@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:id="@+id/group_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:background="#ffffff" >
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/talk_group_poster"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_group_poster"
+                            app:riv_corner_radius="5dip"
+                            app:riv_mutate_background="true" />
+
+                        <com.xunao.benben.view.MyTextView
+                            android:id="@+id/talk_group_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_toRightOf="@id/talk_group_poster"
+                            android:textSize="16dp" />
+
+                        <com.xunao.benben.view.MyTextView
+                            android:id="@+id/talk_group_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_toRightOf="@id/talk_group_name"
+                            android:background="@drawable/contacts_group"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="2dp"
+                            android:textColor="#ffffff"
+                            android:textSize="12dp" />
+
+                        <com.xunao.benben.view.MyTextView
+                            android:id="@+id/talk_group_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:layout_toRightOf="@id/talk_group_poster"
+                            android:textColor="#878787" />
+
+                        <ImageView
+                            android:id="@+id/talk_group_arr"
+                            style="@style/set_layout_right_image"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dip"
+                            android:src="@drawable/ic_right_arr" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="#ffffff"
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" >
+
+                        <com.xunao.benben.view.MyTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:text="群介绍"
+                            android:textColor="#878787" />
+
+                        <com.xunao.benben.view.MyTextView
+                            android:id="@+id/talk_group_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="5dp"
+                            android:maxLines="10"
+                            android:paddingBottom="5dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/group_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#ffffff"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp" >
+
+                        <com.xunao.benben.view.MyTextView
+                            android:id="@+id/talk_group_count"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="#878787" />
+
+                        <ImageView
+                            android:id="@+id/talk_group_count_arr"
+                            style="@style/set_layout_right_image"
+                            android:layout_marginRight="10dip"
+                            android:src="@drawable/ic_right_arr" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/group_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="0.5dip"
+                        android:background="#ffffff"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp" >
+
+                        <com.xunao.benben.view.MyTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="添加群成员"
+                            android:textColor="#878787" />
+
+                        <ImageView
+                            android:id="@+id/talk_group_count_arr"
+                            style="@style/set_layout_right_image"
+                            android:layout_marginRight="10dip"
+                            android:src="@drawable/ic_right_arr" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/talk_group_myname_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="0.5dip"
+                        android:background="@drawable/fragment_private_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
+                        android:visibility="gone" >
+
+                        <com.xunao.benben.view.MyTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="我的名片"
+                            android:textColor="#878787" />
+
+                        <com.xunao.benben.view.MyTextView
+                            android:id="@+id/talk_group_myname"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dip"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="叶翔宇"
+                            android:textColor="#000000" />
+
+                        <ImageView
+                            style="@style/set_layout_right_image"
+                            android:layout_marginRight="10dip"
+                            android:src="@drawable/ic_right_arr" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/group_manage_change"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="0.5dip"
+                        android:background="#ffffff"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp" >
+
+                        <com.xunao.benben.view.MyTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="群组转让"
+                            android:textColor="#878787" />
+
+                        <ImageView
+                            style="@style/set_layout_right_image"
+                            android:layout_marginRight="10dip"
+                            android:src="@drawable/ic_right_arr" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_switch_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="0.5dip"
+                        android:background="#ffffff"
+                        android:paddingLeft="20dp"
+                        android:visibility="gone"
+                        android:layout_marginRight="10dip"
+                        >
+
+
+                        <com.xunao.benben.view.MyTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="消息免打扰"
+                            android:textColor="#878787"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <ImageView
+                            android:id="@+id/iv_switch_open_message"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/open_icon"
+                            android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/iv_switch_close_message"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/close_icon"
+                            android:visibility="visible" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/group_my_contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="0.5dip"
+                        android:background="#ffffff"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
+                        android:visibility="gone"
+                        >
+
+                        <com.xunao.benben.view.MyTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="我添加的成员"
+                            android:textColor="#878787" />
+
+                        <ImageView
+                            style="@style/set_layout_right_image"
+                            android:layout_marginRight="10dip"
+                            android:src="@drawable/ic_right_arr" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="400dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical" >
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/send_message_blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/btn_sendmessage_blue"
+                    android:gravity="center"
+                    android:text="加入该群"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/size_16"
+                    android:visibility="visible" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/send_message_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/btn_sendmessage_red"
+                    android:gravity="center"
+                    android:text="退出该群"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/size_16"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/wite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

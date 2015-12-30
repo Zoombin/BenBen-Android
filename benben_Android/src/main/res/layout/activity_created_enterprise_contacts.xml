@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <EditText
+        android:id="@+id/et_enterprise_name"
+        android:layout_width="fill_parent"
+        android:layout_height="38dip"
+        android:layout_marginBottom="1dip"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:hint="请填写通讯录名称"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip"
+        android:text=""
+        android:textColor="#000000"
+        android:textColorHint="#9e9e9e"
+        android:textSize="15dip" />
+
+    <RelativeLayout
+        android:id="@+id/tv_enterprice_rl"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_marginBottom="1dip"
+        android:background="#ffffff"
+        android:clickable="true"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip" >
+
+        <TextView
+            android:id="@+id/tv_enterprise_area"
+            android:layout_width="wrap_content"
+            android:layout_height="38dip"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:hint="请选择所在地区"
+            android:text=""
+            android:textColor="#000000"
+            android:textColorHint="#9e9e9e"
+            android:textSize="15dip" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+   
+    <!-- android:inputType="number" -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="38dip"
+        android:layout_marginBottom="1dip"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="选择通讯录类型"
+            android:textColor="#9e9e9e"
+            android:textSize="15dip" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rbn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:checked="true"
+                android:drawableLeft="@drawable/radio_check_selector"
+                android:gravity="center"
+                android:paddingRight="12dip"
+                android:text="企业"
+                android:textColor="#000000"
+                android:textSize="15dip" />
+
+            <RadioButton
+                android:id="@+id/rbn_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_check_selector"
+                android:gravity="center"
+                android:paddingLeft="5dip"
+                android:paddingRight="12dip"
+                android:text="虚拟网"
+                android:textColor="#000000"
+                android:textSize="15dip" />
+        </RadioGroup>
+    </RelativeLayout>
+    
+     <EditText
+        android:id="@+id/et_enterprise_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="38dip"
+        android:layout_marginBottom="1dip"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:hint="请填写您的短号"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip"
+        android:text=""
+        android:textColor="#000000"
+        android:textColorHint="#9e9e9e"
+        android:textSize="15dip" />
+
+    <EditText
+        android:id="@+id/et_enterprise_intro"
+        android:layout_width="fill_parent"
+        android:layout_height="150dip"
+        android:background="#ffffff"
+        android:gravity="left|top"
+        android:hint="请填写通讯录简介,创建之后无法修改"
+        android:minLines="6"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip"
+        android:paddingTop="5dip"
+        android:text=""
+        android:textColor="#000000"
+        android:textColorHint="#9e9e9e"
+        android:textSize="15dip" />
+    <!-- android:inputType="textMultiLine" -->
+
+</LinearLayout>

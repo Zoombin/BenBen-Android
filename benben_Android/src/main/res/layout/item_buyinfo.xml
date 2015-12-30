@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dip"
+            android:background="#f2f2f2" >
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/item_buyinfo_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dip"
+                android:textColor="#3c3c3c"
+                android:textSize="16dip" />
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/item_buyinfo_n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/item_buyinfo_title"
+                android:textColor="#068cd9"
+                android:textSize="12dip" />
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/item_buyinfo_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                 android:layout_marginLeft="5dip"
+                android:padding="5dip"
+                android:singleLine="true"
+                android:textColor="#a1a1a1"
+                android:textSize="12dip" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/price_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_baojia"
+            android:layout_width="match_parent"
+            android:layout_height="35dip"
+            android:orientation="horizontal" >
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/item_buyinfo_num"
+                android:layout_width="0dip"
+                android:layout_height="35dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:singleLine="true"
+                android:textColor="#a1a1a1"
+                android:textSize="12dip" />
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/item_buyinfo_but"
+                android:layout_width="0dip"
+                android:layout_height="35dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:singleLine="true"
+                android:text="我来报价"
+                android:textColor="#42be69"
+                android:textSize="12dip" />
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/item_buyinfo_time"
+                android:layout_width="0dip"
+                android:layout_height="35dip"
+                android:layout_weight="1.2"
+                android:drawableLeft="@drawable/ic_time"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:paddingRight="5dip"
+                android:singleLine="true"
+                android:textColor="#a1a1a1"
+                android:textSize="12dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_pinbi"
+            
+            android:layout_width="match_parent"
+            android:layout_height="35dip"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="该帖子已被管理员屏蔽"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="#dddddd" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/icon_contacts_info_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/talkgroup_poster"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/icon_default_grouppost"
+            app:riv_corner_radius="3dip"
+            app:riv_mutate_background="true" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/contacts_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="上传精美群头像，让你的群脱颖而出"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <com.xunao.benben.view.MyEditView
+        android:id="@+id/talk_group_name"
+        style="@style/register_three_text"
+        android:hint="请填写群名称（2-10字）" />
+
+    <RelativeLayout
+        android:id="@+id/talk_group_address"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp" >
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/tv_choice_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:hint="请选择所在地区"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <com.xunao.benben.view.MyEditView
+        android:id="@+id/talk_group_info"
+        style="@style/register_three_text"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:gravity="top"
+        android:hint="请填写群组简介 "
+        android:minLines="4"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp" />
+
+</LinearLayout>

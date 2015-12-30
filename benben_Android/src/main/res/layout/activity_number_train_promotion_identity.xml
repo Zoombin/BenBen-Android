@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/com_title_bar" />
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:orientation="horizontal"
+        android:padding="0.5dip" >
+
+        <RelativeLayout
+            android:id="@+id/prerecord_tab_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true" >
+
+            <RadioButton
+                android:id="@+id/tab_RB"
+                style="@style/record_title_style"
+                android:background="@drawable/small_mak_title_bg"
+                android:button="@null"
+                android:text="个人"
+                android:textColor="@drawable/record_title_text_selector" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v_vertical"
+            android:layout_width="1dip"
+            android:layout_height="45dip"
+            android:background="#d1d1d1" />
+
+        <RelativeLayout
+            android:id="@+id/prerecord_tab_three"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true" >
+
+            <RadioButton
+                android:id="@id/tab_RB"
+                style="@style/record_title_style"
+                android:background="@drawable/small_mak_title_bg"
+                android:button="@null"
+                android:text="商家"
+                android:textColor="@drawable/record_title_text_selector" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="15dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textColor="#000000"
+                        android:text="真实姓名："
+                        android:layout_marginLeft="5dp"
+                        ></TextView>
+
+                    <EditText
+                        android:id="@+id/edt_person_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="请输入真实姓名"
+                        android:textSize="15dp"
+                        android:background="@null"
+                        />
+
+
+                </LinearLayout>
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textColor="#000000"
+                        android:text="身份证号："
+                        android:layout_marginLeft="5dp"
+                        ></TextView>
+
+                    <EditText
+                        android:id="@+id/edt_person_identityCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="请输入身份证号码"
+                        android:textSize="15dp"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:maxLength="18"
+                        />
+
+
+                </LinearLayout>
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="#000000"
+                    android:text="身份证件"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    ></TextView>
+
+                <View
+                    android:layout_marginTop="3dp"
+                    style="@style/set_item_Line_5"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    >
+
+                    <in.srain.cube.image.CubeImageView
+                        android:id="@+id/iv_person_identityCode1"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/img_identity_code_front"
+                        android:scaleType="fitXY"
+                        android:layout_marginRight="15dp"
+                        />
+
+                    <in.srain.cube.image.CubeImageView
+                        android:id="@+id/iv_person_identityCode2"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/img_identity_code_back"
+                        android:scaleType="fitXY"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_merchant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textColor="#000000"
+                        android:text="真实姓名："
+                        android:layout_marginLeft="5dp"
+                        ></TextView>
+
+                    <EditText
+                        android:id="@+id/edt_merchant_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="请输入真实姓名"
+                        android:textSize="15dp"
+                        android:background="@null"
+                        />
+
+
+                </LinearLayout>
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textColor="#000000"
+                        android:text="身份证号："
+                        android:layout_marginLeft="5dp"
+                        ></TextView>
+
+                    <EditText
+                        android:id="@+id/edt_merchant_identityCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="请输入身份证号码"
+                        android:textSize="15dp"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:maxLength="18"
+                        />
+
+
+                </LinearLayout>
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="#000000"
+                    android:text="身份证件"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    ></TextView>
+
+                <View
+                    android:layout_marginTop="3dp"
+                    style="@style/set_item_Line_5"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    >
+
+                    <in.srain.cube.image.CubeImageView
+                        android:id="@+id/iv_merchant_identityCode1"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/img_identity_code_front"
+                        android:scaleType="fitXY"
+                        android:layout_marginRight="15dp"
+                        />
+
+                    <in.srain.cube.image.CubeImageView
+                        android:id="@+id/iv_merchant_identityCode2"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/img_identity_code_back"
+                        android:scaleType="fitXY"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="#000000"
+                    android:text="营业执照"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    ></TextView>
+
+                <View
+                    android:layout_marginTop="3dp"
+                    style="@style/set_item_Line_5"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    >
+
+                    <in.srain.cube.image.CubeImageView
+                        android:id="@+id/iv_merchant_license"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/img_license"
+                        android:scaleType="fitXY"
+                        android:layout_marginRight="15dp"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        >
+        <CheckBox
+            android:id="@+id/cb_agree"
+            style="@style/MyCheckboxStyle"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:text="我已阅读并同意"
+            android:layout_marginLeft="5dp"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/tv_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/top_bar_color"
+            android:layout_marginLeft="5dp"
+            ></TextView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_auth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交审核"
+        android:textSize="15dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/green_but"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_promotion_fail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="审核失败："
+            android:textColor="@color/red"
+            android:textSize="15dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\u3000\u3000\u3000\u3000\u3000由于************************！"
+            android:textColor="#b4b4b4"
+            android:textSize="15dp"
+            android:layout_margin="10dp"
+            />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

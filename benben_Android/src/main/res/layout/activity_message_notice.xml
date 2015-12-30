@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaeaea"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <View
+        style="@style/set_item_Line_7"
+        android:layout_marginTop="15dip" />
+
+    <RelativeLayout
+        android:id="@+id/rl_switch_sound"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/fragment_private_bg"
+        android:padding="10dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dip"
+            android:text="@string/voice"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp"
+            android:typeface="serif" />
+
+        <ImageView
+            android:id="@+id/iv_switch_open_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/open_icon"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_switch_close_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/close_icon"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/rl_switch_vibrate"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/fragment_private_bg"
+        android:padding="10dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dip"
+            android:text="@string/shake"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:typeface="serif" />
+
+        <ImageView
+            android:id="@+id/iv_switch_open_vibrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/open_icon"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_switch_close_vibrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/close_icon"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+
+
+
+    <View style="@style/set_item_Line_7" />
+
+
+</LinearLayout>

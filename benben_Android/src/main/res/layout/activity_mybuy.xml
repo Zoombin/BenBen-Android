@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <include
+        android:id="@+id/searchBox"
+        layout="@layout/com_editview_02" />
+
+    <TextView
+        android:id="@+id/tv_search_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dip"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip"
+        android:paddingTop="3dip"
+        android:textColor="#333333"
+        android:textSize="14dip"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:background="#d4d4d4"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_range"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="3dip"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip"
+        android:paddingTop="3dip"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="18dip"
+            android:layout_height="18dip"
+            android:src="@drawable/icon_blue_dw" />
+
+        <TextView
+            android:id="@+id/tv_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:textColor="#068cd9"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/nodota"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="100dip"
+                android:layout_height="100dip"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dip"
+                android:src="@drawable/nodata_bg" />
+        </RelativeLayout>
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:fadingEdge="none"
+            android:listSelector="@android:color/transparent"
+            android:scrollbarStyle="outsideOverlay" />
+
+        <ImageView
+            android:id="@+id/public_buy"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dip"
+            android:padding="10dip"
+            android:src="@drawable/ic_samllmakewrite" />
+    </RelativeLayout>
+
+</LinearLayout>

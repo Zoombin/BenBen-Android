@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaeaea"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="fill_parent"
+        android:layout_height="230dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/input_register"
+        android:gravity="left|top"
+        android:hint="请输入您的建议"
+        android:minLines="6"
+        android:padding="10dip" />
+    <!-- android:inputType="textMultiLine" -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll_choice_friend_union"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:orientation="vertical"
+            android:visibility="visible" >
+
+            <RelativeLayout
+                android:id="@+id/rl_choice_friend_union"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="@drawable/fragment_private_bg"
+                android:clickable="true"
+                android:paddingLeft="25dip"
+                android:paddingRight="15dip" >
+
+                <TextView
+                    android:id="@+id/tv_friend_union_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:singleLine="true"
+                    android:text="选择好友联盟"
+                    android:textColor="#3c3c3c"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/item_all"
+                    style="@style/MyCheckboxStyle"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:clickable="false" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line"
+                style="@style/set_item_Line_5" />
+
+            <RelativeLayout
+                android:id="@+id/rl_choice_friend"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="@drawable/fragment_private_bg"
+                android:clickable="true"
+                android:paddingLeft="25dip"
+                android:paddingRight="15dip" >
+
+                <TextView
+                    android:id="@+id/tv_friend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:singleLine="true"
+                    android:text="发送给奔犇好友（108人）"
+                    android:textColor="#3c3c3c"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="14dip"
+                    android:layout_height="18dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right_bar" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_receivers"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#d7d7d7"
+            android:paddingBottom="8dip"
+            android:paddingLeft="18dip"
+            android:paddingRight="18dip"
+            android:paddingTop="8dip"
+            android:textColor="#6f6f6f"
+            android:textSize="14dip" />
+    </RelativeLayout>
+
+</LinearLayout>

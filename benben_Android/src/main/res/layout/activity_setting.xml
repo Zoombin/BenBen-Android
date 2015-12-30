@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaeaea"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+
+
+
+    <include layout="@layout/com_title_bar" />
+
+    <View
+        style="@style/set_item_Line_7"
+        android:layout_marginTop="15dip" />
+
+    <RelativeLayout
+        android:id="@+id/rl_cogradient"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="通讯录同步到奔犇"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/rl_phone_update"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="通讯录同步到手机"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/rl_binding_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="变更注册手机号码"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/rl_update_pwd"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="修改密码"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_7" />
+
+    <View
+        style="@style/set_item_Line_7"
+        android:layout_marginTop="15dip" />
+
+    <RelativeLayout
+        android:id="@+id/rl_check_update"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="检查更新"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/message_notice"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="新消息通知"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/del_cache"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="清理缓存"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/rl_complain"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="投诉建议"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_7" />
+
+    <View
+        style="@style/set_item_Line_7"
+        android:layout_marginTop="15dip" />
+
+    <RelativeLayout
+        android:id="@+id/rl_about_benben"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="关于奔犇"
+            android:textColor="#3c3c3c"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_7" />
+
+    <View
+        style="@style/set_item_Line_7"
+        android:layout_marginTop="15dip" />
+
+    <RelativeLayout
+        android:id="@+id/rl_logout"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="退出登录"
+            android:textColor="#c91f1f"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_7" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

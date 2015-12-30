@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/item_iv"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:layout_marginTop="10dip"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_face"
+            app:riv_corner_radius="5dip"
+            app:riv_mutate_background="true" />
+
+        <RelativeLayout
+            android:id="@+id/name_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="50dip"
+            android:layout_marginTop="10dip"
+            android:layout_toRightOf="@id/item_iv" >
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请叫我都教授"
+                android:textColor="#1d1d1d"
+                android:textSize="@dimen/size_16" />
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/item_name"
+                android:text="2小时前"
+                android:textColor="#a6a6a6"
+                android:textSize="@dimen/size_14" />
+        </RelativeLayout>
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/item_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_box"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="50dip"
+            android:layout_marginTop="10dip"
+            android:layout_toRightOf="@id/item_iv"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="请叫我04都请叫我都教授请"
+            android:textColor="#3c3c3c"
+            android:textSize="@dimen/size_14" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/item_content_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_content"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="50dip"
+            android:layout_toRightOf="@id/item_iv"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="5dip"
+            android:text="请叫我04都请叫我都教授请叫我都教授请叫我都教授请叫我都教授请叫我都教授教授"
+            android:textColor="#3c3c3c"
+            android:textSize="@dimen/size_14" />
+
+        <ImageView
+            android:id="@+id/item_but"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="17dip"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:src="@drawable/ic_buyinfocontent_round" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_alignParentBottom="true"
+            android:background="#eeeeee" />
+    </RelativeLayout>
+
+</LinearLayout>

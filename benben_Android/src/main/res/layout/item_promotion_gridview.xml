@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_promotion"
+            android:layout_width="wrap_content"
+            android:background="#e8e8e8"
+            android:layout_height="60dip"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="5dip"
+            />
+
+        <TextView
+            android:id="@+id/tv_edittxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击编辑"
+            android:textColor="#FFFFFF"
+            android:background="#8f000000"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/iv_promotion"
+            android:layout_alignRight="@+id/iv_promotion"
+            android:visibility="gone"
+            />
+
+        <ImageView
+            android:id="@+id/iv_over_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_over_time"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|top"
+        android:textSize="15dip"
+        android:textColor="#848484"
+        android:layout_marginTop="3dp"
+        android:minLines="2"
+        />
+
+
+    </LinearLayout>
+

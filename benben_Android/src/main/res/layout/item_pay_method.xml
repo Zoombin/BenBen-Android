@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="在线支付,快递发货"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        />
+
+    <EditText
+        android:id="@+id/edt_mail_price"
+        android:layout_width="wrap_content"
+        android:minWidth="80dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bg"
+        android:inputType="numberDecimal"
+        android:textColor="#848484"
+        android:textColorHint="#848484"
+        android:textSize="15dp"
+        android:maxLength="8"
+        android:hint="请输入邮费"
+        android:padding="3dp"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/tv_mail_price"
+        android:layout_width="wrap_content"
+        android:minWidth="80dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bg"
+        android:inputType="numberDecimal"
+        android:textColor="#848484"
+        android:textColorHint="#848484"
+        android:textSize="15dp"
+        android:maxLength="8"
+        android:padding="3dp"
+        android:visibility="gone"
+        android:gravity="center"
+        />
+
+
+    <CheckBox
+        android:id="@+id/cb_item"
+        style="@style/MyCheckboxStyle"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:clickable="false"
+        android:layout_margin="10dp"
+        />
+
+</LinearLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/phoneTime"
+            android:layout_width="60dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dip"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="12-12 17:17"
+            android:textColor="#959595"
+            android:textSize="10dip" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dip"
+            android:src="@drawable/ic_phone_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dip" >
+
+            <ImageView
+                android:id="@+id/phoneImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:paddingLeft="30dip"
+                android:paddingRight="20dip"
+                android:src="@drawable/ic_phone" />
+
+            <LinearLayout
+                android:id="@+id/ll_phone"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:layout_toLeftOf="@id/phoneImg"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/phoneName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="叶翔宇"
+                    android:textColor="#000000"
+                    android:textSize="14dip" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/phoneNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="15358105543"
+                    android:textColor="#959595"
+                    android:textSize="10dip" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_alignParentBottom="true"
+                android:background="#dadada" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

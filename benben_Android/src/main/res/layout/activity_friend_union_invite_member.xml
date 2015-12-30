@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.diegocarloslima.fgelv.lib.FloatingGroupExpandableListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dip"
+            android:clipToPadding="false"
+            android:divider="@null"
+            android:drawSelectorOnTop="true"
+            android:listSelector="@android:color/transparent"
+            android:overScrollMode="never"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="none" />
+
+        <LinearLayout
+            android:id="@+id/no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_default_nodata" />
+
+            <com.xunao.benben.view.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="暂时没有相关数据" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:background="#dddddd"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip" >
+
+            <CheckBox
+                android:id="@+id/all_checkbox"
+                style="@style/MyCheckboxStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="10dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/all_checkbox"
+                android:text="全选"
+                android:textColor="#000000"
+                android:textSize="15dip"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_select_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(0/0)"
+                android:textColor="#000000"
+                android:textSize="15dip"
+                android:layout_toRightOf="@+id/tv_all"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dp"
+                />
+
+
+            <Button
+                android:id="@+id/btn_invite"
+                android:layout_width="60dip"
+                android:layout_height="30dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/invite_friend_to_union_bg"
+                android:text="邀请"
+                android:textColor="#ffffff"
+                android:textSize="15dip" />
+
+            <LinearLayout
+                android:id="@+id/ll_select_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_toLeftOf="@+id/btn_invite"
+                android:layout_toRightOf="@+id/tv_all"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    android:id="@+id/tv_list"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:ellipsize="middle"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textSize="15dip" />
+
+                <TextView
+                    android:id="@+id/tv_listnum"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textSize="15dip" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

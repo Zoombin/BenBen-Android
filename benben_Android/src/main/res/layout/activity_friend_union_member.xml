@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" >
+
+        <com.diegocarloslima.fgelv.lib.FloatingGroupExpandableListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:divider="@null"
+            android:drawSelectorOnTop="true"
+            android:listSelector="@android:color/transparent"
+            android:overScrollMode="never"
+            android:scrollbarStyle="outsideOverlay"
+            android:layout_marginBottom="30dip"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/wx_message"
+            android:layout_width="fill_parent"
+            android:layout_height="30dip"
+            android:layout_alignParentBottom="true"
+            android:background="#84BBD5"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dip"
+            android:text="温馨提示：长按删除成员"
+            android:textColor="#ffffff"
+            android:textSize="15dip" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/friend_union_other_chief"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dip"
+        android:paddingLeft="18dip"
+        android:paddingTop="8dip"
+        android:text="堂主"
+        android:textColor="#9e9e9e"
+        android:textSize="14dip" />
+
+    <com.diegocarloslima.fgelv.lib.FloatingGroupExpandableListView
+        android:id="@+id/listView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dip"
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@android:color/transparent"
+        android:overScrollMode="never"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="none" />
+
+</LinearLayout>

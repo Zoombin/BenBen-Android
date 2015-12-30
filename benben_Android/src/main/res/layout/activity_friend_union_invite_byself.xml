@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="请填写手机号"
+        android:phoneNumber="true"
+        android:paddingBottom="10dip"
+        android:paddingLeft="25dip"
+        android:paddingRight="25dip"
+        android:paddingTop="10dip"
+        android:textColor="#000000"
+        android:textColorHint="#dddddd"
+        android:layout_marginBottom="1dp"
+        android:textSize="16dip" />
+
+    <EditText
+        android:id="@+id/et_benben"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="请填写奔犇号"
+        android:paddingBottom="10dip"
+        android:paddingLeft="25dip"
+        android:paddingRight="25dip"
+        android:layout_marginBottom="1dp"
+        android:paddingTop="10dip"
+        android:textColorHint="#dddddd"
+        android:textColor="#000000"
+        android:textSize="16dip"
+        android:inputType="number"
+        />
+
+</LinearLayout>

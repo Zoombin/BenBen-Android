@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="7dip" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/fragment_private_bg"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="18dip"
+            android:gravity="center"
+            android:paddingBottom="7dip"
+            android:paddingTop="7dip"
+            android:text="1221"
+            android:textColor="#8d8d8d"
+            android:textSize="14dip" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="18dip"
+            android:background="#dddddd" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="18dip"
+            android:paddingTop="7dip"
+            android:text="1221"
+            android:textColor="#575757"
+            android:textSize="15dip" />
+
+        <com.xunao.benben.view.NoScrollGridView
+            android:id="@+id/item_friend_gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="18dip"
+            android:paddingTop="7dip"
+            android:horizontalSpacing="5dp"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="3"
+            android:orientation="horizontal"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp"
+            android:visibility="gone" />
+
+        <in.srain.cube.image.CubeImageView
+            android:id="@+id/item_friend_singleImg"
+            android:layout_width="150dip"
+            android:layout_height="150dip"
+            android:layout_marginLeft="18dip"
+            android:layout_below="@id/item_friend_content"
+            android:layout_marginTop="5dip"
+            android:paddingTop="7dip"
+            android:background="#e8e8e8"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/item_friend_voice_box"
+            android:layout_width="140dip"
+            android:layout_height="40dip"
+            android:layout_below="@id/item_friend_content"
+            android:background="@drawable/vedio_bg"
+            android:layout_marginLeft="18dip">
+
+            <ImageView
+                android:id="@+id/item_friend_voice"
+                android:layout_width="50dip"
+                android:layout_height="20dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:src="@anim/voice_smallmake_icon" />
+
+            <ProgressBar
+                android:id="@+id/item_friend_voice_loding"
+                android:layout_width="50dip"
+                android:layout_height="20dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/item_friend_voice"
+                android:src="@anim/voice_smallmake_icon"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/item_friend_voice_error"
+                android:layout_width="50dip"
+                android:layout_height="20dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/item_friend_voice"
+                android:src="@drawable/login_error_icon"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_senders"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="18dip"
+            android:paddingTop="7dip"
+            android:text="1221"
+            android:textColor="#7ca8c2"
+            android:textSize="15dip" />
+    </LinearLayout>
+
+</LinearLayout>

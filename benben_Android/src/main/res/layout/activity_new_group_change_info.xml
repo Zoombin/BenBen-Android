@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/icon_contacts_info_bg"
+        android:orientation="horizontal" >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/group_poster"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_face"
+            app:riv_corner_radius="5dip"
+            app:riv_mutate_background="true"
+            android:layout_gravity="center_vertical"/>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            >
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/tv_group_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="15dp"
+                />
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    
+    <TextView
+        android:id="@+id/tv_group_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="10dp"
+        android:textSize="16dp"
+        android:textColor="#787878"
+        android:minHeight="100dp"
+        />
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_result_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp"
+        android:visibility="gone"
+        >
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/tv_refuse"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_sendmessage_red"
+            android:gravity="center"
+            android:text="拒绝"
+            android:textColor="#ffffff"
+            android:layout_margin="15dp"
+            android:padding="10dp"
+            />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/tv_agree"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/but_bg_public_unagree"
+            android:gravity="center"
+            android:text="接受"
+            android:textColor="#ffffff"
+            android:layout_margin="15dp"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:weightSum="4"
+        android:visibility="gone"
+        android:layout_marginTop="100dp"
+        >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="0dp"/>
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/tv_state"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:background="@drawable/but_bg_public_agree"
+            android:gravity="center"
+            android:text="已接受"
+            android:textColor="#ffffff"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

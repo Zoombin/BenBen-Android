@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/icon_contacts_info_bg"
+                android:orientation="horizontal" >
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/contacts_poster"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_face"
+                    app:riv_corner_radius="5dip"
+                    app:riv_mutate_background="true"
+                    android:layout_centerVertical="true"/>
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/contacts_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/contacts_poster"
+                    android:textColor="#ffffff"
+                    android:layout_above="@+id/tv_nick_name"
+                    android:textSize="15dp" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/contacts_group_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_above="@+id/tv_nick_name"
+                    android:layout_toRightOf="@id/contacts_name"
+                    android:background="@drawable/contacts_group"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="2dp"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/tv_nick_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toRightOf="@id/contacts_poster"
+                    android:layout_centerVertical="true"
+                    android:textColor="#ffffff" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/contacts_benben"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_nick_name"
+                    android:layout_toRightOf="@id/contacts_poster"
+                    android:layout_toLeftOf="@+id/ll_change"
+                    android:textColor="#ffffff" />
+
+                <LinearLayout
+                    android:id="@+id/ll_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tv_nick_name"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_change"
+                        android:layout_marginRight="5dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="换一换"
+                        android:textColor="#ffffff"
+                        android:layout_marginRight="15dp"
+                        />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/contacts_add_benben"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_contacts_info_addbenben" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="邀请Ta加入奔犇"
+                    android:textColor="#4ac16f"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <com.xunao.benben.view.ListViewForScrollView
+                            android:id="@+id/listview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@null"
+                            android:listSelector="@android:color/transparent" >
+                        </com.xunao.benben.view.ListViewForScrollView>
+
+
+                        <LinearLayout
+                            android:id="@+id/ll_ztc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#FFFFFF"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:visibility="gone"
+                            >
+
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/iv_ztc"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/icon_upload_face"
+                                app:riv_corner_radius="5dip"
+                                app:riv_mutate_background="true"
+                                android:layout_centerVertical="true"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:orientation="vertical"
+                                >
+
+                                <TextView
+                                    android:id="@+id/tv_short_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="可大公开"
+                                    android:textColor="#000000"
+                                    android:textSize="16dp"
+                                    android:singleLine="true"
+                                    android:ellipsize="end"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_tag"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="可大公开"
+                                    android:textColor="#000000"
+                                    android:textSize="16dp"
+                                    android:singleLine="true"
+                                    android:ellipsize="end"
+                                    android:layout_marginTop="5dp"
+                                    />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="14dip"
+                                android:layout_height="18dip"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/icon_right_bar" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/ll_friend_union"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#FFFFFF"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:visibility="gone"
+                            >
+
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/iv_friend_union"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/icon_default_grouppost"
+                                app:riv_corner_radius="5dip"
+                                app:riv_mutate_background="true"
+                                android:layout_centerVertical="true"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:orientation="vertical"
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    >
+
+                                    <TextView
+                                        android:id="@+id/tv_friend_union_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="可大公开"
+                                        android:textColor="#000000"
+                                        android:textSize="16dp"
+                                        android:singleLine="true"
+                                        android:ellipsize="end"
+                                        />
+
+                                    <TextView
+                                        android:id="@+id/tv_friend_union_type"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="可大公开"
+                                        android:textColor="#000000"
+                                        android:textSize="16dp"
+                                        android:singleLine="true"
+                                        android:layout_marginLeft="10dp"
+                                        />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tv_friend_union_area"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="可大公开"
+                                    android:textColor="#000000"
+                                    android:textSize="16dp"
+                                    android:singleLine="true"
+                                    android:ellipsize="end"
+                                    android:layout_marginTop="5dp"
+                                    />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="14dip"
+                                android:layout_height="18dip"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/icon_right_bar" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+                <LinearLayout
+                    android:id="@+id/send_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:id="@+id/send_msg_or_add_friend"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/btn_sendmessage_blue"
+                        android:gravity="center"
+                        android:text="发消息"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/wite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

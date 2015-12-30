@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <include layout="@layout/com_title_bar" />
+
+    <!--<ListView-->
+        <!--android:id="@+id/listview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:divider="@null"-->
+        <!--android:listSelector="@android:color/transparent" >-->
+    <!--</ListView>-->
+
+    <!--<com.xunao.benben.view.TouchInterceptor-->
+        <!--android:id="@+id/listview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:drawSelectorOnTop="false"-->
+        <!--android:fastScrollEnabled="true"-->
+<!--></com.xunao.benben.view.TouchInterceptor>-->
+
+    <com.xunao.benben.view.DragListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="false"
+        android:fastScrollEnabled="true"
+        android:divider="#d3d3d3"
+        android:dividerHeight="1dp"
+        android:scrollbars="vertical"
+        ></com.xunao.benben.view.DragListView>
+</LinearLayout>

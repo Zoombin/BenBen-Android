@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:background="#FFFFFF"
+    >
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/item_poster"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_group_poster"
+            app:riv_corner_radius="5dip"
+            app:riv_mutate_background="true" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/item_poster"
+            android:text="李涛锋"
+            android:layout_marginLeft="5dp"
+            android:textColor="#0f72aa"
+            android:textSize="14dip"
+            />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/item_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/item_poster"
+            android:layout_below="@+id/item_name"
+            android:text="李涛锋"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#000000"
+            android:textSize="13dip"
+            />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2小时前"
+            android:textColor="#a6a6a6"
+            android:textSize="13dip"
+            android:layout_toRightOf="@+id/item_poster"
+            android:layout_below="@+id/item_review"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"/>
+
+    </RelativeLayout>
+
+    <com.xunao.benben.view.MyTextView
+        android:id="@+id/item_description"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:maxLines="4"
+        android:textColor="#a6a6a6"
+        android:textSize="13dip"
+        android:text="内容"
+        android:ellipsize="end"
+        />
+
+</LinearLayout>

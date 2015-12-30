@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="59dp"
+    android:gravity="center_vertical" >
+
+    <RelativeLayout
+        android:id="@+id/avatar_container_buy"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_alignParentLeft="true" >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/avatar_buy"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_public"
+            app:riv_corner_radius="5dip"
+            app:riv_mutate_background="true" />
+
+        <TextView
+            android:id="@+id/unread_msg_number_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/unread_count_bg"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="12dp"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+
+
+
+
+    <TextView
+        android:id="@+id/tv_message_buy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="6dp"
+        android:layout_toRightOf="@id/avatar_container_buy"
+        android:gravity="center_vertical"
+        android:text="报价提醒"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentBottom="true"
+        android:background="#d1d1d1" />
+
+</RelativeLayout>

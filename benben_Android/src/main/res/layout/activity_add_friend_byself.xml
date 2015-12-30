@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="请填写好友手机号"
+        android:phoneNumber="true"
+        android:paddingBottom="10dip"
+        android:paddingLeft="25dip"
+        android:paddingRight="25dip"
+        android:paddingTop="10dip"
+        android:textColor="#000000"
+        android:textColorHint="#dddddd"
+        android:layout_marginBottom="1dp"
+        android:textSize="16dip" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="请填写好友姓名"
+        android:paddingBottom="10dip"
+        android:paddingLeft="25dip"
+        android:paddingRight="25dip"
+        android:layout_marginBottom="1dp"
+        android:paddingTop="10dip"
+        android:textColorHint="#dddddd"
+        android:textColor="#000000"
+        android:textSize="16dip" />
+
+    <EditText
+        android:id="@+id/et_reason"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="请输入验证信息"
+        android:paddingBottom="10dip"
+        android:paddingLeft="25dip"
+        android:paddingRight="25dip"
+        android:paddingTop="10dip"
+        android:layout_marginBottom="1dp"
+        android:textColorHint="#dddddd"
+        android:textColor="#000000"
+        android:textSize="16dip"
+        android:minHeight="80dp"
+        android:gravity="top|left"
+        android:visibility="gone"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_add_group"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:layout_marginBottom="1dp"
+        android:clickable="true"
+        android:paddingLeft="25dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:id="@+id/tv_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="添加到分组"
+            android:textColor="#3c3c3c"
+            android:textSize="14dip" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+</LinearLayout>

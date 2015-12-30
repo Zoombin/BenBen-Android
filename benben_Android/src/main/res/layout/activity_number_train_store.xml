@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/com_title_bar" />
+
+
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="#848484"
+        android:textSize="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        />
+
+    <View style="@style/set_item_Line_5"
+        android:layout_marginTop="5dp"
+        />
+
+    <ListView
+        android:id="@+id/lv_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:focusable="false"
+        android:listSelector="@android:color/transparent"
+        android:layout_marginBottom="1dip"
+        android:dividerHeight="1dp"
+        android:divider="#d8d8d8"
+        />
+
+</LinearLayout>

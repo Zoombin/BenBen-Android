@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:orientation="horizontal"
+        android:paddingBottom="2dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="5dip" >
+
+        <RelativeLayout
+            android:layout_width="55dip"
+            android:layout_height="60dip"
+            android:clipChildren="true"
+            android:clipToPadding="true" >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/item_iv"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:scaleType="fitXY"
+                android:src="@drawable/default_face"
+                app:riv_corner_radius="5dip"
+                app:riv_mutate_background="true" />
+
+            <TextView
+                android:id="@+id/red_point"
+                android:layout_width="10dip"
+                android:layout_height="10dip"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/red_point"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:layout_marginLeft="5dip"
+            android:orientation="vertical"
+            android:paddingBottom="2dip"
+            android:paddingTop="2dip" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="请叫我都教授"
+                    android:textColor="#000000"
+                    android:textSize="14dip" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/item_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2小时前"
+                    android:textColor="#909090"
+                    android:textSize="13dip" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/item_smalltitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/o_bg"
+                    android:gravity="center"
+                    android:paddingLeft="2dip"
+                    android:paddingRight="2dip"
+                    android:singleLine="true"
+                    android:text="小喇叭"
+                    android:textColor="#ffffff"
+                    android:textSize="12dip" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/item_friend_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dip"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dip"
+                    android:layout_toRightOf="@id/item_smalltitle"
+                    android:singleLine="true"
+                    android:text="今晚吃了石锅拌饭好爽啊!!!!今晚吃了石锅拌饭好爽啊!!!!"
+                    android:textColor="#909090"
+                    android:textSize="13dip" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#d7d7d7" />
+
+</LinearLayout>

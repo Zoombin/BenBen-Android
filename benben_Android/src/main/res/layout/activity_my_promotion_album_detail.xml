@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/com_title_bar" />
+
+    <View
+        android:layout_marginTop="15dp"
+        style="@style/set_item_Line_5"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="80dip"
+        android:background="@drawable/fragment_private_bg"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="相册封面"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            />
+
+        <LinearLayout
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_centerVertical="true"
+            android:background="@drawable/head_img_bg"
+            android:orientation="horizontal"
+            android:layout_marginRight="10dp"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rv_album_cover"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:scaleType="fitXY"
+                app:riv_corner_radius="5dip"
+                android:src="@drawable/icon_addpic_unfocused"
+                />
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </LinearLayout>
+
+    <View
+        style="@style/set_item_Line_5"/>
+
+    <LinearLayout
+        android:id="@+id/ll_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="相册名称"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            />
+
+        <EditText
+            android:id="@+id/edt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入相册名称"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:textColor="#787878"
+            android:textSize="15dp"
+            android:textColorHint="#787878"
+            />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:textColor="#787878"
+            android:textSize="15dp"
+            android:textColorHint="#787878"
+            android:visibility="gone"
+            />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </LinearLayout>
+
+    <View
+        style="@style/set_item_Line_5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="2dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="2dp"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="#848484"
+            android:textSize="15dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="(0张)"
+            android:textColor="#848484"
+            android:textSize="15dp"
+            />
+
+    </LinearLayout>
+
+    <View
+        style="@style/set_item_Line_5"/>
+
+    <GridView
+        android:id="@+id/noScrollgridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
+        android:numColumns="4"
+        android:scrollbars="none"
+        android:background="#FFFFFF"
+        >
+    </GridView>
+
+
+    <LinearLayout
+        android:id="@+id/ll_all"
+        android:layout_width="fill_parent"
+        android:layout_height="45dip"
+        android:background="#dddddd"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="12dip"
+        android:visibility="gone"
+        >
+
+        <CheckBox
+            android:id="@+id/all_checkbox"
+            style="@style/MyCheckboxStyle"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="3dip"
+            android:layout_marginRight="10dp"
+             />
+
+        <TextView
+            android:id="@+id/tv_all"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="全选"
+            android:textColor="#000000"
+            android:textSize="15dip" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:textColor="#000000"
+            android:textSize="15dip"
+            android:layout_marginRight="10dp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

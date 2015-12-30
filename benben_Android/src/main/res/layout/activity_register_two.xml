@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <com.xunao.benben.view.MyTextView
+        android:id="@+id/phone_info"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+        android:text="验证码已发送至：13333333333"
+        android:textColor="#969696"
+        android:textSize="14dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal" >
+
+        <com.xunao.benben.view.MyEditView
+            android:id="@+id/input_phone_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/input_register_left"
+            android:gravity="center_vertical"
+            android:hint="请输入收到的验证码"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textColorHint="@color/hint_color"
+            android:textSize="14dp" />
+
+            <!-- -->
+
+        <Button
+            android:id="@+id/no_phone_code"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_register_right"
+            android:gravity="center"
+            android:text="没收到？"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+</LinearLayout>

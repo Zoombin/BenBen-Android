@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaeaea"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_public_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="10dip"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:paddingBottom="5dip" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:orientation="horizontal" >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="标题"
+                        android:textSize="14dip" />
+
+                    <EditText
+                        android:id="@+id/buyingo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dip"
+                        android:layout_marginLeft="48dip"
+                        android:background="@drawable/search_edittext_02"
+                        android:gravity="center_vertical"
+                        android:hint="我要买..."
+                        android:padding="5dip"
+                        android:singleLine="true"
+                        android:textColorHint="#afafaf"
+                        android:textSize="14dip" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip" >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:id="@+id/f"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="描述"
+                        android:textSize="14dip" />
+
+                    <EditText
+                        android:id="@+id/buyingo_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="48dip"
+                        android:layout_toRightOf="@id/f"
+                        android:background="@drawable/search_edittext_02"
+                        android:gravity="top|left"
+                        android:hint="请填写描述"
+                        android:maxLines="5"
+                        android:minLines="5"
+                        android:padding="5dip"
+                        android:textColorHint="#afafaf"
+                        android:textSize="14dip" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginTop="10dip"
+                    android:orientation="horizontal" >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="数量"
+                        android:textSize="14dip" />
+
+                    <EditText
+                        android:id="@+id/buyingo_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dip"
+                        android:layout_marginLeft="48dip"
+                        android:background="@drawable/search_edittext_02"
+                        android:gravity="center_vertical"
+                        android:hint="请填写数量和单位"
+                        android:padding="5dip"
+                        android:singleLine="true"
+                        android:textColorHint="#afafaf"
+                        android:textSize="14dip" />
+                        <!-- android:inputType="number" -->
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dip"
+                    android:layout_marginTop="10dip"
+                    android:background="#f0f0f0" />
+
+                <RelativeLayout
+                    android:id="@+id/select_address"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_marginTop="5dip"
+                    android:background="@drawable/fragment_private_bg"
+                    android:clickable="true" >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:id="@+id/tv_chose_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="14dip"
+                        android:singleLine="true"
+                        android:text="选择地址"
+                        android:textColor="#3c3c3c"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="14dip"
+                        android:layout_height="18dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_right_bar" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <com.xunao.benben.view.MyTextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:layout_centerVertical="true"
+                android:background="#eaeaea"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:text="结束时间"
+                android:textColor="#3c3c3c"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/buyTime"
+                android:layout_width="fill_parent"
+                android:layout_height="161dip"
+                android:background="#ffffff" >
+
+                <RadioButton
+                    android:id="@+id/threeDay"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:button="@null"
+                    android:drawableRight="@drawable/checkbox_style"
+                    android:paddingLeft="20dip"
+                    android:paddingRight="20dip"
+                    android:text="3天"
+                    android:textSize="14dip" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dip"
+                    android:background="#f0f0f0" />
+
+                <RadioButton
+                    android:id="@+id/sevenDay"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:button="@null"
+                    android:drawableRight="@drawable/checkbox_style"
+                    android:paddingLeft="20dip"
+                    android:paddingRight="20dip"
+                    android:text="7天"
+                    android:textSize="14dip" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dip"
+                    android:background="#f0f0f0" />
+
+                <RadioButton
+                    android:id="@+id/halfmonth"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:button="@null"
+                    android:drawableRight="@drawable/checkbox_style"
+                    android:paddingLeft="20dip"
+                    android:paddingRight="20dip"
+                    android:text="半个月"
+                    android:textSize="14dip" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dip"
+                    android:background="#f0f0f0" />
+
+                <RadioButton
+                    android:id="@+id/onemonth"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:button="@null"
+                    android:drawableRight="@drawable/checkbox_style"
+                    android:paddingLeft="20dip"
+                    android:paddingRight="20dip"
+                    android:text="一个月"
+                    android:textSize="14dip" />
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

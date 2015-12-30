@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaeaea"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" >
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/rl_status"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dip"
+                    android:background="#ffffff"
+                    android:paddingLeft="25dip"
+                    android:paddingRight="25dip"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="状态"
+                        android:textColor="#848484"
+                        android:textSize="16dip" />
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="#ffffff"
+                        android:gravity="right"
+                        android:src="@drawable/icon_right_bar"
+                        android:textSize="16dip" />
+                    <!-- android:inputType="number" -->
+                </RelativeLayout>
+
+                <View style="@style/set_item_Line_5" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_reason"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:minHeight="45dip"
+                    android:paddingLeft="25dip"
+                    android:paddingRight="25dip"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:id="@+id/reason"
+                        android:layout_width="60dip"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="理由"
+                        android:textColor="#848484"
+                        android:textSize="16dip" />
+
+                    <EditText
+                        android:id="@+id/tv_reason"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="60dip"
+                        android:background="#ffffff"
+                        android:focusable="false"
+                        android:gravity="left"
+                        android:textSize="16dip" />
+                    <!-- android:inputType="number" -->
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/line"
+                    style="@style/set_item_Line_5"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dip"
+                    android:background="#ffffff"
+                    android:paddingLeft="25dip"
+                    android:paddingRight="25dip" >
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="60dip"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="手机号"
+                        android:textColor="#848484"
+                        android:textSize="16dip" />
+
+                    <EditText
+                        android:id="@+id/tv_user_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/phone"
+                        android:background="#ffffff"
+                        android:focusable="false"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:src="@drawable/icon_right_bar"
+                        android:textSize="16dip" />
+                    <!-- android:inputType="number" -->
+                </RelativeLayout>
+
+                <View style="@style/set_item_Line_5" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_shortPhone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dip"
+                    android:background="#ffffff"
+                    android:paddingLeft="25dip"
+                    android:paddingRight="25dip"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="短号"
+                        android:textColor="#848484"
+                        android:textSize="16dip" />
+
+                    <TextView
+                        android:id="@+id/tv_shortPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="#ffffff"
+                        android:gravity="right"
+                        android:src="@drawable/icon_right_bar"
+                        android:textSize="16dip" />
+                    <!-- android:inputType="number" -->
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/line_short"
+                    style="@style/set_item_Line_5"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dip"
+                    android:background="#ffffff"
+                    android:paddingLeft="25dip"
+                    android:paddingRight="25dip" >
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="60dip"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="姓名"
+                        android:textColor="#848484"
+                        android:textSize="16dip" />
+
+                    <EditText
+                        android:id="@+id/et_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/name"
+                        android:background="#ffffff"
+                        android:gravity="right"
+                        android:hint="请输入真实姓名"
+                        android:singleLine="true"
+                        android:src="@drawable/icon_right_bar"
+                        android:text=""
+                        android:textSize="16dip" />
+                </RelativeLayout>
+
+                <View style="@style/set_item_Line_5" />
+
+                <RelativeLayout
+                    android:id="@+id/cardid_rl"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dip"
+                    android:background="#ffffff"
+                    android:paddingLeft="25dip"
+                    android:paddingRight="25dip" >
+
+                    <TextView
+                        android:id="@+id/cardid"
+                        android:layout_width="60dip"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="身份证"
+                        android:textColor="#848484"
+                        android:textSize="16dip" />
+
+                    <EditText
+                        android:id="@+id/et_cardnum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/cardid"
+                        android:background="#ffffff"
+                        android:gravity="right"
+                        android:hint="请输入身份证号码"
+                        android:singleLine="true"
+                        android:src="@drawable/icon_right_bar"
+                        android:textSize="16dip" />
+                    <!-- android:inputType="number" -->
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/cardid_line"
+                    style="@style/set_item_Line_5" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_area"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:background="@drawable/fragment_private_bg"
+                    android:clickable="true"
+                    android:paddingLeft="25dip"
+                    android:paddingRight="15dip" >
+
+                    <TextView
+                        android:id="@+id/tv_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="请选择所在地区"
+                        android:textColor="#848484"
+                        android:textSize="16dip" />
+
+                    <ImageView
+                        android:layout_width="14dip"
+                        android:layout_height="18dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_right_bar" />
+                </RelativeLayout>
+
+                <View style="@style/set_item_Line_5" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/register_point"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dip"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="8dip"
+                    android:lineSpacingExtra="5dp"
+                    android:text="点击提交表示阅读并同意《东阳百姓网入网协议》"
+                    android:textColor="#000000"
+                    android:textSize="16dip" />
+
+                <LinearLayout
+                    android:id="@+id/ll_iv1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dip"
+                    android:paddingTop="10dip"
+                    android:visibility="gone" >
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/iv_idcard1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="160dip"
+                        android:layout_marginLeft="25dip"
+                        android:layout_marginRight="25dip"
+                        android:scaleType="fitXY"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_iv2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:paddingBottom="15dip"
+                    android:paddingTop="10dip"
+                    android:visibility="gone" >
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/iv_idcard2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="160dip"
+                        android:layout_marginLeft="25dip"
+                        android:layout_marginRight="25dip"
+                        android:scaleType="fitXY"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_card1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dip"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginLeft="12dip"
+                    android:layout_marginRight="12dip"
+                    android:layout_marginTop="15dip"
+                    android:background="@drawable/add_card_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="18dip"
+                        android:layout_height="18dip"
+                        android:src="@drawable/icon_add_card" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dip"
+                        android:text="添加身份证正面照"
+                        android:textColor="#ffffff"
+                        android:textSize="18dip" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_card2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dip"
+                    android:layout_marginBottom="40dip"
+                    android:layout_marginLeft="12dip"
+                    android:layout_marginRight="12dip"
+                    android:layout_marginTop="15dip"
+                    android:background="@drawable/add_card_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:layout_width="18dip"
+                        android:layout_height="18dip"
+                        android:src="@drawable/icon_add_card" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dip"
+                        android:text="添加身份证反面照"
+                        android:textColor="#ffffff"
+                        android:textSize="18dip" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <View
+            android:id="@+id/loding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+</LinearLayout>

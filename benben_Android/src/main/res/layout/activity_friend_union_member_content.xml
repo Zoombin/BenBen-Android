@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="1dip"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:paddingBottom="10dip"
+        android:paddingLeft="18dip"
+        android:paddingRight="18dip"
+        android:paddingTop="10dip" >
+
+        <CheckBox
+            android:id="@+id/item_all"
+            style="@style/MyCheckboxStyle"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:clickable="false"
+            android:visibility="visible" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/chief_poster"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/item_all"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_face"
+            android:layout_marginLeft="5dip"
+            app:riv_corner_radius="5dip"
+            app:riv_mutate_background="true" />
+
+        <LinearLayout
+            android:id="@+id/ll_chief"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@+id/chief_poster"
+            android:orientation="horizontal" >
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/chief_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dip"
+                android:text="老妹妹"
+                android:textColor="#000000"
+                android:textSize="14dip" />
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/chief_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_marginTop="1dip"
+                android:background="@drawable/textview_bg_4"
+                android:paddingBottom="1dip"
+                android:paddingLeft="5dip"
+                android:paddingRight="8dip"
+                android:paddingTop="1dip"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="11"
+                android:textColor="#068cd9"
+                android:textSize="14dip"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/chief_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_chief"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="5dip"
+            android:layout_toRightOf="@+id/chief_poster"
+            android:text="盟主"
+            android:textColor="#9e9e9e"
+            android:textSize="14dip" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#dddddd" />
+
+</LinearLayout>

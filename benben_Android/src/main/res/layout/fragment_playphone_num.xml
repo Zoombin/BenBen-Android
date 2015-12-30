@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#ededed" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/dialNum1"
+                style="@style/phone_but"
+                android:tag="1"
+                android:text="1"
+                android:textSize="25dip" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:background="#ededed" />
+
+            <TextView
+                android:id="@+id/dialNum2"
+                style="@style/phone_but"
+                android:background="@drawable/phone_but_bg"
+                android:tag="2"
+                android:text="2"
+                android:textSize="25dip" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:background="#ededed" />
+
+            <TextView
+                android:id="@+id/dialNum3"
+                style="@style/phone_but"
+                android:tag="3"
+                android:text="3"
+                android:textSize="25dip" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#ededed" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/dialNum4"
+                style="@style/phone_but"
+                android:tag="4"
+                android:text="4"
+                android:textSize="25dip" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:background="#ededed" />
+
+            <TextView
+                android:id="@+id/dialNum5"
+                style="@style/phone_but"
+                android:tag="5"
+                android:text="5"
+                android:textSize="25dip" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:background="#ededed" />
+
+            <TextView
+                android:id="@+id/dialNum6"
+                style="@style/phone_but"
+                android:tag="6"
+                android:text="6"
+                android:textSize="25dip" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#ededed" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/dialNum7"
+                style="@style/phone_but"
+                android:tag="7"
+                android:text="7"
+                android:textSize="25dip" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:background="#ededed" />
+
+            <TextView
+                android:id="@+id/dialNum8"
+                style="@style/phone_but"
+                android:tag="8"
+                android:text="8"
+                android:textSize="25dip" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:background="#ededed" />
+
+            <TextView
+                android:id="@+id/dialNum9"
+                style="@style/phone_but"
+                android:tag="9"
+                android:text="9"
+                android:textSize="25dip" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#ededed" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/dialNumX"
+                style="@style/phone_but"
+                android:tag="*"
+                android:text="*"
+                android:textSize="25dip" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:background="#ededed" />
+
+            <TextView
+                android:id="@+id/dialNum0"
+                style="@style/phone_but"
+                android:tag="0"
+                android:text="0"
+                android:textSize="25dip" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:background="#ededed" />
+
+            <TextView
+                android:id="@+id/dialNumJ"
+                style="@style/phone_but"
+                android:tag="#"
+                android:text="#"
+                android:textSize="25dip" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#ededed" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/dialclose"
+                style="@style/phone_but"
+                android:background="#ffffff"
+                android:src="@drawable/ic_numclose"
+                android:tag="close" />
+
+            <Button
+                android:id="@+id/dialplay"
+                style="@style/phone_but"
+                android:layout_weight="4"
+                android:background="@drawable/z_phoneplay_bg"
+                android:tag="play"
+                android:text="拨号"
+                android:textColor="#ffffff"
+                android:textSize="20dip"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/dialdel"
+                style="@style/phone_but"
+                android:background="#ffffff"
+                android:src="@drawable/ic_numdel"
+                android:tag="del" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="#bcbcbc" />
+    </LinearLayout>
+
+</LinearLayout>

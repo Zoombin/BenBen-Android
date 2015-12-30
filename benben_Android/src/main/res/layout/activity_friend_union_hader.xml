@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dip"
+        android:paddingLeft="18dip"
+        android:paddingTop="8dip"
+        android:text="堂主"
+        android:textColor="#9e9e9e"
+        android:textSize="14dip" />
+
+    <LinearLayout
+        android:id="@+id/ll_hader"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <LinearLayout
+            android:layout_width="15dp"
+            android:layout_height="50dp"
+            android:gravity="center_vertical" >
+
+            <ImageView
+                android:id="@+id/status_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_contacts_single_right" />
+        </LinearLayout>
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/group_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="16dip" />
+
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="18dip"
+            android:layout_height="18dip"
+            android:layout_marginLeft="8dip"
+            android:background="@drawable/icon_edit_member" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/group_num"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:textSize="14dip" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/base_background" />
+
+</LinearLayout>

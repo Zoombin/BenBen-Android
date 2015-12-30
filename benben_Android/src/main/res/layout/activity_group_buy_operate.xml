@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingBottom="15dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <View
+                android:layout_marginTop="15dp"
+                style="@style/set_item_Line_5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                android:padding="@dimen/padding_10dp"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="团购品:"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edt_group_buy_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:hint="请输入团购品名称"
+                    android:textColor="#848484"
+                    android:textColorHint="#848484"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_group_buy_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:textColor="#848484"
+                    android:textColorHint="#848484"
+                    android:textSize="15dp"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginLeft="10dp"
+                style="@style/set_item_Line_5"/>
+
+            <GridView
+                android:id="@+id/noScrollgridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="10dp"
+                android:horizontalSpacing="3dp"
+                android:numColumns="4"
+                android:scrollbars="none"
+                android:background="#FFFFFF"
+                >
+            </GridView>
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+            <View
+                android:layout_marginTop="15dp"
+                style="@style/set_item_Line_5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="原价:"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edt_origin_price"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:inputType="numberDecimal"
+                    android:textColor="#848484"
+                    android:textColorHint="#848484"
+                    android:textSize="15dp"
+                    android:gravity="right"
+                    android:maxLength="8"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="元"
+                    android:textColor="#848484"
+                    android:textSize="15dp"
+                    android:drawableRight="@drawable/icon_right_bar"
+                    android:drawablePadding="5dp"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginLeft="10dp"
+                style="@style/set_item_Line_5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="团购价:"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edt_group_buy_price"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:inputType="numberDecimal"
+                    android:textColor="#848484"
+                    android:textColorHint="#848484"
+                    android:textSize="15dp"
+                    android:gravity="right"
+                    android:maxLength="8"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="元"
+                    android:textColor="#848484"
+                    android:textSize="15dp"
+                    android:drawableRight="@drawable/icon_right_bar"
+                    android:drawablePadding="5dp"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginLeft="10dp"
+                style="@style/set_item_Line_5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="起始时间:"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_start_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:text="请选择"
+                    android:textColor="#848484"
+                    android:textSize="15dp"
+                    android:drawableRight="@drawable/icon_right_bar"
+                    android:drawablePadding="5dp"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginLeft="10dp"
+                style="@style/set_item_Line_5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="结束时间:"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_end_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:text="请选择"
+                    android:textColor="#848484"
+                    android:textSize="15dp"
+                    android:drawableRight="@drawable/icon_right_bar"
+                    android:drawablePadding="5dp"
+                    />
+
+            </LinearLayout>
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="选择支持的购买方式"
+                android:textColor="#848484"
+                android:textSize="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <View
+                android:layout_marginTop="3dp"
+                style="@style/set_item_Line_5"/>
+
+            <com.xunao.benben.view.ListViewForScrollView
+                android:id="@+id/lv_pay_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:background="#FFFFFF"
+                android:divider="#d8d8d8"
+                android:dividerHeight="1dp"
+                />
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!-->-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:background="#FFFFFF"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!-->-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:text="在线支付,快递发货"-->
+                        <!--android:textColor="#000000"-->
+                        <!--android:textSize="15dp"-->
+                        <!--/>-->
+
+                    <!--<EditText-->
+                        <!--android:id="@+id/edt_mail_price"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:minWidth="80dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@drawable/edit_text_bg"-->
+                        <!--android:inputType="numberDecimal"-->
+                        <!--android:textColor="#848484"-->
+                        <!--android:textColorHint="#848484"-->
+                        <!--android:textSize="15dp"-->
+                        <!--android:maxLength="8"-->
+                        <!--android:hint="请输入邮费"-->
+                        <!--android:padding="3dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--/>-->
+
+                    <!--<CheckBox-->
+                        <!--style="@style/MyCheckboxStyle"-->
+                        <!--android:layout_width="25dp"-->
+                        <!--android:layout_height="25dp"-->
+                        <!--android:clickable="false"-->
+                        <!--android:layout_margin="5dp"-->
+                        <!--android:checked="true"-->
+                        <!--/>-->
+
+                <!--</LinearLayout>-->
+
+                <!--<View-->
+                    <!--style="@style/set_item_Line_5"/>-->
+
+            <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!-->-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:background="#FFFFFF"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!-->-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:text="在线支付,到店消费"-->
+                        <!--android:textColor="#000000"-->
+                        <!--android:textSize="15dp"-->
+                        <!--/>-->
+
+
+                    <!--<CheckBox-->
+                        <!--style="@style/MyCheckboxStyle"-->
+                        <!--android:layout_width="25dp"-->
+                        <!--android:layout_height="25dp"-->
+                        <!--android:clickable="false"-->
+                        <!--android:layout_margin="5dp"-->
+                        <!--/>-->
+
+                <!--</LinearLayout>-->
+
+                <!--<View-->
+                    <!--style="@style/set_item_Line_5"/>-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!-->-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:background="#FFFFFF"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!-->-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:text="在线下单，到店交易"-->
+                        <!--android:textColor="#000000"-->
+                        <!--android:textSize="15dp"-->
+                        <!--/>-->
+
+
+                    <!--<CheckBox-->
+                        <!--style="@style/MyCheckboxStyle"-->
+                        <!--android:layout_width="25dp"-->
+                        <!--android:layout_height="25dp"-->
+                        <!--android:clickable="false"-->
+                        <!--android:layout_margin="5dp"-->
+                        <!--/>-->
+
+                <!--</LinearLayout>-->
+
+                <!--<View-->
+                    <!--style="@style/set_item_Line_5"/>-->
+
+            <!--</LinearLayout>-->
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="产品参数"
+                android:textColor="#848484"
+                android:textSize="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <View
+                android:layout_marginTop="3dp"
+                style="@style/set_item_Line_5"/>
+
+            <EditText
+                android:id="@+id/edt_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="#FFFFFF"
+                android:textColor="#848484"
+                android:textColorHint="#848484"
+                android:textSize="15dp"
+                android:hint="请输入促销产品的参数..."
+                android:gravity="top"
+                android:minLines="2"
+                />
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="文字介绍"
+                android:textColor="#848484"
+                android:textSize="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <View
+                android:layout_marginTop="3dp"
+                style="@style/set_item_Line_5"/>
+
+            <EditText
+                android:id="@+id/edt_description"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:background="#FFFFFF"
+                android:textColor="#848484"
+                android:textColorHint="#848484"
+                android:textSize="15dp"
+                android:hint="请输入促销产品的文字介绍..."
+                android:gravity="top"
+                />
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="购买须知"
+                android:textColor="#848484"
+                android:textSize="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <View
+                android:layout_marginTop="3dp"
+                style="@style/set_item_Line_5"/>
+
+            <EditText
+                android:id="@+id/edt_rule"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:background="#FFFFFF"
+                android:textColor="#848484"
+                android:textColorHint="#848484"
+                android:textSize="15dp"
+                android:hint="请输入团购产品的使用规则..."
+                android:gravity="top"
+                />
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确认修改"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:background="@drawable/green_but"
+        android:visibility="gone"
+        />
+
+
+
+</LinearLayout>

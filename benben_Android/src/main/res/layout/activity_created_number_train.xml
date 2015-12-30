@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebebeb"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="80dip"-->
+                <!--android:background="@drawable/bg_upload_face"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal" >-->
+
+                <!--<com.makeramen.roundedimageview.RoundedImageView-->
+                    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                    <!--android:id="@+id/iv_upload_face"-->
+                    <!--android:layout_width="55dip"-->
+                    <!--android:layout_height="55dip"-->
+                    <!--android:layout_marginLeft="15dip"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/icon_upload_face"-->
+                    <!--app:riv_corner_radius="3dip"-->
+                    <!--app:riv_mutate_background="true" >-->
+                <!--</com.makeramen.roundedimageview.RoundedImageView>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dip"-->
+                    <!--android:text="上传精美头像，让你的店铺脱颖而出"-->
+                    <!--android:textColor="#ffffff"-->
+                    <!--android:textSize="16dp" />-->
+            <!--</LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="140dp"
+                android:background="@drawable/bg_number_train_detail"
+                android:orientation="vertical"
+                android:padding="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dip"
+                    android:text="上传精美头像，让你的店铺脱颖而出"
+                    android:textColor="#ffffff"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scrollbars="none" >
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            >
+                            <GridView
+                                android:id="@+id/noScrollgridview"
+                                android:layout_width="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_height="100dp"
+                                android:stretchMode="none"
+                                android:numColumns="auto_fit"
+                                android:columnWidth="80dp"
+                                android:horizontalSpacing="5dp"
+                                android:padding="10dp"
+                                />
+                        </LinearLayout>
+                    </FrameLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_1" />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:hint="请输入商铺详细名称"
+                android:paddingLeft="15dip"
+                android:textSize="15dp" />
+
+            <View style="@style/set_item_Line_1" />
+
+            <EditText
+                android:id="@+id/et_short_name"
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:hint="请填写商铺简称，让用户更容易记住"
+                android:paddingLeft="15dip"
+                android:textSize="15dp" />
+
+            <View style="@style/set_item_Line_1" />
+
+            <EditText
+                android:id="@+id/et_numPhone"
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:hint="请填写手机号"
+                android:inputType="phone"
+                android:paddingLeft="15dip"
+                android:textSize="15dp" />
+
+            <View style="@style/set_item_Line_1" />
+
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:hint="请填写固话"
+                android:inputType="phone"
+                android:paddingLeft="15dip"
+                android:textSize="15dp" />
+
+            <View style="@style/set_item_Line_1" />
+
+            <RelativeLayout
+                android:id="@+id/rl_industry"
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:background="#FFFFFF"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip" >
+
+                <TextView
+                    android:id="@+id/et_industry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="#FFFFFF"
+                    android:gravity="center_vertical"
+                    android:text="选择行业"
+                    android:textColor="#848484"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right_bar" />
+            </RelativeLayout>
+
+            <View style="@style/set_item_Line_1" />
+
+            <RelativeLayout
+                android:id="@+id/rl_chose_address"
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip" >
+
+                <TextView
+                    android:id="@+id/tv_chose_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="#FFFFFF"
+                    android:gravity="center_vertical"
+                    android:text="选择所在地区"
+                    android:textColor="#848484"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right_bar" />
+            </RelativeLayout>
+
+            <View style="@style/set_item_Line_1" />
+
+            <RelativeLayout
+                android:id="@+id/rl_set_detailaddress"
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:background="@drawable/fragment_private_bg"
+                android:clickable="true" >
+
+                <TextView
+                    android:id="@+id/tv_set_detailaddress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/fragment_private_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dip"
+                    android:text="去地图设置详细地址"
+                    android:textColor="#848484"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dip"
+                    android:src="@drawable/icon_right_bar" />
+            </RelativeLayout>
+
+            <View style="@style/set_item_Line_1" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:minHeight="45dip" >
+
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="请填写详细地址"
+                    android:maxLines="2"
+                    android:paddingLeft="15dip"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_1" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:minHeight="45dip" >
+
+                <EditText
+                    android:id="@+id/et_tag1"
+                    android:layout_width="fill_parent"
+                    android:minHeight="45dip"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="请填写服务项目1"
+                    android:paddingLeft="15dip"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_1" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:minHeight="45dip" >
+
+                <EditText
+                    android:id="@+id/et_tag2"
+                    android:layout_width="fill_parent"
+                    android:minHeight="45dip"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="请填写服务项目2"
+                    android:paddingLeft="15dip"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_1" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:minHeight="45dip" >
+
+                <EditText
+                    android:id="@+id/et_tag3"
+                    android:layout_width="fill_parent"
+                    android:minHeight="45dip"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="请填写服务项目3"
+                    android:paddingLeft="15dip"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_1" />
+
+            <EditText
+                android:id="@+id/et_description"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:background="#ffffff"
+                android:gravity="top"
+                android:hint="请填写业务介绍"
+                android:minLines="10"
+                android:scrollbars="vertical"
+                android:paddingBottom="10dip"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:paddingTop="5dip"
+                android:textSize="15dp" />
+            <!-- android:inputType="textMultiLine" -->
+
+            <View
+                style="@style/set_item_Line_1"
+                android:layout_marginBottom="50dip" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

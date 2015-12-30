@@ -1,0 +1,196 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:attr="http://schemas.android.com/apk/res/com.kankanews.kankanxinwen"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_bgcolor"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/comritlebar"
+        layout="@layout/comritlebar" />
+
+    <in.srain.cube.image.CubeImageView
+        android:id="@+id/temp"
+        android:layout_width="1px"
+        android:layout_height="1px" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/main_fragment_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="46.5dp"
+            android:background="#ededed"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <View
+            android:id="@+id/black_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="47dip"
+            android:background="#33000000"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/menu_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent" >
+
+            <LinearLayout
+                android:id="@+id/menu_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="47dip"
+                android:layout_alignParentBottom="true"
+                android:background="#fcfcfc" >
+
+                <RelativeLayout
+                    android:id="@+id/tab_one"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="touchTab" >
+
+                    <TextView
+                        android:id="@+id/tab_num"
+                        style="@style/red_point"
+                        android:visibility="gone" />
+
+                    <LinearLayout style="@style/bottom_bar" >
+
+                        <ImageView
+                            android:id="@+id/tab_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="center"
+                            android:src="@drawable/tab_one_nomal" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tab_two"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="touchTab" >
+
+                    <LinearLayout style="@style/bottom_bar" >
+
+                        <ImageView
+                            android:id="@id/tab_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="center"
+                            android:src="@drawable/tab_two_nomal" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tab_two_num"
+                        style="@style/red_point"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tab_three"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="touchTab" >
+
+                    <TextView
+                        android:id="@id/tab_num"
+                        style="@style/red_point"
+                        android:visibility="gone" />
+
+                    <LinearLayout style="@style/bottom_bar" >
+
+                        <ImageView
+                            android:id="@id/tab_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="center"
+                            android:src="@drawable/tab_three_nomal" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tab_four"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="touchTab" >
+
+
+
+                    <LinearLayout style="@style/bottom_bar" >
+
+                        <ImageView
+                            android:id="@id/tab_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="center"
+                            android:src="@drawable/tab_four_nomal" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tab_four_hint"
+                        android:layout_width="10dip"
+                        android:layout_height="10dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/red_point"
+                        android:visibility="gone"
+                        />
+
+                    <TextView
+                        android:id="@+id/tab_four_num"
+                        style="@style/red_point"
+                        android:visibility="gone"
+                         />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tab_five"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="touchTab" >
+
+                    <TextView
+                        android:id="@id/tab_num"
+                        style="@style/red_point"
+                        android:visibility="gone" />
+
+                    <LinearLayout style="@style/bottom_bar" >
+
+                        <ImageView
+                            android:id="@id/tab_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="center"
+                            android:src="@drawable/tab_five_nomal" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:layout_above="@id/menu_bottom"
+                android:background="#bcbcbc" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

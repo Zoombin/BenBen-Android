@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.diegocarloslima.fgelv.lib.FloatingGroupExpandableListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@android:color/transparent"
+        android:overScrollMode="never"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:id="@+id/nodata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include layout="@layout/com_editview" />
+
+        <LinearLayout
+            android:id="@+id/contacts_layout_zqtxl"
+            style="@style/contacts_head_layout" >
+
+            <ImageView
+                style="@style/contacts_head_image"
+                android:src="@drawable/icon_contacts_zqtxl" />
+
+            <com.xunao.benben.view.MyTextView
+                style="@style/contacts_head_text"
+                android:text="政企通讯录" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contacts_layout_qun"
+            style="@style/contacts_head_layout"
+            android:layout_marginTop="1dp" >
+
+            <ImageView
+                style="@style/contacts_head_image"
+                android:src="@drawable/icon_contacts_qun" />
+
+            <com.xunao.benben.view.MyTextView
+                style="@style/contacts_head_text"
+                android:text="群组" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contacts_layout_hmztc"
+            style="@style/contacts_head_layout"
+            android:layout_marginTop="1dp" >
+
+            <ImageView
+                style="@style/contacts_head_image"
+                android:src="@drawable/icon_contacts_hmztc" />
+
+            <com.xunao.benben.view.MyTextView
+                style="@style/contacts_head_text"
+                android:text="号码直通车" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#d2d2d2" />
+
+        <com.xunao.benben.view.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="#ebebeb"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="手机好友"
+            android:textColor="#838390"
+            android:textSize="12dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#d2d2d2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ebebeb"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_marginTop="60dip"
+                android:src="@drawable/ic_refresh" />
+
+            <com.xunao.benben.view.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:text="同步通讯录失败,刷新重新同步"
+                android:textColor="#838390"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/refreshBut"
+                android:layout_width="80dip"
+                android:layout_height="30dip"
+                android:background="@drawable/green_but"
+                android:text="刷新"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/size_14" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

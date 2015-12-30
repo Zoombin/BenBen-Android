@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    >
+
+    <include layout="@layout/com_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:orientation="horizontal"
+        android:padding="0.5dip" >
+
+        <RelativeLayout
+            android:id="@+id/order_tab_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true" >
+
+            <RadioButton
+                android:id="@+id/tab_RB"
+                style="@style/record_title_style"
+                android:background="@drawable/small_mak_title_bg"
+                android:button="@null"
+                android:text="全部\n(0)"
+                android:textColor="@drawable/record_title_text_selector" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:background="#d1d1d1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/order_tab_two"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true" >
+
+            <RadioButton
+                android:id="@id/tab_RB"
+                style="@style/record_title_style"
+                android:background="@drawable/small_mak_title_bg"
+                android:button="@null"
+                android:text="待发货\n(0)"
+                android:textColor="@drawable/record_title_text_selector" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:background="#d1d1d1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/order_tab_three"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true" >
+
+            <RadioButton
+                android:id="@id/tab_RB"
+                style="@style/record_title_style"
+                android:background="@drawable/small_mak_title_bg"
+                android:button="@null"
+                android:text="已发货\n(0)"
+                android:textColor="@drawable/record_title_text_selector" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:background="#d1d1d1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/order_tab_four"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true" >
+
+            <RadioButton
+                android:id="@id/tab_RB"
+                style="@style/record_title_style"
+                android:background="@drawable/small_mak_title_bg"
+                android:button="@null"
+                android:text="待评价\n(0)"
+                android:textColor="@drawable/record_title_text_selector" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:background="#d1d1d1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/order_tab_five"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true" >
+
+            <RadioButton
+                android:id="@id/tab_RB"
+                style="@style/record_title_style"
+                android:background="@drawable/small_mak_title_bg"
+                android:button="@null"
+                android:text="退款\n(0)"
+                android:textColor="@drawable/record_title_text_selector" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dip"
+        >
+
+        <LinearLayout
+            android:id="@+id/no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-100dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_default_nodata" />
+
+            <com.xunao.benben.view.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="暂时没有相关数据" />
+        </LinearLayout>
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="10dip"
+            android:divider="#00000000"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:smoothScrollbar="true" >
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+    </RelativeLayout>
+
+</LinearLayout>

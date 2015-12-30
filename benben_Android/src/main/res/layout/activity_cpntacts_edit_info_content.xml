@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebebeb"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/icon_contacts_info_bg"
+                android:orientation="horizontal" >
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/contacts_poster"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_face"
+                    app:riv_corner_radius="5dip"
+                    app:riv_mutate_background="true"
+                    android:layout_centerVertical="true"
+                    />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/contacts_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/contacts_poster"
+                    android:textColor="#ffffff"
+                    android:layout_above="@+id/tv_nick_name"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:id="@+id/iv_edit_name"
+                    android:layout_width="18dip"
+                    android:layout_height="18dip"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/contacts_name"
+                    android:src="@drawable/ic_edit_name"
+                    android:layout_above="@+id/tv_nick_name"
+                    android:visibility="gone" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/contacts_group_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/contacts_name"
+                    android:background="@drawable/contacts_group"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="2dp"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/tv_nick_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toRightOf="@id/contacts_poster"
+                    android:layout_centerVertical="true"
+                    android:textColor="#ffffff" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/contacts_benben"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_nick_name"
+                    android:layout_toRightOf="@id/contacts_poster"
+                    android:textColor="#ffffff" />
+
+                <LinearLayout
+                    android:id="@+id/ll_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tv_nick_name"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_com_list_delete"
+                        android:layout_marginRight="5dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="删除奔犇号"
+                        android:textColor="@color/red"
+                        android:layout_marginRight="15dp"
+                        />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_contacts_group"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:layout_marginBottom="1dip"
+                android:background="@drawable/fragment_private_bg"
+                android:clickable="true"
+                android:paddingLeft="20dip"
+                android:paddingRight="15dip" >
+
+                <TextView
+                    android:id="@+id/tv_contacts_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="14dip" />
+
+                <ImageView
+                    android:layout_width="14dip"
+                    android:layout_height="18dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right_bar" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <ListView
+                    android:id="@+id/listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:divider="@null"
+                    android:listSelector="@android:color/transparent"
+                    android:scrollbars="none" >
+                </ListView>
+
+                <LinearLayout
+                    android:id="@+id/layout_addPhone"
+                    style="@style/set_layout_item"
+                    android:layout_height="40dip"
+                    android:layout_below="@id/listview"
+                    android:layout_marginTop="20dip" >
+
+                    <ImageView
+                        style="@style/set_image_item"
+                        android:layout_marginLeft="30dip"
+                        android:src="@drawable/ic_addphone" />
+
+                    <com.xunao.benben.view.MyTextView
+                        style="@style/set_layout_left_text"
+                        android:text="添加号码"
+                        android:textColor="#42be69"
+                        android:textSize="@dimen/size_14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/layout_addPhone"
+                    android:orientation="vertical" >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/btn_sendmessage_red"
+                        android:gravity="center"
+                        android:text="删除联系人"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

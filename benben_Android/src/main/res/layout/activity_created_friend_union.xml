@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/icon_contacts_info_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/friend_union_poster"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/icon_default_grouppost"
+                    app:riv_corner_radius="3dip"
+                    app:riv_mutate_background="true" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/contacts_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="上传精美头像，让你的联盟脱颖而出"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <com.xunao.benben.view.MyEditView
+                android:id="@+id/friend_union_name"
+                style="@style/register_three_text"
+                android:layout_marginBottom="1dip"
+                android:hint="请填写好友联盟名称" />
+
+            <RelativeLayout
+                android:id="@+id/friend_union_rl"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#ffffff"
+                android:clickable="true"
+                android:paddingLeft="25dip"
+                android:paddingRight="15dip" >
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/friend_union_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="#ffffff"
+                    android:hint="请选择所在地区"
+                    android:textColorHint="#848484"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="14dip"
+                    android:layout_height="18dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right_bar" />
+            </RelativeLayout>
+
+            <com.xunao.benben.view.MyEditView
+                android:id="@+id/friend_union_info"
+                style="@style/register_three_text"
+                android:layout_height="160dip"
+                android:layout_marginTop="1dp"
+                android:gravity="left|top"
+                android:hint="请填写好友联盟简介"
+                android:minLines="6"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" />
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/union_type_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="8dip"
+                android:text="请选择组建类型"
+                android:textColor="#949494"
+                android:textSize="14dip" />
+
+            <RelativeLayout
+                android:id="@+id/rl_work_union"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="#ffffff"
+                android:paddingBottom="8dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="8dip" >
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/union_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="工作联盟"
+                    android:textColor="#535353"
+                    android:textSize="15dip" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/union_type"
+                    android:layout_marginTop="10dip"
+                    android:text="招募成员方式：在好友列表中挑选"
+                    android:textColor="#949494"
+                    android:textSize="14dip" />
+
+                <ImageView
+                    android:id="@+id/iv_work"
+                    android:layout_width="25dip"
+                    android:layout_height="25dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_checkbox_noselect" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_lol_union"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="#ffffff"
+                android:paddingBottom="8dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:paddingTop="8dip" >
+
+                <com.xunao.benben.view.MyTextView
+                    android:id="@+id/union_type2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="英雄联盟"
+                    android:textColor="#535353"
+                    android:textSize="15dip" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/union_type2"
+                    android:layout_marginTop="10dip"
+                    android:text="招募成员方式：默认好友加入，点选剔除"
+                    android:textColor="#949494"
+                    android:textSize="14dip" />
+
+                <ImageView
+                    android:id="@+id/iv_lol"
+                    android:layout_width="25dip"
+                    android:layout_height="25dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_checkbox_noselect" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

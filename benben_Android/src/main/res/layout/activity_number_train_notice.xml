@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/com_title_bar" />
+
+    <View
+        android:layout_marginTop="15dp"
+        style="@style/set_item_Line_5"/>
+
+    <EditText
+        android:id="@+id/edt_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="10dp"
+        android:hint="输入公告内容..."
+        android:minHeight="150dp"
+        android:gravity="top"
+        />
+
+</LinearLayout>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_bgcolor"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <LinearLayout style="@style/set_layout" >
+
+            <View style="@style/set_item_Line_5"
+                android:layout_marginTop="15dip"/>
+
+            <LinearLayout
+                android:id="@+id/layout_friend"
+                style="@style/set_layout_item"
+                 >
+
+                <ImageView
+                    style="@style/set_image_item"
+                    android:src="@drawable/ic_friend" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dip"
+                    android:layout_marginLeft="10dip"
+                    android:text="朋友圈" />
+
+                <TextView
+                    android:id="@+id/num_friend_about_me"
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/red_point"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="5dip"
+                    android:visibility="gone"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    android:id="@+id/num_friend"
+                    android:layout_width="10dip"
+                    android:layout_height="10dip"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/red_point"
+                    android:gravity="center"
+                    android:textSize="15dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone"
+                     />
+
+
+
+                <ImageView
+                    style="@style/set_layout_right_image"
+                    android:src="@drawable/icon_right_bar" />
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_5" />
+
+            <View style="@style/set_item_Line_5"
+                android:layout_marginTop="15dip"/>
+
+            <LinearLayout
+                android:id="@+id/layout_creation"
+                style="@style/set_layout_item"
+                 >
+
+                <ImageView
+                    style="@style/set_image_item"
+                    android:src="@drawable/ic_creation" />
+
+                <com.xunao.benben.view.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dip"
+                    android:layout_marginLeft="10dip"
+                    android:text="微创作" />
+
+                <TextView
+                    android:id="@+id/num_creation_about_me"
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/red_point"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="5dip"
+                    android:visibility="gone"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    android:id="@+id/num_creation"
+                    android:layout_width="10dip"
+                    android:layout_height="10dip"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/red_point"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone"
+                    />
+
+
+                <ImageView
+                    style="@style/set_layout_right_image"
+                    android:src="@drawable/ic_right_arr" />
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_5" />
+
+            <LinearLayout
+                android:id="@+id/layout_mybuy"
+                style="@style/set_layout_item"
+                >
+
+                <ImageView
+                    style="@style/set_image_item"
+                    android:src="@drawable/ic_mybuy" />
+
+                <com.xunao.benben.view.MyTextView
+                    style="@style/set_layout_left_text"
+                    android:text="我要买" />
+
+                <ImageView
+                    style="@style/set_layout_right_image"
+                    android:src="@drawable/ic_right_arr" />
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_5" />
+
+            <LinearLayout
+                android:id="@+id/layout_happy"
+                style="@style/set_layout_item"
+                 >
+
+                <ImageView
+                    style="@style/set_image_item"
+                    android:src="@drawable/ic_happy" />
+
+                <com.xunao.benben.view.MyTextView
+                    style="@style/set_layout_left_text"
+                    android:text="开心一刻" />
+
+                <ImageView
+                    style="@style/set_layout_right_image"
+                    android:src="@drawable/ic_right_arr" />
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_5" />
+
+            <View style="@style/set_item_Line_5"
+                android:layout_marginTop="15dip"/>
+
+            <LinearLayout
+                android:id="@+id/layout_twocode"
+                style="@style/set_layout_item"
+                 >
+
+                <ImageView
+                    style="@style/set_image_item"
+                    android:src="@drawable/ic_twocode" />
+
+                <com.xunao.benben.view.MyTextView
+                    style="@style/set_layout_left_text"
+                    android:text="扫一扫" />
+
+                <ImageView
+                    style="@style/set_layout_right_image"
+                    android:src="@drawable/ic_right_arr" />
+            </LinearLayout>
+
+            <View style="@style/set_item_Line_5"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

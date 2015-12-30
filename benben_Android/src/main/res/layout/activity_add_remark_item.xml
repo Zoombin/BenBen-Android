@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="43dip"
+        android:background="#dbdbdb"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:text="sdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="#000000"
+            android:textSize="15dip" />
+
+        <TextView
+            android:text="sddsfas"
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="40dip"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_name"
+            android:gravity="center_vertical"
+            android:textColor="#000000"
+            android:textSize="15dip" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_5" />
+
+    <RelativeLayout
+        android:id="@+id/rl_nick_name"
+        android:layout_width="fill_parent"
+        android:layout_height="43dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:paddingLeft="20dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:id="@+id/tv_remark_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="请填写真实姓名"
+            android:textColor="#848484"
+            android:textSize="16dip" />
+
+        <ImageView
+            android:layout_width="14dip"
+            android:layout_height="18dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+</LinearLayout>

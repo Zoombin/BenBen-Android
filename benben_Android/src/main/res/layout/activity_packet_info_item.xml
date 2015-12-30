@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/base_background"
+    android:orientation="vertical" >
+
+    <com.xunao.benben.view.MyTextView
+        android:id="@+id/item_pinyin"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
+        android:textColor="#838390"
+        android:textSize="14dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="1dp"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/item_phone_checkbox"
+            style="@style/MyCheckboxStyle"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:clickable="false"
+            android:visibility="gone" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/item_phone_poster"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_face"
+            android:visibility="visible"
+            app:riv_corner_radius="5dip"
+            app:riv_mutate_background="true" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/item_phone_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:textSize="16dp" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/item_phone_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+</LinearLayout>

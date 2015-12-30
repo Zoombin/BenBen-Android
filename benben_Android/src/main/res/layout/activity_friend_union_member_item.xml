@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dip"
+        android:paddingBottom="6dip"
+        android:paddingLeft="15dip"
+        android:background="@drawable/fragment_private_bg"
+        android:paddingRight="15dip"
+        android:paddingTop="6dip" >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/friend_union_member_poster"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_face"
+            app:riv_mutate_background="true" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/friend_union_member_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_marginTop="5dip"
+            android:layout_toRightOf="@id/friend_union_member_poster"
+            android:text="护花世界"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/friend_union_member_name"
+            android:layout_marginLeft="8dip"
+            android:layout_marginTop="5dip"
+            android:layout_toRightOf="@id/friend_union_member_poster"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="15dip"
+                android:layout_height="15dip"
+                android:layout_marginRight="5dip"
+                android:src="@drawable/icon_phone_001" />
+
+            <com.xunao.benben.view.MyTextView
+                android:id="@+id/friend_union_member_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="护花世界"
+                android:textColor="#848484"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/friend_union_member_remark_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dip"
+            android:text="护花世界"
+            android:textColor="#848484"
+            android:textSize="14dp" />
+    </RelativeLayout>
+
+</LinearLayout>

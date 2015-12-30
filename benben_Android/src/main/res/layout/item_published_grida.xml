@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="78dp"
+    android:layout_height="78dp" >
+
+    <RelativeLayout
+        android:id="@+id/box"
+        android:layout_width="78dp"
+        android:layout_height="78dp" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/item_grida_image"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_addpic_unfocused" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tv_edittxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="编辑封面"
+                android:textColor="#FFFFFF"
+                android:background="#8f000000"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignLeft="@+id/item_grida_image"
+                android:layout_alignRight="@+id/item_grida_image"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_com_list_delete" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

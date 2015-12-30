@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xunao.benben"
+    android:versionCode="13"
+    android:versionName="1.3.1" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+
+    <!-- 读取联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
+    </uses-permission>
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+    </uses-permission>
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
+    </uses-permission>
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" >
+    </uses-permission>
+    <!-- 允许应用读取低级别的系统日志文件 -->
+    <uses-permission android:name="android.permission.READ_LOGS" >
+    </uses-permission>
+    <!-- 录音 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/><!-- 写入通讯录权限 -->
+
+    <!-- 环信 -->
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <permission android:name="com.easemob.chatuidemo.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.easemob.chatuidemo.permission.C2D_MESSAGE" />
+
+    <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature android:name="android.hardware.screen.landscape" />
+    <uses-feature
+        android:name="android.hardware.wifi"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <application
+        android:name="com.xunao.benben.base.IA.CrashApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_icon"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        <activity
+            android:name="com.xunao.benben.activity.SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_s"
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="benben"
+                    android:host=""/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.ActivityLogin"
+            android:screenOrientation="portrait"
+            android:theme="@style/login_theme"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <!-- 注册界面1 -->
+        <activity
+            android:name="com.xunao.benben.ui.ActivityRegisterOne"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 注册界面2 -->
+        <activity
+            android:name="com.xunao.benben.ui.ActivityRegisterTwo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 注册界面3 -->
+        <activity
+            android:name="com.xunao.benben.ui.ActivityRegisterThree"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 忘记密码界面 -->
+        <activity
+            android:name="com.xunao.benben.ui.ActivityForgetPassWord"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.ActivityForgetPasswordTwo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.ActivityForgetPasswordThree"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityFriendUnionMember"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityBenBenFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityFriendUnionInviteMember"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityFriendUnionInviteMemberBySelf"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoseGroupLeader"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityEnterpriseAddMember"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivitySmallPublic"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityInviteContactsToBenBen"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAddFriendBySelf"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAddFriendDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 主界面 -->
+        <activity
+            android:name="com.xunao.benben.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.ActivityFindContacts"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 联系人分组 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ContectManagement.ActivityPacketManagement"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ContectManagement.ActivityPacketAddFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivitySmallPublics"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceBroadFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 删除分组 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ContectManagement.ActivityPacketDelete"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 查看分组里联系人信息 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ContectManagement.ActivityPacketInfo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMySelfBuy"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityBroadCasting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 编辑成员 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ContectManagement.ActivityPacketInfoManagement"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityFriendUnionAddBulletin"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 编辑联系人 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityContactsEditInfoContent"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 编辑联系人 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceContactsGroup"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 联系人信息 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityContactsInfo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 联系人列表 -->
+        <activity
+            android:name="com.xunao.benben.ui.ActivityAllContacts"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAddNewFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAddNewHxFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 群组列表 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityTalkGroup"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 邀请群组人员 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityAddGroupMember"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityEnterpriseEditGroupMember"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityEnterpriseMyAddContacts"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 消息详情 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityNewContent"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityCreatedTallGroup"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityFindTalkGroup"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityUpdateTallGroup"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityTalkGroupInfo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 选择地址 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceAddress"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceTrumpetAddress"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceBroadCastFriendByArea"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceBroadCastUnionByArea"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 选择行业 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceIndusrty"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceSecondIndusrty"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceThirdIndusrty"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.sitech.oncon.barcode.core.CaptureActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAddFriendChoiceGroup"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 绑定手机 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityPhoneBinding"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityBindingPhoneEnterCode"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 证企通讯录 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityEnterprisesContacts"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.NewFriendsMsgActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityNewGroupInfo"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityNewFriendInfo"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityNewUnionInfo"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityNewGroupChangeInfo"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMessageNotice"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+
+
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityContactsUnionInfo"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivitySearchEnterprise"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAddRemarks"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityEnterpriseChoiceMember"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAddCommon"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 群组人员列表 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityTalkGroupMember"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityMyContactMember"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityCreatedEnterpriseContacts"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityEnterpriseDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityEnterpriseMember"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityEnterpriseInviteMember"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityEnterpriseGroup"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityDeleteEnterpriseGroup"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+
+        <!-- 号码直通车 -->
+        <activity
+            android:name="com.xunao.benben.ui.ActivityNumberTrain"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMyNumberTrain"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan|stateHidden" 
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityNumberTrainDetail"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMyNumberTrainDetail"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+        <activity
+            android:name=".ui.item.ActivityNumberTrainPromotionIdentity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+
+        <activity
+            android:name="com.xunao.benben.ui.ActivityNumberTrainMap"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityCutImage"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceDetailAddress"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMyNumberTrianInfoPerfect"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.ActivityNumberTrainDetailMap"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+        <!-- 朋友圈浏览大图 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityContentPicSet"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 我要买申诉 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAppeal"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 设置 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivitySetting"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 我的微创作 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMySmallMake"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 申请加入百姓网 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityApplyBaiXing"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityInviteFriendToBx"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityProgressOfBx"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityApplyBaixingDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 消息中心 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityNews"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 我要买 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityBuyNews"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 好友联盟 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMyFriendUnion"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityFriendUnionDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityCreatedFriendUnion"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityInviteMyFriendToUnion"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+        <!-- 个人信息 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityPersonal"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityComplain"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAboutBenben"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityUpdatNickName"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityUpdateRealName"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityUpdateAddress"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityUpdatePassword"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 我的 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMyDynamic"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 开心一刻 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityHappy"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 小喇叭 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityTrumpetForArea"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 查找朋友 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityAddFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 浏览器 -->
+        <activity
+            android:name="com.xunao.benben.ui.ActivityWeb"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 发布朋友圈 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityWriteFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 发布微创作 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityWriteSmallMake"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 我的关注 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMyttention"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.AlbumActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.GalleryActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ImageFile"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ShowAllPhoto"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 通讯录同步 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityContactsSynchro"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityContactsUpdate"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 微创作 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivitySmallMake"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 我要买 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivitymyBuy"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <!-- 我要买发布 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityWriteBuyInfo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 我要买详情 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityBuyInfoContent"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"  >
+        </activity>
+        <!-- 我要买搜索 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityBuySearch"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 聊天界面 -->
+        <activity
+            android:name="com.xunao.benben.hx.chatuidemo.activity.ChatActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <!-- 聊天界面查看图片 -->
+        <activity
+            android:name="com.xunao.benben.hx.chatuidemo.activity.ShowBigImage"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChatPicSet"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.hx.chatuidemo.activity.ShowNormalFileActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 聊天界面图片选择 -->
+        <activity
+            android:name="com.xunao.benben.hx.chatuidemo.activity.PhotoWallActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 发送小喇叭 -->
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceFriendUnion"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 自定义的contextmenu -->
+        <activity
+            android:name="com.xunao.benben.hx.chatuidemo.activity.ContextMenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.hx.chatuidemo.activity.AlertDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+        <!-- 选取视频 -->
+        <activity
+            android:name="com.xunao.benben.hx.chatuidemo.activity.ImageGridActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 播放视频 -->
+        <activity
+            android:name="com.xunao.benben.hx.chatuidemo.activity.ShowVideoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 拍摄视频 -->
+        <activity
+            android:name="com.xunao.benben.hx.chatuidemo.activity.RecorderVideoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityNewAboutMe"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceBroadUnion"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.promotion.ActivityPromotionManage"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.promotion.ActivityPromotionOperate"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.promotion.ActivityMyPromotionAlbum"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.promotion.ActivityPromotionAlbum"
+            android:screenOrientation="portrait" >
+        </activity>
+
+
+        <activity
+            android:name=".ui.promotion.ActivityMyPromotionAlbumDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.promotion.ActivityPromotionAlbumDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.promotion.ActivityPromotionAddAlbum"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.promotion.ActivityUpdateAlbumName"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.promotion.ActivityPromotionDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.groupbuy.ActivityGroupBuyManage"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.groupbuy.ActivityGroupBuyOperate"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.ActivityNumberTrainComment"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.ActivityNumberTrainStore"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.shareselect.ActivityShareSelectFriend"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.shareselect.ActivityShareSelectTalkGroup"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityMyNumberTrainNotice"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.order.ActivityMakeOrder"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.order.ActivityMyOrder"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.account.ActivityAccountAddressManage"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.account.ActivityAddressOperate"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.account.ActivityMyAccount"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.order.ActivityOrderCheck"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.order.ActivityOrderPayResult"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.order.ActivityMyOrderDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ui.order.ActivityOrderPayType"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ui.order.ActivityOrderCheckDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ui.order.ActivityBusinessOrder"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.order.ActivityBusinessOrderDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.order.ActivityManualSend"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.order.ActivityMyOrderComment"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.order.ActivityBusinessOrderComment"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.order.ActivityOrderCommentDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 开机自启动服务 -->
+        <receiver android:name="com.easemob.chat.StartServiceReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 设置环信应用的appkey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="benben2015#benben" />
+		<!-- benben2015#benben   xunao#benben-->
+        <!-- 声明sdk所需的service -->
+        <service android:name="com.easemob.chat.EMChatService" />
+
+        <!-- 声明sdk所需的receiver -->
+        <receiver android:name="com.easemob.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 百度地图所需的service -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="3ecea51f560650b1ed8a4b99808f52e8" />
+        <!-- 消息中心service -->
+        <service
+            android:name="com.xunao.benben.base.service.UpdateInfoService"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="com.xunao.benben.base.service.UpdateInfoService" />
+            </intent-filter>
+        </service>
+        <!-- umeng appkey，可忽略 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55643cc267e58e5cf10028f8" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="benben" />
+
+        <!-- alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+
+        <!-- alipay sdk end -->
+    </application>
+
+</manifest>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <corners        android:bottomLeftRadius="0dip"
+        android:bottomRightRadius="0dip"        android:topLeftRadius="15dip"
+        android:topRightRadius="15dip" />
+
+    <gradient
+        android:endColor="@color/bule_color"
+        android:startColor="@color/bule_color" />
+
+</shape>

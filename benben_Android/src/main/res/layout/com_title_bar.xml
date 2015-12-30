@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/com_title_bar_bg"
+        style="@style/ActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_action_bar_height" >
+
+        <ImageView
+            android:id="@+id/com_title_bar_left_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/back_height"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dip"
+            android:paddingBottom="10dip"
+            android:paddingRight="18dp"
+            android:paddingTop="10dip" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/com_title_bar_left_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/com_title_bar_left_bt"
+            android:paddingRight="50dip"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/com_title_bar_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="65dip"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/base_action_bar_title_size" />
+
+        <ImageView
+            android:id="@+id/com_title_bai_content_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/com_title_bar_right_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dip"
+            android:paddingBottom="10dip"
+            android:paddingLeft="18dp"
+            android:paddingTop="10dip"  />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/com_title_bar_right_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingLeft="80dip"
+            android:paddingRight="15dip"
+            android:textColor="#ffffff"
+            android:textSize="16dp" >
+        </com.xunao.benben.view.MyTextView>
+    </RelativeLayout>
+
+</LinearLayout>

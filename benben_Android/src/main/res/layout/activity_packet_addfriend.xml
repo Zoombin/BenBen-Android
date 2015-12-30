@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:layout_centerInParent="true"
+        android:background="#ebebeb"
+        android:orientation="horizontal"
+        android:paddingBottom="10dip"
+        android:paddingLeft="45dp"
+        android:paddingRight="45dp"
+        android:paddingTop="10dip" >
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/tab_left"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bac_bule_left"
+            android:gravity="center"
+            android:text="全部联系人"
+            android:textColor="#ffffff" />
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/tab_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bac_white_right"
+            android:gravity="center"
+            android:text="已选择(0)"
+            android:textColor="@color/top_bar_color" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#d1d1d1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/unSelectBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <com.diegocarloslima.fgelv.lib.FloatingGroupExpandableListView
+                android:id="@+id/unlistView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dip"
+                android:clipToPadding="false"
+                android:divider="@null"
+                android:drawSelectorOnTop="true"
+                android:listSelector="@android:color/transparent"
+                android:overScrollMode="never"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:layout_alignParentBottom="true"
+                android:background="#dddddd"
+                android:paddingLeft="12dip"
+                android:paddingRight="12dip" >
+
+                <CheckBox
+                    android:id="@+id/all_checkbox"
+                    style="@style/MyCheckboxStyle"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tv_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/all_checkbox"
+                    android:text="全选"
+                    android:textColor="#000000"
+                    android:textSize="15dip" />
+
+                <!-- <Button
+                    android:id="@+id/btn_invite"
+                    android:layout_width="60dip"
+                    android:layout_height="30dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/invite_friend_to_union_bg"
+                    android:text="邀请"
+                    android:textColor="#ffffff"
+                    android:textSize="15dip" /> -->
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SelectBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" >
+            
+             <ListView
+                android:id="@+id/selectListview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="vertical" >
+            </ListView>
+            
+            
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

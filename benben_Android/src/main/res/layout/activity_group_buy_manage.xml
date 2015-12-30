@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="展示中"
+                android:textColor="#848484"
+                android:textSize="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                />
+
+            <View
+                android:layout_marginTop="3dp"
+                style="@style/set_item_Line_5"/>
+
+            <com.xunao.benben.view.ListViewForScrollView
+                android:id="@+id/lv_group_buy_showing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:focusable="false"
+                android:listSelector="@android:color/transparent"
+                android:layout_marginBottom="1dip"
+                android:visibility="gone"
+                android:dividerHeight="1dp"
+                android:divider="#d8d8d8"
+                />
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+
+            <TextView
+                android:id="@+id/tv_add_group_buy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:text="添加新的团购"
+                android:textColor="#848484"
+                android:textSize="18dp"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/icon_add_promotion"
+                android:drawablePadding="5dp"
+                android:visibility="gone"
+                />
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="已下架"
+                android:textColor="@color/red"
+                android:textSize="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                />
+
+            <View
+                android:layout_marginTop="3dp"
+                style="@style/set_item_Line_5"/>
+
+            <com.xunao.benben.view.ListViewForScrollView
+                android:id="@+id/lv_group_buy_off_shelf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:focusable="false"
+                android:listSelector="@android:color/transparent"
+                android:layout_marginBottom="1dip"
+                android:visibility="gone"
+                android:dividerHeight="1dp"
+                android:divider="#d8d8d8"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

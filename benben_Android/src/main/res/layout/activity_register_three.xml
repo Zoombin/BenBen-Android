@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <com.xunao.benben.view.MyEditView
+        android:id="@+id/user_name"
+        style="@style/register_three_text"
+        android:hint="请输入您的昵称" />
+
+    <com.xunao.benben.view.MyTextView
+        android:id="@+id/user_age"
+        style="@style/register_three_text"
+        android:layout_marginTop="1dp"
+        android:hint="请输入您的年龄" />
+
+    <com.xunao.benben.view.MyEditView
+        android:id="@+id/user_password_one"
+        style="@style/register_three_text"
+        android:layout_marginTop="1dp"
+        android:hint="请设置6-16位登录密码"
+        android:inputType="textPassword" />
+
+    <com.xunao.benben.view.MyEditView
+        android:id="@+id/user_password_two"
+        style="@style/register_three_text"
+        android:layout_marginTop="1dp"
+        android:hint="重复登录密码"
+        android:inputType="textPassword" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="1dp"
+        android:background="#ffffff"
+        android:contentDescription="性别"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp" >
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            style="@style/MyCheckboxStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:paddingLeft="30dip"
+            android:text="男"
+            android:textColor="#848484"
+            android:textSize="16dp" >
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            style="@style/MyCheckboxStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingLeft="30dip"
+            android:text="女"
+            android:textColor="#848484"
+            android:textSize="16dp" >
+        </RadioButton>
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <include layout="@layout/com_editview" />
+
+    <TextView
+        android:id="@+id/add_common"
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="5dip"
+        android:background="#84BBD5"
+        
+        android:gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:text="温馨提示：长按可以设置为常用联系人"
+      	android:textColor="#ffffff"
+        android:textSize="15dip" />
+  <!--  android:textColor="#8F8F9B"-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_default_nodata" />
+
+            <com.xunao.benben.view.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="暂时没有相关数据" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dip" >
+        </ListView>
+
+        <RelativeLayout
+            android:id="@+id/rl_add_common"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:text="选择1-50人成为常用联系人"
+                android:textSize="15dip" />
+
+            <Button
+                android:id="@+id/btn_invite"
+                android:layout_width="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:layout_height="30dip"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dip"
+                android:background="@drawable/invite_friend_to_union_bg"
+                android:text="确定 (0/50)"
+                android:textColor="#ffffff"
+                android:textSize="15dip" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

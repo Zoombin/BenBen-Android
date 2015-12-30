@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    >
+
+    <View
+        android:background="#dcdcdc"
+        android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        >
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="王先生"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15851437940"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="苏州市"
+        android:textColor="#787878"
+        android:textSize="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        />
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:background="#dcdcdc"
+        android:layout_height="0.5dp"
+        android:layout_width="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_default"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            >
+
+            <CheckBox
+                android:id="@+id/cb_default"
+                style="@style/MyCheckboxStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:clickable="false"
+                android:checked="true"
+                android:layout_gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设置默认收货地址"
+                android:textColor="#787878"
+                android:textSize="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_edt"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="编辑"
+            android:textColor="#787878"
+            android:textSize="15dp"
+            android:background="@drawable/textview_bg_grey"
+            android:padding="3dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:background="@drawable/textview_bg_red"
+            android:padding="3dp"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="5dp"
+        android:background="#dcdcdc"
+        android:layout_height="0.5dp"
+        android:layout_width="match_parent"/>
+
+</LinearLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_toLeftOf="@+id/addFriend"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/item_delete"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/item_select"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/icon_com_list_delete" />
+        </LinearLayout>
+
+        <com.xunao.benben.view.MyTextView
+            android:id="@+id/group_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="哈哈哈哈哈哈哈哈"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/changeNameBut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dip"
+            android:paddingLeft="6dip"
+            android:paddingRight="6dip"
+            android:paddingTop="10dip"
+            android:src="@drawable/editname_blue" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addFriend"
+        android:layout_width="110dip"
+        android:layout_height="45dp"
+        android:layout_toLeftOf="@+id/ll_move"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip" >
+
+        <ImageView
+            android:layout_width="15dip"
+            android:layout_height="15dip"
+            android:layout_marginRight="5dip"
+            android:clickable="false"
+            android:focusable="false"
+            android:src="@drawable/icon_add_member" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="新成员"
+            android:textColor="#42be69"
+            android:textSize="15dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_move"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        >
+        <ImageView
+            android:id="@+id/iv_move"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_list_move"
+            android:layout_centerVertical="true"
+            android:visibility="visible"
+            android:layout_gravity="right"
+            />
+
+        </LinearLayout>
+
+
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dip"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="#d1d1d1" />-->
+
+</RelativeLayout>

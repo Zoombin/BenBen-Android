@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="35dip"
+        android:src="@drawable/icon_about_benben" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dip"
+        android:text="奔犇1.1.1"
+        android:textColor="@color/about_color"
+        android:textSize="15sp" />
+
+    <View style="@style/set_item_Line_5" />
+
+    <RelativeLayout
+        android:id="@+id/tl_tab_1"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关于我们"
+            android:textColor="@color/about_color"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/tl_tab_2"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="法律声明"
+            android:textColor="@color/about_color"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/tl_tab_3"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使用帮助"
+            android:textColor="@color/about_color"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_6" />
+
+    <RelativeLayout
+        android:id="@+id/tl_tab_4"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/fragment_private_bg"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dip"
+        android:paddingRight="15dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="积分说明"
+            android:textColor="@color/about_color"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_right_bar" />
+    </RelativeLayout>
+
+    <View style="@style/set_item_Line_5" />
+
+</LinearLayout>

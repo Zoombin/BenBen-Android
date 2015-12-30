@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/com_title_bar" />
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="0.5dip" >
+
+        <RelativeLayout
+            android:id="@+id/prerecord_tab_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true" >
+
+            <RadioButton
+                android:id="@+id/tab_RB"
+                style="@style/record_title_style"
+                android:background="@drawable/small_mak_title_bg"
+                android:button="@null"
+                android:text="我的发布"
+                android:textColor="@drawable/record_title_text_selector" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v_vertical"
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:background="#d1d1d1" />
+
+        <RelativeLayout
+            android:id="@+id/prerecord_tab_three"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true" >
+
+            <RadioButton
+                android:id="@id/tab_RB"
+                style="@style/record_title_style"
+                android:background="@drawable/small_mak_title_bg"
+                android:button="@null"
+                android:text="我的报价"
+                android:textColor="@drawable/record_title_text_selector" />
+        </RelativeLayout>
+    </LinearLayout>
+    <!--
+         <include
+        android:id="@+id/searchBox"
+        layout="@layout/com_editview_02" />
+    -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/buy_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/buy_nodota"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:layout_width="100dip"
+                    android:layout_height="100dip"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dip"
+                    android:src="@drawable/nodata_bg" />
+            </RelativeLayout>
+
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/buy_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:fadingEdge="none"
+                android:listSelector="@android:color/transparent"
+                android:scrollbarStyle="outsideOverlay" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/price_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/price_nodota"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:layout_width="100dip"
+                    android:layout_height="100dip"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dip"
+                    android:src="@drawable/nodata_bg" />
+            </RelativeLayout>
+
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/price_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:fadingEdge="none"
+                android:listSelector="@android:color/transparent"
+                android:scrollbarStyle="outsideOverlay" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/public_buy"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dip"
+            android:padding="10dip"
+            android:src="@drawable/ic_samllmakewrite" />
+    </RelativeLayout>
+
+</LinearLayout>

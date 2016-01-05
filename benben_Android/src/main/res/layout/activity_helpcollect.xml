@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebebeb"
+    android:orientation="vertical">
+
+    <include layout="@layout/com_title_bar" />
+
+    <LinearLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/content_rest_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_title_rest_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2个赠送小喇叭"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:minWidth="100dp"
+                android:text="（可提升 150 人）"
+                android:textColor="@color/gray_pressed"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btleft_rest_num"
+                android:layout_width="wrap_content"
+                android:layout_height="32dip"
+                android:background="@drawable/help_btn_selector"
+                android:text="前往发送"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_is_fl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_title_is_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="好友联盟"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:minWidth="100dp"
+                android:text="（可提升 300 人）"
+                android:textColor="@color/gray_pressed"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btleft_is_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="32dip"
+                android:background="@drawable/help_btn_selector"
+                android:text="立即开通"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_is_po"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_title_is_po"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="促销"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:minWidth="100dp"
+                android:text="（可提升 100 人）"
+                android:textColor="@color/gray_pressed"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btleft_is_po"
+                android:layout_width="wrap_content"
+                android:layout_height="32dip"
+                android:background="@drawable/help_btn_selector"
+                android:text="立即开通"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_is_gb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_title_is_gb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="团购"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:minWidth="100dp"
+                android:text="（可提升 200 人）"
+                android:textColor="@color/gray_pressed"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btleft_is_gb"
+                android:layout_width="wrap_content"
+                android:layout_height="32dip"
+                android:background="@drawable/help_btn_selector"
+                android:text="立即开通"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_is_vip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_title_is_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员号"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:minWidth="100dp"
+                android:text="（可提升 1000 人）"
+                android:textColor="@color/gray_pressed"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btleft_is_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="32dip"
+                android:background="@drawable/help_btn_selector"
+                android:text="立即开通"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

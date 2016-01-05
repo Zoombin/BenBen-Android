@@ -6,7 +6,6 @@ public class AndroidConfig {
 
 	public static final String SHARENAME = "BenBen";
 
-
 	public static final String NETHOST ="http://112.124.101.177:81/index.php/v2";
     public static final String NETHOST2 ="http://112.124.101.177:81/index.php/v2";
     public static final String NETHOST3 ="http://112.124.101.177:81/index.php/v1";
@@ -661,4 +660,11 @@ public class AndroidConfig {
     public static final String Reply = "/order/Reply";
     //同意退款
     public static final String Agreeback = "/order/Agreeback";
+	//收藏小助手详情
+	public static final String HelpcollectDetails = "/store/Helpcollect";
+	//群公告添加
+	public static final String Addbulletin = "/group/Addbulletin";
+	//群组公告弹框
+	public static final String PopContent = "/store/popContent";
+
 }

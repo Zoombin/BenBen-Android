@@ -25,6 +25,8 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.xunao.benben.R;
 import com.xunao.benben.R.drawable;
@@ -33,6 +35,7 @@ import com.xunao.benben.base.IA.CrashApplication;
 import com.xunao.benben.bean.NumberTrainDetail;
 import com.xunao.benben.bean.NumberTrainPoster;
 import com.xunao.benben.bean.Promotion;
+import com.xunao.benben.dialog.HelpcollectDialog;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
@@ -53,6 +56,7 @@ import com.xunao.benben.view.NoScrollGridView;
 
 import net.tsz.afinal.FinalBitmap;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -226,6 +230,9 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
 				InteNetUtils.getInstance(mContext).getOwnerDetail(id,
                         mCurrentLantitude + "", mCurrentLongitude + "",
                         mRequestCallBack);
+
+                //群组公告弹窗
+                getPopInfo();
 			}
 		}
 
@@ -575,6 +582,46 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
 		ToastUtils.Errortoast(mContext, "网络请求失败，请重试！");
 		dissLoding();
 	}
+
+
+    public void getPopInfo(){
+        //群组公告弹窗
+        InteNetUtils.getInstance(mContext).popContent(user.getToken(), new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(responseInfo.result);
+                    String optString = jsonObject.optString("ret_num");
+                    if (optString != null) {
+                        if (optString.equals("0")) {
+                            String views = jsonObject.optString("views");
+                            String over_rate = jsonObject.optString("over_rate");
+
+                            HelpcollectDialog dialog = new HelpcollectDialog(mContext,R.style.MyDialog1);
+                            dialog.setData(views,over_rate);
+                            dialog.setHelpcollectListener(new HelpcollectDialog.HelpcollectListener() {
+                                @Override
+                                public void iknow() {
+                                }
+
+                                @Override
+                                public void continuer() {
+                                   startActivity(new Intent(mContext,ActivityHelpCollect.class));
+                                }
+                            });
+                            dialog.show();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(HttpException e, String s) {
+            }
+        });
+    }
 
 	@Override
 	public void onClick(View arg0) {

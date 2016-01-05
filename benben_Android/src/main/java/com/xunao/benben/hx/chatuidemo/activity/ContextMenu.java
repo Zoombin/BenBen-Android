@@ -102,4 +102,9 @@ public class ContextMenu extends BaseActivity {
 		finish();
 	}
 
+	public void forward(View view){
+		setResult(ChatActivity.RESULT_CODE_FORWARD, new Intent().putExtra("position", position));
+		finish();
+	}
+
 }

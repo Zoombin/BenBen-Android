@@ -47,6 +47,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.ClipboardManager;
 import android.text.Editable;
@@ -127,10 +128,13 @@ import com.xunao.benben.ui.ActivityNumberTrain;
 import com.xunao.benben.ui.item.ActivityContactsInfo;
 import com.xunao.benben.ui.item.ImageFile;
 import com.xunao.benben.ui.item.TallGroup.ActivityTalkGroupInfo;
+import com.xunao.benben.ui.shareselect.ActivityShareSelectFriend;
+import com.xunao.benben.ui.shareselect.ActivityShareSelectTalkGroup;
 import com.xunao.benben.utils.Bimp;
 import com.xunao.benben.utils.PublicWay;
 import com.xunao.benben.utils.Res;
 import com.xunao.benben.utils.ToastUtils;
+import com.xunao.benben.view.ActionSheet;
 import com.xunao.benben.view.MyTextView;
 
 /**
@@ -769,15 +773,22 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 						adapter.getCount()) - 1);
 				break;
 
-			// case RESULT_CODE_FORWARD: // 转发消息
-			// EMMessage forwardMsg = (EMMessage) adapter.getItem(data
-			// .getIntExtra("position", 0));
-			// Intent intent = new Intent(this, ForwardMessageActivity.class);
-			// intent.putExtra("forward_msg_id", forwardMsg.getMsgId());
-			// startActivity(intent);
-			//
-			// break;
+				case RESULT_CODE_FORWARD: // 转发消息
+					// case RESULT_CODE_FORWARD: // 转发消息
+					// EMMessage forwardMsg = (EMMessage) adapter.getItem(data
+					// .getIntExtra("position", 0));
+					// Intent intent = new Intent(this, ForwardMessageActivity.class);
+					// intent.putExtra("forward_msg_id", forwardMsg.getMsgId());
+					// startActivity(intent);
+					//
+					// break;
 
+
+					EMMessage forwardMsg = (EMMessage) adapter.getItem(data
+					.getIntExtra("position", 0));
+					setTheme(R.style.ActionSheetStyleIOS7);
+					showShareActionSheet(forwardMsg);
+					break;
 			default:
 				break;
 			}
@@ -942,9 +953,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
                     R.anim.activity_translate_in,
                     R.anim.activity_translate_out);
 
-			// } else if (id == R.id.btn_location) { // 位置
-			// startActivityForResult(new Intent(this, BaiduMapActivity.class),
-			// REQUEST_CODE_MAP);
+		} else if (id == R.id.btn_location) { // 位置
+			startActivityForResult(new Intent(this, BaiduMapActivity.class),
+					REQUEST_CODE_MAP);
 		} else if (id == R.id.iv_emoticons_normal) { // 点击显示表情框
 			more.setVisibility(View.VISIBLE);
 			iv_emoticons_normal.setVisibility(View.INVISIBLE);
@@ -2059,6 +2070,49 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		default:
 			break;
 		}
+	}
+
+	private void showShareActionSheet(final EMMessage forwardMsg) {
+		ActionSheet
+				.createBuilder(this, getSupportFragmentManager())
+				.setCancelButtonTitle("取消")
+				.setOtherButtonTitles("分享给好友", "分享到群组")
+						// 设置颜色 必须一一对应
+				.setOtherButtonTitlesColor("#1E82FF", "#1E82FF")
+				.setCancelableOnTouchOutside(true)
+				.setListener(new ActionSheet.ActionSheetListener() {
+					@Override
+					public void onDismiss(ActionSheet actionSheet, boolean isCancel) {
+					}
+
+					@Override
+					public void onOtherButtonClick(ActionSheet actionSheet, int index) {
+						switch (index) {
+							case 0:
+								Intent intent = new Intent(ChatActivity.this, ActivityShareSelectFriend.class);
+								if (forwardMsg.getType() == EMMessage.Type.IMAGE) {
+									intent.putExtra("type","Forward_img");
+								}else if (forwardMsg.getType() == EMMessage.Type.VIDEO){
+									intent.putExtra("type","Forward_video");
+								}
+								intent.putExtra("msg_id", forwardMsg.getMsgId());
+								startActivity(intent);
+								overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+								break;
+							case 1:
+								Intent groupintent = new Intent(ChatActivity.this, ActivityShareSelectTalkGroup.class);
+								if (forwardMsg.getType() == EMMessage.Type.IMAGE) {
+									groupintent.putExtra("type","Forward_img");
+								}else if (forwardMsg.getType() == EMMessage.Type.VIDEO){
+									groupintent.putExtra("type","Forward_video");
+								}
+								groupintent.putExtra("msg_id", forwardMsg.getMsgId());
+								startActivity(groupintent);
+								overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+								break;
+						}
+					}
+				}).show();
 	}
 
 	/**

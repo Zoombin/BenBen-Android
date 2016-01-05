@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +20,9 @@ import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
+import com.easemob.chat.ImageMessageBody;
 import com.easemob.chat.TextMessageBody;
+import com.easemob.chat.VideoMessageBody;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.xunao.benben.R;
@@ -31,16 +34,20 @@ import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.hx.chatuidemo.activity.ChatActivity;
+import com.xunao.benben.hx.chatuidemo.utils.ImageUtils;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.item.TallGroup.ActivityCreatedTallGroup;
 import com.xunao.benben.ui.item.TallGroup.ActivityFindTalkGroup;
 import com.xunao.benben.utils.CommonUtils;
+import com.xunao.benben.utils.SimpleDownLoadUtils;
 import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.view.ActionSheet;
 import com.xunao.benben.view.ActionSheet.ActionSheetListener;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import in.srain.cube.image.CubeImageView;
@@ -60,6 +67,8 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
     private String train_poster;
     private String shop;
     private String url;
+	private String type;
+	private String msgId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +131,8 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
         train_tag = getIntent().getStringExtra("train_tag");
         train_poster = getIntent().getStringExtra("train_poster");
         shop = getIntent().getStringExtra("shop");
+		type = getIntent().getStringExtra("type");
+		msgId = getIntent().getStringExtra("msg_id");
 		showLoding("请稍后...");
 		InteNetUtils.getInstance(mContext).getTalkGroup(mRequestCallBack);
 
@@ -254,83 +265,144 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 			itemHolder.talk_group_level.setText("LV" + tG.getLevel());
 
             converView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final MsgDialog msgDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
-                    msgDialog.setContent("确定分享至该群", "", "确认", "取消");
-                    msgDialog.setCancleListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            msgDialog.dismiss();
-                        }
-                    });
-                    msgDialog.setOKListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            EMConversation conversation = EMChatManager.getInstance().getConversation(tG.getHuanxin_groupid());
-                            EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-                            message.setChatType(EMMessage.ChatType.GroupChat);
-                            if(url!=null && !url.equals("")){
-                                TextMessageBody txtBody = new TextMessageBody("这个商品不错哦，快来看看吧!"+url);
-                                // 设置消息body
-                                message.addBody(txtBody);
-                            }else {
-                                TextMessageBody txtBody = new TextMessageBody("号码直通车");
-                                // 设置消息body
-                                message.addBody(txtBody);
-                                message.setAttribute("train_id", train_id);
-                                message.setAttribute("train_name", train_name);
-                                message.setAttribute("train_tag", train_tag);
-                                message.setAttribute("train_poster", train_poster);
-                                message.setAttribute("shop", shop);
-                            }
-                            // 设置要发给谁,用户username或者群聊groupid
-                            message.setReceipt(tG.getHuanxin_groupid());
-                            // 把messgage加到conversation中
-                            conversation.addMessage(message);
-                            EMChatManager.getInstance().sendMessage(message, new EMCallBack(){
-                                @Override
-                                public void onSuccess() {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            dissLoding();
-                                            ToastUtils.Infotoast(mContext,"分享成功");
-                                            AnimFinsh();
-                                        }
-                                    });
+				@Override
+				public void onClick(View view) {
+					final MsgDialog msgDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
+					msgDialog.setContent("确定分享至该群", "", "确认", "取消");
+					msgDialog.setCancleListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							msgDialog.dismiss();
+						}
+					});
+					msgDialog.setOKListener(new OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							final EMConversation conversation = EMChatManager.getInstance().getConversation(tG.getHuanxin_groupid());
+							EMMessage message = null;
+							if (!TextUtils.isEmpty(type)) {
+								final EMMessage forward_msg = EMChatManager.getInstance().getMessage(msgId);
+								if ("Forward_img".equals(type)) {
+									ImageMessageBody iBody = (ImageMessageBody) forward_msg.getBody();
+									String localUrl = iBody.getLocalUrl();
+									if (new File(localUrl).exists()) {
+										message = forward_msg;
+									} else {
+										try {
+											new File(localUrl).createNewFile();
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
+										showLoding("");
+										SimpleDownLoadUtils.download(iBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
+											@Override
+											public void DownLoadComplete(String url, String outPath) {
+												sendMsgToGroup(conversation, tG, forward_msg, false);
+											}
 
-                                }
+											@Override
+											public void DownLoadFailed(String url, String outPath) {
+												ToastUtils.Infotoast(mContext, "分享失败");
+											}
+										});
+										return;
+									}
+								}
+								if ("Forward_video".equals(type)) {
+									VideoMessageBody vBody = (VideoMessageBody) forward_msg.getBody();
+									String localUrl = vBody.getLocalUrl();
+									if (new File(localUrl).exists()) {
+										message = forward_msg;
+									} else {
+										try {
+											new File(localUrl).createNewFile();
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
+										showLoding("");
+										SimpleDownLoadUtils.download(vBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
+											@Override
+											public void DownLoadComplete(String url, String outPath) {
+												sendMsgToGroup(conversation, tG, forward_msg, false);
+											}
 
-                                @Override
-                                public void onError(int i, String s) {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            dissLoding();
-                                            ToastUtils.Infotoast(mContext,"分享失败");
-                                        }
-                                    });
-
-                                }
-
-                                @Override
-                                public void onProgress(int i, String s) {
-                                    showLoding("");
-                                }
-                            });
-
-
-
-                        }
-                    });
-                    msgDialog.show();
-                }
-            });
+											@Override
+											public void DownLoadFailed(String url, String outPath) {
+												ToastUtils.Infotoast(mContext,"分享失败");
+											}
+										});
+										return;
+									}
+								}
+							} else {
+								message = EMMessage.createSendMessage(EMMessage.Type.TXT);
+								if (url != null && !url.equals("")) {
+									TextMessageBody txtBody = new TextMessageBody("这个商品不错哦，快来看看吧!" + url);
+									// 设置消息body
+									message.addBody(txtBody);
+								} else {
+									TextMessageBody txtBody = new TextMessageBody("号码直通车");
+									// 设置消息body
+									message.addBody(txtBody);
+									message.setAttribute("train_id", train_id);
+									message.setAttribute("train_name", train_name);
+									message.setAttribute("train_tag", train_tag);
+									message.setAttribute("train_poster", train_poster);
+									message.setAttribute("shop", shop);
+								}
+							}
+							sendMsgToGroup(conversation,tG,message,true);
+						}
+					});
+					msgDialog.show();
+				}
+			});
 
 			return converView;
 		}
 
+	}
+
+	public void sendMsgToGroup(EMConversation conversation,TalkGroup tG,EMMessage message,boolean showLoading){
+		// 设置要发给谁,用户username或者群聊groupid
+		message.setReceipt(tG.getHuanxin_groupid());
+		message.setChatType(EMMessage.ChatType.GroupChat);
+		// 把messgage加到conversation中
+		conversation.addMessage(message);
+		if(showLoading){
+			showLoding("");
+		}
+		EMChatManager.getInstance().sendMessage(message, new EMCallBack() {
+			@Override
+			public void onSuccess() {
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						dissLoding();
+						ToastUtils.Infotoast(mContext, "分享成功");
+						AnimFinsh();
+					}
+				});
+
+			}
+
+			@Override
+			public void onError(int i, String s) {
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						dissLoding();
+						ToastUtils.Infotoast(mContext, "分享失败");
+					}
+				});
+
+			}
+
+			@Override
+			public void onProgress(int i, String s) {
+				//showLoding("");
+			}
+		});
 	}
 
 	class ItemHolder {

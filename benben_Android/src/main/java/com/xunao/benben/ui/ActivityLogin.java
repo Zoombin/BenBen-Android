@@ -290,38 +290,39 @@ public class ActivityLogin extends BaseActivity implements OnClickListener {
 	}
 
 	private void loginHuanXin(final User user) {
+		Log.d("LSD",user.getHuanxin_username()  +"   "+user.getHuanxin_password());
         EMChatManager.getInstance().login(user.getHuanxin_username(), user.getHuanxin_password(), new EMCallBack() {
 
-            @Override
-            public void onSuccess() {
-                mApplication.setUserName(user.getHuanxin_username());
-                mApplication.setPassword(user.getHuanxin_password());
+			@Override
+			public void onSuccess() {
+				mApplication.setUserName(user.getHuanxin_username());
+				mApplication.setPassword(user.getHuanxin_password());
 
-                EMGroupManager.getInstance().loadAllGroups();
-                EMChatManager.getInstance().loadAllConversations();
-                mApplication.getSpUtil().setLastTimeLogin(true);
-                dissLoding();
-                startAnimActivity2Obj(MainActivity.class, "source",
-                        "login");
-                finish();
-            }
+				EMGroupManager.getInstance().loadAllGroups();
+				EMChatManager.getInstance().loadAllConversations();
+				mApplication.getSpUtil().setLastTimeLogin(true);
+				dissLoding();
+				startAnimActivity2Obj(MainActivity.class, "source",
+						"login");
+				finish();
+			}
 
-            @Override
-            public void onProgress(int progress, String status) {
-            }
+			@Override
+			public void onProgress(int progress, String status) {
+			}
 
-            @Override
-            public void onError(final int code, final String message) {
-                Log.d("ltf", "login=============失败=========");
-                ActivityLogin.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dissLoding();
-                        startAnimActivity2Obj(MainActivity.class,
-                                "source", "login");
-                        AnimFinsh();
-                    }
-                });
+			@Override
+			public void onError(final int code, final String message) {
+				Log.d("ltf", "login=============失败=========");
+				ActivityLogin.this.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						dissLoding();
+						startAnimActivity2Obj(MainActivity.class,
+								"source", "login");
+						AnimFinsh();
+					}
+				});
             }
         });
 

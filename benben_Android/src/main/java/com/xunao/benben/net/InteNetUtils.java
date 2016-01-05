@@ -503,6 +503,35 @@ public class InteNetUtils {
 				callBack);
 	}
 
+
+	//收藏小助手详情
+	public void helpcollectDetails(String token,RequestCallBack<String> requestCallBack) {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("key", "android");
+		hashMap.put("token", token);
+		ComPost(AndroidConfig.NETHOST + AndroidConfig.HelpcollectDetails, hashMap,requestCallBack);
+	}
+
+
+	//群组公告添加
+	public void addbulletin(String groupid,String bulletin,String token,RequestCallBack<String> requestCallBack) {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("key", "android");
+		hashMap.put("groupid", groupid);
+		hashMap.put("bulletin", bulletin);
+		hashMap.put("token", token);
+		ComPost(AndroidConfig.NETHOST + AndroidConfig.Addbulletin, hashMap,requestCallBack);
+	}
+
+	//群组公告弹窗
+	public void popContent(String token,RequestCallBack<String> requestCallBack) {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("key", "android");
+		hashMap.put("token", token);
+		ComPost(AndroidConfig.NETHOST + AndroidConfig.PopContent, hashMap,requestCallBack);
+	}
+
+
 	public void doPublic(final String friendUnionId, final String content, final String phone,final String legphone,
 			final String type, final String[] images, final RequestCallBack<String> callBack) {
         new Thread(new Runnable() {

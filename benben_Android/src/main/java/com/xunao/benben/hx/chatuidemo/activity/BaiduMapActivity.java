@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -70,6 +71,7 @@ public class BaiduMapActivity extends BaseActivity {
 	private BaiduMap mBaiduMap;
 	
 	private LocationMode mCurrentMode;
+	private TextView tvaddress;
 	
 	/**
 	 * 构造广播监听类，监听 SDK key 验证以及网络异常广播
@@ -97,9 +99,11 @@ public class BaiduMapActivity extends BaseActivity {
 		instance = this;
 		//在使用SDK各组件之前初始化context信息，传入ApplicationContext  
         //注意该方法要再setContentView方法之前实现  
-        SDKInitializer.initialize(getApplicationContext());  
+        SDKInitializer.initialize(getApplicationContext());
 		setContentView(R.layout.activity_baidumap);
+		tvaddress = (TextView) findViewById(R.id.tvaddress);
 		mMapView = (MapView) findViewById(R.id.bmapView);
+		mMapView.showZoomControls(false);
 		sendButton = (Button) findViewById(R.id.btn_location_send);
 		Intent intent = getIntent();
 		double latitude = intent.getDoubleExtra("latitude", 0);
@@ -116,6 +120,7 @@ public class BaiduMapActivity extends BaseActivity {
 		} else {
 			double longtitude = intent.getDoubleExtra("longitude", 0);
 			String address = intent.getStringExtra("address");
+			tvaddress.setText(address);
 			LatLng p = new LatLng(latitude, longtitude);
 			mMapView = new MapView(this,
 					new BaiduMapOptions().mapStatus(new MapStatus.Builder()
@@ -164,12 +169,13 @@ public class BaiduMapActivity extends BaseActivity {
 		});
 
 		progressDialog.show();
-
+		mLocClient = new LocationClient(this);
 		mLocClient.registerLocationListener(myListener);
 
 		LocationClientOption option = new LocationClientOption();
 		option.setOpenGps(true);// 打开gps
-		 option.setCoorType("bd09ll"); //设置坐标类型
+		option.setCoorType("bd09ll"); //设置坐标类型
+		option.setIsNeedAddress(true);
 		// Johnson change to use gcj02 coordination. chinese national standard
 		// so need to conver to bd09 everytime when draw on baidu map
 //		option.setCoorType("gcj02");
@@ -231,6 +237,7 @@ public class BaiduMapActivity extends BaseActivity {
 					return;
 				}
 			}
+			Log.d("map", "same location, ok");
 			lastLocation = location;
 			mBaiduMap.clear();
 			LatLng llA = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
@@ -244,6 +251,7 @@ public class BaiduMapActivity extends BaseActivity {
 			mBaiduMap.addOverlay(ooA);
 			MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(convertLatLng, 17.0f);
 			mBaiduMap.animateMapStatus(u);
+			tvaddress.setText(lastLocation.getAddrStr());
 		}
 
 		public void onReceivePoi(BDLocation poiLocation) {
@@ -267,6 +275,7 @@ public class BaiduMapActivity extends BaseActivity {
 		intent.putExtra("latitude", lastLocation.getLatitude());
 		intent.putExtra("longitude", lastLocation.getLongitude());
 		intent.putExtra("address", lastLocation.getAddrStr());
+		Log.d("map", "lat = "+lastLocation.getLatitude()+",lng = "+lastLocation.getLongitude()+",Addr = "+lastLocation.getAddrStr());
 		this.setResult(RESULT_OK, intent);
 		finish();
 		overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);

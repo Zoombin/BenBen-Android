@@ -318,6 +318,14 @@
             android:name="com.xunao.benben.ui.item.TallGroup.ActivityTalkGroupInfo"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityGroupNotice"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.xunao.benben.ui.item.TallGroup.ActivityGroupNoticeDetails"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 选择地址 -->
         <activity
             android:name="com.xunao.benben.ui.item.ActivityChoiceAddress"
@@ -504,6 +512,21 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" >
         </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityTransferMyNumberTrain"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityTransferDetails"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
 
         <activity
             android:name=".ui.item.ActivityNumberTrainPromotionIdentity"

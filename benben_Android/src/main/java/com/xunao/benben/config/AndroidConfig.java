@@ -664,7 +664,15 @@ public class AndroidConfig {
 	public static final String HelpcollectDetails = "/store/Helpcollect";
 	//群公告添加
 	public static final String Addbulletin = "/group/Addbulletin";
+	//查看群公告
+	public static final String Getbulletin = "/group/Getbulletin";
 	//群组公告弹框
 	public static final String PopContent = "/store/popContent";
+	//号码直通车转让
+	public static final String ApplyStoreTransfer = "/store/applyStoreTransfer";
+	//直通车同意转让
+	public static final String StoreAgreeTransfer = "/store/agreeTransfer";
+	//直通车不同意转让
+	public static final String StoreRefuseTransfer = "/store/refuseTransfer";
 
 }

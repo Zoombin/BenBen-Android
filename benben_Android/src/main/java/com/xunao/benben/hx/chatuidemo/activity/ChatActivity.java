@@ -127,6 +127,7 @@ import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.ActivityNumberTrain;
 import com.xunao.benben.ui.item.ActivityContactsInfo;
 import com.xunao.benben.ui.item.ImageFile;
+import com.xunao.benben.ui.item.TallGroup.ActivityGroupNoticeDetails;
 import com.xunao.benben.ui.item.TallGroup.ActivityTalkGroupInfo;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectFriend;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectTalkGroup;
@@ -287,6 +288,12 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		com_title_bar_right_tv = (MyTextView) findViewById(R.id.com_title_bar_right_tv);
 		com_title_bar_content = (MyTextView) findViewById(R.id.com_title_bar_content);
 
+		//处理公告
+		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) com_title_bar_right_tv.getLayoutParams();
+		layoutParams.setMargins(0, 0, 90, 0);
+		com_title_bar_right_tv.setLayoutParams(layoutParams);
+		com_title_bar_right_tv.setText("公告");
+
 		recordingContainer = findViewById(R.id.recording_container);
         tv_record_time = (TextView)findViewById(R.id.tv_record_time);
 		micImage = (ImageView) findViewById(R.id.mic_image);
@@ -423,7 +430,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		if (chatType == CHATTYPE_SINGLE) { // 单聊
 
 			com_title_bar_right_bt.setVisibility(View.VISIBLE);
-			com_title_bar_right_tv.setVisibility(View.VISIBLE);
+			com_title_bar_right_tv.setVisibility(View.INVISIBLE);
 
 			toChatUsername = getIntent().getStringExtra("userId");
 			// ((TextView) findViewById(R.id.name)).setText(toChatUsername);
@@ -513,7 +520,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
                 com_title_bar_right_bt.setVisibility(View.GONE);
             }
 		} else {
+			com_title_bar_right_bt.setVisibility(View.VISIBLE);
+			com_title_bar_right_tv.setVisibility(View.VISIBLE);
 			mTalkGroup = (TalkGroup) getIntent().getSerializableExtra("tG");
+
 
 			// 群聊
 			findViewById(R.id.container_to_group).setVisibility(View.VISIBLE);
@@ -1004,8 +1014,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		else if (id == R.id.com_title_bar_left_bt
 				|| id == R.id.com_title_bar_left_tv) {
 			back(view);
-		} else if (id == R.id.com_title_bar_right_bt
-				|| id == R.id.com_title_bar_right_tv) {
+		} else if (id == R.id.com_title_bar_right_bt) {
 			// 如果是群组聊天进入群组详细
 			// emptyHistory(view);
 
@@ -1042,6 +1051,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 						"TalkGroupID", toChatUsername,
 						AndroidConfig.writeFriendResultCode);
 			}
+		}else if(id == R.id.com_title_bar_right_tv){
+			//查看群公告
+			startActivity(new Intent(ChatActivity.this, ActivityGroupNoticeDetails.class).putExtra("hx_groupid",toChatUsername));
 		}
 	}
 

@@ -50,6 +50,7 @@ import com.xunao.benben.hx.chatuidemo.activity.RecorderVideoActivity;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.item.ActivityChoseGroupLeader;
 import com.xunao.benben.utils.CommonUtils;
+import com.xunao.benben.utils.TimeUtil;
 import com.xunao.benben.utils.ToastUtils;
 
 public class ActivityTalkGroupInfo extends BaseActivity implements
@@ -79,6 +80,10 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
     private LinearLayout group_manage_change;
     private LinearLayout group_my_contact;
 
+	private LinearLayout group_notice;
+	private TextView tv_group_notice;
+	private TextView tv_notice_time;
+
 
 	@Override
 	public void loadLayout(Bundle savedInstanceState) {
@@ -93,7 +98,6 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
 	public void initView(Bundle savedInstanceState) {
 		initTitle_Right_Left_bar("群资料", "", "", R.drawable.icon_com_title_left,
 				0);
-		wite = findViewById(R.id.wite);
 		talk_group_poster = (CubeImageView) findViewById(R.id.talk_group_poster);
 		talk_group_name = (TextView) findViewById(R.id.talk_group_name);
 		talk_group_level = (TextView) findViewById(R.id.talk_group_level);
@@ -130,6 +134,11 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
         group_manage_change.setOnClickListener(this);
         group_my_contact = (LinearLayout) findViewById(R.id.group_my_contact);
         group_my_contact.setOnClickListener(this);
+
+		group_notice = (LinearLayout) findViewById(R.id.group_notice);
+		group_notice.setOnClickListener(this);
+		tv_group_notice = (TextView) findViewById(R.id.tv_group_notice);
+		tv_notice_time = (TextView) findViewById(R.id.tv_notice_time);
 	}
 
 	int type;
@@ -172,7 +181,6 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
 									.optJSONObject("group_info");
 
 							mTalkGroup.parseJSON(optJSONObject);
-							wite.setVisibility(View.GONE);
 							addData(mTalkGroup);
 						} catch (JSONException e) {
 							ToastUtils.Errortoast(mContext, "当前网络不可用");
@@ -281,6 +289,16 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
 		talk_group_info.setText(mTalkGroup.getDescription());
 		talk_group_count.setText("成员（" + mTalkGroup.getNumber() + "人/"
 				+ mTalkGroup.getMaxuser() + "人）");
+		tv_group_notice.setText(mTalkGroup.getBulletin());
+		long time = 0;
+		try {
+			time = Long.parseLong(mTalkGroup.getCreated_time());
+		}catch (Exception e){}
+		if(time >0){
+			tv_notice_time.setText(TimeUtil.getTimeString(time));
+		}else{
+			tv_notice_time.setText("");
+		}
 
 		if (mApplication.mTalkGroupMap.get(mTalkGroup.getHuanxin_groupid()) == null) {
 			send_message_blue.setVisibility(View.VISIBLE);
@@ -297,6 +315,7 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
                 rl_switch_message.setVisibility(View.GONE);
                 group_manage_change.setVisibility(View.VISIBLE);
                 group_my_contact.setVisibility(View.GONE);
+				group_notice.setVisibility(View.VISIBLE);
 			} else {
 				// group_add.setVisibility(View.GONE);
                 group_manage_change.setVisibility(View.GONE);
@@ -304,6 +323,7 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
 				send_message_red.setTag(1);
 				send_message_red.setText("退出群组");
                 rl_switch_message.setVisibility(View.GONE);
+				group_notice.setVisibility(View.GONE);
                 EMGroup emGroup =EMGroupManager.getInstance().getGroup(mTalkGroup.getHuanxin_groupid());
                 if(emGroup.isMsgBlocked()){
                     iv_switch_open_message.setVisibility(View.VISIBLE);
@@ -353,7 +373,6 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
 	};
 	private TextView talk_group_myname;
 	private View decorView;
-	private View wite;
 	private GroupInfoBroadCast mGroupInfoBroadCast;
 	private View group_add;
 
@@ -636,9 +655,11 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
             case R.id.group_my_contact:
                 startAnimActivity2Obj(ActivityMyContactMember.class, "TG",
                         mTalkGroup);
-
-
                 break;
+			case R.id.group_notice:
+				//群公告
+				startActivity(new Intent(mContext,ActivityGroupNotice.class).putExtra("talk_groupid",mTalkGroup.getId()));
+				break;
             default:
                 break;
 		}

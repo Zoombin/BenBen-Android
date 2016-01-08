@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -523,12 +525,53 @@ public class InteNetUtils {
 		ComPost(AndroidConfig.NETHOST + AndroidConfig.Addbulletin, hashMap,requestCallBack);
 	}
 
+	//查看公告
+	public void Getbulletin(String groupid,String token,RequestCallBack<String> requestCallBack) {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("key", "android");
+		hashMap.put("groupid", groupid);
+		hashMap.put("token", token);
+		ComPost(AndroidConfig.NETHOST + AndroidConfig.Getbulletin, hashMap,requestCallBack);
+	}
+
 	//群组公告弹窗
 	public void popContent(String token,RequestCallBack<String> requestCallBack) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("key", "android");
 		hashMap.put("token", token);
 		ComPost(AndroidConfig.NETHOST + AndroidConfig.PopContent, hashMap,requestCallBack);
+	}
+
+	//号码直通车转让
+	public void applyStoreTransfer(String benben_id,String memo,String token,RequestCallBack<String> requestCallBack) {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("key", "android");
+		try {
+			hashMap.put("memo", URLEncoder.encode(memo,"utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		hashMap.put("benben_id", benben_id);
+		hashMap.put("token", token);
+		ComPost(AndroidConfig.NETHOST + AndroidConfig.ApplyStoreTransfer, hashMap,requestCallBack);
+	}
+
+	//直通车同意转让
+	public void storeAgreeTransfer(String transfer_id,String token,RequestCallBack<String> requestCallBack) {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("key", "android");
+		hashMap.put("transfer_id", transfer_id);
+		hashMap.put("token", token);
+		ComPost(AndroidConfig.NETHOST + AndroidConfig.StoreAgreeTransfer, hashMap,requestCallBack);
+	}
+
+	//直通车拒绝
+	public void storeRefuseTransfer(String transfer_id,String token,RequestCallBack<String> requestCallBack) {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap.put("key", "android");
+		hashMap.put("transfer_id", transfer_id);
+		hashMap.put("token", token);
+		ComPost(AndroidConfig.NETHOST + AndroidConfig.StoreRefuseTransfer, hashMap,requestCallBack);
 	}
 
 

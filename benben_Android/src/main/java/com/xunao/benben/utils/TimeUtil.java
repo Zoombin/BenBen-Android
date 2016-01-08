@@ -194,6 +194,11 @@ public class TimeUtil {
 		return format.format(new Date(time));
 	}
 
+	public static String getTimeString(long time) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		return format.format(new Date(time));
+	}
+
 	public static String getHourAndMin(long time) {
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 		return format.format(new Date(time));

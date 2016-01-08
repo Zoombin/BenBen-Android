@@ -1,36 +1,20 @@
 package com.xunao.benben.ui.item;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.lang.ref.SoftReference;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,6 +34,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.ta.utdid2.android.utils.NetworkUtils;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.base.IA.CrashApplication;
@@ -61,13 +46,13 @@ import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.InfoMsgHint;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.dialog.MsgDialog;
+import com.xunao.benben.dialog.TransferMyNumberTrainDialog;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.ActivityLogin;
-import com.xunao.benben.ui.promotion.ActivityPromotionOperate;
+import com.xunao.benben.ui.item.TallGroup.ActivityGroupNotice;
 import com.xunao.benben.utils.Bimp;
 import com.xunao.benben.utils.CommonUtils;
-import com.xunao.benben.utils.CutImageUtils;
 import com.xunao.benben.utils.FileUtils;
 import com.xunao.benben.utils.ImageItem;
 import com.xunao.benben.utils.PixelUtil;
@@ -78,7 +63,13 @@ import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.view.ActionSheet;
 import com.xunao.benben.view.ActionSheet.ActionSheetListener;
 
-import net.tsz.afinal.FinalBitmap;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.lang.ref.SoftReference;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class ActivityMyNumberTrain extends BaseActivity implements
 		OnClickListener, ActionSheetListener {
@@ -241,11 +232,12 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 
 		setOnRightClickLinester(new OnClickListener() {
 
-			@Override
-			public void onClick(View arg0) {
+            @Override
+            public void onClick(View arg0) {
                 saveMessage();
-			}
-		});
+            }
+        });
+        findViewById(R.id.transfer_mynumber_train).setOnClickListener(this);
 
         et_tag1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -857,6 +849,10 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 			hint.show();
 
 			break;
+        case R.id.transfer_mynumber_train:
+            //转让号码直通车
+            startActivity(new Intent(mContext, ActivityTransferMyNumberTrain.class));
+             break;
 		case R.id.rl_chose_address:
 			startAnimActivityForResult3(ActivityChoiceAddress.class,
 					CHOCE_ADDRESS, "trim", "trim", "level", "0");
@@ -883,6 +879,17 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 			break;
 		}
 	}
+
+    //处理号码直通车转让
+    private void dealTransferMyNumberTrain(){
+        TransferMyNumberTrainDialog dialog = new TransferMyNumberTrainDialog(mContext);
+        dialog.setDialogListener(new TransferMyNumberTrainDialog.DialogViewListener() {
+            @Override
+            public void onConfirm() {
+            }
+        });
+        dialog.show();
+    }
 
 	// 显示拍照选照片 弹窗
 	private void changeImage() {

@@ -488,9 +488,10 @@
 
                 <View style="@style/set_item_Line_1" />
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="70dip"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:background="#f3f3f3" >
 
                     <com.xunao.benben.view.MyTextView
@@ -505,7 +506,18 @@
                         android:text="退出该群"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/size_16" />
-                </RelativeLayout>
+
+                    <com.xunao.benben.view.MyTextView
+                        android:id="@+id/transfer_mynumber_train"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dip"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/btn_sendmessage_yellow"
+                        android:gravity="center"
+                        android:text="转让号码直通车"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/size_16" />
+                </LinearLayout>
 
                 <View
                     style="@style/set_item_Line_1"

@@ -1,6 +1,10 @@
 package com.xunao.benben.dialog;
 
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -9,7 +13,7 @@ import com.xunao.benben.base.BaseActivity;
 
 /**
  * Created by LSD on 15/12/31.
- * 我的号码直通车弹窗
+ * 收藏小助手弹窗
  */
 public class HelpcollectDialog extends AbsDialog {
     BaseActivity context;
@@ -32,13 +36,14 @@ public class HelpcollectDialog extends AbsDialog {
 
     public void init() {
         setContentView(R.layout.dialog_helpcollect);
-//        Window dialogWindow = this.getWindow();
-//        dialogWindow.setGravity(Gravity.CENTER);
-//        WindowManager windowManager = context.getWindowManager();
-//        Display display = windowManager.getDefaultDisplay();
-//        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-//        lp.width = (int)(display.getWidth()*3/4); //设置宽度
-//        dialogWindow.setAttributes(lp);
+
+        Window dialogWindow = this.getWindow();
+        dialogWindow.setGravity(Gravity.CENTER);
+        WindowManager windowManager = context.getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.width = (int)(display.getWidth()*3/4); //设置宽度
+        dialogWindow.setAttributes(lp);
     }
 
     @Override

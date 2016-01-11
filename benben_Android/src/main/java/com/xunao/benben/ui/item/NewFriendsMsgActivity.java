@@ -760,6 +760,61 @@ public class NewFriendsMsgActivity extends BaseActivity {
                         }
                     });
                     break;
+					case PublicMessage.NUMBERTRAIN_CHANGE:
+						item_name.setText(item.getNick_name());
+						item_user_name.setText("");
+						item_content.setText(item.getReason());
+						addFriend.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								if (CommonUtils.isNetworkAvailable(mContext)) {
+									showLoding("正在处理...");
+									// 号码直通车转让
+									InteNetUtils.getInstance(mContext).storeAgreeTransfer(item.getNews_id(),user.getToken(), new RequestCallBack<String>() {
+
+										@Override
+										public void onFailure(HttpException arg0, String arg1) {
+											dissLoding();
+											ToastUtils.Errortoast(mContext, "接受转让失败，请稍后再试");
+										}
+
+										@Override
+										public void onSuccess(ResponseInfo<String> arg0) {
+											dissLoding();
+											try {
+												JSONObject jsonObject = new JSONObject(arg0.result);
+
+												SuccessMsg msg = new SuccessMsg();
+
+												msg.parseJSON(jsonObject);
+												ToastUtils.Errortoast(mContext, "接受转让成功");
+												item.setStatus(PublicMessage.AGREE);
+												try {
+													dbUtil.saveOrUpdate(item);
+												} catch (DbException e1) {
+													// TODO
+													// Auto-generated
+													// catch block
+													e1.printStackTrace();
+												}
+												adapter.notifyDataSetChanged();
+
+											} catch (JSONException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (NetRequestException e) {
+												e.getError().print(mContext);
+												e.printStackTrace();
+											}
+
+										}
+									});
+								}else{
+									ToastUtils.Errortoast(mContext,"当前网络不可用");
+								}
+							}
+						});
+						break;
 				}
 
 				break;
@@ -816,6 +871,16 @@ public class NewFriendsMsgActivity extends BaseActivity {
                                 startActivityForResult(intentUnion, AndroidConfig.writeFriendRequestCode);
                             }
                             break;
+						case PublicMessage.NUMBERTRAIN_CHANGE:
+							//号码直通车转让
+							if(!item.getNews_id().equals("")) {
+								Intent intentUnion = new Intent(mContext, ActivityTransferDetails.class);
+								mContext.overridePendingTransition(R.anim.in_from_right,
+										R.anim.out_to_left);
+								intentUnion.putExtra("publicMessage", item);
+								startActivityForResult(intentUnion, AndroidConfig.writeFriendRequestCode);
+							}
+							break;
                     }
                 }
             });
@@ -831,8 +896,6 @@ public class NewFriendsMsgActivity extends BaseActivity {
             }else{
                 return 0;
             }
-
-
 		}
 
 		@Override

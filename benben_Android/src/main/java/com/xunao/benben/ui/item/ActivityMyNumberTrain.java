@@ -223,12 +223,12 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 	@Override
 	public void initLinstener(Bundle savedInstanceState) {
 		setOnLeftClickLinester(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
+            @Override
+            public void onClick(View arg0) {
                 onBackPressed();
 
-			}
-		});
+            }
+        });
 
 		setOnRightClickLinester(new OnClickListener() {
 
@@ -237,7 +237,6 @@ public class ActivityMyNumberTrain extends BaseActivity implements
                 saveMessage();
             }
         });
-        findViewById(R.id.transfer_mynumber_train).setOnClickListener(this);
 
         et_tag1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -633,6 +632,7 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 				}
 
 				send_message_red.setOnClickListener(this);
+                findViewById(R.id.transfer_mynumber_train).setOnClickListener(this);
 
 				if (!numberTrainDetail.getHaveRight().equals("0")) {
 					rl_broad_cast.setOnClickListener(new OnClickListener() {

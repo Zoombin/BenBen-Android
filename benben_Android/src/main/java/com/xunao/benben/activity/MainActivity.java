@@ -1004,9 +1004,8 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             case EventNewMessage: // 普通消息
             {
                 EMMessage message = (EMMessage) event.getData();
-//                // 提示新消息
-//                HXSDKHelper.getInstance().getNotifier().onNewMsg(message);
-                initNewMessage(message);
+               // 提示新消息
+				initNewMessage(message);
                 HXSDKHelper.getInstance().getNotifier().onNewMsg(message);
                 break;
             }
@@ -1044,7 +1043,9 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             }
 
             case EventOfflineMessage: {
-                Log.d("ltf","EventOfflineMessage==============");
+				EMMessage message = (EMMessage) event.getData();
+				initNewMessage(message);
+				HXSDKHelper.getInstance().getNotifier().onNewMsg(message);
                 break;
             }
 
@@ -1209,7 +1210,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 //                    }
                 }
             }else if(t2==1){
-                // 注销广播接收者，否则在ChatActivity中会收到这个广播
+				// 注销广播接收者，否则在ChatActivity中会收到这个广播
                 String nick_name = message.getStringAttribute("nick_name", "");
                 String huanxin_username = message.getStringAttribute("hxname","");
                 int leg_id = message.getIntAttribute("leg_id", 0);
@@ -1353,10 +1354,67 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                     } catch (DbException e) {
                         e.printStackTrace();
                     }
+                }else if(t4==6){
+					//直通车转让
+					String transfer_id = message.getStringAttribute("transfer_id", "");
+					String apply_nickname = message.getStringAttribute("apply_nickname", "");
+					String apply_poster = message.getStringAttribute("apply_poster", "");
+					String store_id = message.getStringAttribute("store_id", "");
+					String store_name = message.getStringAttribute("store_name", "");
+					String content = message.getStringAttribute("content", "");
+					String vip_account = message.getStringAttribute("vip_account", "");
+					String txtContnet = ((TextMessageBody) message.getBody()).getMessage();
+					try {
+						PublicMessage mPublicMessage = dbUtil.findFirst(Selector.from(
+								PublicMessage.class).where("news_id", "=",transfer_id).and("classType","=",PublicMessage.NUMBERTRAIN_CHANGE));
+						if (mPublicMessage == null) {
+							mPublicMessage = new PublicMessage();
+							mPublicMessage.setName("");
+							mPublicMessage.setHuanxin_username("");
+							mPublicMessage.setNews_id(transfer_id);
+							mPublicMessage.setNick_name(apply_nickname);
+							mPublicMessage.setPoster(apply_poster);
+							mPublicMessage.setStore_id(store_id);
+							mPublicMessage.setStore_name(store_name);
+							mPublicMessage.setReason(content);
+							mPublicMessage.setTxtContent(txtContnet);
+							mPublicMessage.setVip_account(vip_account);
+							mPublicMessage.setClassType(PublicMessage.NUMBERTRAIN_CHANGE);
+							mPublicMessage.setStatus(type);
+							mPublicMessage.setCreatTime(TimeUtil.now());
+							if (!mApplication.mPublicMessage.contains(mPublicMessage)) {
+								mApplication.mPublicMessage.add(0, mPublicMessage);
+							}
 
-
-
-                }
+							try {
+								dbUtil.saveOrUpdate(mPublicMessage);
+							} catch (DbException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}else{
+							mPublicMessage = new PublicMessage();
+							mPublicMessage.setName("");
+							mPublicMessage.setHuanxin_username("");
+							mPublicMessage.setNews_id(transfer_id);
+							mPublicMessage.setNick_name(apply_nickname);
+							mPublicMessage.setPoster(apply_poster);
+							mPublicMessage.setStore_id(store_id);
+							mPublicMessage.setStore_name(store_name);
+							mPublicMessage.setReason(content);
+							mPublicMessage.setTxtContent(txtContnet);
+							mPublicMessage.setVip_account(vip_account);
+							mPublicMessage.setClassType(PublicMessage.NUMBERTRAIN_CHANGE);
+							mPublicMessage.setStatus(type);
+							mPublicMessage.setIsLook(PublicMessage.UNLOOK);
+							mPublicMessage.setCreatTime(TimeUtil.now());
+							mApplication.mPublicMessage.add(0, mPublicMessage);
+							dbUtil.update(mPublicMessage);
+						}
+					} catch (DbException e) {
+						e.printStackTrace();
+					}
+				}
 
                 EMConversation conversation = EMChatManager.getInstance().getConversation(from);
                 conversation.removeMessage(msgId);

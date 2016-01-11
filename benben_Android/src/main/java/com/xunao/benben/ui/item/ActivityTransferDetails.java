@@ -11,16 +11,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.base.IA.CrashApplication;
+import com.xunao.benben.bean.PublicMessage;
 import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.ActivityLogin;
+import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.ToastUtils;
 
 import org.json.JSONException;
@@ -32,7 +36,7 @@ import org.json.JSONObject;
  */
 public class ActivityTransferDetails extends BaseActivity {
 
-    private ImageView ivlogo;
+    private RoundedImageView ivlogo;
     private TextView tvtitle;
     private TextView tvname;
     private TextView tvtipstxt;
@@ -42,7 +46,7 @@ public class ActivityTransferDetails extends BaseActivity {
     private Button btyes;
     private LinearLayout contentlayout;
 
-    private String extMsg;
+    private PublicMessage publicMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,7 @@ public class ActivityTransferDetails extends BaseActivity {
     public void initView(Bundle savedInstanceState) {
         initTitle_Right_Left_bar("转赠详情", "", "", R.drawable.icon_com_title_left, 0);
 
-        ivlogo = (ImageView) findViewById(R.id.iv_logo);
+        ivlogo = (RoundedImageView) findViewById(R.id.iv_logo);
         tvtitle = (TextView) findViewById(R.id.tv_title);
         tvname = (TextView) findViewById(R.id.tv_name);
         tvtipstxt = (TextView) findViewById(R.id.tv_tips_txt);
@@ -72,7 +76,19 @@ public class ActivityTransferDetails extends BaseActivity {
 
     @Override
     public void initDate(Bundle savedInstanceState) {
-        extMsg = getIntent().getStringExtra("extMsg");
+        publicMessage = (PublicMessage) getIntent().getSerializableExtra("publicMessage");
+
+        String avstar = publicMessage.getPoster();
+        String applay_name = publicMessage.getNick_name();
+        String content = publicMessage.getTxtContent();
+        String vip_account = publicMessage.getVip_account();
+        String store_name = publicMessage.getStore_name();
+
+        CommonUtils.startImageLoader(cubeimageLoader, avstar, ivlogo);
+        tvtitle.setText(store_name);
+        tvname.setText("转赠人：" + applay_name);
+        tvtipscontent.setText(content);
+        tvtipskeep.setText("该直通车上还有"+vip_account+"元的会员账务");
     }
 
     @Override
@@ -87,7 +103,7 @@ public class ActivityTransferDetails extends BaseActivity {
             @Override
             public void onClick(View view) {
                 showLoding("");
-                String transfer_id="";
+                String transfer_id=publicMessage.getNews_id();
                 InteNetUtils.getInstance(mContext).storeRefuseTransfer(transfer_id, user.getToken(), new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -98,6 +114,15 @@ public class ActivityTransferDetails extends BaseActivity {
                             String ret_num = jsonObject.optString("ret_num");
 
                             if (ret_num.equals("0")) {
+                                ToastUtils.Errortoast(mContext, "取消请求");
+                                publicMessage.setStatus(PublicMessage.REFUSE);
+                                try {
+                                    dbUtil.saveOrUpdate(publicMessage);
+                                } catch (DbException e1) {
+                                    e1.printStackTrace();
+                                }
+                                setResult(AndroidConfig.writeFriendResultCode);
+                                AnimFinsh();
                             } else {
                                 ToastUtils.Errortoast(mContext, jsonObject.optString("ret_msg"));
                             }
@@ -118,7 +143,7 @@ public class ActivityTransferDetails extends BaseActivity {
             @Override
             public void onClick(View view) {
                 showLoding("");
-                String transfer_id="";
+                String transfer_id=publicMessage.getNews_id();
                 InteNetUtils.getInstance(mContext).storeAgreeTransfer(transfer_id, user.getToken(), new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -129,6 +154,15 @@ public class ActivityTransferDetails extends BaseActivity {
                             String ret_num = jsonObject.optString("ret_num");
 
                             if (ret_num.equals("0")) {
+                                ToastUtils.Errortoast(mContext, "接收请求");
+                                publicMessage.setStatus(PublicMessage.AGREE);
+                                try {
+                                    dbUtil.saveOrUpdate(publicMessage);
+                                } catch (DbException e1) {
+                                    e1.printStackTrace();
+                                }
+                                setResult(AndroidConfig.writeFriendResultCode);
+                                AnimFinsh();
                             } else {
                                 ToastUtils.Errortoast(mContext, jsonObject.optString("ret_msg"));
                             }

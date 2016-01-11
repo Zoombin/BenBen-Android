@@ -36,6 +36,8 @@ public class PublicMessage extends BaseBean {
     public static final int Union = 2;
     @Transient
     public static final int GROUPCHANGE = 3;
+	@Transient
+	public static final int NUMBERTRAIN_CHANGE = 6;
 	@Id
 	private int id;
 	private int sid;
@@ -52,6 +54,12 @@ public class PublicMessage extends BaseBean {
 	private long creatTime;
     private String reason;
     private String news_id;
+
+	//号码直通车转让信息
+	String store_id;
+	String store_name;
+	String vip_account;
+	String txtContent;
 
 	public int getIsLook() {
 		return isLook;
@@ -165,7 +173,7 @@ public class PublicMessage extends BaseBean {
         this.news_id = news_id;
     }
 
-    @Override
+	@Override
 	public JSONObject toJSON() {
 		return null;
 	}
@@ -206,4 +214,36 @@ public class PublicMessage extends BaseBean {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+	public String getStore_id() {
+		return store_id;
+	}
+
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
+	}
+
+	public String getStore_name() {
+		return store_name;
+	}
+
+	public void setStore_name(String store_name) {
+		this.store_name = store_name;
+	}
+
+	public String getVip_account() {
+		return vip_account;
+	}
+
+	public void setVip_account(String vip_account) {
+		this.vip_account = vip_account;
+	}
+
+	public String getTxtContent() {
+		return txtContent;
+	}
+
+	public void setTxtContent(String txtContent) {
+		this.txtContent = txtContent;
+	}
 }

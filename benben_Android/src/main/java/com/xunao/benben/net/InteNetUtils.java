@@ -546,11 +546,7 @@ public class InteNetUtils {
 	public void applyStoreTransfer(String benben_id,String memo,String token,RequestCallBack<String> requestCallBack) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("key", "android");
-		try {
-			hashMap.put("memo", URLEncoder.encode(memo,"utf-8"));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		hashMap.put("memo", memo);
 		hashMap.put("benben_id", benben_id);
 		hashMap.put("token", token);
 		ComPost(AndroidConfig.NETHOST + AndroidConfig.ApplyStoreTransfer, hashMap,requestCallBack);

@@ -105,7 +105,7 @@ public class ActivityPromotionAddAlbum extends BaseActivity implements View.OnCl
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
                 if (arg2 == Bimp.tempSelectBitmap.size()) {
-                    if (Bimp.tempSelectBitmap.size() < 6) {
+                    if (Bimp.tempSelectBitmap.size() < 20) {
                         isCover = false;
                         changeImage();
                     }
@@ -282,8 +282,8 @@ public class ActivityPromotionAddAlbum extends BaseActivity implements View.OnCl
         }
 
         public int getCount() {
-            if (Bimp.tempSelectBitmap.size() == 6) {
-                return 6;
+            if (Bimp.tempSelectBitmap.size() == 20) {
+                return 20;
             }
             return (Bimp.tempSelectBitmap.size() + 1);
         }
@@ -331,7 +331,7 @@ public class ActivityPromotionAddAlbum extends BaseActivity implements View.OnCl
                 holder.image.setImageBitmap(BitmapFactory.decodeResource(
                         getResources(), R.drawable.icon_addpic_unfocused));
                 holder.delete.setVisibility(View.GONE);
-                if (position == 6) {
+                if (position == 20) {
                     holder.image.setVisibility(View.GONE);
                 }
             } else {
@@ -441,7 +441,7 @@ public class ActivityPromotionAddAlbum extends BaseActivity implements View.OnCl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        PublicWay.num = 6;
+        PublicWay.num = 20;
         Bimp.tempSelectBitmap.clear();
         CrashApplication.getInstance().removeActivity(this);
         if (bitMap != null) {

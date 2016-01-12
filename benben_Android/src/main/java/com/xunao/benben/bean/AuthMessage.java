@@ -12,6 +12,7 @@ public class AuthMessage extends BaseBean {
     private int id;
     private int authid;
     private String real_name;
+    private String company;
     private String licence;
     private long time;
     private int memberid;
@@ -118,6 +119,14 @@ public class AuthMessage extends BaseBean {
         this.type = type;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     @Override
     public JSONObject toJSON() {
         return null;
@@ -136,6 +145,7 @@ public class AuthMessage extends BaseBean {
         idcard = jsonObj.optString("idcard");
         front = jsonObj.optString("front");
         type = jsonObj.optInt("type");
+        company = jsonObj.optString("company");
         return this;
     }
 }

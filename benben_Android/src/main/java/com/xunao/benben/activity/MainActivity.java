@@ -1043,9 +1043,12 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             }
 
             case EventOfflineMessage: {
-				EMMessage message = (EMMessage) event.getData();
-				initNewMessage(message);
-				HXSDKHelper.getInstance().getNotifier().onNewMsg(message);
+				List<EMMessage> messages = (List<EMMessage>) event.getData();
+				for(int i=0;i<messages.size();i++){
+					EMMessage message = messages.get(i);
+					initNewMessage(message);
+					HXSDKHelper.getInstance().getNotifier().onNewMsg(message);
+				}
                 break;
             }
 
@@ -1361,23 +1364,19 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 					String apply_poster = message.getStringAttribute("apply_poster", "");
 					String store_id = message.getStringAttribute("store_id", "");
 					String store_name = message.getStringAttribute("store_name", "");
-					String content = message.getStringAttribute("content", "");
 					String vip_account = message.getStringAttribute("vip_account", "");
-					String txtContnet = ((TextMessageBody) message.getBody()).getMessage();
 					try {
 						PublicMessage mPublicMessage = dbUtil.findFirst(Selector.from(
 								PublicMessage.class).where("news_id", "=",transfer_id).and("classType","=",PublicMessage.NUMBERTRAIN_CHANGE));
 						if (mPublicMessage == null) {
 							mPublicMessage = new PublicMessage();
-							mPublicMessage.setName("");
 							mPublicMessage.setHuanxin_username("");
 							mPublicMessage.setNews_id(transfer_id);
 							mPublicMessage.setNick_name(apply_nickname);
 							mPublicMessage.setPoster(apply_poster);
 							mPublicMessage.setStore_id(store_id);
 							mPublicMessage.setStore_name(store_name);
-							mPublicMessage.setReason(content);
-							mPublicMessage.setTxtContent(txtContnet);
+							mPublicMessage.setReason(((TextMessageBody) message.getBody()).getMessage());
 							mPublicMessage.setVip_account(vip_account);
 							mPublicMessage.setClassType(PublicMessage.NUMBERTRAIN_CHANGE);
 							mPublicMessage.setStatus(type);
@@ -1393,16 +1392,11 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 								e.printStackTrace();
 							}
 						}else{
-							mPublicMessage = new PublicMessage();
-							mPublicMessage.setName("");
 							mPublicMessage.setHuanxin_username("");
 							mPublicMessage.setNews_id(transfer_id);
-							mPublicMessage.setNick_name(apply_nickname);
-							mPublicMessage.setPoster(apply_poster);
 							mPublicMessage.setStore_id(store_id);
 							mPublicMessage.setStore_name(store_name);
-							mPublicMessage.setReason(content);
-							mPublicMessage.setTxtContent(txtContnet);
+							mPublicMessage.setReason(((TextMessageBody) message.getBody()).getMessage());
 							mPublicMessage.setVip_account(vip_account);
 							mPublicMessage.setClassType(PublicMessage.NUMBERTRAIN_CHANGE);
 							mPublicMessage.setStatus(type);

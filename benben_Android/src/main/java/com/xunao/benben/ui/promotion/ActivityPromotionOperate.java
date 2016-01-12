@@ -577,8 +577,8 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
             return;
         }
         String description = String.valueOf(edt_description.getText()).trim();
-        if (!CommonUtils.StringIsSurpass2(description, 1, 100)) {
-            ToastUtils.Errortoast(mContext, "促销品介绍限制在1至100个字之内!");
+        if (!CommonUtils.StringIsSurpass2(description, 1, 500)) {
+            ToastUtils.Errortoast(mContext, "促销品介绍限制在1至500个字之内!");
             return;
         }
 
@@ -646,8 +646,8 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
             return;
         }
         String description = String.valueOf(edt_description.getText()).trim();
-        if (!CommonUtils.StringIsSurpass2(description, 1, 100)) {
-            ToastUtils.Errortoast(mContext, "促销品介绍限制在1至100个字之内!");
+        if (!CommonUtils.StringIsSurpass2(description, 1, 500)) {
+            ToastUtils.Errortoast(mContext, "促销品介绍限制在1至500个字之内!");
             return;
         }
 

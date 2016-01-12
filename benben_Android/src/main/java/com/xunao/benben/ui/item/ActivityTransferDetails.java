@@ -80,7 +80,7 @@ public class ActivityTransferDetails extends BaseActivity {
 
         String avstar = publicMessage.getPoster();
         String applay_name = publicMessage.getNick_name();
-        String content = publicMessage.getTxtContent();
+        String content = publicMessage.getReason();
         String vip_account = publicMessage.getVip_account();
         String store_name = publicMessage.getStore_name();
 

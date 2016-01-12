@@ -2490,7 +2490,7 @@ public class InteNetUtils {
     }
 
     //认证
-    public void Setauth(final int type,final String real_name, final String idcard, final File front,final File back,final File licence,final String token,final RequestCallBack<String> callBack) {
+    public void Setauth(final int type,final String real_name, final String idcard, final String company,final File front,final File back,final File licence,final String token,final RequestCallBack<String> callBack) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -2498,6 +2498,7 @@ public class InteNetUtils {
                 hashMap.put("key", "android");
                 hashMap.put("type", type+"");
                 hashMap.put("real_name", real_name);
+				hashMap.put("company", company);
                 hashMap.put("idcard", idcard);
                 hashMap.put("token", token);
                 RequestParams params = new RequestParams();

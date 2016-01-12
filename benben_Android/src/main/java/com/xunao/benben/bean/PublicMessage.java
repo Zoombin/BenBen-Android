@@ -59,7 +59,6 @@ public class PublicMessage extends BaseBean {
 	String store_id;
 	String store_name;
 	String vip_account;
-	String txtContent;
 
 	public int getIsLook() {
 		return isLook;
@@ -239,11 +238,4 @@ public class PublicMessage extends BaseBean {
 		this.vip_account = vip_account;
 	}
 
-	public String getTxtContent() {
-		return txtContent;
-	}
-
-	public void setTxtContent(String txtContent) {
-		this.txtContent = txtContent;
-	}
 }

@@ -55,7 +55,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
     private CubeImageView iv_person_identityCode1,iv_person_identityCode2;
     private CubeImageView iv_merchant_identityCode1,iv_merchant_identityCode2,iv_merchant_license;
     private EditText edt_person_name,edt_person_identityCode;
-    private EditText edt_merchant_name,edt_merchant_identityCode;
+    private EditText edt_merchant_name,edt_merchant_identityCode,edt_company;
     private CheckBox cb_agree;
     private Button btn_auth;
     private RelativeLayout rl_promotion_fail;
@@ -110,6 +110,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
         iv_merchant_license.setOnClickListener(this);
 
         edt_person_name = (EditText) findViewById(R.id.edt_person_name);
+        edt_company = (EditText) findViewById(R.id.edt_company);
         edt_person_identityCode = (EditText) findViewById(R.id.edt_person_identityCode);
         edt_merchant_name = (EditText) findViewById(R.id.edt_merchant_name);
         edt_merchant_identityCode = (EditText) findViewById(R.id.edt_merchant_identityCode);
@@ -175,6 +176,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
             setChecked(prerecord_tab_one, false);
             currentTable=2;
             edt_merchant_name.setText(authMessage.getReal_name());
+            edt_company.setText(authMessage.getCompany());
             edt_merchant_identityCode.setText(authMessage.getIdcard());
             finalBitmap.configLoadfailImage(R.drawable.error);
             finalBitmap.display(iv_merchant_identityCode1,authMessage.getFront());
@@ -306,7 +308,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
         }
 
         if (CommonUtils.isNetworkAvailable(mContext)) {
-            InteNetUtils.getInstance(mContext).Setauth(1,name,identityCode,file1,file2,null,user.getToken(),mRequestCallBack);
+            InteNetUtils.getInstance(mContext).Setauth(1,name,identityCode,"",file1,file2,null,user.getToken(),mRequestCallBack);
         }else{
             ToastUtils.Infotoast(mContext,"网络不可用");
         }
@@ -315,10 +317,16 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
 
     private void merchantAuth() {
         String name = edt_merchant_name.getText().toString();
+        //edt_company 企业名称
+        String company = edt_company.getText().toString();
         String identityCode = String.valueOf(edt_merchant_identityCode.getText()).trim();
 
         if (TextUtils.isEmpty(name)) {
             ToastUtils.Errortoast(mContext, "姓名不可为空!");
+            return;
+        }
+        if (TextUtils.isEmpty(company)) {
+            ToastUtils.Errortoast(mContext, "企业名称不可为空!");
             return;
         }
         if (identityCode.length()<18) {
@@ -345,7 +353,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
         }
 
         if (CommonUtils.isNetworkAvailable(mContext)) {
-            InteNetUtils.getInstance(mContext).Setauth(2,name,identityCode,file3,file4,file5,user.getToken(),mRequestCallBack);
+            InteNetUtils.getInstance(mContext).Setauth(2,name,identityCode,company,file3,file4,file5,user.getToken(),mRequestCallBack);
         }else{
             ToastUtils.Infotoast(mContext,"网络不可用");
         }

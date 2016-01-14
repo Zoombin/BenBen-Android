@@ -119,8 +119,10 @@ public class ActivityMyOrderComment extends BaseActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.ll_train:
-                startAnimActivity2Obj(ActivityNumberTrainDetail.class,
-                        "id", order.getTrain_id());
+                if(!order.getTrain_id().equals("1")) {
+                    startAnimActivity2Obj(ActivityNumberTrainDetail.class,
+                            "id", order.getTrain_id());
+                }
                 break;
             case R.id.btn_comment:
                 int comment_rank = getRank();

@@ -52,6 +52,7 @@ public class ActivityChoiceAddress extends BaseActivity implements
 	private LinkedList<AddressInfo> addressInfos2 = new LinkedList<AddressInfo>();
 
 	private int i;
+    private String from="";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,10 @@ public class ActivityChoiceAddress extends BaseActivity implements
 			}
 
 		}
+
+        if(intent.hasExtra("from")){
+            from = intent.getStringExtra("from");
+        }
 	}
 
 	@Override
@@ -260,64 +265,77 @@ public class ActivityChoiceAddress extends BaseActivity implements
 				@Override
 				public void onClick(View arg0) {
 					addressInfos2.add(addressinfo);
-					if (choseRange) {
-						addressname = addressinfo.getArea_name();
-						addressId[index] = addressinfo.getBid();
-						index++;
-						if (Integer.valueOf(addressinfo.getLevel()) >= 3) {
-							Intent intent = new Intent();
-							intent.putExtra("address", addressname);
-							intent.putExtra("addressId", addressId);
-							setResult(AndroidConfig.ChoiceAddressResultCode,
-									intent);
-							AnimFinsh();
-						} else {
-							InteNetUtils.getInstance(mContext).getAddress(
-									addressinfo.getBid(), mRequestCallBack);
-						}
-					} else if (level) {
-						addressname += addressinfo.getArea_name() + " ";
-						addressId[index] = addressinfo.getBid();
-						index++;
-						if (Integer.valueOf(addressinfo.getLevel()) >= 3) {
-							Intent intent = new Intent();
-							intent.putExtra("address", addressname);
-							intent.putExtra("addressId", addressId);
-							if (positions != -1) {
-								intent.putExtra("position", positions);
-							}
-							setResult(AndroidConfig.ChoiceAddressResultCode,
-									intent);
-							AnimFinsh();
-						} else {
-							InteNetUtils.getInstance(mContext).getAddress(
-									addressinfo.getBid(), mRequestCallBack);
-						}
-					} else {
-						if (trims) {
-							addressname += addressinfo.getArea_name() + " ";
-						} else {
-							addressname += addressinfo.getArea_name() + " ";
-						}
-						addressId[index] = addressinfo.getBid();
-						index++;
-						if (Integer.valueOf(addressinfo.getLevel()) >= 4) {
-							Intent intent = new Intent();
-							intent.putExtra("address", addressname);
-							intent.putExtra("addressId", addressId);
+                    if(from.equals("train") && i==2){
+                        addressname += addressinfo.getArea_name() + " ";
+                        addressId[index] = addressinfo.getBid();
+                        index++;
+                        Intent intent = new Intent();
+                        intent.putExtra("address", addressname);
+                        intent.putExtra("addressId", addressId);
+                        setResult(AndroidConfig.ChoiceAddressResultCode,
+                                intent);
+                        AnimFinsh();
+                    }else {
+
+                        if (choseRange) {
+                            addressname = addressinfo.getArea_name();
+                            addressId[index] = addressinfo.getBid();
+                            index++;
+                            if (Integer.valueOf(addressinfo.getLevel()) >= 3) {
+                                Intent intent = new Intent();
+                                intent.putExtra("address", addressname);
+                                intent.putExtra("addressId", addressId);
+                                setResult(AndroidConfig.ChoiceAddressResultCode,
+                                        intent);
+                                AnimFinsh();
+                            } else {
+                                InteNetUtils.getInstance(mContext).getAddress(
+                                        addressinfo.getBid(), mRequestCallBack);
+                            }
+                        } else if (level) {
+                            addressname += addressinfo.getArea_name() + " ";
+                            addressId[index] = addressinfo.getBid();
+                            index++;
+                            if (Integer.valueOf(addressinfo.getLevel()) >= 3) {
+                                Intent intent = new Intent();
+                                intent.putExtra("address", addressname);
+                                intent.putExtra("addressId", addressId);
+                                if (positions != -1) {
+                                    intent.putExtra("position", positions);
+                                }
+                                setResult(AndroidConfig.ChoiceAddressResultCode,
+                                        intent);
+                                AnimFinsh();
+                            } else {
+                                InteNetUtils.getInstance(mContext).getAddress(
+                                        addressinfo.getBid(), mRequestCallBack);
+                            }
+                        } else {
+                            if (trims) {
+                                addressname += addressinfo.getArea_name() + " ";
+                            } else {
+                                addressname += addressinfo.getArea_name() + " ";
+                            }
+                            addressId[index] = addressinfo.getBid();
+                            index++;
+                            if (Integer.valueOf(addressinfo.getLevel()) >= 4) {
+                                Intent intent = new Intent();
+                                intent.putExtra("address", addressname);
+                                intent.putExtra("addressId", addressId);
 
 							if (positions != -1) {
 								intent.putExtra("position", positions);
 							}
 
-							setResult(AndroidConfig.ChoiceAddressResultCode,
-									intent);
-							AnimFinsh();
-						} else {
-							InteNetUtils.getInstance(mContext).getAddress(
-									addressinfo.getBid(), mRequestCallBack);
-						}
-					}
+                                setResult(AndroidConfig.ChoiceAddressResultCode,
+                                        intent);
+                                AnimFinsh();
+                            } else {
+                                InteNetUtils.getInstance(mContext).getAddress(
+                                        addressinfo.getBid(), mRequestCallBack);
+                            }
+                        }
+                    }
 				}
 			});
 

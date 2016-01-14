@@ -25,6 +25,8 @@ import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.hx.chatuidemo.activity.ChatActivity;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.groupbuy.ActivityGroupBuyManage;
+import com.xunao.benben.ui.promotion.ActivityPromotionManage;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.ToastUtils;
 
@@ -58,6 +60,7 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
     private TextView tv_operate1,tv_operate2,tv_operate3,tv_operate4,tv_operate5,tv_operate6;
     private NewsBrocastReceiver brocastReceiver;
     private MsgDialog msgDialog;
+    private LinearLayout ll_promotion;
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
@@ -93,6 +96,8 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
         ll_user.setOnClickListener(this);
         rv_poster = (RoundedImageView) findViewById(R.id.rv_poster);
         tv_user_name = (TextView) findViewById(R.id.tv_user_name);
+        ll_promotion = (LinearLayout) findViewById(R.id.ll_promotion);
+        ll_promotion.setOnClickListener(this);
         iv_promotion_post = (CubeImageView) findViewById(R.id.iv_promotion_post);
         tv_promotion_name = (TextView) findViewById(R.id.tv_promotion_name);
         tv_goods_amount = (TextView) findViewById(R.id.tv_goods_amount);
@@ -284,6 +289,17 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
             case R.id.ll_user:
                 startAnimActivity2Obj(ChatActivity.class, "userId",
                         order.getHuanxin_username());
+                break;
+            case R.id.ll_promotion:
+                if(order.getIs_close()==1){
+                    ToastUtils.Infotoast(mContext,"该商品已下架");
+                }else if(order.getIs_out()==1){
+                    ToastUtils.Infotoast(mContext,"该商品已过期");
+                }else{
+                    Intent intent = new Intent(ActivityBusinessOrderDetail.this, ActivityGroupBuyManage.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                }
                 break;
             case R.id.tv_operate1:
                 msgDialog = new MsgDialog(ActivityBusinessOrderDetail.this, R.style.MyDialogStyle);

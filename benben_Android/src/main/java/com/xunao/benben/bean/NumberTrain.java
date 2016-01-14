@@ -24,6 +24,7 @@ public class NumberTrain extends BaseBean<NumberTrain>{
 	private String description;
     private String shop;
     private int auth_grade;
+    private int place;
 	
 
 	public String getTag() {
@@ -163,6 +164,14 @@ public class NumberTrain extends BaseBean<NumberTrain>{
         this.auth_grade = auth_grade;
     }
 
+    public int getPlace() {
+        return place;
+    }
+
+    public void setPlace(int place) {
+        this.place = place;
+    }
+
     @Override
 	public JSONObject toJSON() {
 	
@@ -189,6 +198,7 @@ public class NumberTrain extends BaseBean<NumberTrain>{
 		description = jsonObj.optString("description");
         shop =  jsonObj.optString("shop");
         auth_grade =  jsonObj.optInt("auth_grade");
+        place = jsonObj.optInt("place");
 		return this;
 	}
 

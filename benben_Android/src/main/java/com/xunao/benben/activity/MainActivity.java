@@ -4,6 +4,7 @@ import in.srain.cube.image.CubeImageView;
 import in.srain.cube.image.ImageTask;
 import in.srain.cube.image.impl.DefaultImageLoadHandler;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;

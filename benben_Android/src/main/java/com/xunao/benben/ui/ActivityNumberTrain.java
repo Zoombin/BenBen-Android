@@ -68,6 +68,7 @@ import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.item.ActivityChoiceAddress;
+import com.xunao.benben.ui.item.ActivityChoiceIndusrty;
 import com.xunao.benben.ui.item.ActivityMyNumberTrainDetail;
 import com.xunao.benben.ui.item.ActivityNumberTrainDetail;
 import com.xunao.benben.utils.CommonUtils;
@@ -105,6 +106,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 	// 记录了地区的id
 	private String[] addressId = { "", "", "", "" };
 	private static final int CHOCE_ADDRESS = 1;
+    private static final int CHOCE_INDUSTRY = 2;
 	private LodingDialog lodingDialog;
 
 	private boolean isDelete = false;
@@ -117,6 +119,11 @@ public class ActivityNumberTrain extends BaseActivity implements
 	private TextView tv_range;
 	protected InfoMsgHint hint;
     private String from="";
+
+    private LinearLayout ll_search_range,ll_search_industry;
+    private LinearLayout ll_industry;
+    private TextView tv_industry;
+    private String industryId="";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -287,6 +294,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 		iv_search_content_delect.setOnClickListener(this);
 		btn_search_range.setOnClickListener(this);
+        btn_search_range.setText("搜索");
 
 		listView.setOnRefreshListener(this);
 		listView.setOnLastItemVisibleListener(this);
@@ -298,6 +306,13 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 		adapter = new myAdapter();
 		listView.setAdapter(adapter);
+
+        ll_search_range = (LinearLayout) findViewById(R.id.ll_search_range);
+        ll_search_range.setOnClickListener(this);
+        ll_search_industry = (LinearLayout) findViewById(R.id.ll_search_industry);
+        ll_search_industry.setOnClickListener(this);
+        ll_industry = (LinearLayout) findViewById(R.id.ll_industry);
+        tv_industry = (TextView) findViewById(R.id.tv_industry);
 	}
 
 	// 初始化本地数据
@@ -337,7 +352,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 					addressname = null;
 					InteNetUtils.getInstance(mContext).getStoreList(pagerNum,
 							"", latitude, longitude, addressId[0],
-							addressId[1], addressId[2], addressId[3],
+							addressId[1], addressId[2], addressId[3],industryId,
 							requestCallBack);
 					isSearch = false;
 					isDelete = false;
@@ -426,7 +441,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 					InteNetUtils.getInstance(mContext).getStoreList(pagerNum,
 							searchKey, latitude, longitude, addressId[0],
-							addressId[1], addressId[2], addressId[3],
+							addressId[1], addressId[2], addressId[3],industryId,
 							requestCallBack);
 					return true;
 				}
@@ -618,11 +633,11 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 				number_train_title.setText(numberTrain.getShortName());
 
-				if (!numberTrain.getIsTop().equals("0")) {
-					iv_top.setVisibility(View.VISIBLE);
-				} else {
-                    iv_top.setVisibility(View.GONE);
-				}
+//				if (!numberTrain.getIsTop().equals("0")) {
+//					iv_top.setVisibility(View.VISIBLE);
+//				} else {
+//                    iv_top.setVisibility(View.GONE);
+//				}
                 int auth_grade=numberTrain.getAuth_grade();
                 if(auth_grade==0){
                     iv_corner.setVisibility(View.GONE);
@@ -633,6 +648,12 @@ public class ActivityNumberTrain extends BaseActivity implements
                     }else if(auth_grade==2){
                         iv_corner.setImageResource(R.drawable.icon_corner_tuan);
                     }
+                }
+
+                if(numberTrain.getPlace()>0 && numberTrain.getPlace()!=100){
+                    iv_top.setVisibility(View.VISIBLE);
+                }else{
+                    iv_top.setVisibility(View.GONE);
                 }
 
 
@@ -703,7 +724,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 		InteNetUtils.getInstance(mContext).getStoreList(pagerNum, searchKey,
 				latitude, longitude, addressId[0], addressId[1], addressId[2],
-				addressId[3], requestCallBack);
+				addressId[3],industryId, requestCallBack);
 	}
 
 	@Override
@@ -712,7 +733,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 		pagerNum++;
 		InteNetUtils.getInstance(mContext).getStoreList(pagerNum, searchKey,
 				latitude, longitude, addressId[0], addressId[1], addressId[2],
-				addressId[3], requestCallBack);
+				addressId[3],industryId, requestCallBack);
 	}
 
 	private RequestCallBack<String> requestCallBack = new RequestCallBack<String>() {
@@ -723,7 +744,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 				lodingDialog.dismiss();
 			}
 			listView.onRefreshComplete();
-			ToastUtils.Errortoast(mContext, arg1);
+//			ToastUtils.Errortoast(mContext, arg1);
 		}
 
 		@Override
@@ -746,7 +767,8 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 			try {
 				numberTrainList.parseJSON(jsonObject);
-				if (numberTrainList == null) {
+                Log.d("ltf","numberTrainList===="+numberTrainList+"==="+numberTrainList.getNumberTrains().size());
+				if (numberTrainList == null || numberTrainList.getNumberTrains()==null || numberTrainList.getNumberTrains().size()==0) {
 					numberTrains.clear();
 				} else {
 					if (isLoadMore) {
@@ -795,6 +817,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 			} catch (NetRequestException e) {
 				e.getError().print(mContext);
+                numberTrains.clear();
 			}
 			adapter.notifyDataSetChanged();
 		}
@@ -818,7 +841,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 			pagerNum = 0;
 			InteNetUtils.getInstance(mContext).getStoreList(pagerNum,
 					searchKey, location.getLatitude(), location.getLongitude(),
-					addressId[0], addressId[1], addressId[2], addressId[3],
+					addressId[0], addressId[1], addressId[2], addressId[3],industryId,
 					requestCallBack);
 		}
 	}
@@ -844,10 +867,38 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 		// 选择搜索范围
 		case R.id.btn_search_range:
-			isSearch = true;
-			startAnimActivityForResult2(ActivityChoiceAddress.class,
-					CHOCE_ADDRESS, "level", "0");
+            // 更新关键字
+            searchKey = search_edittext.getText().toString().trim();
+            isLoadMore = false;
+            pagerNum = 0;
+            enterNum = false;
+            if (CommonUtils.isEmpty(searchKey)) {
+                isSearch = false;
+            } else {
+                isSearch = true;
+            }
+
+            InteNetUtils.getInstance(mContext).getStoreList(pagerNum,
+                    searchKey, latitude, longitude, addressId[0],
+                    addressId[1], addressId[2], addressId[3],industryId,
+                    requestCallBack);
+//			isSearch = true;
+//			startAnimActivityForResult2(ActivityChoiceAddress.class,
+//					CHOCE_ADDRESS, "level", "0");
 			break;
+        case R.id.ll_search_range:
+            isSearch = true;
+            startAnimActivityForResult3(ActivityChoiceAddress.class,
+                    CHOCE_ADDRESS, "level", "0","from","train");
+            break;
+        case R.id.ll_search_industry:
+            isSearch = true;
+            Intent intent = new Intent(this, ActivityChoiceIndusrty.class);
+            intent.putExtra("from","train");
+            startActivityForResult(intent, CHOCE_INDUSTRY);
+            overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
+            break;
 		default:
 			break;
 		}
@@ -882,12 +933,26 @@ public class ActivityNumberTrain extends BaseActivity implements
 					pagerNum = 0;
 					InteNetUtils.getInstance(mContext).getStoreList(pagerNum,
 							searchKey, latitude, longitude, addressId[0],
-							addressId[1], addressId[2], addressId[3],
+							addressId[1], addressId[2], addressId[3],industryId,
 							requestCallBack);
 				}
 			}
 			break;
-
+        case CHOCE_INDUSTRY:
+            if (data != null) {
+                ll_industry.setVisibility(View.VISIBLE);
+                tv_industry.setText("行业:"+data.getStringExtra("industry"));
+                industryId = data.getStringExtra("industryId");
+            }else{
+                ll_industry.setVisibility(View.GONE);
+                industryId = "";
+            }
+            isLoadMore = false;
+            pagerNum = 0;
+            InteNetUtils.getInstance(mContext).getStoreList(pagerNum,
+                    searchKey, latitude, longitude, addressId[0],
+                    addressId[1], addressId[2], addressId[3],industryId,
+                    requestCallBack);
 		default:
 			break;
 		}

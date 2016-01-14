@@ -100,6 +100,7 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
     private LinearLayout ll_rank_num;
     private TextView tv_level;
     private LinearLayout ll_comment;
+    private TextView tv_mean_rate,tv_comment_num;
     private TextView tv_poster_num;
     private ArrayList<NumberTrainPoster> numberTrainPosters = new ArrayList<>();
     private String images;
@@ -174,6 +175,8 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
         tv_level = (TextView) findViewById(R.id.tv_level);
         ll_comment = (LinearLayout) findViewById(R.id.ll_comment);
         ll_comment.setOnClickListener(this);
+        tv_mean_rate = (TextView) findViewById(R.id.tv_mean_rate);
+        tv_comment_num = (TextView) findViewById(R.id.tv_comment_num);
         iv_auto_type = (ImageView) findViewById(R.id.iv_auto_type);
         ll_store = (LinearLayout) findViewById(R.id.ll_store);
         ll_store.setOnClickListener(this);
@@ -537,7 +540,7 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                         ll_rank_num.setVisibility(View.GONE);
                     }else{
                         ll_rank_num.setVisibility(View.VISIBLE);
-
+                        ll_rank_num.removeAllViews();
                         int rankType = rank/5;
                         int rankNum = rank%5;
                         if(rankNum==0){
@@ -555,6 +558,8 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                     }
                     tv_level.setText("("+rank+"级)");
                     ll_comment.setVisibility(View.VISIBLE);
+                    tv_mean_rate.setText("好评率： "+numberTrainDetail.getMean_rate());
+                    tv_comment_num.setText("共"+numberTrainDetail.getNum()+"条评论");
                     buyAdapter.notifyDataSetChanged();
                     item_group_buy.setVisibility(View.VISIBLE);
                     if(numberTrainDetail.getShopnum()>0){
@@ -661,6 +666,8 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                 break;
             case R.id.ll_comment:
                 Intent commentIntent = new Intent(ActivityMyNumberTrainDetail.this, ActivityNumberTrainComment.class);
+                commentIntent.putExtra("store_id",id);
+                commentIntent.putExtra("mean_rate",numberTrainDetail.getMean_rate());
                 startActivity(commentIntent);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 break;

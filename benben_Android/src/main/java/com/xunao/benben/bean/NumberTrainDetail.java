@@ -52,6 +52,8 @@ public class NumberTrainDetail extends BaseBean {
     private int shopnum;
     private int auth_grade;
     private int rank;
+    private String mean_rate;
+    private int num;
 
     @Transient
     private ArrayList<Promotion> promotions = new ArrayList<Promotion>();
@@ -386,6 +388,22 @@ public class NumberTrainDetail extends BaseBean {
         this.rank = rank;
     }
 
+    public String getMean_rate() {
+        return mean_rate;
+    }
+
+    public void setMean_rate(String mean_rate) {
+        this.mean_rate = mean_rate;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
     @Override
 	public JSONObject toJSON() {
 
@@ -474,6 +492,8 @@ public class NumberTrainDetail extends BaseBean {
             shopnum = jsonObj.optInt("shopnum");
             auth_grade = jsonObj.optInt("auth_grade");
             rank = jsonObj.optInt("rank");
+            mean_rate = jsonObj.optString("mean_rate");
+            num = jsonObj.optInt("num");
 
             JSONArray phoneArray = jsonObj.optJSONArray("promotion");
             if (phoneArray != null && phoneArray.length() > 0) {

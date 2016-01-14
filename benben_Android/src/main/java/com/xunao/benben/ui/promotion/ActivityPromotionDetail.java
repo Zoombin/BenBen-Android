@@ -18,8 +18,10 @@ import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.LodingDialog;
+import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectFriend;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectTalkGroup;
+import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.view.ActionSheet;
 
@@ -116,7 +118,11 @@ public class ActivityPromotionDetail extends BaseActivity {
                                            int index) {
                 switch (index) {
                     case 0:
-
+                        if(CommonUtils.isNetworkAvailable(mContext)){
+                            InteNetUtils.getInstance(mContext).AddCollect(promotionId[position],"0",mRequestCallBack);
+                        }else{
+                            ToastUtils.Infotoast(mContext,"当前网络不可用");
+                        }
                         break;
 //                    case 1:
 //                        Intent intent = new Intent(Intent.ACTION_SEND);
@@ -169,14 +175,18 @@ public class ActivityPromotionDetail extends BaseActivity {
 	}
 
 	@Override
-	protected void onSuccess(JSONObject t) {
-
+	protected void onSuccess(JSONObject jsonObject) {
+        if(jsonObject.optInt("ret_num")==0){
+            ToastUtils.Infotoast(mContext,"收藏成功");
+        }else{
+            ToastUtils.Infotoast(mContext,jsonObject.optString("ret_msg"));
+        }
 	}
 
 	@Override
 	protected void onFailure(HttpException exception, String strMsg) {
 		// TODO Auto-generated method stub
-
+        ToastUtils.Infotoast(mContext,"收藏失败!");
 	}
 
 	@Override
@@ -198,6 +208,7 @@ public class ActivityPromotionDetail extends BaseActivity {
             Log.d("ltf","url========="+url);
             position++;
             if(position==promotionId.length){
+                position--;
                 ToastUtils.Infotoast(mContext,"已无更多促销");
             }else{
                 view.loadUrl( AndroidConfig.NETHOST+"/promotion/promotiondetail/key/android?promotionid="+promotionId[position]);

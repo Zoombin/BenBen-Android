@@ -17,6 +17,7 @@ public class OrderCommentReply extends BaseBean<OrderCommentReply>{
     private long add_time;
     private int comment_type;
     private int promotion_id;
+    private String nick_name;
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
@@ -41,6 +42,7 @@ public class OrderCommentReply extends BaseBean<OrderCommentReply>{
         comment_rank = jsonObj.optInt("comment_rank");
         add_time = jsonObj.optLong("add_time");
         comment_type = jsonObj.optInt("comment_type");
+        nick_name = jsonObj.optString("nick_name");
         return this;
 	}
 
@@ -114,5 +116,13 @@ public class OrderCommentReply extends BaseBean<OrderCommentReply>{
 
     public void setPromotion_id(int promotion_id) {
         this.promotion_id = promotion_id;
+    }
+
+    public String getNick_name() {
+        return nick_name;
+    }
+
+    public void setNick_name(String nick_name) {
+        this.nick_name = nick_name;
     }
 }

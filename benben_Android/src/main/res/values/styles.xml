@@ -448,4 +448,20 @@
         <item name="android:maxHeight">20dp</item>
     </style>
 
+    <!-- 对话框样式 -->
+    <style name="myDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 屏幕背景变暗 -->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!-- 弹出框动画 由下至上 -->
+    <style name="dialogstyle" parent="@android:style/Theme.Dialog">
+        <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
+        <!-- 进入时的动画 -->
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+        <!-- 退出时的动画 -->
+    </style>
+
 </resources>

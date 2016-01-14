@@ -675,4 +675,30 @@ public class AndroidConfig {
 	//直通车不同意转让
 	public static final String StoreRefuseTransfer = "/store/refuseTransfer";
 
+    //添加收藏
+    public static final String AddCollect = "/CollectGoods/addCollect";
+    //收藏列表
+    public static final String CollectGoodsList = "/CollectGoods/collectGoodsList";
+    //删除收藏
+    public static final String DelCollect = "/CollectGoods/delCollect";
+    //查询某店铺所有评论
+    public static final String StoreCommentList = "/StoreComment/StoreCommentList";
+    //我的账户
+    public static final String MyAccount = "/user/myAccount";
+    //我的账单
+    public static final String MyPayLog = "/user/myPayLog";
+    //政企通讯录电话数统计
+    public static final String AddTelNum = "/enterprise/addTelNum";
+    //获取所有拍卖场
+    public static final String GetAuctionList = "/TopAuction/GetAuctionList";
+    //获取拍卖场详情
+    public static final String AuctionDetail = "/TopAuction/AuctionDetail";
+    //出价
+    public static final String GivePrice = "/TopAuction/GivePrice";
+    //保证金
+    public static final String PayGuarantee = "/TopAuction/PayGuarantee";
+    //拍卖纪录
+    public static final String GetLog = "/TopAuction/GetLog";
+    //拍卖用户token值
+    public static final String AuctionSet = "/TopAuction/Set";
 }

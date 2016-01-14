@@ -774,7 +774,7 @@ public class InteNetUtils {
 
 	// 号码直通车
 	public void getStoreList(int pagerNum, String searchKey, double latitude,
-			double longitude, String province, String city, String area, String street,
+			double longitude, String province, String city, String area, String street,String industryId,
 			RequestCallBack<String> callBack) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("key", "android");
@@ -786,6 +786,7 @@ public class InteNetUtils {
 		hashMap.put("city", city);
 		hashMap.put("area", area);
 		hashMap.put("street", street);
+        hashMap.put("industry", industryId);
 		ComPost(AndroidConfig.NETHOST + AndroidConfig.GetStoreList, hashMap,
 				callBack);
 	}
@@ -3130,6 +3131,110 @@ public class InteNetUtils {
         hashMap.put("key", "android");
         hashMap.put("order_id", order_id);
         ComPost(AndroidConfig.NETHOST + AndroidConfig.Agreeback, hashMap,
+                requestCallBack);
+    }
+
+    public void AddCollect(String promotion_id,String type,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("promotion_id", promotion_id);
+        hashMap.put("type", type);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.AddCollect, hashMap,
+                requestCallBack);
+    }
+
+    public void CollectGoodsList(RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.CollectGoodsList, hashMap,
+                requestCallBack);
+    }
+
+    public void DelCollect(String promotion_id,String type,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("promotion_id", promotion_id);
+        hashMap.put("type", type);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.DelCollect, hashMap,
+                requestCallBack);
+    }
+
+    public void StoreCommentList(String store_id,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("store_id", store_id);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.StoreCommentList, hashMap,
+                requestCallBack);
+    }
+
+    public void MyAccount(RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.MyAccount, hashMap,
+                requestCallBack);
+    }
+
+    public void MyPayLog(RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.MyPayLog, hashMap,
+                requestCallBack);
+    }
+
+
+    public void AddTelNum(String enterprise_member_id,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("enterprise_member_id", enterprise_member_id);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.AddTelNum, hashMap,
+                requestCallBack);
+    }
+
+
+    public void GetAuctionList(RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.GetAuctionList, hashMap,
+                requestCallBack);
+    }
+
+    public void AuctionDetail(int auction_id,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("auction_id", auction_id+"");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.AuctionDetail, hashMap,
+                requestCallBack);
+    }
+
+    public void GivePrice(int auction_id,String price,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("auction_id", auction_id+"");
+        hashMap.put("price",price);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.GivePrice, hashMap,
+                requestCallBack);
+    }
+
+    public void PayGuarantee(int auction_id,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("auction_id", auction_id+"");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.PayGuarantee, hashMap,
+                requestCallBack);
+    }
+
+    public void GetLog(RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.GetLog, hashMap,
+                requestCallBack);
+    }
+
+
+    public void AuctionSet(RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.AuctionSet, hashMap,
                 requestCallBack);
     }
 }

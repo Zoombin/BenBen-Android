@@ -134,5 +134,17 @@
         android:src="@drawable/icon_right_bar"
         />
 
-    </LinearLayout>
+    <CheckBox
+        android:id="@+id/cb_item"
+        style="@style/MyCheckboxStyle"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="3dip"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:clickable="false"
+        android:visibility="gone"
+        />
+
+</LinearLayout>
 

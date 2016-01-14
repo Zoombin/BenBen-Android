@@ -1001,7 +1001,52 @@
         </activity>
 
         <activity
+            android:name="com.xunao.benben.ui.account.ActivityMyPromotionCollection"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
             android:name=".ui.order.ActivityOrderCommentDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.groupbuy.ActivityGroupBuyDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.account.ActivityMyWallet"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.account.ActivityMyBill"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.account.ActivityMoneyIncome"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.auction.ActivityTopAuctionNotice"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.auction.ActivityTopAuction"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.auction.ActivityTopAuctionRecord"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.auction.ActivityTopAuctionDetail"
             android:screenOrientation="portrait" >
         </activity>
 

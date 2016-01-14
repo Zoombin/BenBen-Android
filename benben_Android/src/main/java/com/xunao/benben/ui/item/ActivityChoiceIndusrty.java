@@ -52,6 +52,7 @@ public class ActivityChoiceIndusrty extends BaseActivity implements
 	private String industry;
 	private int id = 0;
 	private String industryId;
+    private String from="";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,11 @@ public class ActivityChoiceIndusrty extends BaseActivity implements
 
 	@Override
 	public void initDate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        if(intent.hasExtra("from")){
+            from = intent.getStringExtra("from");
+        }
+
 		// 第一次传空
 		InteNetUtils.getInstance(mContext).getIndustry(getLatestTime(), mRequestCallBack);
 
@@ -199,7 +205,7 @@ public class ActivityChoiceIndusrty extends BaseActivity implements
                     intent.putExtra("industry", industry);
                     intent.putExtra("industryId", industryId);
                     String last = industryInfo.getLast();
-                    if(last.equals("0")){
+                    if(!from.equals("train") && last.equals("0")){
                         intent.setClass(ActivityChoiceIndusrty.this,ActivityChoiceSecondIndusrty.class);
                         startActivityForResult(intent, 1);
                         overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);

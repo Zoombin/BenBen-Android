@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_give_price"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_dialog_place"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="置顶第一位"
+            android:textSize="18dp"
+            android:textColor="#000000"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:textSize="18dp"
+            android:textColor="#000000"
+            />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_dialog_add_step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="加价幅度:100元"
+        android:textSize="18dp"
+        android:textColor="#E93434"
+        android:layout_marginLeft="20dp"
+        />
+
+    <View
+        android:layout_marginTop="20dp"
+        style="@style/set_item_Line_5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:padding="20dp"
+        >
+
+        <EditText
+            android:id="@+id/edt_dialog_price"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="请输入金额"
+            android:textSize="18dp"
+            android:textColor="#B4B4B4"
+            android:textColorHint="#B4B4B4"
+            android:background="@null"
+            android:inputType="numberDecimal"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="元"
+            android:textSize="18dp"
+            android:textColor="#000000"
+            />
+
+
+    </LinearLayout>
+
+    <View
+        style="@style/set_item_Line_5"/>
+
+    <View
+        android:layout_marginTop="20dp"
+        style="@style/set_item_Line_5"/>
+
+    <TextView
+        android:id="@+id/tv_dialog_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="确认出价"
+        android:textSize="18dp"
+        android:textColor="#6ABC4D"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        />
+    </LinearLayout>
+</LinearLayout>

@@ -36,6 +36,8 @@ public class Promotion extends BaseBean {
     private String mustknow;
     private String shipping_fee;
 
+    private boolean isChecked = false;
+
 
     public int getId() {
         return id;
@@ -237,6 +239,14 @@ public class Promotion extends BaseBean {
         this.mustknow = mustknow;
     }
 
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean isChecked) {
+        this.isChecked = isChecked;
+    }
+
     @Override
     public JSONObject toJSON() {
         return null;
@@ -245,6 +255,36 @@ public class Promotion extends BaseBean {
     @Override
     public Object parseJSON(JSONObject jsonObj) throws NetRequestException {
         promotionid = jsonObj.optInt("promotionid");
+        poster = jsonObj.optString("poster");
+        small_poster = jsonObj.optString("small_poster");
+        vip_time = jsonObj.optString("vip_time");
+        name = jsonObj.optString("name");
+        description = jsonObj.optString("description");
+        is_overtime = jsonObj.optInt("is_overtime");
+        is_down = jsonObj.optInt("is_down");
+
+        is_close = jsonObj.optInt("is_close");
+        valid_left = jsonObj.optString("valid_left");
+        valid_right = jsonObj.optString("valid_right");
+        poster_st = jsonObj.optString("poster_st");
+        pm_id = jsonObj.optInt("pm_id");
+
+        small_poster_st = jsonObj.optString("small_poster_st");
+        poster_nd = jsonObj.optString("poster_nd");
+        small_poster_nd = jsonObj.optString("small_poster_nd");
+        poster_rd = jsonObj.optString("poster_rd");
+        small_poster_rd = jsonObj.optString("small_poster_rd");
+        origion_price = jsonObj.optDouble("origion_price");
+        promotion_price = jsonObj.optDouble("promotion_price");
+        sellcount = jsonObj.optInt("sellcount");
+        model = jsonObj.optString("model");
+        mustknow = jsonObj.optString("mustknow");
+        shipping_fee = jsonObj.optString("shipping_fee");
+        return this;
+    }
+
+    public Object parseJSONCollection(JSONObject jsonObj) throws NetRequestException {
+        promotionid = jsonObj.optInt("promotion_id");
         poster = jsonObj.optString("poster");
         small_poster = jsonObj.optString("small_poster");
         vip_time = jsonObj.optString("vip_time");

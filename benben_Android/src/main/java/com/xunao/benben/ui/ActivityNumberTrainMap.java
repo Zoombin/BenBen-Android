@@ -457,7 +457,7 @@ public class ActivityNumberTrainMap extends BaseActivity implements
 					int pagerNum = 0;
 					InteNetUtils.getInstance(mContext).getStoreList(pagerNum,
 							searchKey, mCurrentLantitude, mCurrentLongitude,
-							"", "", "","", mRequestCallBack);
+							"", "", "","","", mRequestCallBack);
 					return true;
 				}
 				return false;

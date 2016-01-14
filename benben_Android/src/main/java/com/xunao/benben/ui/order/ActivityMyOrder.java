@@ -36,6 +36,8 @@ import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.account.ActivityMoneyIncome;
+import com.xunao.benben.ui.account.ActivityMyWallet;
 import com.xunao.benben.ui.item.ActivityNumberTrainDetail;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.PayResult;
@@ -437,10 +439,12 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                         tv_pay_status.setText("已付款");
                         tv_order_amount.setText("费用总计:" + order.getOrder_amount() + "元");
                         tv_order_amount.setVisibility(View.VISIBLE);
-                        tv_apply_refund.setVisibility(View.VISIBLE);
                         ll_order_operate.setVisibility(View.VISIBLE);
-                        tv_operate1.setVisibility(View.VISIBLE);
-                        tv_operate2.setVisibility(View.VISIBLE);
+                        if(!order.getTrain_id().equals("1")) {
+                            tv_apply_refund.setVisibility(View.VISIBLE);
+                            tv_operate1.setVisibility(View.VISIBLE);
+                            tv_operate2.setVisibility(View.VISIBLE);
+                        }
                         tv_operate3.setText("确认收货");
                         tv_operate3.setVisibility(View.VISIBLE);
                     } else if (order.getShipping_status() == 2) {
@@ -449,7 +453,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                         tv_order_amount.setText("费用总计:" + order.getOrder_amount() + "元");
                         tv_order_amount.setVisibility(View.VISIBLE);
                         ll_order_operate.setVisibility(View.VISIBLE);
-                        if (order.getPay_id() == 1) {
+                        if (order.getPay_id() == 1 && !order.getTrain_id().equals("1")) {
                             tv_operate2.setVisibility(View.VISIBLE);
                         }
                         if (order.getOrder_status() == 5) {
@@ -486,8 +490,10 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                 ll_train.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startAnimActivity2Obj(ActivityNumberTrainDetail.class,
-                                "id", order.getTrain_id());
+                        if(!order.getTrain_id().equals("1")) {
+                            startAnimActivity2Obj(ActivityNumberTrainDetail.class,
+                                    "id", order.getTrain_id());
+                        }
                     }
                 });
 
@@ -510,15 +516,25 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                                     order_id = order.getOrder_id();
                                     order_sn = order.getOrder_sn();
 //                                payOrder();
-                                    Intent intent = new Intent(ActivityMyOrder.this, ActivityOrderPayType.class);
-                                    intent.putExtra("payType", order.getPay_id());
-                                    intent.putExtra("order_id", order_id);
-                                    intent.putExtra("order_sn", order_sn);
-                                    intent.putExtra("payPrice", order.getOrder_amount());
-                                    intent.putExtra("shipping_fee", order.getShipping_fee());
-                                    intent.putExtra("name", order.getGoods_name());
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                                    if(!order.getTrain_id().equals("1")) {
+                                        Intent intent = new Intent(ActivityMyOrder.this, ActivityOrderPayType.class);
+                                        intent.putExtra("payType", order.getPay_id());
+                                        intent.putExtra("order_id", order_id);
+                                        intent.putExtra("order_sn", order_sn);
+                                        intent.putExtra("payPrice", order.getOrder_amount());
+                                        intent.putExtra("shipping_fee", order.getShipping_fee());
+                                        intent.putExtra("name", order.getGoods_name());
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                                    }else{
+                                        Intent intent = new Intent(ActivityMyOrder.this, ActivityMoneyIncome.class);
+                                        intent.putExtra("from", "order");
+                                        intent.putExtra("order_id", order_id);
+                                        intent.putExtra("order_sn", order_sn);
+                                        intent.putExtra("payPrice", order.getOrder_amount());;
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                                    }
 
                                 }
                             });
@@ -769,8 +785,10 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startAnimActivity3Obj(ActivityMyOrderDetail.class,
-                                "order_id", order.getOrder_id(),"pay_name",order.getPay_name());
+                        if(!order.getTrain_id().equals("1")) {
+                            startAnimActivity3Obj(ActivityMyOrderDetail.class,
+                                    "order_id", order.getOrder_id(), "pay_name", order.getPay_name());
+                        }
                     }
                 });
 

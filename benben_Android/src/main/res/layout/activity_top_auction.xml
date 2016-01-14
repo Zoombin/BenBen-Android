@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EBEBEB"
+    >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ListView
+        android:id="@+id/lv_auction"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:divider="#00000000"
+        android:dividerHeight="10dp"
+        android:listSelector="@android:color/transparent"
+        ></ListView>
+
+    <View
+        android:layout_marginTop="10dp"
+        style="@style/set_item_Line_5"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:padding="10dp"
+        android:visibility="gone"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="可用余额:"
+                    android:textSize="15dp"
+                    android:textColor="#969696"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_available_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="300元"
+                    android:textSize="15dp"
+                    android:textColor="#6ABC4D"
+                    android:layout_marginLeft="5dp"
+                    />
+             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已冻结保证金:"
+                    android:textSize="15dp"
+                    android:textColor="#969696"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_freeze_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="200元"
+                    android:textSize="15dp"
+                    android:textColor="#E93434"
+                    android:layout_marginLeft="5dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="充值"
+            android:textSize="15dp"
+            android:textColor="#969696"
+            android:layout_gravity="center_vertical"
+            android:drawableRight="@drawable/right_arrow_icon"
+            android:drawablePadding="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

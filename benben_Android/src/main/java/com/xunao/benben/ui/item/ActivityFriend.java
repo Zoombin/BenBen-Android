@@ -914,8 +914,8 @@ public class ActivityFriend extends BaseActivity implements OnClickListener,
 				String images = item.getThumb();
 				if (!TextUtils.isEmpty(images)) {
 					String[] split = images.split("\\^");
-					int length = split.length;
-					if (length > 1) {
+//					int length = split.length;
+//					if (length > 1) {
 						// 多图用GridView
 						holderTextAImg.item_friend_singleImg.setVisibility(View.GONE);
 						holderTextAImg.item_friend_gridView
@@ -935,38 +935,38 @@ public class ActivityFriend extends BaseActivity implements OnClickListener,
 												arg2);
 									}
 								});
-					} else {
-						// 单图
-						holderTextAImg.item_friend_singleImg
-								.setVisibility(View.VISIBLE);
-						holderTextAImg.item_friend_gridView
-						.setVisibility(View.GONE);
-						holderTextAImg.item_friend_singleImg.getLayoutParams().width = item
-								.getSingImageW();
-						holderTextAImg.item_friend_singleImg.getLayoutParams().height = item
-								.getSingImageH();
-
-						if (!TextUtils.isEmpty(split[0])) {
-							CommonUtils.startImageLoader(cubeimageLoader,
-									split[0],
-									holderTextAImg.item_friend_singleImg);
-						} else {
-							CommonUtils.startImageLoader(cubeimageLoader,
-									"www.baidu.com",
-									holderTextAImg.item_friend_singleImg);
-						}
-
-						holderTextAImg.item_friend_singleImg
-								.setOnClickListener(new OnClickListener() {
-									@Override
-									public void onClick(View v) {
-										startActivity2StringAndPosition(
-												ActivityContentPicSet.class,
-												"IMAGES", item.getImages(), 0);
-									}
-								});
-
-					}
+//					}else {
+//						// 单图
+//						holderTextAImg.item_friend_singleImg
+//								.setVisibility(View.VISIBLE);
+//						holderTextAImg.item_friend_gridView
+//						.setVisibility(View.GONE);
+//						holderTextAImg.item_friend_singleImg.getLayoutParams().width = item
+//								.getSingImageW();
+//						holderTextAImg.item_friend_singleImg.getLayoutParams().height = item
+//								.getSingImageH();
+//
+//						if (!TextUtils.isEmpty(split[0])) {
+//							CommonUtils.startImageLoader(cubeimageLoader,
+//									split[0],
+//									holderTextAImg.item_friend_singleImg);
+//						} else {
+//							CommonUtils.startImageLoader(cubeimageLoader,
+//									"www.baidu.com",
+//									holderTextAImg.item_friend_singleImg);
+//						}
+//
+//						holderTextAImg.item_friend_singleImg
+//								.setOnClickListener(new OnClickListener() {
+//									@Override
+//									public void onClick(View v) {
+//										startActivity2StringAndPosition(
+//												ActivityContentPicSet.class,
+//												"IMAGES", item.getImages(), 0);
+//									}
+//								});
+//
+//					}
 				} else {
 					holderTextAImg.item_friend_singleImg.setTag("");
 				}

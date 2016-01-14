@@ -244,7 +244,7 @@
                 android:paddingRight="10dip"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 >
 
                 <TextView
@@ -321,23 +321,23 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_mean_rate"
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="#ffffff"
                     android:gravity="center_vertical"
-                    android:text="好评率：90%"
                     android:textColor="#000000"
                     android:textSize="16dp"
                     android:layout_marginRight="5dp"
                     />
 
                 <TextView
+                    android:id="@+id/tv_comment_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#ffffff"
                     android:gravity="center_vertical"
-                    android:text="共200条评论"
                     android:textColor="#42be69"
                     android:textSize="16dp"
                     android:drawableRight="@drawable/right_arrow_icon"

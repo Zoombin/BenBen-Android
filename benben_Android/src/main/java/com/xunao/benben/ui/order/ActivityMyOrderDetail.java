@@ -27,6 +27,7 @@ import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.hx.chatuidemo.activity.ChatActivity;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.ActivityNumberTrainDetailMap;
+import com.xunao.benben.ui.groupbuy.ActivityGroupBuyDetail;
 import com.xunao.benben.ui.item.ActivityNumberTrainDetail;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.ToastUtils;
@@ -54,6 +55,7 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
     private RoundedImageView rv_poster;
     private TextView tv_short_name;
     private CubeImageView iv_promotion_post;
+    private LinearLayout ll_promotion;
     private TextView tv_promotion_name,tv_goods_amount,tv_shipping_fee,tv_goods_number;
     private TextView tv_order_amount,tv_order_fee;
     private LinearLayout ll_pay_text;
@@ -85,6 +87,8 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
         ll_train.setOnClickListener(this);
         rv_poster = (RoundedImageView) findViewById(R.id.rv_poster);
         tv_short_name = (TextView) findViewById(R.id.tv_short_name);
+        ll_promotion = (LinearLayout) findViewById(R.id.ll_promotion);
+        ll_promotion.setOnClickListener(this);
         iv_promotion_post = (CubeImageView) findViewById(R.id.iv_promotion_post);
         tv_promotion_name = (TextView) findViewById(R.id.tv_promotion_name);
         tv_goods_amount = (TextView) findViewById(R.id.tv_goods_amount);
@@ -363,6 +367,21 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
             case R.id.ll_train:
                 startAnimActivity2Obj(ActivityNumberTrainDetail.class,
                         "id", order.getTrain_id());
+                break;
+            case R.id.ll_promotion:
+                if(order.getIs_close()==1){
+                    ToastUtils.Infotoast(mContext,"该商品已下架");
+                }else if(order.getIs_out()==1){
+                    ToastUtils.Infotoast(mContext,"该商品已过期");
+                }else{
+                    Intent intent = new Intent(ActivityMyOrderDetail.this, ActivityGroupBuyDetail.class);
+                    intent.putExtra("ids", order.getPromotion_id()+"");
+                    intent.putExtra("position", 0);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                }
+
+
                 break;
             case R.id.iv_order_code:
                 CommonUtils.showQrCode(mContext, order.getQrcode(),

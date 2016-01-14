@@ -7,6 +7,72 @@
 
     <include layout="@layout/com_title_bar" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_search_range"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="范围"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:drawableRight="@drawable/ico_arrow_down"
+                android:textSize="15dp"
+                />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#dcdcdc"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_search_industry"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="行业"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:drawableRight="@drawable/ico_arrow_down"
+                android:textSize="15dp"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        style="@style/set_item_Line_5"
+        android:layout_marginBottom="10dp"
+        />
+
     <include layout="@layout/com_editview_02" />
 
     <RelativeLayout
@@ -80,6 +146,35 @@
             android:layout_marginLeft="10dip"
             android:textColor="#068cd9"
             android:textSize="14dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_industry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="#d4d4d4"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            />
+        <TextView
+            android:id="@+id/tv_industry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#068cd9"
+            android:textSize="14dip"
+            android:paddingBottom="3dip"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            android:paddingTop="3dip"
+            />
+
     </LinearLayout>
 
     <RelativeLayout

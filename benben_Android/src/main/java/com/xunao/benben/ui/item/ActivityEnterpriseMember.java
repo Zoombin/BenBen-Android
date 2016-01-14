@@ -570,6 +570,15 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 			holder.iv_make_phone.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
+                    InteNetUtils.getInstance(mContext).AddTelNum(enterpriseMemberDetail.getId(), new RequestCallBack<String>() {
+                        @Override
+                        public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                        }
+
+                        @Override
+                        public void onFailure(HttpException e, String s) {
+                        }
+                    });
 					PhoneUtils.makeCall(Integer.parseInt(enterpriseMemberDetail.getId()),enterpriseMemberDetail.getName(),
 							enterpriseMemberDetail.getPhone(), mContext);
 				}
@@ -586,6 +595,15 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 			holder.iv_make_shortphone.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
+                    InteNetUtils.getInstance(mContext).AddTelNum(enterpriseMemberDetail.getId(), new RequestCallBack<String>() {
+                        @Override
+                        public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                        }
+
+                        @Override
+                        public void onFailure(HttpException e, String s) {
+                        }
+                    });
 					PhoneUtils.makeCall(Integer.parseInt(enterpriseMemberDetail.getId()),enterpriseMemberDetail.getName(),
 							enterpriseMemberDetail.getShortPhone(), mContext);
 				}

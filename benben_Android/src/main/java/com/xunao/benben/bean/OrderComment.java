@@ -19,6 +19,8 @@ public class OrderComment extends BaseBean<OrderComment>{
     private long add_time;
     private int comment_type;
     private int promotion_id;
+    private String nick_name;
+    private String poster;
 
 	private ArrayList<OrderCommentReply> orderCommentReplies = new ArrayList<OrderCommentReply>();
 
@@ -40,6 +42,8 @@ public class OrderComment extends BaseBean<OrderComment>{
         comment_rank = jsonObj.optInt("comment_rank");
         add_time = jsonObj.optLong("add_time");
         comment_type = jsonObj.optInt("comment_type");
+        nick_name = jsonObj.optString("nick_name");
+        poster = jsonObj.optString("poster");
 
         try {
             JSONArray jsonArray = jsonObj.getJSONArray("reply");
@@ -135,5 +139,21 @@ public class OrderComment extends BaseBean<OrderComment>{
 
     public void setOrderCommentReplies(ArrayList<OrderCommentReply> orderCommentReplies) {
         this.orderCommentReplies = orderCommentReplies;
+    }
+
+    public String getNick_name() {
+        return nick_name;
+    }
+
+    public void setNick_name(String nick_name) {
+        this.nick_name = nick_name;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 }

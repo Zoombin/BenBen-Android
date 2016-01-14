@@ -520,6 +520,16 @@ public class ActivityAddFriend extends BaseActivity implements OnClickListener,
                 localViewHolder.addFriend.setBackgroundResource(R.drawable.but_bg_public_agree);
                 localViewHolder.addFriend.setOnClickListener(null);
             }
+
+            convertView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ActivityAddFriend.this, ActivityContactsInfo.class);
+                    intent.putExtra("username", map.get("huanxin_username"));
+                    startActivityForResult(intent, AndroidConfig.ContactsFragmentRequestCode);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                }
+            });
             return convertView;
         }
 
@@ -657,6 +667,16 @@ public class ActivityAddFriend extends BaseActivity implements OnClickListener,
 
 					}
 				});
+                convertView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(ActivityAddFriend.this, ActivityContactsInfo.class);
+                        intent.putExtra("username", item.getHuanxin_username());
+                        startActivityForResult(intent, AndroidConfig.ContactsFragmentRequestCode);
+                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                    }
+                });
+
 			} else {
 
 				if (isMoreData) {

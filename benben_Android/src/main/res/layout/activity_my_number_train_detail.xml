@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ll_poster"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"
+                    android:textSize="14sp"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:layout_marginTop="3dp"
@@ -131,6 +131,7 @@
                     android:layout_below="@+id/tv_name"
                     android:textColor="#ffffff"
                     android:layout_centerHorizontal="true"
+                    android:textSize="14sp"
                     />
 
 
@@ -165,7 +166,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dip"
                             android:textColor="#FFFFFF"
-                            android:textSize="14dip"
+                            android:textSize="14sp"
                             />
                     </LinearLayout>
 

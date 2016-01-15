@@ -115,9 +115,28 @@ public class ActivityPromotionDetail extends BaseActivity {
 				showMoreActionSheet();
 			}
 		});
+		tv_sendmsg.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				webView.loadUrl("javascript:window.benben.sendMsg(document.getElementsByName('huanxin_username')[0].value)");
+			}
+		});
+		tv_search.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				webView.loadUrl("javascript:window.benben.search(document.getElementsByName('train_id')[0].value)");
+			}
+		});
 		tv_call.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				webView.loadUrl("javascript:window.benben.getTel(document.getElementsByName('tel')[0].value)");
+			}
+		});
+		tv_buynow.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				webView.loadUrl("javascript:window.benben.bynow(document.getElementsByName('type')[0].value)");
 			}
 		});
 	}
@@ -285,6 +304,18 @@ public class ActivityPromotionDetail extends BaseActivity {
 	public class MyJsInterface {
 		@JavascriptInterface
 		public void getTel(String info) {
+			Log.d("TTT",info);
+		}
+		@JavascriptInterface
+		public void bynow(String info) {
+			Log.d("TTT",info);
+		}
+		@JavascriptInterface
+		public void search(String info) {
+			Log.d("TTT",info);
+		}
+		@JavascriptInterface
+		public void sendMsg(String info) {
 			Log.d("TTT",info);
 		}
 	}

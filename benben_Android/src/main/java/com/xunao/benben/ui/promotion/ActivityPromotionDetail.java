@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.xunao.benben.R;
@@ -30,10 +33,11 @@ import org.json.JSONObject;
 public class ActivityPromotionDetail extends BaseActivity {
 
 	private WebView webView;
+	private TextView tv_search,tv_sendmsg,tv_call,tv_buynow;
 	private View progressBar;
 	private LodingDialog lodingDialog;
     private String ids;
-    private String[] promotionId;
+    private String[] promotionId= new String[0];
     private int position;
 
 	@Override
@@ -45,6 +49,10 @@ public class ActivityPromotionDetail extends BaseActivity {
 	public void initView(Bundle savedInstanceState) {
 
 		webView = (WebView) findViewById(R.id.webView);
+		tv_search = (TextView) findViewById(R.id.tv_search);
+		tv_sendmsg = (TextView) findViewById(R.id.tv_sendmsg);
+		tv_call = (TextView) findViewById(R.id.tv_call);
+		tv_buynow = (TextView) findViewById(R.id.tv_buynow);
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setSupportZoom(true);
 		webSettings.setJavaScriptEnabled(true);
@@ -67,6 +75,7 @@ public class ActivityPromotionDetail extends BaseActivity {
 		}
 		MyWebClinet myWebClinet = new MyWebClinet();
 		webView.setWebViewClient(myWebClinet);
+		webView.addJavascriptInterface(new MyJsInterface(), "benben");
 
 		initTitle_Right_Left_bar("促销详情", "", "", R.drawable.icon_com_title_left, R.drawable.icon_share);
 		
@@ -77,10 +86,15 @@ public class ActivityPromotionDetail extends BaseActivity {
 	@Override
 	public void initDate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
-		String ids = intent.getStringExtra("ids");
-        promotionId = ids.split(";");
-		position = intent.getIntExtra("position",0);
-        webView.loadUrl( AndroidConfig.NETHOST+"/promotion/promotiondetail/key/android?promotionid="+promotionId[position]);
+		String url = intent.getStringExtra("url");
+		if(!TextUtils.isEmpty(url)){
+		}else{
+			String ids = intent.getStringExtra("ids");
+			promotionId = ids.split(";");
+			position = intent.getIntExtra("position", 0);
+			url = AndroidConfig.NETHOST + "/promotion/promotiondetail/key/android?promotionid=" + promotionId[position];
+		}
+        webView.loadUrl(url);
 		
 	}
 
@@ -95,12 +109,36 @@ public class ActivityPromotionDetail extends BaseActivity {
 		});
 
         setOnRightClickLinester(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setTheme(R.style.ActionSheetStyleIOS7);
-                showMoreActionSheet();
-            }
-        });
+			@Override
+			public void onClick(View view) {
+				setTheme(R.style.ActionSheetStyleIOS7);
+				showMoreActionSheet();
+			}
+		});
+		tv_sendmsg.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				webView.loadUrl("javascript:window.benben.sendMsg(document.getElementsByName('huanxin_username')[0].value)");
+			}
+		});
+		tv_search.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				webView.loadUrl("javascript:window.benben.search(document.getElementsByName('train_id')[0].value)");
+			}
+		});
+		tv_call.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				webView.loadUrl("javascript:window.benben.getTel(document.getElementsByName('tel')[0].value)");
+			}
+		});
+		tv_buynow.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				webView.loadUrl("javascript:window.benben.bynow(document.getElementsByName('type')[0].value)");
+			}
+		});
 	}
 
     public void showMoreActionSheet() {
@@ -261,6 +299,24 @@ public class ActivityPromotionDetail extends BaseActivity {
 			}
 		}
 
+	}
 
+	public class MyJsInterface {
+		@JavascriptInterface
+		public void getTel(String info) {
+			Log.d("TTT",info);
+		}
+		@JavascriptInterface
+		public void bynow(String info) {
+			Log.d("TTT",info);
+		}
+		@JavascriptInterface
+		public void search(String info) {
+			Log.d("TTT",info);
+		}
+		@JavascriptInterface
+		public void sendMsg(String info) {
+			Log.d("TTT",info);
+		}
 	}
 }

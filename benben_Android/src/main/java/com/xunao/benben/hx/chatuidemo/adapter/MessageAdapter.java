@@ -13,22 +13,6 @@
  */
 package com.xunao.benben.hx.chatuidemo.adapter;
 
-import in.srain.cube.image.CubeImageView;
-import in.srain.cube.image.ImageLoader;
-
-import java.io.File;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -53,7 +37,6 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
-import com.baidu.platform.comapi.map.C;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMConversation;
@@ -75,7 +58,6 @@ import com.easemob.util.FileUtils;
 import com.easemob.util.LatLng;
 import com.easemob.util.TextFormater;
 import com.lidroid.xutils.db.sqlite.Selector;
-import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -96,7 +78,6 @@ import com.xunao.benben.hx.chatuidemo.activity.BaiduMapActivity;
 import com.xunao.benben.hx.chatuidemo.activity.BaseActivity;
 import com.xunao.benben.hx.chatuidemo.activity.ChatActivity;
 import com.xunao.benben.hx.chatuidemo.activity.ContextMenu;
-import com.xunao.benben.hx.chatuidemo.activity.ShowBigImage;
 import com.xunao.benben.hx.chatuidemo.activity.ShowNormalFileActivity;
 import com.xunao.benben.hx.chatuidemo.activity.ShowVideoActivity;
 import com.xunao.benben.hx.chatuidemo.task.LoadImageTask;
@@ -107,15 +88,30 @@ import com.xunao.benben.hx.chatuidemo.utils.SmileUtils;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.item.ActivityChatPicSet;
 import com.xunao.benben.ui.item.ActivityContactsInfo;
-import com.xunao.benben.ui.item.ActivityContactsUnionInfo;
 import com.xunao.benben.ui.item.ActivityFriendUnionDetail;
 import com.xunao.benben.ui.item.ActivityMyNumberTrainDetail;
 import com.xunao.benben.ui.item.ActivityNumberTrainDetail;
+import com.xunao.benben.ui.promotion.ActivityPromotionDetail;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.PixelUtil;
 import com.xunao.benben.utils.TimeUtil;
 import com.xunao.benben.utils.ToastUtils;
-import com.xunao.benben.utils.XunaoLog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import in.srain.cube.image.CubeImageView;
+import in.srain.cube.image.ImageLoader;
 
 public class MessageAdapter extends BaseAdapter {
 
@@ -970,7 +966,7 @@ public class MessageAdapter extends BaseAdapter {
 	 * @param holder
 	 * @param position
 	 */
-	private void handleTextMessage(EMMessage message, ViewHolder holder,
+	private void handleTextMessage(EMMessage message, final ViewHolder holder,
 			final int position) {
         final String train_id = message.getStringAttribute("train_id", "");
         final String shop = message.getStringAttribute("shop", "");
@@ -982,7 +978,29 @@ public class MessageAdapter extends BaseAdapter {
             // 设置内容
             holder.tv.setText(span, BufferType.SPANNABLE);
             holder.tv.setTextColor(Color.parseColor("#000000"));
-
+			//自定义处理文本消息点击（有链接需要内部跳转）
+			String linktype = message.getStringAttribute("link_type", "");//暂时没用
+			//[小喇叭]我开通了新的促销,http://112.124.101.177:81/index.php/v2/promotion/promotiondetail/key/android?promotionid=44,来给我捧捧场吧!
+			final String textContent = holder.tv.getText().toString();
+			holder.tv.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if(textContent.contains("http")|| textContent.contains("com")|| textContent.contains("www")){
+						String url = textContent.substring(textContent.indexOf("http"));
+						if(textContent.contains("promotionid")){
+							//内部跳转
+							Intent intent = new Intent(context, ActivityPromotionDetail.class);
+							intent.putExtra("url", url);
+							context.startActivity(intent);
+						}else{
+							//默认跳转
+							Intent intent = new Intent(Intent.ACTION_VIEW);
+							intent.setData(Uri.parse(url));
+							context.startActivity(intent);
+						}
+					}
+				}
+			});
 
             // 设置长按事件监听
             holder.tv.setOnLongClickListener(new OnLongClickListener() {

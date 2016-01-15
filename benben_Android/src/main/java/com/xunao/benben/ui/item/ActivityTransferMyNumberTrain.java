@@ -71,6 +71,10 @@ public class ActivityTransferMyNumberTrain extends BaseActivity implements View.
                     ToastUtils.Errortoast(mContext,"请输入对方奔犇号");
                     return;
                 }
+                if(benben_id_other.equals(user.getBenbenId())){
+                    ToastUtils.Errortoast(mContext,"不能转让给自己");
+                    return;
+                }
                 hideSoftInput();
                 InteNetUtils.getInstance(mContext).applyStoreTransfer(benben_id_other, tips, user.getToken(), mRequestCallBack);
             }

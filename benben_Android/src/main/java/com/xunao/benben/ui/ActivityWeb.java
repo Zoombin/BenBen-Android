@@ -64,7 +64,7 @@ public class ActivityWeb extends BaseActivity {
 		String title = intent.getStringExtra("title");
 		initTitle_Right_Left_bar(title, "", "", R.drawable.icon_com_title_left, 0);
 		
-	//	progressBar = findViewById(R.id.progressBar);
+		//	progressBar = findViewById(R.id.progressBar);
 
 	}
 
@@ -72,6 +72,7 @@ public class ActivityWeb extends BaseActivity {
 	public void initDate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
 		String url = intent.getStringExtra("url");
+		String entryType = intent.getStringExtra("entryType");
 		
 		webView.loadUrl(url);
 		

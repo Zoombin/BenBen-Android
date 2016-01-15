@@ -49,6 +49,7 @@
             android:layout_toRightOf="@id/iv_userhead"
             android:background="@drawable/chatfrom_bg"
             android:autoLink="web"
+            android:linksClickable="false"
             android:clickable="true"
             android:focusable="true"
             android:gravity="left|center"

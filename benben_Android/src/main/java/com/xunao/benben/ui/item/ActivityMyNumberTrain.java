@@ -972,13 +972,15 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 //				intent.putExtra("imagePath", temp.getAbsolutePath());
 //				startActivityForResult(intent, PIC_REQUEST_CODE_WITH_DATA);
 //			}
-            String fileName = String.valueOf(System.currentTimeMillis());
-            Bitmap bm = (Bitmap) data.getExtras().get("data");
-            String saveBitmap = FileUtils.saveBitmapPhoto(bm, fileName);
-            ImageItem takePhoto = new ImageItem();
-            takePhoto.setBitmap(new SoftReference<Bitmap>(bm));
-            takePhoto.setImagePath(saveBitmap);
-            Bimp.tempSelectBitmap.add(takePhoto);
+            if(resultCode==RESULT_OK) {
+                String fileName = String.valueOf(System.currentTimeMillis());
+                Bitmap bm = (Bitmap) data.getExtras().get("data");
+                String saveBitmap = FileUtils.saveBitmapPhoto(bm, fileName);
+                ImageItem takePhoto = new ImageItem();
+                takePhoto.setBitmap(new SoftReference<Bitmap>(bm));
+                takePhoto.setImagePath(saveBitmap);
+                Bimp.tempSelectBitmap.add(takePhoto);
+            }
 			break;
 //		case PIC_Select_CODE_ImageFromLoacal:
 //			if (data != null) {
@@ -1092,7 +1094,13 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 			} catch (JSONException e2) {
 				e2.printStackTrace();
 			}
+            setOnRightClickLinester(new OnClickListener() {
 
+                @Override
+                public void onClick(View arg0) {
+                    saveMessage();
+                }
+            });
 		}
 	};
 	private TextView send_message_red;

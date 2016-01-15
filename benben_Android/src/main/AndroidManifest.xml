@@ -489,8 +489,7 @@
         </activity>
         <activity
             android:name="com.xunao.benben.ui.item.ActivityMyNumberTrain"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan|stateHidden" 
+
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -1101,11 +1100,23 @@
         <!-- umeng appkey，可忽略 -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="55643cc267e58e5cf10028f8" >
+            android:value="56988b2c67e58ec17200241f" >
+            <!--55643cc267e58e5cf10028f8-->
+
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="benben" />
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
 
         <!-- alipay sdk begin -->
         <activity

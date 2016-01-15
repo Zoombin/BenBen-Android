@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '22.0.1'
+    buildToolsVersion '21.1.2'
 
     defaultConfig {
         applicationId "com.xunao.benben"
@@ -38,6 +38,7 @@ dependencies {
     compile files('libs/afinal_0.5_bin.jar')
     compile files('libs/alipaySdk-20151215.jar')
     compile 'io.socket:socket.io-client:0.6.3'
+    compile files('libs/umeng-update-v2.6.0.1.jar')
 }
 
 

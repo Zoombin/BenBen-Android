@@ -86,6 +86,7 @@ import com.xunao.benben.view.ActionSheet.ActionSheetListener;
 public class ActivityEnterpriseMember extends BaseActivity implements
 		OnClickListener, ActionSheetListener {
 	private EditText search_edittext;
+    private TextView searchName;
 	private LinearLayout ll_seach_icon;
 	private EMBoradcast mEMBoradcast;
 	private ImageView iv_search_content_delect;
@@ -135,6 +136,8 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 				R.drawable.icon_com_title_left, 0);
 
 		search_edittext = (EditText) findViewById(R.id.search_edittext);
+        searchName = (TextView) findViewById(R.id.searchName);
+        searchName.setText("搜索其他联系人");
 		ll_seach_icon = (LinearLayout) findViewById(R.id.ll_seach_icon);
 		iv_search_content_delect = (ImageView) findViewById(R.id.iv_search_content_delect);
 		no_data = (LinearLayout) findViewById(R.id.no_data);

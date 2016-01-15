@@ -54,6 +54,7 @@ import com.xunao.benben.view.MyTextView;
 public class ActivityAddCommon extends BaseActivity {
 	private String enterpriseId;
 	private EditText search_edittext;
+    private TextView searchName;
 	private LinearLayout ll_seach_icon;
 	private ImageView iv_search_content_delect;
 	private ListView listView;
@@ -77,6 +78,9 @@ public class ActivityAddCommon extends BaseActivity {
 				R.drawable.icon_com_title_left, 0);
 
 		search_edittext = (EditText) findViewById(R.id.search_edittext);
+        searchName = (TextView) findViewById(R.id.searchName);
+        searchName.setText("搜索其他联系人");
+
 		ll_seach_icon = (LinearLayout) findViewById(R.id.ll_seach_icon);
 		iv_search_content_delect = (ImageView) findViewById(R.id.iv_search_content_delect);
 

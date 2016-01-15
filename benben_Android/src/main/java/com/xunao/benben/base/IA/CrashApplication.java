@@ -74,6 +74,8 @@ public class CrashApplication extends Application {
 //    public int creationAboutMe=0;
 //    public int friendAboutMe=0;
 
+    public boolean updateFlag = false;
+
 	/**
 	 * 专门给通讯录分组用 所有的分组,与所有的联系人
 	 */

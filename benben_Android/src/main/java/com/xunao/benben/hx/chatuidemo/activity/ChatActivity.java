@@ -741,6 +741,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_LOCAL){
+            isMySend = true;
             if (Bimp.tempSelectBitmap.size() > 0) {
                 for (int i = 0; i < Bimp.tempSelectBitmap.size(); i++) {
                     sendPicture(Bimp.tempSelectBitmap.get(i).getImagePath());
@@ -904,6 +905,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 					String pasteText = clipboard.getText().toString();
 					if (pasteText.startsWith(COPY_IMAGE)) {
 						// 把图片前缀去掉，还原成正常的path
+                        isMySend = true;
 						sendPicture(pasteText.replace(COPY_IMAGE, ""));
 					}
 

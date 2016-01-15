@@ -21,6 +21,7 @@ import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.easemob.chat.EMChatManager;
@@ -29,6 +30,9 @@ import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.base.IA.CrashApplication;
@@ -50,7 +54,7 @@ import com.xunao.benben.view.ActionSheet;
 import com.xunao.benben.view.ActionSheet.ActionSheetListener;
 
 public class ActivitySetting extends BaseActivity implements OnClickListener,
-		ActionSheetListener {
+		ActionSheetListener, UmengUpdateListener {
 	private RelativeLayout rl_cogradient;
     private RelativeLayout rl_phone_update;
 	private RelativeLayout rl_check_update;
@@ -61,6 +65,8 @@ public class ActivitySetting extends BaseActivity implements OnClickListener,
 	private RelativeLayout del_cache;
 	private RelativeLayout rl_binding_phone;
     private RelativeLayout message_notice;
+
+    private ImageView iv_hint;
 
 	protected LodingDialog lodingDialog;
 	protected boolean isShowLoding = true;
@@ -100,11 +106,16 @@ public class ActivitySetting extends BaseActivity implements OnClickListener,
 		del_cache = (RelativeLayout) findViewById(R.id.del_cache);
 		rl_binding_phone = (RelativeLayout) findViewById(R.id.rl_binding_phone);
         message_notice = (RelativeLayout) findViewById(R.id.message_notice);
+        iv_hint = (ImageView) findViewById(R.id.iv_hint);
 	}
 
 	@Override
 	public void initDate(Bundle savedInstanceState) {
-
+        if(CrashApplication.getInstance().updateFlag){
+            iv_hint.setVisibility(View.VISIBLE);
+        }else{
+            iv_hint.setVisibility(View.GONE);
+        }
 	}
 
 	@Override
@@ -284,43 +295,48 @@ public class ActivitySetting extends BaseActivity implements OnClickListener,
 
 	// 检查更新
 	private void chekVersionUpdate() {
-		setShowLoding(false);
-		if (CommonUtils.isNetworkAvailable(mContext)) {
-			InteNetUtils.getInstance(mContext).checkVersion(
-					new RequestCallBack<String>() {
-						@Override
-						public void onSuccess(ResponseInfo<String> json) {
-							AndriodVersion andriodVersion = new AndriodVersion();
-							JSONObject object = null;
-							try {
-								object = new JSONObject(json.result);
-								andriodVersion.parseJSON(object);
-							} catch (Exception e) {
-								e.printStackTrace();
-								ToastUtils.Errortoast(mContext, "服务器数据有误!");
-								return;
-							}
+        showLoding("");
+        UmengUpdateAgent.setUpdateOnlyWifi(false); //false 则非wifi也检测更新
+        UmengUpdateAgent.update(this);
+        UmengUpdateAgent.setUpdateListener(this);
 
-							boolean versionCompare = CommonUtils
-									.versionCompare(mContext,
-											andriodVersion.getAndriodVersion());
-
-							if (!versionCompare) {
-								CommonUtils.showUpdateDialog(mContext,
-										andriodVersion.getUrl(),
-										andriodVersion.getUpdateContent(),
-										new Handler());
-							} else {
-								ToastUtils.Infotoast(mContext, "当前版本已是最新版本!");
-							}
-						}
-
-						@Override
-						public void onFailure(HttpException arg0, String arg1) {
-							ToastUtils.Infotoast(mContext, "服务器出错!");
-						}
-					});
-		}
+//		setShowLoding(false);
+//		if (CommonUtils.isNetworkAvailable(mContext)) {
+//			InteNetUtils.getInstance(mContext).checkVersion(
+//					new RequestCallBack<String>() {
+//						@Override
+//						public void onSuccess(ResponseInfo<String> json) {
+//							AndriodVersion andriodVersion = new AndriodVersion();
+//							JSONObject object = null;
+//							try {
+//								object = new JSONObject(json.result);
+//								andriodVersion.parseJSON(object);
+//							} catch (Exception e) {
+//								e.printStackTrace();
+//								ToastUtils.Errortoast(mContext, "服务器数据有误!");
+//								return;
+//							}
+//
+//							boolean versionCompare = CommonUtils
+//									.versionCompare(mContext,
+//											andriodVersion.getAndriodVersion());
+//
+//							if (!versionCompare) {
+//								CommonUtils.showUpdateDialog(mContext,
+//										andriodVersion.getUrl(),
+//										andriodVersion.getUpdateContent(),
+//										new Handler());
+//							} else {
+//								ToastUtils.Infotoast(mContext, "当前版本已是最新版本!");
+//							}
+//						}
+//
+//						@Override
+//						public void onFailure(HttpException arg0, String arg1) {
+//							ToastUtils.Infotoast(mContext, "服务器出错!");
+//						}
+//					});
+//		}
 	}
 
     //覆盖手机通讯录
@@ -527,6 +543,11 @@ public class ActivitySetting extends BaseActivity implements OnClickListener,
 	}
 
 
-
-
+    @Override
+    public void onUpdateReturned(int i, UpdateResponse updateResponse) {
+        dissLoding();
+        if(!updateResponse.hasUpdate){
+            ToastUtils.Infotoast(this,"当前已是最新版本！");
+        }
+    }
 }

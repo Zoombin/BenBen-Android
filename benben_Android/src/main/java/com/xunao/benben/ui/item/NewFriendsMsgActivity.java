@@ -303,8 +303,9 @@ public class NewFriendsMsgActivity extends BaseActivity {
 				switch (item.getClassType()) {
 				case PublicMessage.GROUP:
 					item_name.setText(item.getName());
-					item_content.setText(item.getName() + "请求加入【"
-							+ item.getNick_name() + "】");
+//					item_content.setText(item.getName() + "请求加入【"
+//							+ item.getNick_name() + "】");
+                    item_content.setText(item.getName() + "同意了您的加群请求");
                     item_user_name.setText("");
 					break;
 				case PublicMessage.FRIEND:
@@ -333,8 +334,7 @@ public class NewFriendsMsgActivity extends BaseActivity {
                     case PublicMessage.GROUP:
                         item_name.setText(item.getName());
                         item_user_name.setText("");
-                        item_content.setText(item.getName() + "请求加入【"
-                                + item.getNick_name() + "】");
+                        item_content.setText(item.getName() + "拒绝了您的加群请求");
                         break;
                     case PublicMessage.FRIEND:
                         item_name.setText(item.getNick_name());

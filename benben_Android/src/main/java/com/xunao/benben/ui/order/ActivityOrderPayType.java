@@ -1,5 +1,6 @@
 package com.xunao.benben.ui.order;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,6 +32,7 @@ public class ActivityOrderPayType extends BaseActivity implements View.OnClickLi
     private int payType;
     private String order_id,order_sn,shipping_fee,name;
     private String payPrice;
+    private int extension_code=0;
 
     private TextView tv_pay_price,tv_pay_fee;
     private Button btn_confirm;
@@ -53,6 +55,7 @@ public class ActivityOrderPayType extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initDate(Bundle savedInstanceState) {
+        extension_code = getIntent().getIntExtra("extension_code",0);
         payType = getIntent().getIntExtra("payType",0);
         order_id = getIntent().getStringExtra("order_id");
         order_sn = getIntent().getStringExtra("order_sn");
@@ -171,8 +174,12 @@ public class ActivityOrderPayType extends BaseActivity implements View.OnClickLi
                     // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
                     if (TextUtils.equals(resultStatus, "9000")) {
                         ToastUtils.Infotoast(mContext, "支付成功");
-                        startAnimActivity2Obj(ActivityOrderPayResult.class,
-                                "order_id", order_id);
+                        if(extension_code==3 || extension_code==5){
+                            sendBroadcast(new Intent("orderRefresh"));
+                        }else {
+                            startAnimActivity2Obj(ActivityOrderPayResult.class,
+                                    "order_id", order_id);
+                        }
                         AnimFinsh();
                     } else {
                         // 判断resultStatus 为非“9000”则代表可能支付失败

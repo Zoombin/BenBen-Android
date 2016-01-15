@@ -403,7 +403,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                     tv_shipping_fee.setText("");
                 }
                 tv_goods_number.setText("数量:x"+order.getGoods_number());
-
+                final int extension_code = order.getExtension_code();
                 if(order.getBack_status()==0) {
                     if (order.getShipping_status() == 0) {
                         tv_title_right.setText(order.getPay_name());
@@ -440,7 +440,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                         tv_order_amount.setText("费用总计:" + order.getOrder_amount() + "元");
                         tv_order_amount.setVisibility(View.VISIBLE);
                         ll_order_operate.setVisibility(View.VISIBLE);
-                        if(!order.getTrain_id().equals("1")) {
+                        if(extension_code!=3 && extension_code!=4 && extension_code!=5) {
                             tv_apply_refund.setVisibility(View.VISIBLE);
                             tv_operate1.setVisibility(View.VISIBLE);
                             tv_operate2.setVisibility(View.VISIBLE);
@@ -453,7 +453,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                         tv_order_amount.setText("费用总计:" + order.getOrder_amount() + "元");
                         tv_order_amount.setVisibility(View.VISIBLE);
                         ll_order_operate.setVisibility(View.VISIBLE);
-                        if (order.getPay_id() == 1 && !order.getTrain_id().equals("1")) {
+                        if (order.getPay_id() == 1 && extension_code!=3 && extension_code!=4 && extension_code!=5) {
                             tv_operate2.setVisibility(View.VISIBLE);
                         }
                         if (order.getOrder_status() == 5) {
@@ -490,7 +490,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                 ll_train.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!order.getTrain_id().equals("1")) {
+                        if(extension_code!=3 && extension_code!=4 && extension_code!=5) {
                             startAnimActivity2Obj(ActivityNumberTrainDetail.class,
                                     "id", order.getTrain_id());
                         }
@@ -516,7 +516,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                                     order_id = order.getOrder_id();
                                     order_sn = order.getOrder_sn();
 //                                payOrder();
-                                    if(!order.getTrain_id().equals("1")) {
+                                    if(extension_code!=4) {
                                         Intent intent = new Intent(ActivityMyOrder.this, ActivityOrderPayType.class);
                                         intent.putExtra("payType", order.getPay_id());
                                         intent.putExtra("order_id", order_id);
@@ -524,6 +524,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                                         intent.putExtra("payPrice", order.getOrder_amount());
                                         intent.putExtra("shipping_fee", order.getShipping_fee());
                                         intent.putExtra("name", order.getGoods_name());
+                                        intent.putExtra("extension_code", extension_code);
                                         startActivity(intent);
                                         overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                                     }else{
@@ -785,7 +786,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!order.getTrain_id().equals("1")) {
+                        if(extension_code!=3 && extension_code!=4 && extension_code!=5) {
                             startAnimActivity3Obj(ActivityMyOrderDetail.class,
                                     "order_id", order.getOrder_id(), "pay_name", order.getPay_name());
                         }

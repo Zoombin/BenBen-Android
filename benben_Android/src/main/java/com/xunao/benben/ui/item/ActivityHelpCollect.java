@@ -171,6 +171,9 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
             case R.id.btleft_is_vip:
                 break;
             case R.id.btleft_rest_num:
+                startAnimActivity2Obj(
+                        ActivitySmallPublic.class,
+                        "numberTrain", "我开通了号码直通车来给我捧捧场吧!");
                 break;
         }
         finish();

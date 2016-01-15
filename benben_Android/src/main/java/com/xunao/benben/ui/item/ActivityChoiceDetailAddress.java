@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -78,7 +79,7 @@ public class ActivityChoiceDetailAddress extends BaseActivity implements
 
 	@Override
 	public void initView(Bundle savedInstanceState) {
-		initTitle_Right_Left_bar("选择详细地址", "", "完成",
+		initTitle_Right_Left_bar("选择位置", "", "完成",
 				R.drawable.icon_com_title_left, 0);
 		// 地图初始化
 		mMapView = (MapView) findViewById(R.id.bmapView);
@@ -204,7 +205,8 @@ public class ActivityChoiceDetailAddress extends BaseActivity implements
 
 	@Override
 	public void onGetGeoCodeResult(GeoCodeResult result) {
-		if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+        Log.d("ltf","result============"+result);
+        if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
 			ToastUtils.Infotoast(mContext, "抱歉，未能找到结果");
 			return;
 		}
@@ -224,7 +226,7 @@ public class ActivityChoiceDetailAddress extends BaseActivity implements
 					.visible(isShow).draggable(true));
 
 		}
-
+        Log.d("ltf","result====1========"+result);
 		mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(result
 				.getLocation()));
 	}
@@ -252,6 +254,8 @@ public class ActivityChoiceDetailAddress extends BaseActivity implements
 							.fromResource(R.drawable.icon_marker))
 					.visible(isShow).draggable(true));
 		}
+        latitude = result.getLocation().latitude;
+        longitude = result.getLocation().longitude;
 
 		// ToastUtils.Infotoast(mContext, result.getAddress());
 	}
@@ -315,7 +319,9 @@ public class ActivityChoiceDetailAddress extends BaseActivity implements
 
 	@Override
 	public void onMapStatusChange(MapStatus arg0) {
-		addOverlay.setPosition(arg0.target);
+        if(addOverlay!=null) {
+            addOverlay.setPosition(arg0.target);
+        }
 		isShow = true;
 	}
 

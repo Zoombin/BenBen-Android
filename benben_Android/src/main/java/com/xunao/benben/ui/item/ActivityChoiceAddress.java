@@ -94,8 +94,13 @@ public class ActivityChoiceAddress extends BaseActivity implements
 			if (intent.getStringExtra("level").equals("3")) {
 				level = true;
 			} else if (intent.getStringExtra("level").equals("0")) {
-				initTitle_Right_Left_bar(leve[0], "", "完成",
-						R.drawable.icon_com_title_left, 0);
+                if(trims){
+                    initTitle_Right_Left_bar(leve[0], "", "",
+                            R.drawable.icon_com_title_left, 0);
+                }else {
+                    initTitle_Right_Left_bar(leve[0], "", "完成",
+                            R.drawable.icon_com_title_left, 0);
+                }
 				isRandomBack = true;
 			} else {
 				initTitle_Right_Left_bar(leve[0], "", "完成",

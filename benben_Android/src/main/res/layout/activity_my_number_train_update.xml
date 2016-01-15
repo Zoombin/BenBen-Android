@@ -311,7 +311,7 @@
                             android:background="@drawable/fragment_private_bg"
                             android:clickable="true"
                             android:gravity="center_vertical"
-                            android:text="去地图设置详细地址"
+                            android:hint="去地图设置详细地址"
                             android:textColor="#848484"
                             android:textSize="15dp" />
 

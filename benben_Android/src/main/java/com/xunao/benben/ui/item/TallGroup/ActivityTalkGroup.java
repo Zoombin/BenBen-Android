@@ -144,6 +144,7 @@ public class ActivityTalkGroup extends BaseActivity implements OnClickListener,
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject========"+jsonObject);
         dissLoding();
 		try {
 			TalkGroupList groupList = new TalkGroupList();
@@ -198,6 +199,7 @@ public class ActivityTalkGroup extends BaseActivity implements OnClickListener,
 	protected void onFailure(HttpException exception, String strMsg) {
 		dissLoding();
 		no_talk_group.setVisibility(View.GONE);
+        ToastUtils.Infotoast(mContext,"当前无可用网络");
 	}
 
 	@Override

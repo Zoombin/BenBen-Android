@@ -74,6 +74,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.base.BaseFragment;
@@ -116,7 +119,7 @@ import com.xunao.benben.utils.SharePreferenceUtil;
 import com.xunao.benben.utils.TimeUtil;
 import com.xunao.benben.utils.ToastUtils;
 
-public class MainActivity extends BaseActivity implements EMEventListener {
+public class MainActivity extends BaseActivity implements EMEventListener, UmengUpdateListener {
 
 	public static final int UPDATA = 0;
 	public static final int NOUPDATA = 1;
@@ -226,6 +229,11 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+        UmengUpdateAgent.setUpdateOnlyWifi(false); //false 则非wifi也检测更新
+        UmengUpdateAgent.update(this);
+        UmengUpdateAgent.setUpdateListener(this);
+
 
         bimap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.error);
@@ -1048,7 +1056,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 				for(int i=0;i<messages.size();i++){
 					EMMessage message = messages.get(i);
 					initNewMessage(message);
-					HXSDKHelper.getInstance().getNotifier().onNewMsg(message);
+//					HXSDKHelper.getInstance().getNotifier().onNewMsg(message);
 				}
                 break;
             }
@@ -1896,7 +1904,14 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 	private InviteMessgeDao inviteMessgeDao;
 	private UserDao userDao;
 
-	/***
+    @Override
+    public void onUpdateReturned(int i, UpdateResponse updateResponse) {
+        if(updateResponse.hasUpdate){
+            CrashApplication.getInstance().updateFlag = true;
+        }
+    }
+
+    /***
 	 * 好友变化listener
 	 * 
 	 */
@@ -2277,7 +2292,8 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 					mPublicMessage.setName(reason);
                     mPublicMessage.setReason(reason);
 					mPublicMessage.setCreatTime(TimeUtil.now());
-					mPublicMessage.setNick_name(groupName);
+                    TalkGroup group = dbUtil.findFirst(Selector.from(TalkGroup.class).where("huanxin_groupid","=",groupId));
+					mPublicMessage.setNick_name(group.getName());
 					mPublicMessage.setPoster(talkGroup.getPoster());
 					mPublicMessage.setHuanxin_username_joiner(applyer);
 					if (!mApplication.mPublicMessage.contains(mPublicMessage)) {
@@ -2295,6 +2311,9 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 					mPublicMessage.setIsLook(PublicMessage.UNLOOK);
 					mPublicMessage.setStatus(PublicMessage.UNAGREE);
 					mPublicMessage.setCreatTime(TimeUtil.now());
+                    mPublicMessage.setHuanxin_username(groupId);
+                    TalkGroup group = dbUtil.findFirst(Selector.from(TalkGroup.class).where("huanxin_groupid","=",groupId));
+                    mPublicMessage.setNick_name(group.getName());
 					mApplication.mPublicMessage.add(0, mPublicMessage);
 					dbUtil.update(mPublicMessage);
 					notifyNewIviteMessage();

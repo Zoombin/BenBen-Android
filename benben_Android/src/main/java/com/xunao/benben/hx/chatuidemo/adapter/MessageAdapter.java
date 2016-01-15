@@ -1387,7 +1387,6 @@ public class MessageAdapter extends BaseAdapter {
 							holder.pb.setVisibility(View.VISIBLE);
 							holder.tv.setVisibility(View.GONE);
 //							holder.tv.setText(message.progress + "%");
-                            Log.d("ltf","3===================="+message.status);
 							if (message.status == EMMessage.Status.SUCCESS) {
 								holder.pb.setVisibility(View.GONE);
 								holder.tv.setVisibility(View.GONE);
@@ -1964,6 +1963,7 @@ public class MessageAdapter extends BaseAdapter {
                     int position=0;
                     for(int i=0;i<chatImageses.size();i++){
                         if(message.getMsgId().equals(chatImageses.get(i).getMsgId())){
+
                             position = i;
                             break;
                         }

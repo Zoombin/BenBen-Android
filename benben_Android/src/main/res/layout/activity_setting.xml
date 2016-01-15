@@ -154,6 +154,19 @@
             android:textSize="16sp" />
 
         <ImageView
+            android:id="@+id/iv_hint"
+            android:layout_width="10dip"
+            android:layout_height="10dip"
+            android:background="@drawable/red_point"
+            android:textColor="#FFFFFF"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/iv_arrow"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
             android:layout_width="14dip"
             android:layout_height="18dip"
             android:layout_alignParentRight="true"

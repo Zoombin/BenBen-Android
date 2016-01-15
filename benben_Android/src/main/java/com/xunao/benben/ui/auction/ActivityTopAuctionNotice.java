@@ -1,5 +1,6 @@
 package com.xunao.benben.ui.auction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import com.lidroid.xutils.exception.HttpException;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
+import com.xunao.benben.config.AndroidConfig;
+import com.xunao.benben.ui.ActivityWeb;
 import com.xunao.benben.ui.account.ActivityAccountAddressManage;
 import com.xunao.benben.ui.account.ActivityMoneyIncome;
 
@@ -19,6 +22,7 @@ import org.json.JSONObject;
  */
 public class ActivityTopAuctionNotice extends BaseActivity implements View.OnClickListener {
     private Button btn_cancel,btn_confirm;
+    private TextView tv_agreement;
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
@@ -34,6 +38,8 @@ public class ActivityTopAuctionNotice extends BaseActivity implements View.OnCli
         btn_confirm = (Button) findViewById(R.id.btn_confirm);
         btn_cancel.setOnClickListener(this);
         btn_confirm.setOnClickListener(this);
+        tv_agreement = (TextView) findViewById(R.id.tv_agreement);
+        tv_agreement.setOnClickListener(this);
     }
 
     @Override
@@ -80,6 +86,14 @@ public class ActivityTopAuctionNotice extends BaseActivity implements View.OnCli
             case R.id.btn_confirm:
                 startAnimActivity(ActivityTopAuction.class);
                 AnimFinsh();
+                break;
+            case R.id.tv_agreement:
+                Intent intent = new Intent(ActivityTopAuctionNotice.this, ActivityWeb.class);
+                intent.putExtra("title", "拍卖申明");
+                intent.putExtra("url", AndroidConfig.NETHOST +  "/topAuction/auctionDeclaration");
+
+                startActivity(intent);
+
                 break;
         }
     }

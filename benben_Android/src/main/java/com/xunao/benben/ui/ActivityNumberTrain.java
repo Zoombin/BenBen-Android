@@ -817,7 +817,9 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 			} catch (NetRequestException e) {
 				e.getError().print(mContext);
-                numberTrains.clear();
+                if (!isLoadMore) {
+                    numberTrains.clear();
+                }
 			}
 			adapter.notifyDataSetChanged();
 		}

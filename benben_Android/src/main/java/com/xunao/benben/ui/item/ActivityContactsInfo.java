@@ -212,6 +212,7 @@ public class ActivityContactsInfo extends BaseActivity implements
             if (phones != null && phones.size() > 0) {
                 int i = 0;
                 for (PhoneInfo phoneInfo : phones) {
+                    Log.d("ltf","phoneInfo======="+phoneInfo.getIs_benben());
                     if (!phoneInfo.getIs_benben().equals("0")) {
                         phoneBenbenList.add(phoneInfo);
                         if (phoneInfo.getIs_active().equals("1")) {
@@ -345,11 +346,21 @@ public class ActivityContactsInfo extends BaseActivity implements
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject============="+jsonObject);
         dissLoding();
         mContacts = new Contacts();
         try {
             mContacts.parseJSONSingle4(jsonObject);
+            dbUtil.saveOrUpdate(mContacts);
+
+            dbUtil.delete(PhoneInfo.class,WhereBuilder.b("contacts_id", "=", mContacts.getId()));
+            if(mContacts.getPhones()!=null && mContacts.getPhones().size()>0) {
+                dbUtil.saveOrUpdateAll(mContacts.getPhones());
+            }
+
         } catch (NetRequestException e) {
+            e.printStackTrace();
+        } catch (DbException e) {
             e.printStackTrace();
         }
         getData();

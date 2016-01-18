@@ -517,15 +517,15 @@ public class ActivityBuySearch extends BaseActivity implements OnClickListener,
 									public void onClick(View v) {
 										// 开通直通车
 
-										// 判断是不是完善了我的号码直通车信息
-										switch (mContext.user.getUserInfo()) {
-										case "0":
-											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-											break;
-										case "2":
-											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-											break;
-										default:
+//										// 判断是不是完善了我的号码直通车信息
+//										switch (mContext.user.getUserInfo()) {
+//										case "0":
+//											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+//											break;
+//										case "2":
+//											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+//											break;
+//										default:
 											InteNetUtils
 													.getInstance(mContext)
 													.getMyStore(
@@ -569,7 +569,7 @@ public class ActivityBuySearch extends BaseActivity implements OnClickListener,
 																}
 															});
 
-										}
+//										}
 										hint.dismiss();
 									}
 								});

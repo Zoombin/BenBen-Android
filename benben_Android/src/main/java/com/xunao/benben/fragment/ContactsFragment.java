@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -114,8 +115,10 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 	 * 0显示所有的人,1 显示搜索的人;
 	 */
 	private int ContactsShowType = 0;
+    private boolean isNew = false;
+    private String snapshot;
 
-	@Override
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
@@ -195,19 +198,28 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	protected void initDate() {
+        snapshot =  CrashApplication.getInstance().getSpUtil().getSnapshot();
+        Log.d("ltf","snapshot============"+snapshot);
+        if(snapshot.equals("1")){
+            isNew = true;
+        }
+
+
 
 		if (AndroidConfig.AUTOLOGIN.equals(mActivity.getFrom())) {
 			initlocakData();
 			if (CommonUtils.isNetworkAvailable(mActivity)) {
-				InteNetUtils.getInstance(mActivity).GetContact(
-						getContactCallBack);
+//				InteNetUtils.getInstance(mActivity).GetContact(
+//						getContactCallBack);
+                InteNetUtils.getInstance(mActivity).AddressBook(snapshot, getContactBack);
 			}
 
 		} else if (mActivity.getFrom().equals("login")) {
 			if (CommonUtils.isNetworkAvailable(mActivity)) {
 				mActivity.showLoding("请稍后...");
-				InteNetUtils.getInstance(mActivity).GetContact(
-						getContactCallBack);
+//				InteNetUtils.getInstance(mActivity).GetContact(
+//						getContactCallBack);
+                InteNetUtils.getInstance(mActivity).AddressBook(snapshot, getContactBack);
 			} else {
 				initlocakData();
 			}
@@ -563,7 +575,8 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 	}
 
 	public void refreshData() {
-		InteNetUtils.getInstance(mActivity).GetContact(getContactCallBack);
+        InteNetUtils.getInstance(mActivity).AddressBook(snapshot, getContactBack);
+//		InteNetUtils.getInstance(mActivity).GetContact(getContactCallBack);
 	}
 
 	/*
@@ -605,27 +618,51 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 		// mPopupWindowHeight = mPopupWindow.getHeight();
 	}
 
-	private RequestCallBack<String> getContactCallBack = new RequestCallBack<String>() {
-		@Override
-		public void onSuccess(ResponseInfo<String> arg0) {
-			JSONObject jsonObject = null;
-			try {
-				jsonObject = new JSONObject(arg0.result);
-				getData(jsonObject);
-			} catch (JSONException e) {
-				initlocakData();
-				e.printStackTrace();
-			}
+//	private RequestCallBack<String> getContactCallBack = new RequestCallBack<String>() {
+//		@Override
+//		public void onSuccess(ResponseInfo<String> arg0) {
+//			JSONObject jsonObject = null;
+//			try {
+//				jsonObject = new JSONObject(arg0.result);
+//                Log.d("ltf","jsonObject====2======="+jsonObject);
+//				getData(jsonObject);
+//			} catch (JSONException e) {
+//				initlocakData();
+//				e.printStackTrace();
+//			}
+//
+//		}
+//
+//		@Override
+//		public void onFailure(HttpException arg0, String arg1) {
+//			ToastUtils.Errortoast(mActivity, "服务器数据匹配失败");
+//			initlocakData();
+//			mActivity.dissLoding();
+//		}
+//	};
 
-		}
+    private RequestCallBack<String> getContactBack = new RequestCallBack<String>() {
+        @Override
+        public void onSuccess(ResponseInfo<String> arg0) {
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(arg0.result);
+                Log.d("ltf","jsonObject====1======="+jsonObject);
+                getData(jsonObject);
+            } catch (JSONException e) {
+                initlocakData();
+                e.printStackTrace();
+            }
 
-		@Override
-		public void onFailure(HttpException arg0, String arg1) {
-			ToastUtils.Errortoast(mActivity, "服务器数据匹配失败");
-			initlocakData();
-			mActivity.dissLoding();
-		}
-	};
+        }
+
+        @Override
+        public void onFailure(HttpException arg0, String arg1) {
+            ToastUtils.Errortoast(mActivity, "服务器数据匹配失败");
+            initlocakData();
+            mActivity.dissLoding();
+        }
+    };
 	private View headView;
 	private View nodata;
 	private View refreshBut;
@@ -774,8 +811,35 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 	private void getData(JSONObject jsonObject) {
 		final ContactsObject contactsObject = new ContactsObject();
 		try {
-			XunaoLog.yLog().i(jsonObject.toString());
-			contactsObject.parseJSON(jsonObject);
+//			XunaoLog.yLog().i(jsonObject.toString());
+            JSONObject delJsonObject = jsonObject.getJSONObject("delete");
+            if(delJsonObject!=null && !delJsonObject.equals("")){
+                if(delJsonObject.has("group")) {
+                    JSONArray delGroupJsonArray = delJsonObject.getJSONArray("group");
+                    if (delGroupJsonArray != null && delGroupJsonArray.length() > 0) {
+                        int[] groupIds = new int[delGroupJsonArray.length()];
+                        for (int i = 0; i < delGroupJsonArray.length(); i++) {
+                            int groupId = delGroupJsonArray.getInt(i);
+                            groupIds[i] = groupId;
+                        }
+                        dbUtil.delete(ContactsGroup.class, WhereBuilder.b("id", "in", groupIds));
+                    }
+                }
+                if(delJsonObject.has("contact")) {
+                    JSONArray delContactJsonArray = delJsonObject.getJSONArray("contact");
+                    if (delContactJsonArray != null && delContactJsonArray.length() > 0) {
+                        int[] contactIds = new int[delContactJsonArray.length()];
+                        for (int i = 0; i < delContactJsonArray.length(); i++) {
+                            int contactId = delContactJsonArray.getInt(i);
+                            contactIds[i] = contactId;
+                        }
+                        dbUtil.delete(Contacts.class, WhereBuilder.b("id", "in", contactIds));
+                        dbUtil.delete(PhoneInfo.class, WhereBuilder.b("contacts_id", "in", contactIds));
+                    }
+                }
+            }
+            CrashApplication.getInstance().getSpUtil().setSnapshot(jsonObject.optString("snapshot"));
+			contactsObject.parseJSON(jsonObject.getJSONObject("add"));
 			crashApplication.setContactsObject(contactsObject);
 			mContactsGroups = crashApplication.contactsObject
 					.getmContactsGroups();
@@ -825,9 +889,12 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 					// crashApplication.getInstance().setHuanXinMap(huanXinMap);
 
 					try {
-						dbUtil.deleteAll(ContactsGroup.class);
-						dbUtil.deleteAll(Contacts.class);
-						dbUtil.deleteAll(PhoneInfo.class);
+                        if(isNew) {
+                            dbUtil.deleteAll(ContactsGroup.class);
+                            dbUtil.deleteAll(Contacts.class);
+                            dbUtil.deleteAll(PhoneInfo.class);
+                            isNew = false;
+                        }
 
 						dbUtil.saveOrUpdateAll(mContactsGroups);
                         dbUtil.saveOrUpdateAll(contactsObject.getmContactss());
@@ -857,8 +924,12 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 			e.getError().print(mActivity);
 			nodata.setVisibility(View.VISIBLE);
 			// initlocakData();
-		}
-	}
+		} catch (JSONException e) {
+            e.printStackTrace();
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
 
 	private void groupOrderBy() {
 		int size = mContactsGroups.size();
@@ -1030,7 +1101,13 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 					} else {
 						Intent intent = new Intent(mActivity,
 								ActivityContactsInfo.class);
-						intent.putExtra("contacts", cs);
+//						intent.putExtra("contacts", cs);
+                        String hxName =  cs.getHuanxin_username();
+                        if(hxName!=null && !hxName.equals("")) {
+                            intent.putExtra("username", cs.getHuanxin_username());
+                        }else{
+                            intent.putExtra("contacts", cs);
+                        }
 						startActivityForResult(intent,
 								AndroidConfig.ContactsFragmentRequestCode);
 						mActivity.overridePendingTransition(

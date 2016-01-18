@@ -308,7 +308,7 @@ public class ActivityPacketManagement extends BaseActivity implements
 //					}
 
 					if ("未分组".equals(pecketName)) {
-						ToastUtils.Infotoast(mContext, "");
+						ToastUtils.Infotoast(mContext, "分组名已存在");
 					} else {
 						inputDialog.dismiss();
 						if (CommonUtils.isNetworkAvailable(mContext))

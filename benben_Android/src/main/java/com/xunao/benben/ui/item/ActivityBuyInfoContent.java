@@ -623,14 +623,14 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 					@Override
 					public void onClick(View v) {
 						// 判断是不是完善了我的号码直通车信息
-						switch (mContext.user.getUserInfo()) {
-						case "0":
-							mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-							break;
-						case "2":
-							mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-							break;
-						default:
+//						switch (mContext.user.getUserInfo()) {
+//						case "0":
+//							mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+//							break;
+//						case "2":
+//							mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+//							break;
+//						default:
 							InteNetUtils.getInstance(mContext).getMyStore(
 									new RequestCallBack<String>() {
 
@@ -666,7 +666,7 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 										}
 									});
 
-						}
+//						}
 						hint.dismiss();
 					}
 				});

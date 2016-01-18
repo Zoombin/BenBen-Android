@@ -53,11 +53,11 @@ public class ContactsObject extends BaseBean<ContactsObject> implements
 				cont = new Contacts();
 				jsonObject = contact.optJSONObject(i);
 				cont.parseJSON(jsonObject);
-
+                mContactss.add(cont);
 				for (ContactsGroup cg : mContactsGroups) {
 					if ((cg.getId() + "").equalsIgnoreCase(cont.getGroup_id())) {
 						cg.getmContacts().add(cont);
-						mContactss.add(cont);
+
 						break;
 					}
 				}

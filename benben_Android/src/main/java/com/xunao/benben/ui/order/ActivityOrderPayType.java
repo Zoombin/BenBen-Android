@@ -124,7 +124,7 @@ public class ActivityOrderPayType extends BaseActivity implements View.OnClickLi
 
     private void payOrder() {
         // 订单
-        String orderInfo = PayUtils.getOrderInfo(name, name, "0.01", order_sn);
+        String orderInfo = PayUtils.getOrderInfo(name, name, payPrice, order_sn);
         // 对订单做RSA 签名
         String sign = PayUtils.sign(orderInfo);
         try {

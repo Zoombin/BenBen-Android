@@ -70,7 +70,7 @@ public class ActivityMyPromotionAlbumDetail extends BaseActivity implements View
     private RoundedImageView rv_album_cover;
     private LinearLayout ll_name;
     private EditText edt_name;
-    private TextView tv_name,tv_time,tv_num;
+    private TextView tv_name,tv_time,tv_max_num,tv_num;
     private GridView noScrollgridview;
     private GridAdapter adapter;
     private boolean isCover = false;
@@ -123,6 +123,7 @@ public class ActivityMyPromotionAlbumDetail extends BaseActivity implements View
         edt_name.setVisibility(View.GONE);
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_name.setVisibility(View.VISIBLE);
+        tv_max_num = (TextView) findViewById(R.id.tv_max_num);
         tv_num = (TextView) findViewById(R.id.tv_num);
         tv_time = (TextView) findViewById(R.id.tv_time);
         noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
@@ -319,6 +320,7 @@ public class ActivityMyPromotionAlbumDetail extends BaseActivity implements View
                     album.getSmall_poster_cover(), rv_album_cover);
 
             tv_name.setText(album.getTitle());
+            tv_max_num.setText("(仅限"+maxpic+"张图片)");
             tv_num.setText("("+album.getPoster_num()+"张)");
             long time = album.getTime();
             Date date = new Date(time*1000);

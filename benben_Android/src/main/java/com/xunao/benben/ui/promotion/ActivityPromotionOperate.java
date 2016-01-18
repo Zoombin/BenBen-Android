@@ -19,6 +19,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -164,6 +165,16 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
         edt_origin_price = (EditText) findViewById(R.id.edt_origin_price);
         edt_promotion_price = (EditText) findViewById(R.id.edt_promotion_price);
         edt_description = (EditText) findViewById(R.id.edt_description);
+        edt_description.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                //这句话说的意思告诉父View我自己的事件我自己处理
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
         tv_start_date = (TextView) findViewById(R.id.tv_start_date);
         tv_start_date.setOnClickListener(this);
         tv_end_date = (TextView) findViewById(R.id.tv_end_date);
@@ -328,10 +339,14 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
 
                                 break;
                             case 2:
-                                startAnimActivity2Obj(
-                                        ActivitySmallPublic.class,
-                                        "promotion", "我开通了新的促销,"+ AndroidConfig.NETHOST+"/promotion/promotiondetail/key/android?promotionid="+promotionid+",来给我捧捧场吧!");
+                                if(type==1) {
 
+                                    startAnimActivity2Obj(
+                                            ActivitySmallPublic.class,
+                                            "promotion", "我开通了新的促销," + AndroidConfig.NETHOST + "/promotion/promotiondetail/key/android?promotionid=" + promotionid + ",来给我捧捧场吧!");
+                                }else{
+                                    ToastUtils.Infotoast(mContext,"该商品已下架，无法发送小喇叭!");
+                                }
                                 break;
                             default:
                                 break;

@@ -523,22 +523,22 @@ public class ActivityMySelfBuy extends BaseActivity implements OnClickListener,
 						AndroidConfig.writeFriendRequestCode);
 			} else {
 
-				switch (user.getUserInfo()) {
-				case "0":
-					startAnimActivity2Obj(
-							ActivityMyNumberTrianInfoPerfect.class, "buy",
-							"buyInfo");
-					break;
-				case "2":
-					startAnimActivity2Obj(
-							ActivityMyNumberTrianInfoPerfect.class, "buy",
-							"buyInfo");
-					break;
-				default:
+//				switch (user.getUserInfo()) {
+//				case "0":
+//					startAnimActivity2Obj(
+//							ActivityMyNumberTrianInfoPerfect.class, "buy",
+//							"buyInfo");
+//					break;
+//				case "2":
+//					startAnimActivity2Obj(
+//							ActivityMyNumberTrianInfoPerfect.class, "buy",
+//							"buyInfo");
+//					break;
+//				default:
 					startAnimActivityForResult(ActivityWriteBuyInfo.class,
 							AndroidConfig.writeFriendRequestCode);
-				}
-				break;
+//				}
+//				break;
 			}
 			break;
 		case R.id.prerecord_tab_one:// 我的我要买

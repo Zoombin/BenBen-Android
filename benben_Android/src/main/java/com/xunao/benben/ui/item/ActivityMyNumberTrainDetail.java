@@ -512,64 +512,67 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                     }else if(numberTrainDetail.getAuth_status()==2){
                         wx_message.setVisibility(View.GONE);
                     }
+
+                    if(numberTrainDetail.getAuth_grade()==0){
+                        iv_auto_type.setVisibility(View.GONE);
+                    }else{
+                        iv_auto_type.setImageResource(identityIcons[numberTrainDetail.getType()-1][numberTrainDetail.getAuth_grade()-1]);
+                        iv_auto_type.setVisibility(View.VISIBLE);
+                    }
+
+
+                    if(vip_type==0){
+                        tv_type.setText("商家促销");
+                        ll_train_level.setVisibility(View.GONE);
+                        ll_comment.setVisibility(View.GONE);
+                        adapter.notifyDataSetChanged();
+                        item_gridView.setVisibility(View.VISIBLE);
+                    }else {
+                        tv_type.setText("商家团购");
+                        ll_train_level.setVisibility(View.VISIBLE);
+                        int rank=numberTrainDetail.getRank();
+                        if(rank==0){
+                            ll_rank_num.setVisibility(View.GONE);
+                        }else{
+                            ll_rank_num.setVisibility(View.VISIBLE);
+                            ll_rank_num.removeAllViews();
+                            int rankType = rank/5;
+                            int rankNum = rank%5;
+                            if(rankNum==0){
+                                rankType--;
+                                rankNum=5;
+                            }
+                            for(int i=0;i<rankNum;i++) {
+                                ImageView iv_rank = new ImageView(mContext);
+                                iv_rank.setImageResource(rankTypes[rankType]);
+                                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                        LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                                params.rightMargin = 5;
+                                ll_rank_num.addView(iv_rank, params);
+                            }
+                        }
+                        tv_level.setText("("+rank+"级)");
+                        ll_comment.setVisibility(View.VISIBLE);
+                        tv_mean_rate.setText("好评率： "+numberTrainDetail.getMean_rate());
+                        tv_comment_num.setText("共"+numberTrainDetail.getNum()+"条评论");
+                        buyAdapter.notifyDataSetChanged();
+                        item_group_buy.setVisibility(View.VISIBLE);
+                        if(numberTrainDetail.getShopnum()>0){
+                            ll_store.setVisibility(View.VISIBLE);
+                            tv_store_num.setText(numberTrainDetail.getShopnum()+"家");
+                        }else{
+                            ll_store.setVisibility(View.GONE);
+                        }
+
+                    }
+
                 }else{
                     ll_identity.setVisibility(View.VISIBLE);
                     ll_authentication.setVisibility(View.GONE);
                     wx_message.setVisibility(View.GONE);
                 }
 
-                if(numberTrainDetail.getAuth_grade()==0){
-                    iv_auto_type.setVisibility(View.GONE);
-                }else{
-                    iv_auto_type.setImageResource(identityIcons[numberTrainDetail.getType()-1][numberTrainDetail.getAuth_grade()-1]);
-                    iv_auto_type.setVisibility(View.VISIBLE);
-                }
 
-
-                if(vip_type==0){
-                    tv_type.setText("商家促销");
-                    ll_train_level.setVisibility(View.GONE);
-                    ll_comment.setVisibility(View.GONE);
-                    adapter.notifyDataSetChanged();
-                    item_gridView.setVisibility(View.VISIBLE);
-                }else {
-                    tv_type.setText("商家团购");
-                    ll_train_level.setVisibility(View.VISIBLE);
-                    int rank=numberTrainDetail.getRank();
-                    if(rank==0){
-                        ll_rank_num.setVisibility(View.GONE);
-                    }else{
-                        ll_rank_num.setVisibility(View.VISIBLE);
-                        ll_rank_num.removeAllViews();
-                        int rankType = rank/5;
-                        int rankNum = rank%5;
-                        if(rankNum==0){
-                            rankType--;
-                            rankNum=5;
-                        }
-                        for(int i=0;i<rankNum;i++) {
-                            ImageView iv_rank = new ImageView(mContext);
-                            iv_rank.setImageResource(rankTypes[rankType]);
-                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                            params.rightMargin = 5;
-                            ll_rank_num.addView(iv_rank, params);
-                        }
-                    }
-                    tv_level.setText("("+rank+"级)");
-                    ll_comment.setVisibility(View.VISIBLE);
-                    tv_mean_rate.setText("好评率： "+numberTrainDetail.getMean_rate());
-                    tv_comment_num.setText("共"+numberTrainDetail.getNum()+"条评论");
-                    buyAdapter.notifyDataSetChanged();
-                    item_group_buy.setVisibility(View.VISIBLE);
-                    if(numberTrainDetail.getShopnum()>0){
-                        ll_store.setVisibility(View.VISIBLE);
-                        tv_store_num.setText(numberTrainDetail.getShopnum()+"家");
-                    }else{
-                        ll_store.setVisibility(View.GONE);
-                    }
-
-                }
 
 
                 initRightClick(numberTrainDetail.getNo_auth());

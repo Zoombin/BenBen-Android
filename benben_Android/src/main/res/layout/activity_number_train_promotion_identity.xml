@@ -133,8 +133,8 @@
                         android:hint="请输入身份证号码"
                         android:textSize="15dp"
                         android:background="@null"
-                        android:inputType="number"
                         android:maxLength="18"
+                        android:digits="0123456789X"
                         />
 
 
@@ -217,15 +217,15 @@
                         android:layout_height="wrap_content"
                         android:textSize="15dp"
                         android:textColor="#000000"
-                        android:text="真实姓名："
+                        android:text="单位名称："
                         android:layout_marginLeft="5dp"
                         ></TextView>
 
                     <EditText
-                        android:id="@+id/edt_merchant_name"
+                        android:id="@+id/edt_company"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="请输入真实姓名"
+                        android:hint="请输入单位名称"
                         android:textSize="15dp"
                         android:background="@null"
                         />
@@ -250,19 +250,17 @@
                         android:layout_height="wrap_content"
                         android:textSize="15dp"
                         android:textColor="#000000"
-                        android:text="单位名称："
+                        android:text="真实姓名："
                         android:layout_marginLeft="5dp"
                         ></TextView>
 
                     <EditText
-                        android:id="@+id/edt_company"
+                        android:id="@+id/edt_merchant_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="请输入单位名称"
+                        android:hint="请输入负责人的名字"
                         android:textSize="15dp"
                         android:background="@null"
-                        android:inputType="number"
-                        android:maxLength="18"
                         />
 
 
@@ -270,6 +268,8 @@
 
                 <View
                     style="@style/set_item_Line_5"/>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -296,7 +296,7 @@
                         android:hint="请输入身份证号码"
                         android:textSize="15dp"
                         android:background="@null"
-                        android:inputType="number"
+                        android:digits="0123456789X"
                         android:maxLength="18"
                         />
 

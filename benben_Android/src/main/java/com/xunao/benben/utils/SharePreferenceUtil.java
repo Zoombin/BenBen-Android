@@ -55,6 +55,13 @@ public class SharePreferenceUtil {
     //记录μ创作的通知时间
     private String SHARED_CREATION_NOTICE = "shared_creation_notice";
     private String SHARED_CREATION_RUSH_NOTICE = "shared_creation_rush_notice";
+
+    //通讯录版本号
+    private String SHARED_SNAP_SHOT = "shared_snap_shot";
+
+    //用户奔犇号
+    private String SHARED_LOGIN_BENBEN = "shared_login_benben";
+
 	// 消息最后请求时间
 	public void setLastTime(long lastTime) {
 		editor.putLong(SHARED_KEY_LSSTTIME, lastTime);
@@ -265,5 +272,26 @@ public class SharePreferenceUtil {
 
 		return null;
 	}
+
+    // 获取通讯录版本号
+    public String getSnapshot() {
+        return mSharedPreferences.getString(SHARED_SNAP_SHOT, "1");
+    }
+
+    public void setSnapshot(String snapshot) {
+        editor.putString(SHARED_SNAP_SHOT, snapshot);
+        editor.commit();
+    }
+
+
+    // 获取上次登录用户信息
+    public String getLastLoginUser() {
+        return mSharedPreferences.getString(SHARED_LOGIN_BENBEN, "");
+    }
+
+    public void setLastLoginUser(String benbenid) {
+        editor.putString(SHARED_LOGIN_BENBEN, benbenid);
+        editor.commit();
+    }
 
 }

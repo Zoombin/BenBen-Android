@@ -137,7 +137,8 @@ public class ActivityFindContacts extends BaseActivity {
 				} else {
 					Intent intent = new Intent(mContext,
 							ActivityContactsInfo.class);
-					intent.putExtra("contacts", contactsList.get(position));
+//					intent.putExtra("contacts", contactsList.get(position));
+                    intent.putExtra("username", contactsList.get(position).getHuanxin_username());
 					startActivityForResult(intent,
 							AndroidConfig.ContactsFragmentRequestCode);
 					mContext.overridePendingTransition(R.anim.in_from_right,

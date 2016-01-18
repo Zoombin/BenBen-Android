@@ -3237,4 +3237,12 @@ public class InteNetUtils {
         ComPost(AndroidConfig.NETHOST + AndroidConfig.AuctionSet, hashMap,
                 requestCallBack);
     }
+
+    public void AddressBook(String snapshot,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("snapshot", snapshot);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.AddressBook, hashMap,
+                callBack);
+    }
 }

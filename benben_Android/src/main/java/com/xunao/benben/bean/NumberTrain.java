@@ -25,6 +25,7 @@ public class NumberTrain extends BaseBean<NumberTrain>{
     private String shop;
     private int auth_grade;
     private int place;
+    private int is_valid;
 	
 
 	public String getTag() {
@@ -172,6 +173,14 @@ public class NumberTrain extends BaseBean<NumberTrain>{
         this.place = place;
     }
 
+    public int getIs_valid() {
+        return is_valid;
+    }
+
+    public void setIs_valid(int is_valid) {
+        this.is_valid = is_valid;
+    }
+
     @Override
 	public JSONObject toJSON() {
 	
@@ -199,6 +208,7 @@ public class NumberTrain extends BaseBean<NumberTrain>{
         shop =  jsonObj.optString("shop");
         auth_grade =  jsonObj.optInt("auth_grade");
         place = jsonObj.optInt("place");
+        is_valid = jsonObj.optInt("is_valid");
 		return this;
 	}
 

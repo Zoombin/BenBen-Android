@@ -428,7 +428,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
                         break;
                     case 4:
                         file4 = CommonUtils.getImagePath(mContext, imageName);
-                        iv_merchant_identityCode1.setImageBitmap(getBitmap(imagePath));
+                        iv_merchant_identityCode2.setImageBitmap(getBitmap(imagePath));
                         break;
                     case 5:
                         file5 = CommonUtils.getImagePath(mContext, imageName);

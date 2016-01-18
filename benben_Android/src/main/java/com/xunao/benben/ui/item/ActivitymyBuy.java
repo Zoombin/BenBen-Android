@@ -498,22 +498,22 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 						AndroidConfig.writeFriendRequestCode);
 			} else {
 
-				switch (user.getUserInfo()) {
-				case "0":
-					startAnimActivity2Obj(
-							ActivityMyNumberTrianInfoPerfect.class, "buy",
-							"buyInfo");
-					break;
-				case "2":
-					startAnimActivity2Obj(
-							ActivityMyNumberTrianInfoPerfect.class, "buy",
-							"buyInfo");
-					break;
-				default:
+//				switch (user.getUserInfo()) {
+//				case "0":
+//					startAnimActivity2Obj(
+//							ActivityMyNumberTrianInfoPerfect.class, "buy",
+//							"buyInfo");
+//					break;
+//				case "2":
+//					startAnimActivity2Obj(
+//							ActivityMyNumberTrianInfoPerfect.class, "buy",
+//							"buyInfo");
+//					break;
+//				default:
 					startAnimActivityForResult(ActivityWriteBuyInfo.class,
 							AndroidConfig.writeFriendRequestCode);
-				}
-				break;
+//				}
+//				break;
 			}
 
 			// startAnimActivityForResult(ActivityWriteBuyInfo.class,
@@ -726,14 +726,14 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 									public void onClick(View v) {
 										// 开通直通车
 										// 判断是不是完善了我的号码直通车信息
-										switch (mContext.user.getUserInfo()) {
-										case "0":
-											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-											break;
-										case "2":
-											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-											break;
-										default:
+//										switch (mContext.user.getUserInfo()) {
+//										case "0":
+//											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+//											break;
+//										case "2":
+//											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+//											break;
+//										default:
 											InteNetUtils
 													.getInstance(mContext)
 													.getMyStore(
@@ -777,7 +777,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 																}
 															});
 
-										}
+//										}
 										hint.dismiss();
 									}
 								});

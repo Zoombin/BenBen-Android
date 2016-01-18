@@ -639,7 +639,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 //                    iv_top.setVisibility(View.GONE);
 //				}
                 int auth_grade=numberTrain.getAuth_grade();
-                if(auth_grade==0){
+                if(auth_grade==0 || numberTrain.getIs_valid()==0){
                     iv_corner.setVisibility(View.GONE);
                 }else{
                     iv_corner.setVisibility(View.VISIBLE);
@@ -764,10 +764,8 @@ public class ActivityNumberTrain extends BaseActivity implements
 			listView.onRefreshComplete();
 
 			numberTrainList = new NumberTrainList();
-
 			try {
 				numberTrainList.parseJSON(jsonObject);
-                Log.d("ltf","numberTrainList===="+numberTrainList+"==="+numberTrainList.getNumberTrains().size());
 				if (numberTrainList == null || numberTrainList.getNumberTrains()==null || numberTrainList.getNumberTrains().size()==0) {
 					numberTrains.clear();
 				} else {

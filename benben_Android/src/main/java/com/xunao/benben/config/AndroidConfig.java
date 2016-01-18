@@ -701,4 +701,8 @@ public class AndroidConfig {
     public static final String GetLog = "/TopAuction/GetLog";
     //拍卖用户token值
     public static final String AuctionSet = "/TopAuction/Set";
+
+
+    // 首页获取通讯录
+    public static final String AddressBook = "/contact/addressBook";
 }

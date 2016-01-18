@@ -54,7 +54,7 @@ import com.xunao.benben.ui.item.ActivityMyDynamic;
 import com.xunao.benben.ui.item.ActivityMyFriendUnion;
 import com.xunao.benben.ui.item.ActivityMyNumberTrain;
 import com.xunao.benben.ui.item.ActivityMyNumberTrainDetail;
-import com.xunao.benben.ui.item.ActivityMyNumberTrianInfoPerfect;
+//import com.xunao.benben.ui.item.ActivityMyNumberTrianInfoPerfect;
 import com.xunao.benben.ui.item.ActivityMySelfBuy;
 import com.xunao.benben.ui.item.ActivityMySmallMake;
 import com.xunao.benben.ui.item.ActivityPersonal;
@@ -438,16 +438,16 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 							});
 				} else {
 
-					switch (mActivity.user.getUserInfo()) {
-					case "0":
-						mActivity
-								.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-						break;
-					case "2":
-						mActivity
-								.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-						break;
-					default:
+//					switch (mActivity.user.getUserInfo()) {
+//					case "0":
+//						mActivity
+//								.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+//						break;
+//					case "2":
+//						mActivity
+//								.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+//						break;
+//					default:
 						InteNetUtils.getInstance(mActivity).getMyStore(
 								new RequestCallBack<String>() {
 
@@ -534,8 +534,8 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 									}
 								});
 					}
-					break;
-				}
+//					break;
+//				}
 
 			} else if (CrashApplication.getInstance().user.getStore_disable() == 1) {
 				final InfoSimpleMsgHint hint = new InfoSimpleMsgHint(mActivity,

@@ -524,7 +524,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/green_but"
                         android:textColor="#FFFFFF"
-                        android:textSize="13dp"
+                        android:textSize="15dp"
                         android:text="续费"
                         android:paddingTop="3dp"
                         android:paddingBottom="3dp"

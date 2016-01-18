@@ -59,7 +59,7 @@
                 android:textSize="12dp"
                 android:textColor="@color/top_bar_color"
                 android:layout_marginLeft="5dp"
-                android:text="《号码直通车置顶拍卖申明》"
+                android:text="《号码直通车置顶拍卖声明》"
                 ></TextView>
         </LinearLayout>
 
@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             >
 
             <Button

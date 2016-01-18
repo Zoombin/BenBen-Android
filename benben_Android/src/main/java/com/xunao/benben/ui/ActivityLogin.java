@@ -302,8 +302,14 @@ public class ActivityLogin extends BaseActivity implements OnClickListener {
 				EMChatManager.getInstance().loadAllConversations();
 				mApplication.getSpUtil().setLastTimeLogin(true);
 				dissLoding();
+                if(!spUtil.getLastLoginUser().equals(user.getBenbenId())){
+                    spUtil.setLastLoginUser(user.getBenbenId());
+                    spUtil.setSnapshot("1");
+                }
 				startAnimActivity2Obj(MainActivity.class, "source",
 						"login");
+
+
 				finish();
 			}
 
@@ -313,12 +319,16 @@ public class ActivityLogin extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onError(final int code, final String message) {
-				Log.d("ltf", "login=============失败=========");
 				ActivityLogin.this.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
 						dissLoding();
-						startAnimActivity2Obj(MainActivity.class,
+                        if(!spUtil.getLastLoginUser().equals(user.getBenbenId())){
+                            spUtil.setLastLoginUser(user.getBenbenId());
+                            spUtil.setSnapshot("1");
+                        }
+
+                        startAnimActivity2Obj(MainActivity.class,
 								"source", "login");
 						AnimFinsh();
 					}

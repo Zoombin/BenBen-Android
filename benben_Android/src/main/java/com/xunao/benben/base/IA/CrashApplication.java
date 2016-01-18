@@ -319,10 +319,10 @@ public class CrashApplication extends Application {
 	}
 
 	private void createDB() {
-		db = DbUtils.create(this, "benben", 7, new DbUpgradeListener() {
+		db = DbUtils.create(this, "benben", 8, new DbUpgradeListener() {
 			@Override
 			public void onUpgrade(DbUtils arg0, int arg1, int arg2) {
-
+                getInstance().getSpUtil().setSnapshot("1");
 			}
 		});
 

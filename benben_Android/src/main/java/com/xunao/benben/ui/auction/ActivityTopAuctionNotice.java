@@ -89,7 +89,7 @@ public class ActivityTopAuctionNotice extends BaseActivity implements View.OnCli
                 break;
             case R.id.tv_agreement:
                 Intent intent = new Intent(ActivityTopAuctionNotice.this, ActivityWeb.class);
-                intent.putExtra("title", "拍卖申明");
+                intent.putExtra("title", "拍卖声明");
                 intent.putExtra("url", AndroidConfig.NETHOST +  "/topAuction/auctionDeclaration");
 
                 startActivity(intent);

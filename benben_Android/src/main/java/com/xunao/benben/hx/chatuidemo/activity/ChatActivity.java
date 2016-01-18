@@ -1024,7 +1024,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
                 Contacts mContacts = (Contacts) getIntent().getSerializableExtra("contacts");
                 String name = toChatUsername;
                 Intent intent = new Intent(this, ActivityContactsInfo.class);
-                intent.putExtra("contacts", mContacts);
+//                intent.putExtra("contacts", mContacts);
                 intent.putExtra("username", name);
                 this.startActivityForResult(intent, AndroidConfig.ContactsFragmentRequestCode);
                 this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);

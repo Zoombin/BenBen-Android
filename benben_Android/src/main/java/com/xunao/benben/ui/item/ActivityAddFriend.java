@@ -610,6 +610,7 @@ public class ActivityAddFriend extends BaseActivity implements OnClickListener,
                         Intent intent = new Intent(mContext, ActivityAddFriendDetail.class);
                         mContext.overridePendingTransition(R.anim.in_from_right,
                                 R.anim.out_to_left);
+                        intent.putExtra("nick_name", item.getNickName());
                         intent.putExtra("from_huanxin", user.getHuanxin_username());
                         intent.putExtra("to_huanxin", item.getHuanxin_username());
                         startActivityForResult(intent, AndroidConfig.writeFriendRequestCode);

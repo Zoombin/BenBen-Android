@@ -137,7 +137,7 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 
 		search_edittext = (EditText) findViewById(R.id.search_edittext);
         searchName = (TextView) findViewById(R.id.searchName);
-        searchName.setText("搜索其他联系人");
+        searchName.setText("搜索手机号/姓名");
 		ll_seach_icon = (LinearLayout) findViewById(R.id.ll_seach_icon);
 		iv_search_content_delect = (ImageView) findViewById(R.id.iv_search_content_delect);
 		no_data = (LinearLayout) findViewById(R.id.no_data);
@@ -436,8 +436,9 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 							.getWindowToken(),
 							InputMethodManager.HIDE_NOT_ALWAYS);
 			isSearch = false;
-			InteNetUtils.getInstance(mContext).enterpriseMember(id, "",
-					mRequestCallBack);
+
+//			InteNetUtils.getInstance(mContext).enterpriseMember(id, "",
+//					mRequestCallBack);
 			break;
 		case R.id.management_packet:
 

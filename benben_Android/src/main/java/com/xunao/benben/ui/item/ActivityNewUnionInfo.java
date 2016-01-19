@@ -92,11 +92,12 @@ public class ActivityNewUnionInfo extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject============"+jsonObject);
         if (jsonObject.optString("ret_num").equals("0")) {
             CommonUtils.startImageLoader(cubeimageLoader, jsonObject.optString("leg_poster"), group_poster);
             tv_group_name.setText(jsonObject.optString("leg_name"));
             tv_group_address.setText(jsonObject.optString("leg_district"));
-            tv_group_message.setText("群公告："+jsonObject.optString("leg_announcement"));
+            tv_group_message.setText("联盟公告："+jsonObject.optString("leg_announcement"));
             union_member_num.setText(jsonObject.optString("leg_number"));
             union_member_type.setText(jsonObject.optString("leg_type"));
             union_member_introduce.setText(jsonObject.optString("leg_description"));

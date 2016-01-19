@@ -13,6 +13,7 @@ import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.bean.TalkGroup;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.utils.TimeUtil;
 import com.xunao.benben.utils.ToastUtils;
 
 import org.json.JSONException;
@@ -24,7 +25,7 @@ import org.json.JSONObject;
  */
 public class ActivityGroupNoticeDetails extends BaseActivity implements
         View.OnClickListener {
-    private TextView tvcontent;
+    private TextView tvcontent,tv_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class ActivityGroupNoticeDetails extends BaseActivity implements
     @Override
     public void initView(Bundle savedInstanceState) {
         initTitle_Right_Left_bar("群公告", "", "", R.drawable.icon_com_title_left, 0);
+        tv_time = (TextView) findViewById(R.id.tv_time);
         tvcontent = (TextView) findViewById(R.id.tv_content);
     }
 
@@ -51,6 +53,7 @@ public class ActivityGroupNoticeDetails extends BaseActivity implements
                 new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> arg0) {
+                        dissLoding();
                         try {
                             //改用gson
                             TalkGroup mTalkGroup = new TalkGroup();
@@ -59,8 +62,26 @@ public class ActivityGroupNoticeDetails extends BaseActivity implements
                             JSONObject optJSONObject = jsonObj
                                     .optJSONObject("group_info");
                             mTalkGroup.parseJSON(optJSONObject);
+                            String content = mTalkGroup.getBulletin();
+                            if(!TextUtils.isEmpty(content)){
+                                long time = 0;
+                                try {
+                                    time = Long.parseLong(mTalkGroup.getCreated_time());
+                                }catch (Exception e){}
+                                if(time >0){
+                                    tv_time.setText("发布时间:"+TimeUtil.getTimeString(time * 1000));
+                                }else{
+                                    tv_time.setText("发布时间:");
+                                }
+                                tvcontent.setText(content);
+                            }else{
+                                ToastUtils.Errortoast(mContext, "没有公告！");
+                                AnimFinsh();
+                            }
 
-                            InteNetUtils.getInstance(mContext).Getbulletin(mTalkGroup.getId(), user.getToken(), mRequestCallBack);
+
+
+//                            InteNetUtils.getInstance(mContext).Getbulletin(mTalkGroup.getId(), user.getToken(), mRequestCallBack);
                         } catch (Exception e) {
                             dissLoding();
                             ToastUtils.Errortoast(mContext, "当前网络不可用");

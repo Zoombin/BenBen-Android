@@ -91,7 +91,7 @@
         android:layout_marginTop="6dp"
         android:layout_toRightOf="@id/avatar_container"
         android:gravity="center_vertical"
-        android:text="申请与通知"
+        android:text="请求与通知"
         android:textColor="#000"
         android:textSize="18dp" />
 

@@ -87,7 +87,7 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 
 	@Override
 	public void initView(Bundle savedInstanceState) {
-		initTitle_Right_Left_bar("政企通讯录详细", "", "",
+		initTitle_Right_Left_bar("政企通讯录详情", "", "",
 				R.drawable.icon_com_title_left, 0);
 
 		tv_name = (TextView) findViewById(R.id.tv_name);
@@ -214,7 +214,7 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 					rl_phone.setClickable(false);
 					rl_my_phone.setClickable(false);
 				} else {
-					other_phone.setText("我的其他号码");
+					other_phone.setText("我的其它号码");
 					name.setText("企业通讯录");
 					rl_my_phone.setClickable(false);
 					
@@ -307,7 +307,7 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 		case R.id.rl_phone:
 			if (!"2".equals(enterprise.getType())) {
 				inputDialog = new InputDialog(mContext, R.style.MyDialogStyle);
-				inputDialog.setContent("其他号码", "请输入新的号码", "确认", "取消");
+				inputDialog.setContent("其它号码", "请输入新的号码", "确认", "取消");
 				inputDialog.setEditContent(enterprise.getPhone());
 				inputDialog.setInputType(enterprise.getPhone());
 				inputDialog.setCancleListener(new OnClickListener() {
@@ -336,9 +336,9 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 							ToastUtils.Infotoast(mContext, "请输入数字");
 							return;
 						}
-//						if (pecketName.length() > 11) {
-//							ToastUtils.Errortoast(mContext, "号码长度不能超过11位!");
-//						}
+						if (pecketName.length() > 11) {
+							ToastUtils.Errortoast(mContext, "号码长度不能超过11位!");
+						}
 
 						if (CommonUtils.isNetworkAvailable(mContext)) {
 							updatePhoneOrName = true;
@@ -368,12 +368,12 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 				public void onClick(View v) {
 					pecketName = "";
 					pecketName = inputDialog.getInputText();
-//					if (CommonUtils.isEmpty(pecketName)) {
-//						ToastUtils.Infotoast(mContext, "通讯录名片不能为空!");
-//						return;
-//					}
+					if (CommonUtils.isEmpty(pecketName)) {
+						ToastUtils.Infotoast(mContext, "通讯录名片不能为空!");
+						return;
+					}
 
-					if (!CommonUtils.StringIsSurpass(pecketName, 0, 10)) {
+					if (!CommonUtils.StringIsSurpass(pecketName, 1, 10)) {
 						ToastUtils.Infotoast(mContext, "通讯录名片限制在0-10个字数");
 						return;
 					}
@@ -407,7 +407,7 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 				jsonObject = new JSONObject(arg0.result);
 				if (jsonObject.optString("ret_num").equals("0")) {
 					if (updatePhoneOrName) {
-						ToastUtils.Infotoast(mContext, "修改其他号码成功!");
+						ToastUtils.Infotoast(mContext, "修改其它号码成功!");
 						enterprise.setPhone(pecketName);
 						tv_phone.setText(pecketName);
 					} else {

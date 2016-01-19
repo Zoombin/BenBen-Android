@@ -102,7 +102,7 @@ public class InteNetUtils {
 	// 添加图片上传
 	private void addImageUpload(RequestParams params, String filekey, File file) {
 
-		InputStream compressImage = CommonUtils.compressImage(file, 1000, 0);
+		InputStream compressImage = CommonUtils.compressImage(file, 100, 0);
 
 		if (compressImage != null) {
 			File temp = CommonUtils.getImagePath(context,

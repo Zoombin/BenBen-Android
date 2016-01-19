@@ -468,6 +468,7 @@ public class ActivityPacketManagement extends BaseActivity implements
 						.findViewById(R.id.group_name);
 				itHolder.addFriend = (LinearLayout) convertView
 						.findViewById(R.id.addFriend);
+                itHolder.iv_move = (ImageView) convertView.findViewById(R.id.iv_move);
 				convertView.setTag(itHolder);
 			} else {
 				itHolder = (itemHolder) convertView.getTag();
@@ -477,6 +478,12 @@ public class ActivityPacketManagement extends BaseActivity implements
                 itHolder.addFriend.setVisibility(View.GONE);
             }else {
                 itHolder.addFriend.setVisibility(View.VISIBLE);
+            }
+
+            if(position == mContactsGroups.size()-1){
+                itHolder.iv_move.setVisibility(View.INVISIBLE);
+            }else{
+                itHolder.iv_move.setVisibility(View.VISIBLE);
             }
 
 			itHolder.item_delete.setOnClickListener(new OnClickListener() {
@@ -765,6 +772,7 @@ public class ActivityPacketManagement extends BaseActivity implements
 		LinearLayout item_delete;
 		LinearLayout addFriend;
 		TextView group_name;
+        ImageView iv_move;
 	}
 
 	/**

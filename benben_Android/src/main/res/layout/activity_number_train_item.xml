@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/rl_info"
         android:layout_width="fill_parent"
-        android:layout_height="52dip"
+        android:layout_height="60dip"
         android:orientation="horizontal" >
 
         <RelativeLayout
@@ -60,11 +60,13 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="8dip"
             android:layout_toRightOf="@+id/ll_face"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            >
 
             <LinearLayout
                 android:layout_width="0dip"
-                android:layout_height="52dip"
+                android:layout_height="60dip"
                 android:layout_weight="4"
                 android:orientation="vertical" >
 
@@ -89,7 +91,7 @@
                     android:layout_marginTop="2dp"
                     android:gravity="center_vertical"
                     android:maxLines="2"
-                    android:text="dsfasdfs"
+                    android:text="dsfasdfs\n242"
                     android:textColor="#a7a7a7"
                     android:textSize="12sp" />
 
@@ -97,7 +99,7 @@
 
             <LinearLayout
                 android:layout_width="0dip"
-                android:layout_height="52dip"
+                android:layout_height="60dip"
                 android:layout_weight="2.5"
                 android:gravity="center"
                 android:orientation="horizontal" >
@@ -122,7 +124,7 @@
             <ImageView
                 android:id="@+id/iv_call_phone"
                 android:layout_width="0dip"
-                android:layout_height="52dip"
+                android:layout_height="60dip"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:paddingBottom="10dip"

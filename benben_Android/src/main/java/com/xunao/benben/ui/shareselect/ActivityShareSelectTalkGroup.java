@@ -283,10 +283,14 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 							if (!TextUtils.isEmpty(type)) {
 								final EMMessage forward_msg = EMChatManager.getInstance().getMessage(msgId);
 								if ("Forward_img".equals(type)) {
+                                    message = EMMessage
+                                            .createSendMessage(EMMessage.Type.IMAGE);
 									ImageMessageBody iBody = (ImageMessageBody) forward_msg.getBody();
 									String localUrl = iBody.getLocalUrl();
 									if (new File(localUrl).exists()) {
-										message = forward_msg;
+                                        ImageMessageBody body = new ImageMessageBody(new File(localUrl));
+                                        message.addBody(body);
+//                                        sendMsgToGroup(conversation, tG, message, false);
 									} else {
 										try {
 											new File(localUrl).createNewFile();
@@ -294,10 +298,14 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 											e.printStackTrace();
 										}
 										showLoding("");
-										SimpleDownLoadUtils.download(iBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
+                                        final EMMessage finalMessage = message;
+                                        SimpleDownLoadUtils.download(iBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
 											@Override
 											public void DownLoadComplete(String url, String outPath) {
-												sendMsgToGroup(conversation, tG, forward_msg, false);
+//												sendMsgToGroup(conversation, tG, forward_msg, false);
+                                                ImageMessageBody body = new ImageMessageBody(new File(url));
+                                                finalMessage.addBody(body);
+                                                sendMsgToGroup(conversation, tG, finalMessage, false);
 											}
 
 											@Override
@@ -309,21 +317,33 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 									}
 								}
 								if ("Forward_video".equals(type)) {
-									VideoMessageBody vBody = (VideoMessageBody) forward_msg.getBody();
-									String localUrl = vBody.getLocalUrl();
-									if (new File(localUrl).exists()) {
-										message = forward_msg;
-									} else {
+                                    message = EMMessage
+                                            .createSendMessage(EMMessage.Type.VIDEO);
+									final VideoMessageBody vBody = (VideoMessageBody) forward_msg.getBody();
+                                    final String localUrl = vBody.getLocalUrl();
+                                    final File videoFile = new File(localUrl);
+                                    if (videoFile.exists()) {
+                                        VideoMessageBody body = new VideoMessageBody(videoFile, vBody.getLocalThumb(),
+                                                vBody.getLength(), videoFile.length());
+                                        message.addBody(body);
+//                                        sendMsgToGroup(conversation, tG, message, false);
+                                    } else {
 										try {
 											new File(localUrl).createNewFile();
 										} catch (IOException e) {
 											e.printStackTrace();
 										}
 										showLoding("");
-										SimpleDownLoadUtils.download(vBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
+                                        final EMMessage finalMessage1 = message;
+                                        SimpleDownLoadUtils.download(vBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
 											@Override
 											public void DownLoadComplete(String url, String outPath) {
-												sendMsgToGroup(conversation, tG, forward_msg, false);
+//												sendMsgToGroup(conversation, tG, forward_msg, false);
+                                                File videoFile = new File(url);
+                                                VideoMessageBody body = new VideoMessageBody(videoFile, vBody.getLocalThumb(),
+                                                        vBody.getLength(), videoFile.length());
+                                                finalMessage1.addBody(body);
+                                                sendMsgToGroup(conversation, tG, finalMessage1, false);
 											}
 
 											@Override

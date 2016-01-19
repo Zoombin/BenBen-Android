@@ -44,6 +44,7 @@ public class ActivityAddFriendDetail extends BaseActivity {
 	private TextView tv_group;
     private String from_huanxin;
     private String to_huanxin;
+    private String nick_name="";
     String reason;
 
 	@Override
@@ -56,7 +57,6 @@ public class ActivityAddFriendDetail extends BaseActivity {
         et_phone.setVisibility(View.GONE);
 		et_name = (EditText) findViewById(R.id.et_name);
         et_name.setHint("请设置备注");
-        et_name.setText(user.getUserNickname());
         et_reason = (EditText) findViewById(R.id.et_reason);
         et_reason.setVisibility(View.VISIBLE);
 		rl_add_group = (RelativeLayout) findViewById(R.id.rl_add_group);
@@ -80,6 +80,8 @@ public class ActivityAddFriendDetail extends BaseActivity {
 //        publicMessage = (PublicMessage) getIntent().getSerializableExtra("publicMessage");
         from_huanxin = getIntent().getStringExtra("from_huanxin");
         to_huanxin = getIntent().getStringExtra("to_huanxin");
+        nick_name = getIntent().getStringExtra("nick_name");
+        et_name.setText(nick_name);
     }
 
 	@Override

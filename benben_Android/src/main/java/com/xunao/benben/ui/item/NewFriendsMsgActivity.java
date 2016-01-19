@@ -121,7 +121,7 @@ public class NewFriendsMsgActivity extends BaseActivity {
                     });
                     msgDialog.show();
                 }else{
-                    ToastUtils.Errortoast(mContext,"当前无申请与通知消息");
+                    ToastUtils.Errortoast(mContext,"当前无请求与通知消息");
                 }
 			}
 		}, "", R.drawable.ic_back, new OnClickListener() {
@@ -130,7 +130,7 @@ public class NewFriendsMsgActivity extends BaseActivity {
 			public void onClick(View v) {
 				mContext.AnimFinsh();
 			}
-		}, "申请与通知", 0);
+		}, "请求与通知", 0);
 		chanageTitle(mode);
 
 		brocastReceiver = new NewsBrocastReceiver();

@@ -9,10 +9,15 @@ import android.widget.TextView;
 import com.lidroid.xutils.exception.HttpException;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
+import com.xunao.benben.base.IA.CrashApplication;
+import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.utils.ToastUtils;
 
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by LSD on 15/12/31.
@@ -163,6 +168,44 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btleft_is_fl:
+                if (CrashApplication.getInstance().user.getLeague_disable() == 0) {
+                    startAnimActivity(ActivityMyFriendUnion.class);
+                } else if (CrashApplication.getInstance().user.getLeague_disable() == 1) {
+                    final InfoSimpleMsgHint hint = new InfoSimpleMsgHint(ActivityHelpCollect.this,
+                            R.style.MyDialog1);
+                    hint.setContent("功能已被永久禁用");
+                    hint.setBtnContent("确定");
+                    hint.show();
+                    hint.setOKListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            hint.dismiss();
+                        }
+                    });
+
+                    hint.show();
+                } else {
+                    String beginDate = CrashApplication.getInstance().user
+                            .getLeague_disable() + "000";
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    String sd = sdf.format(new Date(Long.parseLong(beginDate)));
+
+                    final InfoSimpleMsgHint hint = new InfoSimpleMsgHint(ActivityHelpCollect.this,
+                            R.style.MyDialog1);
+                    hint.setContent("功能被禁用,将于" + sd + "解禁");
+                    hint.setBtnContent("确定");
+                    hint.show();
+                    hint.setOKListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            hint.dismiss();
+                        }
+                    });
+
+                    hint.show();
+                }
                 break;
             case R.id.btleft_is_gb:
                 break;

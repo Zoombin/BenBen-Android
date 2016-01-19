@@ -86,6 +86,7 @@ import com.xunao.benben.hx.chatuidemo.utils.ImageCache;
 import com.xunao.benben.hx.chatuidemo.utils.ImageUtils;
 import com.xunao.benben.hx.chatuidemo.utils.SmileUtils;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.groupbuy.ActivityGroupBuyDetail;
 import com.xunao.benben.ui.item.ActivityChatPicSet;
 import com.xunao.benben.ui.item.ActivityContactsInfo;
 import com.xunao.benben.ui.item.ActivityFriendUnionDetail;
@@ -987,12 +988,22 @@ public class MessageAdapter extends BaseAdapter {
 				public void onClick(View view) {
 					if(textContent.contains("http")|| textContent.contains("com")|| textContent.contains("www")){
 						String url = textContent.substring(textContent.indexOf("http"));
-						if(textContent.contains("promotionid")){
+                        String ids = textContent.substring(textContent.indexOf("promotionid=")+12);
+						if(textContent.contains("promotiondetail")){
 							//内部跳转
 							Intent intent = new Intent(context, ActivityPromotionDetail.class);
-							intent.putExtra("url", url);
+//							intent.putExtra("url", url);
+                            intent.putExtra("ids", ids);
+                            intent.putExtra("position", 0);
 							context.startActivity(intent);
-						}else{
+						}else if(textContent.contains("groupbuyDetail")){
+                            //内部跳转
+                            Intent intent = new Intent(context, ActivityGroupBuyDetail.class);
+                            intent.putExtra("ids", ids);
+                            intent.putExtra("position", 0);
+//                            intent.putExtra("url", url);
+                            context.startActivity(intent);
+                        }else{
 							//默认跳转
 							Intent intent = new Intent(Intent.ACTION_VIEW);
 							intent.setData(Uri.parse(url));
@@ -1358,6 +1369,7 @@ public class MessageAdapter extends BaseAdapter {
 			// System.err.println("it is receive msg");
 			if (message.status == EMMessage.Status.INPROGRESS) {
 				// System.err.println("!!!! back receive");
+
 				holder.iv.setImageResource(R.drawable.default_image);
 				showDownloadImageProgress(message, holder);
 

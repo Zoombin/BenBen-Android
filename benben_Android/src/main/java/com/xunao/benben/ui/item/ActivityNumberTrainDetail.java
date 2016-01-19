@@ -699,6 +699,7 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
 				contacts.setId(id);
 				contacts.setGroup_id("10000");
 				contacts.setName(numberTrainDetail.getShortName());
+                contacts.setHuanxin_username(numberTrainDetail.getHuanxinUsername());
 				contacts.setPoster(numberTrainDetail.getPoster());
 				contacts.setIs_baixing("0");
 				contacts.setIs_benben("0");

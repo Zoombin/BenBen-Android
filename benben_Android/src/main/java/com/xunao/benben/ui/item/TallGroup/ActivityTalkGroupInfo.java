@@ -295,7 +295,7 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
 			time = Long.parseLong(mTalkGroup.getCreated_time());
 		}catch (Exception e){}
 		if(time >0){
-			tv_notice_time.setText(TimeUtil.getTimeString(time));
+			tv_notice_time.setText(TimeUtil.getTimeString(time*1000));
 		}else{
 			tv_notice_time.setText("");
 		}

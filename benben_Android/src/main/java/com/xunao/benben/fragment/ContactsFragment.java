@@ -1024,13 +1024,13 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 			holder.item_phone_name.setText(cs.getName());
 			// }
 
-			if ("0".equals(cs.getIs_baixing())) {
+			if ("0".equals(cs.getIs_baixing()) || cs.getGroup_id().equals("10000")) {
 				holder.item_phone_single_bxw.setVisibility(View.GONE);
 			} else {
 				holder.item_phone_single_bxw.setVisibility(View.VISIBLE);
 			}
 
-			if ("0".equals(cs.getIs_benben())) {
+			if ("0".equals(cs.getIs_benben()) || cs.getGroup_id().equals("10000")) {
 				holder.item_phone_single_bb.setVisibility(View.GONE);
 			} else {
 				holder.item_phone_single_bb.setVisibility(View.VISIBLE);
@@ -1059,7 +1059,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
                     }
                 }
             }
-            if(ztcFlag){
+            if(ztcFlag && !cs.getGroup_id().equals("10000")){
                 holder.item_phone_single_ztc.setVisibility(View.VISIBLE);
             }else{
                 holder.item_phone_single_ztc.setVisibility(View.GONE);

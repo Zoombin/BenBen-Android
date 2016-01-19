@@ -350,6 +350,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 					searchKey = "";
 					addressId[1] = addressId[2] = addressId[0] = "";
 					addressname = null;
+                    industryId = "";
 					InteNetUtils.getInstance(mContext).getStoreList(pagerNum,
 							"", latitude, longitude, addressId[0],
 							addressId[1], addressId[2], addressId[3],industryId,
@@ -808,6 +809,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 					} else {
 						view.setVisibility(view.GONE);
 						ll_range.setVisibility(view.GONE);
+                        ll_industry.setVisibility(view.GONE);
 						tv_range.setText("");
 						tv_search_number.setVisibility(View.GONE);
 					}

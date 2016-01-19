@@ -121,8 +121,8 @@
                         android:layout_height="45dip"
                         android:background="#ffffff"
                         android:gravity="center_vertical"
-                        android:hint="请填写商铺简称，让用户更容易记住"
-                        android:textSize="15dp" />
+                        android:hint="请填写商铺简称（号码直通车按此简称搜索)"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <View style="@style/set_item_Line_1" />
@@ -151,7 +151,9 @@
                         android:background="#ffffff"
                         android:gravity="center_vertical"
                         android:hint="请填写手机号"
-                        android:textSize="15dp" />
+                        android:textSize="15dp"
+                        android:inputType="phone"
+                        />
                 </LinearLayout>
 
                 <View style="@style/set_item_Line_1" />
@@ -180,7 +182,8 @@
                         android:background="#ffffff"
                         android:gravity="center_vertical"
                         android:hint="请填写固话"
-                        android:textSize="15dp" />
+                        android:textSize="15dp"
+                        android:inputType="phone"/>
                 </LinearLayout>
 
                 <View style="@style/set_item_Line_1" />
@@ -353,7 +356,7 @@
                         android:layout_height="wrap_content"
                         android:background="#ffffff"
                         android:gravity="center_vertical"
-                        android:hint="请填写详细地址"
+                        android:hint="请填写邮件地址（市·区/县·乡/镇）"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -385,7 +388,7 @@
                         android:layout_height="wrap_content"
                         android:background="#ffffff"
                         android:gravity="center_vertical"
-                        android:hint="请填写服务项目1"
+                        android:hint="限6个字（搜索关键字）"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -417,7 +420,7 @@
                         android:layout_height="wrap_content"
                         android:background="#ffffff"
                         android:gravity="center_vertical"
-                        android:hint="请填写服务项目2"
+                        android:hint="限6个字（搜索关键字）"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -449,7 +452,7 @@
                         android:layout_height="wrap_content"
                         android:background="#ffffff"
                         android:gravity="center_vertical"
-                        android:hint="请填写服务项目3"
+                        android:hint="限6个字（搜索关键字）"
                         android:textSize="15dp" />
                 </LinearLayout>
 

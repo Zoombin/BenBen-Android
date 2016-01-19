@@ -1,5 +1,6 @@
 package com.xunao.benben.ui.item;
 
+import java.io.IOException;
 import java.lang.ref.SoftReference;
 
 import org.json.JSONException;
@@ -337,9 +338,19 @@ public class ActivityWriteFriend extends FragmentActivity {
 					holder.image.setVisibility(View.GONE);
 				}
 			} else {
-				holder.image.setImageBitmap(CommonUtils.readPictureDegree(
-						Bimp.tempSelectBitmap.get(position).getImagePath(),
-						Bimp.tempSelectBitmap.get(position).getBitmap()));
+                String imagePath = Bimp.tempSelectBitmap.get(position).getImagePath();
+                try {
+                    SoftReference<Bitmap> bitmap = new SoftReference<Bitmap>(
+                            Bimp.revitionImageSize(imagePath));
+                    holder.image.setImageBitmap(CommonUtils.readPictureDegree(
+                            imagePath,bitmap.get()));
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+
 				holder.delete.setVisibility(View.VISIBLE);
 				holder.delete.setOnClickListener(new OnClickListener() {
 

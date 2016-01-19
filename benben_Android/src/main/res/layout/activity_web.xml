@@ -14,7 +14,7 @@
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="40dp"
+            android:layout_above="@+id/ll_bottom"
             android:scrollbars="none" />
 
         <com.xunao.benben.view.MultiImageView
@@ -28,54 +28,69 @@
             android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/ll_bottom"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
             <TextView
                 android:id="@+id/tv_search"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="搜索商家" />
+                android:text="查看商家"
+                android:drawableTop="@drawable/icon_promotion_detail_operate1"
+                android:drawablePadding="5dp"
+                />
 
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
                 android:background="@color/gray"></View>
 
             <TextView
                 android:id="@+id/tv_sendmsg"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="发送消息" />
+                android:text="发送消息"
+                android:drawableTop="@drawable/icon_promotion_detail_operate2"
+                android:drawablePadding="5dp"/>
 
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
                 android:background="@color/gray"></View>
 
             <TextView
                 android:id="@+id/tv_call"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="拨号" />
+                android:text="拨号"
+                android:drawableTop="@drawable/icon_promotion_detail_operate3"
+                android:drawablePadding="5dp"/>
 
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
                 android:background="@color/gray"></View>
 
             <TextView
@@ -83,8 +98,13 @@
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="立即购买" />
+                android:text="立即购买"
+                android:layout_gravity="center_vertical"
+                />
         </LinearLayout>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 </LinearLayout>

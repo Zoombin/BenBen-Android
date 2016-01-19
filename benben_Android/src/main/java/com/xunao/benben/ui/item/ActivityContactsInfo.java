@@ -169,6 +169,7 @@ public class ActivityContactsInfo extends BaseActivity implements
                     contacts_poster);
             tv_nick_name.setText("昵称：" + mContacts.getNick_name());
             contacts_benben.setText("奔犇号：" + mContacts.getIs_benben());
+            List<PhoneInfo> phonelists = null;
             try {
                 if (!TextUtils.isEmpty(mContacts.getGroup_id())) {
                     ContactsGroup group = dbUtil.findById(ContactsGroup.class,
@@ -179,9 +180,78 @@ public class ActivityContactsInfo extends BaseActivity implements
                 } else {
                     contacts_group_name.setVisibility(View.GONE);
                 }
+
+                // 获得联系人下的 phoneInfo
+                phonelists = dbUtil.findAll(Selector.from(PhoneInfo.class).where(
+                        "contacts_id", "=", mContacts.getId()));
+
             } catch (DbException e) {
                 e.printStackTrace();
             }
+            phoneBenbenList.clear();
+            if (phonelists != null && phonelists.size() > 0) {
+                int i = 0;
+                for (PhoneInfo phoneInfo : phonelists) {
+                    if (!phoneInfo.getIs_benben().equals("0")) {
+                        phoneBenbenList.add(phoneInfo);
+                        if (phoneInfo.getIs_active().equals("1")) {
+                            benPosition = i;
+                        }
+                        i++;
+                    }
+                }
+            }
+
+            if (phoneBenbenList != null && phoneBenbenList.size() != 0) {
+                contacts_benben.setVisibility(View.VISIBLE);
+                if (phoneBenbenList.size() > 1) {
+                    ll_change.setVisibility(View.VISIBLE);
+                } else {
+                    ll_change.setVisibility(View.GONE);
+                }
+
+                CommonUtils.startImageLoader(cubeimageLoader, phoneBenbenList.get(benPosition).getPoster(),
+                        contacts_poster);
+//                tv_nick_name.setText("昵称：" + phoneBenbenList.get(benPosition).getNick_name());
+//                contacts_benben.setText("奔犇号：" + phoneBenbenList.get(benPosition).getIs_benben());
+
+                train_id = phoneBenbenList.get(benPosition).getTrain_id();
+                if (!train_id.equals("") && !train_id.equals("0")) {
+                    ll_ztc.setVisibility(View.VISIBLE);
+                    CommonUtils.startImageLoader(cubeimageLoader, phoneBenbenList.get(benPosition).getPic(),
+                            iv_ztc);
+
+                    tv_short_name.setText(phoneBenbenList.get(benPosition).getShort_name());
+                    tv_tag.setText(phoneBenbenList.get(benPosition).getTag());
+                } else {
+                    ll_ztc.setVisibility(View.GONE);
+                }
+                legid = phoneBenbenList.get(benPosition).getLegid();
+                if (legid != null && !legid.equals("")) {
+                    ll_friend_union.setVisibility(View.VISIBLE);
+                    CommonUtils.startImageLoader(cubeimageLoader, phoneBenbenList.get(benPosition).getLeg_poster(),
+                            iv_friend_union);
+                    tv_friend_union_name.setText(phoneBenbenList.get(benPosition).getLeg_name());
+                    String type = phoneBenbenList.get(benPosition).getType();
+                    if(type.equals("英雄联盟")){
+                        tv_friend_union_type.setText("英雄");
+                        tv_friend_union_type.setTextColor(Color.rgb(33, 207, 213));
+                        tv_friend_union_type.setBackgroundResource(R.drawable.textview_friend_union_2);
+                    }else if(type.equals("工作联盟")){
+                        tv_friend_union_type.setVisibility(View.VISIBLE);
+                        tv_friend_union_type.setText("工作");
+                        tv_friend_union_type.setTextColor(Color.rgb(233,81,135));
+                        tv_friend_union_type.setBackgroundResource(R.drawable.textview_friend_union_1);
+                    }
+//                    tv_friend_union_type.setText(phoneBenbenList.get(benPosition).getType());
+
+                    tv_friend_union_area.setText(phoneBenbenList.get(benPosition).getLeg_district());
+                } else {
+                    ll_friend_union.setVisibility(View.GONE);
+                }
+
+            }
+
         } else {
             isFriend = true;
             send_msg_or_add_friend.setText("发消息");
@@ -212,7 +282,6 @@ public class ActivityContactsInfo extends BaseActivity implements
             if (phones != null && phones.size() > 0) {
                 int i = 0;
                 for (PhoneInfo phoneInfo : phones) {
-                    Log.d("ltf","phoneInfo======="+phoneInfo.getIs_benben());
                     if (!phoneInfo.getIs_benben().equals("0")) {
                         phoneBenbenList.add(phoneInfo);
                         if (phoneInfo.getIs_active().equals("1")) {
@@ -407,6 +476,7 @@ public class ActivityContactsInfo extends BaseActivity implements
                     Intent intent = new Intent(mContext, ActivityAddFriendDetail.class);
                     mContext.overridePendingTransition(R.anim.in_from_right,
                             R.anim.out_to_left);
+                    intent.putExtra("nick_name", mContacts.getNick_name());
                     intent.putExtra("from_huanxin", user.getHuanxin_username());
                     intent.putExtra("to_huanxin", mContacts.getHuanxin_username());
                     startActivityForResult(intent, AndroidConfig.writeFriendRequestCode);

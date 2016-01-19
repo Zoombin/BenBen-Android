@@ -14,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -21,10 +22,13 @@ import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.LodingDialog;
+import com.xunao.benben.hx.chatuidemo.activity.ChatActivity;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.item.ActivityNumberTrainDetail;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectFriend;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectTalkGroup;
 import com.xunao.benben.utils.CommonUtils;
+import com.xunao.benben.utils.PhoneUtils;
 import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.view.ActionSheet;
 
@@ -34,11 +38,16 @@ public class ActivityPromotionDetail extends BaseActivity {
 
 	private WebView webView;
 	private TextView tv_search,tv_sendmsg,tv_call,tv_buynow;
-	private View progressBar;
 	private LodingDialog lodingDialog;
-    private String ids;
     private String[] promotionId= new String[0];
     private int position;
+
+    private LinearLayout ll_bottom;
+    private String hxName="";
+    private String train_id="";
+    private String tel = "";
+    private String type = "";
+
 
 	@Override
 	public void loadLayout(Bundle savedInstanceState) {
@@ -49,10 +58,12 @@ public class ActivityPromotionDetail extends BaseActivity {
 	public void initView(Bundle savedInstanceState) {
 
 		webView = (WebView) findViewById(R.id.webView);
+        ll_bottom = (LinearLayout) findViewById(R.id.ll_bottom);
 		tv_search = (TextView) findViewById(R.id.tv_search);
 		tv_sendmsg = (TextView) findViewById(R.id.tv_sendmsg);
 		tv_call = (TextView) findViewById(R.id.tv_call);
 		tv_buynow = (TextView) findViewById(R.id.tv_buynow);
+        tv_buynow.setVisibility(View.GONE);
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setSupportZoom(true);
 		webSettings.setJavaScriptEnabled(true);
@@ -118,28 +129,64 @@ public class ActivityPromotionDetail extends BaseActivity {
 		tv_sendmsg.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				webView.loadUrl("javascript:window.benben.sendMsg(document.getElementsByName('huanxin_username')[0].value)");
+//				webView.loadUrl("javascript:window.benben.sendMsg(document.getElementsByName('huanxin_username')[0].value)");
+                startAnimActivity2Obj(ChatActivity.class, "userId",hxName);
 			}
 		});
 		tv_search.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				webView.loadUrl("javascript:window.benben.search(document.getElementsByName('train_id')[0].value)");
+//				webView.loadUrl("javascript:window.benben.search(document.getElementsByName('train_id')[0].value)");
+                Intent intent = new Intent(ActivityPromotionDetail.this, ActivityNumberTrainDetail.class);
+                intent.putExtra("id", train_id);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
 			}
 		});
 		tv_call.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				webView.loadUrl("javascript:window.benben.getTel(document.getElementsByName('tel')[0].value)");
+//				webView.loadUrl("javascript:window.benben.getTel(document.getElementsByName('tel')[0].value)");
+                setTheme(R.style.ActionSheetStyleIOS7);
+                String[] phones = tel.split("#");
+                showActionSheet(phones);
 			}
 		});
 		tv_buynow.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				webView.loadUrl("javascript:window.benben.bynow(document.getElementsByName('type')[0].value)");
+//				webView.loadUrl("javascript:window.benben.bynow(document.getElementsByName('type')[0].value)");
 			}
 		});
 	}
+
+
+    private void showActionSheet(final String[] phones) {
+
+        ActionSheet.createBuilder(mContext, getSupportFragmentManager())
+                .setCancelButtonTitle("取消")
+                .setOtherButtonTitles(phones)
+                        // 设置颜色 必须一一对应
+                .setOtherButtonTitlesColor("#1E82FF")
+                .setCancelableOnTouchOutside(true)
+                .setListener(new ActionSheet.ActionSheetListener() {
+
+                    @Override
+                    public void onOtherButtonClick(ActionSheet actionSheet,
+                                                   int index) {
+                        PhoneUtils.makeCall(Integer.parseInt(train_id), "",
+                                phones[index], mContext);
+
+                    }
+
+                    @Override
+                    public void onDismiss(ActionSheet actionSheet,
+                                          boolean isCancel) {
+                    }
+                }).show();
+    }
 
     public void showMoreActionSheet() {
         ActionSheet
@@ -297,6 +344,10 @@ public class ActivityPromotionDetail extends BaseActivity {
 			if (lodingDialog != null && lodingDialog.isShowing()) {
 				lodingDialog.dismiss();
 			}
+            webView.loadUrl("javascript:window.benben.sendMsg(document.getElementsByName('huanxin_username')[0].value)");
+            webView.loadUrl("javascript:window.benben.search(document.getElementsByName('train_id')[0].value)");
+            webView.loadUrl("javascript:window.benben.getTel(document.getElementsByName('tel')[0].value)");
+            webView.loadUrl("javascript:window.benben.bynow(document.getElementsByName('type')[0].value)");
 		}
 
 	}
@@ -305,18 +356,34 @@ public class ActivityPromotionDetail extends BaseActivity {
 		@JavascriptInterface
 		public void getTel(String info) {
 			Log.d("TTT",info);
+            tel = info;
 		}
 		@JavascriptInterface
 		public void bynow(String info) {
 			Log.d("TTT",info);
+            type = info;
 		}
 		@JavascriptInterface
 		public void search(String info) {
 			Log.d("TTT",info);
+            train_id = info;
 		}
 		@JavascriptInterface
 		public void sendMsg(String info) {
 			Log.d("TTT",info);
+            hxName = info;
+            mContext.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(hxName.equals(user.getHuanxin_username())){
+                        ll_bottom.setVisibility(View.GONE);
+                    }else{
+                        ll_bottom.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+
+
 		}
 	}
 }

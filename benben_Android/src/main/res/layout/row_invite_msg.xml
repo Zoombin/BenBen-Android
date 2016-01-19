@@ -69,9 +69,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="2dip"
-                android:singleLine="true"
                 android:textColor="#878787"
-                android:textSize="12dip" />
+                android:textSize="12sp"
+                />
         </RelativeLayout>
 
         <Button

@@ -245,10 +245,15 @@ public class ActivityShareSelectFriend extends BaseActivity {
 							if (!TextUtils.isEmpty(type)) {
 								final EMMessage forward_msg = EMChatManager.getInstance().getMessage(msgId);
 								if ("Forward_img".equals(type)) {
+                                    message = EMMessage
+                                            .createSendMessage(EMMessage.Type.IMAGE);
+
 									ImageMessageBody iBody = (ImageMessageBody) forward_msg.getBody();
 									String localUrl = iBody.getLocalUrl();
 									if (new File(localUrl).exists()) {
-										message = forward_msg;
+                                        ImageMessageBody body = new ImageMessageBody(new File(localUrl));
+                                        message.addBody(body);
+//                                        sendMsgToFriend(conversation,contact,message,false);
 									} else {
 										try {
 											new File(localUrl).createNewFile();
@@ -256,10 +261,13 @@ public class ActivityShareSelectFriend extends BaseActivity {
 											e.printStackTrace();
 										}
 										showLoding("");
-										SimpleDownLoadUtils.download(iBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
+                                        final EMMessage finalMessage = message;
+                                        SimpleDownLoadUtils.download(iBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
 											@Override
 											public void DownLoadComplete(String url, String outPath) {
-												sendMsgToFriend(conversation,contact,forward_msg,false);
+                                                ImageMessageBody body = new ImageMessageBody(new File(url));
+                                                finalMessage.addBody(body);
+                                                sendMsgToFriend(conversation,contact, finalMessage,false);
 											}
 
 											@Override
@@ -271,10 +279,20 @@ public class ActivityShareSelectFriend extends BaseActivity {
 									}
 								}
 								if ("Forward_video".equals(type)) {
-									VideoMessageBody vBody = (VideoMessageBody) forward_msg.getBody();
-									String localUrl = vBody.getLocalUrl();
-									if (new File(localUrl).exists()) {
-										message = forward_msg;
+                                    message = EMMessage
+                                            .createSendMessage(EMMessage.Type.VIDEO);
+									final VideoMessageBody vBody = (VideoMessageBody) forward_msg.getBody();
+//                                    VideoMessageBody body = new VideoMessageBody(videoFile, videoFile.getAbsolutePath(),
+//                                                vBody.getLength(), videoFile.length());
+//                                    message.addBody(vBody);
+//                                    sendMsgToFriend(conversation,contact, message,false);
+									final String localUrl = vBody.getLocalUrl();
+                                    final File videoFile = new File(localUrl);
+									if (videoFile.exists()) {
+                                        VideoMessageBody body = new VideoMessageBody(videoFile, vBody.getLocalThumb(),
+                                                vBody.getLength(), videoFile.length());
+                                        message.addBody(body);
+//                                        sendMsgToFriend(conversation,contact, message,false);
 									} else {
 										try {
 											new File(localUrl).createNewFile();
@@ -282,10 +300,16 @@ public class ActivityShareSelectFriend extends BaseActivity {
 											e.printStackTrace();
 										}
 										showLoding("");
-										SimpleDownLoadUtils.download(vBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
+                                        final EMMessage finalMessage = message;
+                                        SimpleDownLoadUtils.download(vBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
 											@Override
 											public void DownLoadComplete(String url, String outPath) {
-												sendMsgToFriend(conversation,contact,forward_msg,false);
+//												sendMsgToFriend(conversation,contact,forward_msg,false);
+                                                File videoFile = new File(url);
+                                                VideoMessageBody body = new VideoMessageBody(videoFile, vBody.getLocalThumb(),
+                                                        vBody.getLength(), videoFile.length());
+                                                finalMessage.addBody(body);
+                                                sendMsgToFriend(conversation,contact, finalMessage,false);
 											}
 
 											@Override

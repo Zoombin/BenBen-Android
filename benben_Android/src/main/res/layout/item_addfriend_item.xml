@@ -33,7 +33,7 @@
             app:riv_corner_radius="5dip"
             app:riv_mutate_background="true" />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

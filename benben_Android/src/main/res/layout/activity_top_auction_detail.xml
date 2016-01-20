@@ -20,7 +20,7 @@
             android:orientation="vertical"
             >
 
-            <com.xunao.benben.view.ListViewForScrollView
+            <com.xunao.test.view.ListViewForScrollView
                 android:id="@+id/lv_auction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

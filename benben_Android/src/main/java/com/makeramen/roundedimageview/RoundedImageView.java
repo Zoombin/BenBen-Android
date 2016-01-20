@@ -30,7 +30,7 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import com.xunao.benben.R;
+import com.xunao.test.R;
 
 @SuppressWarnings("UnusedDeclaration")
 public class RoundedImageView extends CubeImageView {

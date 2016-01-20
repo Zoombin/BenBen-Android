@@ -14,7 +14,7 @@
             style="@style/contacts_head_image"
             android:src="@drawable/icon_contacts_zqtxl" />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             style="@style/contacts_head_text"
             android:text="政企通讯录" />
     </LinearLayout>
@@ -28,7 +28,7 @@
             style="@style/contacts_head_image"
             android:src="@drawable/icon_contacts_qun" />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             style="@style/contacts_head_text"
             android:text="群组" />
     </LinearLayout>
@@ -42,7 +42,7 @@
             style="@style/contacts_head_image"
             android:src="@drawable/icon_contacts_hmztc" />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             style="@style/contacts_head_text"
             android:text="号码直通车" />
     </LinearLayout>

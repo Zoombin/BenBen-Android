@@ -70,7 +70,7 @@
             android:paddingRight="5dip"
             android:src="@drawable/ic_back" />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_centerInParent="true"

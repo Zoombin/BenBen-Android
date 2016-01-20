@@ -138,7 +138,7 @@
 
             <View style="@style/set_item_Line_5" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/register_point"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"

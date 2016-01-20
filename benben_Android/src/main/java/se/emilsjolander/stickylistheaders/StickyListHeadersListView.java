@@ -25,7 +25,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 
-import com.xunao.benben.R;
+import com.xunao.test.R;
 
 /**
  * Even though this is a FrameLayout subclass we still consider it a ListView.

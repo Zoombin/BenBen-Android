@@ -32,7 +32,7 @@
             android:orientation="vertical"
             >
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/tv_contacts_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:textSize="15dp"
                 />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/tv_contacts_benben"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 android:layout_marginBottom="5dp"
                 />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/tv_contacts_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,7 +220,7 @@
         android:visibility="gone"
         >
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/tv_refuse"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -233,7 +233,7 @@
             android:padding="10dp"
             />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/tv_agree"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -264,7 +264,7 @@
             android:layout_weight="1"
             android:layout_height="0dp"/>
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/tv_state"
             android:layout_width="0dp"
             android:layout_weight="2"

@@ -133,7 +133,7 @@
                 android:layout_marginRight="6dp"
                 android:layout_weight="1">
 
-                <com.xunao.benben.hx.chatuidemo.widget.PasteEditText
+                <com.xunao.test.hx.chatuidemo.widget.PasteEditText
                     android:id="@+id/et_sendmessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

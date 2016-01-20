@@ -234,7 +234,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp">
 
-                    <com.xunao.benben.view.CircularImage
+                    <com.xunao.test.view.CircularImage
                         android:id="@+id/iv_poster"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -550,7 +550,7 @@
                     android:background="#dddddd" />
 
 
-                <com.xunao.benben.view.NoScrollGridView
+                <com.xunao.test.view.NoScrollGridView
                     android:id="@+id/item_gridView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -567,7 +567,7 @@
                     android:focusable="false"
                     />
 
-                <com.xunao.benben.view.ListViewForScrollView
+                <com.xunao.test.view.ListViewForScrollView
                     android:id="@+id/item_group_buy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

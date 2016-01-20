@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Hashtable;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -14,7 +11,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnDismissListener;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,7 +21,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.text.ClipboardManager;
-import android.util.Config;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
@@ -46,11 +41,11 @@ import com.google.zxing.client.result.ResultParser;
 import com.google.zxing.common.HybridBinarizer;
 import com.sitech.oncon.barcode.camera.CameraManager;
 import com.sitech.oncon.barcode.executor.ResultHandler;
-import com.xunao.benben.R;
-import com.xunao.benben.config.AndroidConfig;
-import com.xunao.benben.dialog.InfoSimpleMsgHint;
-import com.xunao.benben.dialog.MsgDialog;
-import com.xunao.benben.ui.item.ActivityContactsInfo;
+import com.xunao.test.R;
+import com.xunao.test.config.AndroidConfig;
+import com.xunao.test.dialog.InfoSimpleMsgHint;
+import com.xunao.test.dialog.MsgDialog;
+import com.xunao.test.ui.item.ActivityContactsInfo;
 
 public final class CaptureActivity extends Activity implements
 		SurfaceHolder.Callback {

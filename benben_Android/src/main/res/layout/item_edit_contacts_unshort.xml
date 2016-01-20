@@ -27,7 +27,7 @@
                 android:padding="10dip"
                 android:src="@drawable/icon_com_list_delete" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_phone_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

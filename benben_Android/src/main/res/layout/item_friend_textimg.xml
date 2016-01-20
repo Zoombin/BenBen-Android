@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <com.xunao.benben.view.MyTextView
+                <com.xunao.test.view.MyTextView
                     android:id="@+id/item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                     android:textColor="#0f72aa"
                     android:textSize="14dip" />
 
-                <com.xunao.benben.view.MyTextView
+                <com.xunao.test.view.MyTextView
                     android:id="@+id/item_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip" >
 
-                <com.xunao.benben.view.MyTextView
+                <com.xunao.test.view.MyTextView
                     android:id="@+id/item_friend_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                     android:textColor="#000000"
                     android:textSize="13dip" />
 
-                <com.xunao.benben.view.NoScrollGridView
+                <com.xunao.test.view.NoScrollGridView
                     android:id="@+id/item_friend_gridView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                     android:layout_centerVertical="true"
                     android:background="@drawable/ic_looknum" />
 
-                <com.xunao.benben.view.MyTextView
+                <com.xunao.test.view.MyTextView
                     android:id="@+id/item_friend_looknum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                     android:src="@drawable/icon_report" />
             </RelativeLayout>
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/laud_list"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

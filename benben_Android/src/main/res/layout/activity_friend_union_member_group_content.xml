@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <com.xunao.benben.view.MyTextView
+                <com.xunao.test.view.MyTextView
                     android:id="@+id/item_phone_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                     android:singleLine="true"
                     android:textSize="16dp" />
 
-                <com.xunao.benben.view.MyTextView
+                <com.xunao.test.view.MyTextView
                     android:id="@+id/item_phone_phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                     android:textSize="15dp" />
             </LinearLayout>
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_phone_benben"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

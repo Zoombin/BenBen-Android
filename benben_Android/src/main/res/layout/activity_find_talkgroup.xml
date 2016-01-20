@@ -27,7 +27,7 @@
                 android:layout_marginTop="40dip"
                 android:src="@drawable/ic_buysearch" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tu"

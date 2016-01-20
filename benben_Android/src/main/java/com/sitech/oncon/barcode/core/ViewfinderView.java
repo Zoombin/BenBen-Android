@@ -32,7 +32,7 @@ import android.view.View;
 
 import com.google.zxing.ResultPoint;
 import com.sitech.oncon.barcode.camera.CameraManager;
-import com.xunao.benben.R;
+import com.xunao.test.R;
 
 /**
  * This view is overlaid on top of the camera preview. It adds the viewfinder

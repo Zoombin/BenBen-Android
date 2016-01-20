@@ -141,7 +141,7 @@
                             android:padding="10dip"
                             android:src="@drawable/vedio_selector" />
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:id="@+id/record_vedio_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

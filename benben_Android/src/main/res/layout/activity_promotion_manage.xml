@@ -34,7 +34,7 @@
                 android:layout_marginTop="3dp"
                 style="@style/set_item_Line_5"/>
 
-            <com.xunao.benben.view.NoScrollGridView
+            <com.xunao.test.view.NoScrollGridView
                 android:id="@+id/gv_promotion_showing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 android:layout_marginTop="3dp"
                 style="@style/set_item_Line_5"/>
 
-            <com.xunao.benben.view.NoScrollGridView
+            <com.xunao.test.view.NoScrollGridView
                 android:id="@+id/gv_promotion_off_shelf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

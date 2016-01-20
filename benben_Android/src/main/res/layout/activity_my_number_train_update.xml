@@ -497,7 +497,7 @@
                     android:orientation="vertical"
                     android:background="#f3f3f3" >
 
-                    <com.xunao.benben.view.MyTextView
+                    <com.xunao.test.view.MyTextView
                         android:id="@+id/send_message_red"
                         android:layout_width="match_parent"
                         android:layout_height="40dip"
@@ -510,7 +510,7 @@
                         android:textColor="#ffffff"
                         android:textSize="@dimen/size_16" />
 
-                    <com.xunao.benben.view.MyTextView
+                    <com.xunao.test.view.MyTextView
                         android:id="@+id/transfer_mynumber_train"
                         android:layout_width="match_parent"
                         android:layout_height="40dip"

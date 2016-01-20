@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.xunao.benben.R;
+import com.xunao.test.R;
 
 public class TitleView extends RelativeLayout {
 	protected TextView tvLeft;

@@ -1,4 +1,4 @@
-<com.xunao.benben.hx.chatuidemo.widget.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.xunao.test.hx.chatuidemo.widget.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -22,4 +22,4 @@
         android:background="@drawable/selector_checkbox"
         />
 
-</com.xunao.benben.hx.chatuidemo.widget.SquareRelativeLayout>
+</com.xunao.test.hx.chatuidemo.widget.SquareRelativeLayout>

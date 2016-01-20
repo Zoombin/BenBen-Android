@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ScrollView;
 
-import com.xunao.benben.R;
+import com.xunao.test.R;
 
 /**
  * 自定义ScrollView

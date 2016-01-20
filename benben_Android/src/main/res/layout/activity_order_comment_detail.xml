@@ -142,7 +142,7 @@
                 android:background="@drawable/search_edittext"
                 android:gravity="center" >
 
-                <com.xunao.benben.hx.chatuidemo.widget.PasteEditText
+                <com.xunao.test.hx.chatuidemo.widget.PasteEditText
                     android:id="@+id/et_sendmessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

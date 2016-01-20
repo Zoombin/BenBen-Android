@@ -29,7 +29,7 @@ import android.util.Log;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.sitech.oncon.barcode.camera.CameraManager;
-import com.xunao.benben.R;
+import com.xunao.test.R;
 
 /**
  * This class handles all the messaging which comprises the state machine for

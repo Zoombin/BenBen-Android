@@ -195,7 +195,7 @@
 
 
 
-            <com.xunao.benben.view.ListViewForScrollView
+            <com.xunao.test.view.ListViewForScrollView
                 android:id="@+id/lv_pay_method"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

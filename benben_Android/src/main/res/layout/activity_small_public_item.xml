@@ -44,7 +44,7 @@
             android:textColor="#575757"
             android:textSize="15dip" />
 
-        <com.xunao.benben.view.NoScrollGridView
+        <com.xunao.test.view.NoScrollGridView
             android:id="@+id/item_friend_gridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

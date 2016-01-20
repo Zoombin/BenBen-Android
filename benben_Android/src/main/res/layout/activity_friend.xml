@@ -59,7 +59,7 @@
                     android:background="@drawable/search_edittext"
                     android:gravity="center" >
 
-                    <com.xunao.benben.view.ContainsEmojiEditText
+                    <com.xunao.test.view.ContainsEmojiEditText
                         android:id="@+id/et_sendmessage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                 android:layout_height="25dp"
                 android:src="@drawable/ic_group_df" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/tv_new_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

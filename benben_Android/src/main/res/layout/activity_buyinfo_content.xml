@@ -59,14 +59,14 @@
                                 android:gravity="center_vertical"
                                 android:orientation="vertical" >
 
-                                <com.xunao.benben.view.MyTextView
+                                <com.xunao.test.view.MyTextView
                                     android:id="@+id/item_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000000"
                                     android:textSize="14dip" />
 
-                                <com.xunao.benben.view.MyTextView
+                                <com.xunao.test.view.MyTextView
                                     android:id="@+id/item_address"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal" >
 
-                                <com.xunao.benben.view.MyTextView
+                                <com.xunao.test.view.MyTextView
                                     android:id="@+id/proname"
                                     android:layout_width="0dip"
                                     android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                                     android:textSize="15dip"
                                     android:textStyle="bold" />
 
-                                <com.xunao.benben.view.MyTextView
+                                <com.xunao.test.view.MyTextView
                                     android:id="@+id/publicTime"
                                     android:layout_width="0dip"
                                     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                                     android:textSize="12dip" />
                             </LinearLayout>
 
-                            <com.xunao.benben.view.MyTextView
+                            <com.xunao.test.view.MyTextView
                                 android:id="@+id/proinfo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/ic_num" />
 
-                                <com.xunao.benben.view.MyTextView
+                                <com.xunao.test.view.MyTextView
                                     android:id="@+id/item_num"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/ic_time" />
 
-                                <com.xunao.benben.view.MyTextView
+                                <com.xunao.test.view.MyTextView
                                     android:id="@+id/item_time"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
                             android:paddingLeft="25dip"
                             android:paddingRight="15dip" >
 
-                            <com.xunao.benben.view.MyTextView
+                            <com.xunao.test.view.MyTextView
                                 android:id="@+id/price_num"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -244,7 +244,7 @@
             android:layout_alignParentBottom="true"
             android:orientation="vertical" >
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/self_but"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -264,7 +264,7 @@
                 android:orientation="horizontal"
                 android:visibility="gone" >
 
-                <com.xunao.benben.view.MyTextView
+                <com.xunao.test.view.MyTextView
                     android:id="@+id/price_but"
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
@@ -305,7 +305,7 @@
                 android:layout_marginTop="70dip"
                 android:src="@drawable/ic_error" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/a"

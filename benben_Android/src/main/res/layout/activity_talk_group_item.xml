@@ -32,14 +32,14 @@
             android:gravity="center_vertical"
             android:orientation="vertical" >
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/talk_group_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="@dimen/size_16" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/talk_group_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:textSize="@dimen/size_14" />
         </LinearLayout>
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/talk_group_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

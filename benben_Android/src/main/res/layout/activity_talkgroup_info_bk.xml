@@ -42,7 +42,7 @@
                             app:riv_corner_radius="5dip"
                             app:riv_mutate_background="true" />
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:id="@+id/talk_group_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                             android:layout_toRightOf="@id/talk_group_poster"
                             android:textSize="16dp" />
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:id="@+id/talk_group_level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                             android:textColor="#ffffff"
                             android:textSize="12dp" />
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:id="@+id/talk_group_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp">
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="5dp"
@@ -99,7 +99,7 @@
                             android:text="群介绍"
                             android:textColor="#878787" />
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:id="@+id/talk_group_info"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                         android:orientation="horizontal"
                         android:paddingLeft="20dp">
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:id="@+id/talk_group_count"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                         android:orientation="horizontal"
                         android:paddingLeft="20dp">
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -167,14 +167,14 @@
                         android:paddingLeft="20dp"
                         android:visibility="gone">
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="我的名片"
                             android:textColor="#878787" />
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:id="@+id/talk_group_myname"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -201,7 +201,7 @@
                         android:orientation="horizontal"
                         android:paddingLeft="20dp">
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -225,7 +225,7 @@
                         android:visibility="gone">
 
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -262,7 +262,7 @@
                         android:paddingLeft="20dp"
                         android:visibility="gone">
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -286,7 +286,7 @@
                         android:orientation="vertical"
                         android:paddingLeft="20dp">
 
-                        <com.xunao.benben.view.MyTextView
+                        <com.xunao.test.view.MyTextView
                             android:id="@+id/tv_notice_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -317,7 +317,7 @@
                 android:layout_marginTop="400dp"
                 android:orientation="vertical">
 
-                <com.xunao.benben.view.MyTextView
+                <com.xunao.test.view.MyTextView
                     android:id="@+id/send_message_blue"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -329,7 +329,7 @@
                     android:textSize="@dimen/size_16"
                     android:visibility="visible" />
 
-                <com.xunao.benben.view.MyTextView
+                <com.xunao.test.view.MyTextView
                     android:id="@+id/send_message_red"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

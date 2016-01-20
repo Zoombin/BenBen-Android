@@ -25,7 +25,7 @@
                 android:src="@drawable/icon_contacts_single_right" />
         </LinearLayout>
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/group_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:padding="5dp"
             android:textSize="16dip" />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/group_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

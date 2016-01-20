@@ -15,7 +15,7 @@
             android:layout_height="35dip"
             android:background="#f2f2f2" >
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_buyinfo_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
                 android:textColor="#3c3c3c"
                 android:textSize="16dip" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_buyinfo_n"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 android:textColor="#068cd9"
                 android:textSize="12dip" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_buyinfo_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:layout_height="35dip"
             android:orientation="horizontal" >
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_buyinfo_num"
                 android:layout_width="0dip"
                 android:layout_height="35dip"
@@ -73,7 +73,7 @@
                 android:textColor="#a1a1a1"
                 android:textSize="12dip" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_buyinfo_but"
                 android:layout_width="0dip"
                 android:layout_height="35dip"
@@ -86,7 +86,7 @@
                 android:textColor="#42be69"
                 android:textSize="12dip" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_buyinfo_time"
                 android:layout_width="0dip"
                 android:layout_height="35dip"

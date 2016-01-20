@@ -32,7 +32,7 @@
             android:layout_marginRight="80dip"
             android:layout_toRightOf="@id/item_iv" >
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 android:text="111"
                 android:textSize="14dip" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_friend_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:textColor="#878787"
                 android:textSize="13dip" />
             
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/item_friend_short_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

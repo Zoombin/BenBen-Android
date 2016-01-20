@@ -1,6 +1,6 @@
 package com.baoyz.swipemenulistview;
 
-import com.xunao.benben.base.BaseBean;
+import com.xunao.test.base.BaseBean;
 
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;

@@ -22,7 +22,7 @@ package com.widget.time;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.xunao.benben.R;
+import com.xunao.test.R;
 
 import android.content.Context;
 import android.graphics.Canvas;

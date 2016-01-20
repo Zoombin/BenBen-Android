@@ -24,7 +24,7 @@
             android:src="@drawable/default_face"
             app:riv_mutate_background="true" />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/friend_union_member_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 android:layout_marginRight="5dip"
                 android:src="@drawable/icon_phone_001" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/friend_union_member_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:textSize="14dp" />
         </LinearLayout>
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/friend_union_member_remark_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

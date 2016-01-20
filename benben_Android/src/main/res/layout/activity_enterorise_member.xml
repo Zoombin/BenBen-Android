@@ -19,7 +19,7 @@
             android:padding="10dip"
             android:src="@drawable/icon_com_title_left" />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/com_title_bar_left_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:layout_marginRight="65dp"
             android:orientation="horizontal" >
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/tab_left"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -46,7 +46,7 @@
                 android:text="全部联系人"
                 android:textColor="#ffffff" />
 
-            <com.xunao.benben.view.MyTextView
+            <com.xunao.test.view.MyTextView
                 android:id="@+id/tab_right"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -57,7 +57,7 @@
                 android:textColor="@color/top_bar_color" />
         </LinearLayout>
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/com_title_bar_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
             android:layout_centerVertical="true"
             android:paddingRight="10dip" />
 
-        <com.xunao.benben.view.MyTextView
+        <com.xunao.test.view.MyTextView
             android:id="@+id/com_title_bar_right_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
             android:text="完成"
             android:textColor="#ffffff"
             android:textSize="16dp" >
-        </com.xunao.benben.view.MyTextView>
+        </com.xunao.test.view.MyTextView>
     </RelativeLayout>
 
     <RelativeLayout

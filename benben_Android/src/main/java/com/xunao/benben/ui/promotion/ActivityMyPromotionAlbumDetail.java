@@ -320,7 +320,7 @@ public class ActivityMyPromotionAlbumDetail extends BaseActivity implements View
                     album.getSmall_poster_cover(), rv_album_cover);
 
             tv_name.setText(album.getTitle());
-            tv_max_num.setText("(仅限"+maxpic+"张图片)");
+            tv_max_num.setText("(每次可上传6张,仅限"+maxpic+"张图片)");
             tv_num.setText("("+album.getPoster_num()+"张)");
             long time = album.getTime();
             Date date = new Date(time*1000);

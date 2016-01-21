@@ -70,6 +70,7 @@ import java.lang.ref.SoftReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -83,7 +84,7 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
     private GridAdapter adapter;
     private TextView tv_start_date,tv_end_date;
     private Button btn_confirm;
-    private EditText edt_promotion_name,edt_origin_price,edt_promotion_price,edt_description;
+    private EditText edt_promotion_name,edt_origin_price,edt_promotion_price,edt_description,edt_model;
 
     private int type=0;
     private int promotionid=0;
@@ -164,6 +165,7 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
         edt_promotion_name = (EditText) findViewById(R.id.edt_promotion_name);
         edt_origin_price = (EditText) findViewById(R.id.edt_origin_price);
         edt_promotion_price = (EditText) findViewById(R.id.edt_promotion_price);
+        edt_model = (EditText) findViewById(R.id.edt_model);
         edt_description = (EditText) findViewById(R.id.edt_description);
         edt_description.setOnTouchListener(new View.OnTouchListener() {
 
@@ -394,6 +396,7 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
         edt_origin_price.setText(promotion.getOrigion_price()+"");
         edt_promotion_price.setText(promotion.getPromotion_price()+"");
         edt_description.setText(promotion.getDescription());
+        edt_model.setText(promotion.getModel());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         valid_left = Long.parseLong(promotion.getValid_left())*1000;
         Date start=new Date(valid_left);
@@ -591,6 +594,13 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
             ToastUtils.Errortoast(mContext, "起始时间不能大于结束时间!");
             return;
         }
+
+        String model = String.valueOf(edt_model.getText()).trim();
+        if (!CommonUtils.StringIsSurpass2(model, 0, 20)) {
+            ToastUtils.Errortoast(mContext, "产品参数限制在20个字之内!");
+            return;
+        }
+
         String description = String.valueOf(edt_description.getText()).trim();
         if (!CommonUtils.StringIsSurpass2(description, 1, 500)) {
             ToastUtils.Errortoast(mContext, "促销品介绍限制在1至500个字之内!");
@@ -600,7 +610,7 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
         if(CommonUtils.isNetworkAvailable(mContext)){
             showLoding("");
             InteNetUtils.getInstance(mContext).Addpromotion(name,origin_price,promotion_price,valid_left/1000,valid_right/1000,description
-                    ,files[0],files[1],files[2],user.getToken(),addCallBack);
+                    ,files[0],files[1],files[2],model,user.getToken(),addCallBack);
         }else{
             ToastUtils.Infotoast(mContext, "网络不可用");
         }
@@ -660,6 +670,13 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
             ToastUtils.Errortoast(mContext, "起始时间不能大于结束时间!");
             return;
         }
+
+        String model = String.valueOf(edt_model.getText()).trim();
+        if (!CommonUtils.StringIsSurpass2(model, 0, 20)) {
+            ToastUtils.Errortoast(mContext, "产品参数限制在20个字之内!");
+            return;
+        }
+
         String description = String.valueOf(edt_description.getText()).trim();
         if (!CommonUtils.StringIsSurpass2(description, 1, 500)) {
             ToastUtils.Errortoast(mContext, "促销品介绍限制在1至500个字之内!");
@@ -674,7 +691,7 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
                 delIds = ids.substring(0,ids.length()-1);
             }
             InteNetUtils.getInstance(mContext).Editpromotion(promotionid,name,origin_price,promotion_price,valid_left/1000,valid_right/1000,description
-                    ,files[0],files[1],files[2],delIds,user.getToken(),updateCallBack);
+                    ,files[0],files[1],files[2],delIds,model,user.getToken(),updateCallBack);
         }else{
             ToastUtils.Infotoast(mContext, "网络不可用");
         }
@@ -917,21 +934,33 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
                         try {
                             SimpleDateFormat myFormatter = new SimpleDateFormat(
                                     "yyyy-MM-dd");
-                            lastTime = dialog.getWheelMain();
+                            Calendar cal = Calendar.getInstance();
+                            cal.set(Calendar.HOUR_OF_DAY, 0);
+                            cal.set(Calendar.SECOND, 0);
+                            cal.set(Calendar.MINUTE, 0);
+                            cal.set(Calendar.MILLISECOND, 0);
+                            long todayTime = cal.getTimeInMillis();
                             Date date = myFormatter.parse(dialog.getWheelMain());
-                            if(type==1) {
-                                startTime = lastTime;
-                                valid_left = date.getTime();
-                                tv_start_date.setText(myFormatter.format(date));
-                            }else if(type==2) {
-                                endTime = lastTime;
-                                valid_right = date.getTime();
-                                tv_end_date.setText(myFormatter.format(date));
+                            if(todayTime>date.getTime()){
+                                ToastUtils.Infotoast(mContext,"不得小于当天时间");
+                            }else {
+
+                                lastTime = dialog.getWheelMain();
+                                if (type == 1) {
+                                    startTime = lastTime;
+                                    valid_left = date.getTime();
+                                    tv_start_date.setText(myFormatter.format(date));
+                                } else if (type == 2) {
+                                    endTime = lastTime;
+                                    valid_right = date.getTime();
+                                    tv_end_date.setText(myFormatter.format(date));
+                                }
+                                dialog.dismiss();
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        dialog.dismiss();
+
                         break;
                     default:
                         break;

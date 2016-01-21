@@ -13,11 +13,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -32,6 +34,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -78,7 +81,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 	private EditText search_edittext;
 	private ImageView iv_search_content_delect;
 	private LinearLayout ll_seach_icon;
-	private LinearLayout ll_search_item;
+    private RelativeLayout rl_search_area;
 	private Button btn_search_range;
 	private String searchKey;
 
@@ -91,6 +94,11 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 	private boolean isRange = false;
 	private refreshBroadCast broadCast;
 	private int page = 0;
+    private PopupWindow popupWindow;
+    private TextView tv_search_range,tv_search_industry;
+    private LinearLayout ll_industry;
+    private TextView tv_industry;
+    private String industryId="";
 
 	@Override
 	public void loadLayout(Bundle savedInstanceState) {
@@ -108,10 +116,10 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 		} else {
 			searchKey = "";
 			search_edittext.setText(searchKey);
-			
+            industryId = "";
 			ll_range.setVisibility(View.GONE);
 			tv_range.setText("");
-			
+			ll_industry.setVisibility(View.GONE);
 			if (CommonUtils.isNetworkAvailable(mContext)) {
 				InteNetUtils.getInstance(mContext).getBuyInfo("", page + "",
 						searchKey, addressIds, mRequestCallBack);
@@ -174,15 +182,16 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 		iv_search_content_delect = (ImageView) findViewById(R.id.iv_search_content_delect);
 		ll_seach_icon = (LinearLayout) findViewById(R.id.ll_seach_icon);
 		btn_search_range = (Button) findViewById(R.id.btn_search_range);
-		ll_search_item = (LinearLayout) findViewById(R.id.ll_search_item);
-
+        rl_search_area = (RelativeLayout) findViewById(R.id.rl_search_area);
+        rl_search_area.setOnClickListener(this);
+        ll_industry = (LinearLayout) findViewById(R.id.ll_industry);
+        tv_industry = (TextView) findViewById(R.id.tv_industry);
 		iv_search_content_delect.setOnClickListener(this);
 		btn_search_range.setOnClickListener(this);
 
 		public_buy = (ImageView) findViewById(R.id.public_buy);
 		nodota = (RelativeLayout) findViewById(R.id.nodota);
 		listview = (PullToRefreshListView) findViewById(R.id.listview);
-
 		listview.setOnRefreshListener(this);
 		listview.setOnLastItemVisibleListener(this);
 
@@ -220,6 +229,8 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 				nodota.setVisibility(View.VISIBLE);
 			}
 		}
+
+        initPopWindow();
 
 	}
 
@@ -523,15 +534,46 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 			isSearchRange = true;
 			search_edittext.setText("");
 			break;
-		case R.id.btn_search_range:// 范围选择
-			isSearchRange = true;
-			startAnimActivityForResult2(ActivityChoiceAddress.class,
-					CHOCE_ADDRESS, "level", "0");
+		case R.id.btn_search_range:
+            // 更新关键字
+            searchKey = search_edittext.getText().toString().trim();
+            isLoadMore = false;
+            enterNum = false;
+            // setShowLoding(!(mQuotes != null && mQuotes.size() > 0));
+            if (CommonUtils.isNetworkAvailable(mContext))
+                if (searchKey.length() > 0
+                        && CommonUtils.isNetworkAvailable(mContext)) {
+                    isSearch = true;
+                    InteNetUtils.getInstance(mContext).getBuyInfo("",
+                            page + "", searchKey, addressIds,
+                            mRequestCallBack);
+                } else {
+
+                }
+//			isSearchRange = true;
+//			startAnimActivityForResult2(ActivityChoiceAddress.class,
+//					CHOCE_ADDRESS, "level", "0");
 			break;
+        case R.id.rl_search_area:
+            popupWindow.showAsDropDown(rl_search_area, -PixelUtil.dp2px(45), 0);
+            break;
+        case R.id.tv_search_range:
+            isSearchRange = true;
+            startAnimActivityForResult2(ActivityChoiceAddress.class,
+                    CHOCE_ADDRESS, "level", "0");
+            popupWindow.dismiss();
+            break;
+        case R.id.tv_search_industry:
+            isSearchRange = true;
+            startAnimActivityForResult2(ActivityChoiceIndusrty.class,
+                    CHOCE_INDUSTRY, "from", "mybuy");
+            popupWindow.dismiss();
+            break;
 		}
 	}
 
 	private static final int CHOCE_ADDRESS = 1;
+    private static final int CHOCE_INDUSTRY = 2;
 	private String[] addressIds;
 	private ArrayList<BuyInfo> getmQuotes;
 
@@ -572,7 +614,23 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 					}, 200);
 				}
 			}
-		}
+		} else if (arg0 == CHOCE_INDUSTRY) {
+            if (arg2 != null) {
+                ll_industry.setVisibility(View.VISIBLE);
+                tv_industry.setText("行业:"+arg2.getStringExtra("industry"));
+                industryId = arg2.getStringExtra("industryId");
+            }else{
+                ll_industry.setVisibility(View.GONE);
+                industryId = "";
+            }
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    listview.setRefreshing(true);
+                }
+            }, 200);
+
+        }
 	}
 
 	class BuyInfoAdapter extends BaseAdapter {
@@ -616,7 +674,8 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 
 			if (arg1 == null) {
 				if (itemViewType == 0) {
-					arg1 = View.inflate(mContext, R.layout.item_buyinfo, null);
+                    arg1 = View.inflate(mContext, R.layout.item_my_buy, null);
+//					arg1 = View.inflate(mContext, R.layout.item_buyinfo, null);
 				}
 			}
 			if (itemViewType == 1) {
@@ -642,198 +701,221 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 						R.id.item_buyinfo_title);
 				MyTextView item_buyinfo_n = ViewHolderUtil.get(arg1,
 						R.id.item_buyinfo_n);
-				MyTextView item_buyinfo_but = ViewHolderUtil.get(arg1,
-						R.id.item_buyinfo_but);
-				LinearLayout price_box = ViewHolderUtil.get(arg1,
-						R.id.price_box);
+//				MyTextView item_buyinfo_but = ViewHolderUtil.get(arg1,
+//						R.id.item_buyinfo_but);
+//				LinearLayout price_box = ViewHolderUtil.get(arg1,
+//						R.id.price_box);
 				MyTextView item_buyinfo_num = ViewHolderUtil.get(arg1,
 						R.id.item_buyinfo_num);
 				MyTextView item_buyinfo_address = ViewHolderUtil.get(arg1,
 						R.id.item_buyinfo_address);
-				final MyTextView item_buyinfo_time = ViewHolderUtil.get(arg1,
+				MyTextView item_buyinfo_time = ViewHolderUtil.get(arg1,
 						R.id.item_buyinfo_time);
+                MyTextView item_name = ViewHolderUtil.get(arg1,
+                        R.id.item_name);
+                MyTextView tv_min_price = ViewHolderUtil.get(arg1,
+                        R.id.tv_min_price);
+
 				final BuyInfo item = getItem(arg0);
 
 				item_buyinfo_title.setText(item.getTitle());
 				item_buyinfo_n.setText("x" + item.getAmount());
 				long deadline = item.getDeadline();
 				if (item.getIs_close() == 1) {
-					item_buyinfo_time.setText("  已关闭");
+					item_buyinfo_time.setText("已关闭");
 				} else {
 					long time = (deadline)
 							- (System.currentTimeMillis() / 1000);
 
 					String secToTime = secToTime(time);
-					item_buyinfo_time.setText("  " + secToTime);
+					item_buyinfo_time.setText("剩余时间:" + secToTime);
 				}
 
-				if (
+//				if (
 				// item.getMemberId() != user.getId()
 				// &&
-				item.getIs_close() != 1) {
-					if (item.getHaveQuote() >= 2
-							|| item.getMemberId() == user.getId()) {
-						item_buyinfo_but.setVisibility(View.INVISIBLE);
-					} else {
-						item_buyinfo_but.setVisibility(View.VISIBLE);
-					}
-
-					item_buyinfo_but.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							// 报价
-							if (user != null && user.getZhiId() != 0) {
-								if (item.getMemberId() != user.getId()) {
-									ArrayList<Quote> getmQuotes = item
-											.getmQuotes();
-									// int index = 0;
-									// for (Quote q : getmQuotes) {
-									// if (q.getMember_id() == user.getId()) {
-									// index += 1;
-									// if (index >= 2) {
-									// ToastUtils.Errortoast(mContext,
-									// "您已经2次报价");
-									// return;
-									// }
-									// }
-									// }
-									curPosition = arg0;
-									buyDialog = new BuyDialog(mContext,
-											R.style.BuyDialog);
-									buyDialog
-											.setSuccessLinstener(ActivitymyBuy.this);
-									buyDialog.setBuyId(item.getId());
-									buyDialog.show();
-								} else {
-									ToastUtils.Errortoast(mContext,
-											"不可给自己发布的我要买报价");
-								}
-							} else {
-
-								hint = new InfoMsgHint(mContext,
-										R.style.MyDialog1);
-								hint.setContent("需要先开通号码直通车", "", "去开通", "取消");
-								hint.setCancleListener(new OnClickListener() {
-
-									@Override
-									public void onClick(View v) {
-										hint.dismiss();
-									}
-								});
-								hint.setOKListener(new OnClickListener() {
-									@Override
-									public void onClick(View v) {
-										// 开通直通车
-										// 判断是不是完善了我的号码直通车信息
-//										switch (mContext.user.getUserInfo()) {
-//										case "0":
-//											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-//											break;
-//										case "2":
-//											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
-//											break;
-//										default:
-											InteNetUtils
-													.getInstance(mContext)
-													.getMyStore(
-															new RequestCallBack<String>() {
-
-																@Override
-																public void onSuccess(
-																		ResponseInfo<String> arg0) {
-																	JSONObject jsonObject = null;
-																	try {
-																		jsonObject = new JSONObject(
-																				arg0.result);
-																	} catch (JSONException e) {
-																		e.printStackTrace();
-																	}
-																	String ret_num = jsonObject
-																			.optString("ret_num");
-
-																	if ("123"
-																			.equalsIgnoreCase(ret_num)) {
-																		mContext.startAnimActivity2Obj(
-																				ActivityMyNumberTrain.class,
-																				"do",
-																				"created");
-																	} else {
-																		mContext.startAnimActivity2Obj(
-																				ActivityMyNumberTrain.class,
-																				"do",
-																				"update");
-																	}
-																}
-
-																@Override
-																public void onFailure(
-																		HttpException arg0,
-																		String arg1) {
-																	ToastUtils
-																			.Infotoast(
-																					mContext,
-																					"网络不可用!");
-																}
-															});
-
-//										}
-										hint.dismiss();
-									}
-								});
-								hint.show();
-								// ToastUtils.Errortoast(mContext,
-								// "创建我的直通车后才可报价");
-							}
-						}
-					});
-
-				} else {
-					item_buyinfo_but.setVisibility(View.INVISIBLE);
-				}
+//				item.getIs_close() != 1) {
+//					if (item.getHaveQuote() >= 2
+//							|| item.getMemberId() == user.getId()) {
+//						item_buyinfo_but.setVisibility(View.INVISIBLE);
+//					} else {
+//						item_buyinfo_but.setVisibility(View.VISIBLE);
+//					}
+//
+//					item_buyinfo_but.setOnClickListener(new OnClickListener() {
+//
+//						@Override
+//						public void onClick(View v) {
+//							// 报价
+//							if (user != null && user.getZhiId() != 0) {
+//								if (item.getMemberId() != user.getId()) {
+//									ArrayList<Quote> getmQuotes = item
+//											.getmQuotes();
+//									// int index = 0;
+//									// for (Quote q : getmQuotes) {
+//									// if (q.getMember_id() == user.getId()) {
+//									// index += 1;
+//									// if (index >= 2) {
+//									// ToastUtils.Errortoast(mContext,
+//									// "您已经2次报价");
+//									// return;
+//									// }
+//									// }
+//									// }
+//									curPosition = arg0;
+//									buyDialog = new BuyDialog(mContext,
+//											R.style.BuyDialog);
+//									buyDialog
+//											.setSuccessLinstener(ActivitymyBuy.this);
+//									buyDialog.setBuyId(item.getId());
+//									buyDialog.show();
+//								} else {
+//									ToastUtils.Errortoast(mContext,
+//											"不可给自己发布的我要买报价");
+//								}
+//							} else {
+//
+//								hint = new InfoMsgHint(mContext,
+//										R.style.MyDialog1);
+//								hint.setContent("需要先开通号码直通车", "", "去开通", "取消");
+//								hint.setCancleListener(new OnClickListener() {
+//
+//									@Override
+//									public void onClick(View v) {
+//										hint.dismiss();
+//									}
+//								});
+//								hint.setOKListener(new OnClickListener() {
+//									@Override
+//									public void onClick(View v) {
+//										// 开通直通车
+//										// 判断是不是完善了我的号码直通车信息
+////										switch (mContext.user.getUserInfo()) {
+////										case "0":
+////											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+////											break;
+////										case "2":
+////											mContext.startAnimActivity(ActivityMyNumberTrianInfoPerfect.class);
+////											break;
+////										default:
+//											InteNetUtils
+//													.getInstance(mContext)
+//													.getMyStore(
+//															new RequestCallBack<String>() {
+//
+//																@Override
+//																public void onSuccess(
+//																		ResponseInfo<String> arg0) {
+//																	JSONObject jsonObject = null;
+//																	try {
+//																		jsonObject = new JSONObject(
+//																				arg0.result);
+//																	} catch (JSONException e) {
+//																		e.printStackTrace();
+//																	}
+//																	String ret_num = jsonObject
+//																			.optString("ret_num");
+//
+//																	if ("123"
+//																			.equalsIgnoreCase(ret_num)) {
+//																		mContext.startAnimActivity2Obj(
+//																				ActivityMyNumberTrain.class,
+//																				"do",
+//																				"created");
+//																	} else {
+//																		mContext.startAnimActivity2Obj(
+//																				ActivityMyNumberTrain.class,
+//																				"do",
+//																				"update");
+//																	}
+//																}
+//
+//																@Override
+//																public void onFailure(
+//																		HttpException arg0,
+//																		String arg1) {
+//																	ToastUtils
+//																			.Infotoast(
+//																					mContext,
+//																					"网络不可用!");
+//																}
+//															});
+//
+////										}
+//										hint.dismiss();
+//									}
+//								});
+//								hint.show();
+//								// ToastUtils.Errortoast(mContext,
+//								// "创建我的直通车后才可报价");
+//							}
+//						}
+//					});
+//
+//				} else {
+//					item_buyinfo_but.setVisibility(View.INVISIBLE);
+//				}
 
 				ArrayList<Quote> getmQuotes = item.getmQuotes();
 				if (getmQuotes != null && getmQuotes.size() > 0) {
-					price_box.removeAllViews();
-					price_box.setVisibility(View.VISIBLE);
-					for (Quote q : getmQuotes) {
+                    double minPrice = 0;
+                    String name = "";
+                    String showPrice = "";
+                    for (Quote q : getmQuotes) {
+                        try {
+                            double price  = Double.parseDouble(q.getPrice());
+                            if(minPrice == 0 || minPrice > price){
+                                minPrice = price;
+                                name = q.getName();
+                                showPrice = q.getPrice();
+                            }
+                        }catch (Exception e){
 
-						int childCount = price_box.getChildCount();
-						if (childCount >= 3) {
-							break;
-						}
-						View inflate = View.inflate(mContext,
-								R.layout.item_quote, null);
-
-						MyTextView item_name = ViewHolderUtil.get(inflate,
-								R.id.item_name);
-						MyTextView item_price = ViewHolderUtil.get(inflate,
-								R.id.item_price);
-						final MyTextView item_info = ViewHolderUtil.get(
-								inflate, R.id.item_info);
-
-						item_name.setText(" " + q.getName());
-						item_price.setText(" 报价:" + q.getPrice() + "元");
-						item_info.setText(" " + q.getDescription());
-
-						price_box.addView(inflate);
-
-					}
-					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-							LinearLayout.LayoutParams.MATCH_PARENT, 1);
-					layoutParams.leftMargin = PixelUtil.dp2px(10);
-					layoutParams.rightMargin = PixelUtil.dp2px(10);
-					layoutParams.topMargin = PixelUtil.dp2px(5);
-
-					View view = new View(mContext);
-					view.setBackgroundColor(Color.parseColor("#dfdfdf"));
-					price_box.addView(view, layoutParams);
+                        }
+                    }
+                    tv_min_price.setText("最低报价:"+showPrice);
+                    item_name.setText(name);
+//					price_box.removeAllViews();
+//					price_box.setVisibility(View.VISIBLE);
+//					for (Quote q : getmQuotes) {
+//
+//						int childCount = price_box.getChildCount();
+//						if (childCount >= 3) {
+//							break;
+//						}
+//						View inflate = View.inflate(mContext,
+//								R.layout.item_quote, null);
+//
+//						MyTextView item_name = ViewHolderUtil.get(inflate,
+//								R.id.item_name);
+//						MyTextView item_price = ViewHolderUtil.get(inflate,
+//								R.id.item_price);
+//						final MyTextView item_info = ViewHolderUtil.get(
+//								inflate, R.id.item_info);
+//
+//						item_name.setText(" " + q.getName());
+//						item_price.setText(" 报价:" + q.getPrice() + "元");
+//						item_info.setText(" " + q.getDescription());
+//
+//						price_box.addView(inflate);
+//
+//					}
+//					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+//							LinearLayout.LayoutParams.MATCH_PARENT, 1);
+//					layoutParams.leftMargin = PixelUtil.dp2px(10);
+//					layoutParams.rightMargin = PixelUtil.dp2px(10);
+//					layoutParams.topMargin = PixelUtil.dp2px(5);
+//
+//					View view = new View(mContext);
+//					view.setBackgroundColor(Color.parseColor("#dfdfdf"));
+//					price_box.addView(view, layoutParams);
 
 				} else {
-					price_box.setVisibility(View.GONE);
+                    tv_min_price.setText("最低报价:暂无");
+                    item_name.setText("");
 				}
 
-				item_buyinfo_num.setText(item.getQuotedNumber() + "人报价");
+				item_buyinfo_num.setText(item.getQuotedNumber() + "个报价");
 				item_buyinfo_address.setText(item.getPro_city());
 
 			}
@@ -919,5 +1001,34 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 		}
 
 	}
+
+    /**
+     * 创建PopupWindow
+     */
+    protected void initPopWindow() {
+        // TODO Auto-generated method stub
+        View popupWindow_view = getLayoutInflater().inflate(R.layout.search_pop_window, null,
+                false);
+        // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
+        popupWindow = new PopupWindow(popupWindow_view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+//        // 设置动画效果
+//        popupWindow.setAnimationStyle(R.style.AnimationFade);
+        // 点击其他地方消失
+        popupWindow_view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+                return false;
+            }
+        });
+        tv_search_range = (TextView) popupWindow_view.findViewById(R.id.tv_search_range);
+        tv_search_industry = (TextView) popupWindow_view.findViewById(R.id.tv_search_industry);
+        tv_search_range.setOnClickListener(this);
+        tv_search_industry.setOnClickListener(this);
+    }
 
 }

@@ -72,6 +72,7 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 	private MyTextView item_num;
 	private MyTextView item_time;
 	private MyTextView price_num;
+    private LinearLayout send_message;
 	private MyTextView self_but;
 	private MyTextView price_but;
 	// private MyTextView appeal_but;
@@ -150,6 +151,7 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 		item_num = (MyTextView) findViewById(R.id.item_num);
 		item_time = (MyTextView) findViewById(R.id.item_time);
 		price_num = (MyTextView) findViewById(R.id.price_num);
+        send_message = (LinearLayout) findViewById(R.id.send_message);
 		self_but = (MyTextView) findViewById(R.id.self_but);
 		price_but = (MyTextView) findViewById(R.id.price_but);
 		// appeal_but = (MyTextView) findViewById(R.id.appeal_but);
@@ -235,14 +237,17 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 			if (user.getId() == info.getMemberId()) {
 				long deadline = info.getDeadline();
 				if (info.getIs_close() == 1) {
+                    send_message.setVisibility(View.GONE);
 					self_but.setVisibility(View.GONE);
 					noself.setVisibility(View.GONE);
 				} else {
+                    send_message.setVisibility(View.VISIBLE);
 					self_but.setVisibility(View.VISIBLE);
 					noself.setVisibility(View.GONE);
 				}
 
 			} else {
+                send_message.setVisibility(View.VISIBLE);
 				self_but.setVisibility(View.GONE);
 				noself.setVisibility(View.VISIBLE);
 			}

@@ -27,6 +27,7 @@ public class ActivityGroupNotice extends BaseActivity implements
     private EditText tvcontent;
     private TextView tv_txt_num;
     private String talk_groupid;
+    private String content="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,8 @@ public class ActivityGroupNotice extends BaseActivity implements
     @Override
     public void initDate(Bundle savedInstanceState) {
         talk_groupid = getIntent().getStringExtra("talk_groupid");
+        content = getIntent().getStringExtra("content");
+        tvcontent.setText(content);
     }
 
     @Override

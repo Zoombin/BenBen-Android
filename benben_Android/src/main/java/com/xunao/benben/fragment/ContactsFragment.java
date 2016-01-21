@@ -1024,12 +1024,6 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 			holder.item_phone_name.setText(cs.getName());
 			// }
 
-			if ("0".equals(cs.getIs_baixing()) || cs.getGroup_id().equals("10000")) {
-				holder.item_phone_single_bxw.setVisibility(View.GONE);
-			} else {
-				holder.item_phone_single_bxw.setVisibility(View.VISIBLE);
-			}
-
 			if ("0".equals(cs.getIs_benben()) || cs.getGroup_id().equals("10000")) {
 				holder.item_phone_single_bb.setVisibility(View.GONE);
 			} else {
@@ -1046,6 +1040,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
                 e.printStackTrace();
             }
             boolean ztcFlag = false;
+            boolean baixingFlag = false;
             ArrayList<String> pString = new ArrayList<String>();
             if (phonesArrayList != null && phonesArrayList.size() > 0) {
                 for (int i = 0; i < phonesArrayList.size(); i++) {
@@ -1057,7 +1052,17 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
                     if(train_id!=null && !train_id.equals("") && !train_id.equals("0")){
                         ztcFlag = true;
                     }
+                    String bx = phonesArrayList.get(i).getIs_baixing();
+                    if(!bx.equals("0") && !phoneString.equals("")){
+                        baixingFlag = true;
+                    }
                 }
+            }
+
+            if (baixingFlag && !cs.getGroup_id().equals("10000")) {
+                holder.item_phone_single_bxw.setVisibility(View.VISIBLE);
+            } else {
+                holder.item_phone_single_bxw.setVisibility(View.GONE);
             }
             if(ztcFlag && !cs.getGroup_id().equals("10000")){
                 holder.item_phone_single_ztc.setVisibility(View.VISIBLE);
@@ -1215,7 +1220,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 						holder.status_img
 								.setImageResource(R.drawable.icon_contacts_single_right);
 					} else {
-						listView.expandGroup(groupPosition);
+						listView.expandGroup(groupPosition,true);
 						holder.status_img
 								.setImageResource(R.drawable.icon_contacts_single_down);
 					}

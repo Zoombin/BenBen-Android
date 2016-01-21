@@ -276,7 +276,7 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
             } else if (order.getBack_status() == 2) {
                 tv_operate5.setText("已退款");
                 tv_operate5.setVisibility(View.VISIBLE);
-            } else if (order.getBack_status() == 4) {
+            } else if (order.getBack_status() == 4 || order.getBack_status() == 5) {
                 tv_operate5.setText("退款中");
                 tv_operate5.setVisibility(View.VISIBLE);
             }

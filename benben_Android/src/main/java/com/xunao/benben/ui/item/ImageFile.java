@@ -39,6 +39,7 @@ public class ImageFile extends Activity {
 	private AlbumHelper helper;
 	private exitBroadCast cast;
 	public static List<ImageBucket> contentList;
+    private boolean isClear = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,6 +65,11 @@ public class ImageFile extends Activity {
 
 		folderAdapter = new FolderAdapter(this);
 		gridView.setAdapter(folderAdapter);
+
+        Intent intent = getIntent();
+        if(intent!=null && intent.hasExtra("isClear")){
+            isClear = intent.getBooleanExtra("isClear",false);
+        }
 	}
 
 	private class CancelListener implements OnClickListener {// 取消按钮的监听
@@ -82,7 +88,9 @@ public class ImageFile extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-        Bimp.tempSelectBitmap.clear();
+        if(isClear) {
+            Bimp.tempSelectBitmap.clear();
+        }
 		this.finish();
 		this.overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 

@@ -1521,23 +1521,46 @@ public class InteNetUtils {
 
 
 
-	public void sendBuyInfo(String sTitle, String sInfo, String sNum,
-			String sTime, String[] areas,
-			RequestCallBack<String> mRequestCallBack) {
-		HashMap<String, String> hashMap = new HashMap<String, String>();
-		hashMap.put("key", "android");
-		hashMap.put("title", sTitle);
-		hashMap.put("description", sInfo);
-		hashMap.put("amount", sNum);
-		hashMap.put("deadline", sTime);
+	public void sendBuyInfo(final String sTitle, final String sInfo, final String sNum,
+			final String sTime, final String[] areas,final String[] images,final String industry,
+			final RequestCallBack<String> mRequestCallBack) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("key", "android");
+                hashMap.put("title", sTitle);
+                hashMap.put("description", sInfo);
+                hashMap.put("amount", sNum);
+                hashMap.put("deadline", sTime);
+                if(areas[0]!=null) {
+                    hashMap.put("province", areas[0]);
+                }
+                if(areas[1]!=null) {
+                    hashMap.put("city", areas[1]);
+                }
+                if(areas[2]!=null) {
+                    hashMap.put("area", areas[2]);
+                }
+                if(areas[3]!=null) {
+                    hashMap.put("street", areas[3]);
+                }
+                hashMap.put("industry", industry);
+                RequestParams params = new RequestParams();
+                int length = images.length;
+                for (int i = 1; i <= length; i++) {
+                    addImageUpload(params, "pic" + i, new File(images[i - 1]));
+                }
+                Set<Entry<String, String>> entrySet = hashMap.entrySet();
+                for (Entry<String, String> entry : entrySet) {
+                    params.addBodyParameter(entry.getKey(), entry.getValue());
+                }
+                httpUtils.send(HttpMethod.POST, AndroidConfig.NETHOST
+                        + AndroidConfig.publicBuyInfo, params, mRequestCallBack);
+            }
+        }).start();
 
-		hashMap.put("province", areas[0]);
-		hashMap.put("city", areas[1]);
-		hashMap.put("area", areas[2]);
-		hashMap.put("street", areas[3]);
 
-		ComPost(AndroidConfig.NETHOST + AndroidConfig.publicBuyInfo, hashMap,
-				mRequestCallBack);
 	}
 
 	public void getBuyInfoContent(String iD,
@@ -2540,7 +2563,7 @@ public class InteNetUtils {
 
 
     public void Addpromotion(final String name,final String origion_price, final String promotion_price, final long valid_left,final long valid_right,
-                             final String description,final File poster_st,final File poster_nd,final File poster_rd,final String token,final RequestCallBack<String> callBack) {
+                             final String description,final File poster_st,final File poster_nd,final File poster_rd,final String model,final String token,final RequestCallBack<String> callBack) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -2552,6 +2575,7 @@ public class InteNetUtils {
                 hashMap.put("valid_left", valid_left+"");
                 hashMap.put("valid_right", valid_right+"");
                 hashMap.put("description", description);
+                hashMap.put("model", model);
                 hashMap.put("token", token);
                 RequestParams params = new RequestParams();
                 if(poster_st!=null) {
@@ -2575,7 +2599,7 @@ public class InteNetUtils {
     }
 
     public void Editpromotion(final int promotionid,final String name,final String origion_price, final String promotion_price, final long valid_left,final long valid_right,
-                             final String description,final File poster_st,final File poster_nd,final File poster_rd,final String ids,final String token,final RequestCallBack<String> callBack) {
+                             final String description,final File poster_st,final File poster_nd,final File poster_rd,final String ids,final String model,final String token,final RequestCallBack<String> callBack) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -2589,6 +2613,7 @@ public class InteNetUtils {
                 hashMap.put("valid_right", valid_right+"");
                 hashMap.put("description", description);
                 hashMap.put("ids", ids);
+                hashMap.put("model", model);
                 hashMap.put("token", token);
                 RequestParams params = new RequestParams();
                 if(poster_st!=null) {

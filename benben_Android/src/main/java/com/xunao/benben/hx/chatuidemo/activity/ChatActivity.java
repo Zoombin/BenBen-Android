@@ -132,6 +132,7 @@ import com.xunao.benben.ui.item.TallGroup.ActivityTalkGroupInfo;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectFriend;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectTalkGroup;
 import com.xunao.benben.utils.Bimp;
+import com.xunao.benben.utils.PixelUtil;
 import com.xunao.benben.utils.PublicWay;
 import com.xunao.benben.utils.Res;
 import com.xunao.benben.utils.ToastUtils;
@@ -287,10 +288,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		com_title_bar_right_bt = (ImageView) findViewById(R.id.com_title_bar_right_bt);
 		com_title_bar_right_tv = (MyTextView) findViewById(R.id.com_title_bar_right_tv);
 		com_title_bar_content = (MyTextView) findViewById(R.id.com_title_bar_content);
+        com_title_bar_content.setMaxWidth(PixelUtil.dp2px(150));
 
 		//处理公告
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) com_title_bar_right_tv.getLayoutParams();
-		layoutParams.setMargins(0, 0, 90, 0);
+		layoutParams.setMargins(0, 0, PixelUtil.dp2px(40), 0);
 		com_title_bar_right_tv.setLayoutParams(layoutParams);
 		com_title_bar_right_tv.setText("公告");
 
@@ -960,6 +962,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
             Intent intent = new Intent(
                     ChatActivity.this,
                     ImageFile.class);
+            intent.putExtra("isClear",true);
             startActivityForResult(intent, REQUEST_CODE_LOCAL);
             overridePendingTransition(
                     R.anim.activity_translate_in,

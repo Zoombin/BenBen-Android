@@ -76,6 +76,30 @@
             android:src="@drawable/friend_delete_selector"
             android:visibility="gone" />
 
+        <RelativeLayout
+            android:id="@+id/rl_search_area"
+            android:layout_width="60dip"
+            android:layout_height="39dp"
+            android:layout_toLeftOf="@+id/btn_search_range"
+            android:layout_centerVertical="true"
+            android:background="#068CD9"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="范围"
+                android:textColor="#ffffff"
+                android:textSize="16dip"
+                android:layout_gravity="center_vertical"
+                android:drawableRight="@drawable/pop_search_arrow_down"
+                android:drawablePadding="5dp"
+                android:layout_centerInParent="true"
+                />
+
+
+        </RelativeLayout>
+
         <Button
             android:id="@+id/btn_search_range"
             android:layout_width="60dip"
@@ -84,7 +108,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dip"
             android:background="@drawable/btn_range_bg"
-            android:text="范围"
+            android:text="搜索"
             android:textColor="#ffffff"
             android:textSize="16dip" />
     </RelativeLayout>

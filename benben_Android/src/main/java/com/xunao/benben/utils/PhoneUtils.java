@@ -2,6 +2,9 @@ package com.xunao.benben.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.json.JSONObject;
 
@@ -281,6 +284,7 @@ public class PhoneUtils {
 							ContactsContract.CommonDataKinds.Phone.CONTACT_ID
 									+ "=" + contactId, null, null);
 					name = PhoneUtils.filterEmoji(name.replaceAll("\\+86", ""));
+                    name = StringFilter(name);
 					int phoneIndex = 0;
 					if (phones.getCount() > 0) {
 						phoneIndex = phones
@@ -320,7 +324,18 @@ public class PhoneUtils {
 		return null;
 	}
 
-	/**
+
+    private static String StringFilter(String str)   throws PatternSyntaxException {
+        // 只允许字母和数字
+        // String   regEx  =  "[^a-zA-Z0-9]";
+        // 清除掉所有特殊字符
+        String regEx="[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+        Pattern p   =   Pattern.compile(regEx);
+        Matcher m   =   p.matcher(str);
+        return   m.replaceAll("").trim();
+    }
+
+    /**
 	 * 发送短信
 	 *
 	 */

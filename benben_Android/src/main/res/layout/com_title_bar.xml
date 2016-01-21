@@ -69,7 +69,8 @@
             android:paddingLeft="80dip"
             android:paddingRight="15dip"
             android:textColor="#ffffff"
-            android:textSize="16dp" >
+            android:textSize="16dp"
+            >
         </com.xunao.benben.view.MyTextView>
     </RelativeLayout>
 

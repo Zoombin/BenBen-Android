@@ -658,7 +658,9 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
                 break;
 			case R.id.group_notice:
 				//群公告
-				startActivity(new Intent(mContext,ActivityGroupNotice.class).putExtra("talk_groupid",mTalkGroup.getId()));
+                startAnimActivity2Obj(ActivityGroupNotice.class,"talk_groupid",mTalkGroup.getId(),"content",mTalkGroup.getBulletin());
+
+//				startActivity(new Intent(mContext,ActivityGroupNotice.class).putExtra("talk_groupid",mTalkGroup.getId()));
 				break;
             default:
                 break;

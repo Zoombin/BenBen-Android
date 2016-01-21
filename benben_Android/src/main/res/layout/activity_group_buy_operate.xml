@@ -462,7 +462,7 @@
                 android:textColor="#848484"
                 android:textColorHint="#848484"
                 android:textSize="15dp"
-                android:hint="请输入促销产品的参数..."
+                android:hint="请输入团购产品的参数..."
                 android:gravity="top"
                 android:minLines="2"
                 />
@@ -493,7 +493,7 @@
                 android:textColor="#848484"
                 android:textColorHint="#848484"
                 android:textSize="15dp"
-                android:hint="请输入促销产品的文字介绍..."
+                android:hint="请输入团购产品的文字介绍..."
                 android:gravity="top"
                 />
 

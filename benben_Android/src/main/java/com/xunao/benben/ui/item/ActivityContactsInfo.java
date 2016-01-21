@@ -192,7 +192,7 @@ public class ActivityContactsInfo extends BaseActivity implements
             if (phonelists != null && phonelists.size() > 0) {
                 int i = 0;
                 for (PhoneInfo phoneInfo : phonelists) {
-                    if (!phoneInfo.getIs_benben().equals("0")) {
+                    if (!phoneInfo.getIs_benben().equals("") && !phoneInfo.getIs_benben().equals("0")) {
                         phoneBenbenList.add(phoneInfo);
                         if (phoneInfo.getIs_active().equals("1")) {
                             benPosition = i;
@@ -282,7 +282,7 @@ public class ActivityContactsInfo extends BaseActivity implements
             if (phones != null && phones.size() > 0) {
                 int i = 0;
                 for (PhoneInfo phoneInfo : phones) {
-                    if (!phoneInfo.getIs_benben().equals("0")) {
+                    if (!phoneInfo.getIs_benben().equals("") && !phoneInfo.getIs_benben().equals("0")) {
                         phoneBenbenList.add(phoneInfo);
                         if (phoneInfo.getIs_active().equals("1")) {
                             benPosition = i;

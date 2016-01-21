@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eaeaea"
+    android:background="#EBEBEB"
     android:orientation="vertical" >
 
     <include layout="@layout/com_title_bar" />
@@ -14,7 +14,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="60dip"
+            android:layout_above="@+id/send_message"
             android:scrollbars="none" >
 
             <RelativeLayout
@@ -242,7 +242,14 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:visibility="gone"
+            >
+
+            <View
+                style="@style/set_item_Line_5"
+                />
 
             <com.xunao.benben.view.MyTextView
                 android:id="@+id/self_but"
@@ -294,7 +301,7 @@
             android:id="@+id/nodota"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#eaeaea"
+            android:background="#EBEBEB"
             android:visibility="gone" >
 
             <ImageView

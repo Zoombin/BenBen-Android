@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#EBEBEB"
+    >
 
     <include layout="@layout/com_title_bar" />
 
@@ -57,6 +59,35 @@
             android:textSize="14dip" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_industry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="#d4d4d4"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            />
+        <TextView
+            android:id="@+id/tv_industry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#068cd9"
+            android:textSize="14dip"
+            android:paddingBottom="3dip"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            android:paddingTop="3dip"
+            />
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -79,10 +110,11 @@
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@null"
+            android:divider="#00000000"
             android:fadingEdge="none"
             android:listSelector="@android:color/transparent"
-            android:scrollbarStyle="outsideOverlay" />
+            android:scrollbarStyle="outsideOverlay"
+            />
 
         <ImageView
             android:id="@+id/public_buy"

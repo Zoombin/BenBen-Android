@@ -18,6 +18,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -200,7 +201,8 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-		nodota.setVisibility(View.GONE);
+        Log.d("ltf","jsonObject========"+jsonObject);
+        nodota.setVisibility(View.GONE);
 		info = new BuyInfoContent();
 		try {
 			info.parseJSON(jsonObject);
@@ -220,11 +222,10 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 					item_iv);
 			item_name.setText(info.getNickName());
 			item_address.setText(info.getPro_city());
-			proinfo.setText("描述:" + info.getDescription());
+			proinfo.setText(info.getDescription());
 			proname.setText(info.getTitle());
 			item_num.setText("数量:" + info.getAmount());
-			publicTime.setText("发布时间:"
-					+ TimeUtil.unix2date(info.getCreated_time(),
+			publicTime.setText(TimeUtil.unix2date(info.getCreated_time(),
 							TimeUtil.FORMAT_DATE1_TIME));
 			// long time = (info.getDeadline())
 			// - (System.currentTimeMillis() / 1000);
@@ -232,7 +233,7 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 			String secToTime = secToTime(info.getLeft_time());
 			item_time.setText("距离结束:" + secToTime);
 
-			price_num.setText(info.getQuotedNumber() + "人报价");
+			price_num.setText(info.getQuotedNumber() + "个报价");
 
 			if (user.getId() == info.getMemberId()) {
 				long deadline = info.getDeadline();

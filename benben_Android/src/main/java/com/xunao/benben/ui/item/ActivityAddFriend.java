@@ -475,9 +475,9 @@ public class ActivityAddFriend extends BaseActivity implements OnClickListener,
                                         if (jsonObject.optInt("ret_num") == 0) {
                                             Contacts contacts = new Contacts();
                                             contacts.parseJSONSingle3(jsonObject);
-                                            if(contacts.getName()==null || contacts.getName().equals("")){
+//                                            if(contacts.getName()==null || contacts.getName().equals("")){
                                                 contacts.setName(contacts.getNick_name());
-                                            }
+//                                            }
                                             dbUtil.saveOrUpdate(contacts);
                                             ArrayList<PhoneInfo> phones = contacts
                                                     .getPhones();

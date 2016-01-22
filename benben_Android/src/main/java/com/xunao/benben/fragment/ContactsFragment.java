@@ -199,7 +199,6 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 	@Override
 	protected void initDate() {
         snapshot =  CrashApplication.getInstance().getSpUtil().getSnapshot();
-        Log.d("ltf","snapshot============"+snapshot);
         if(snapshot.equals("1")){
             isNew = true;
         }
@@ -945,6 +944,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
             final ArrayList<PhoneInfo> mPhoneInfos = new ArrayList<PhoneInfo>();
             for (Contacts contacts : contactsObject.getmContactss()) {
                 ArrayList<PhoneInfo> phones = contacts.getPhones();
+
                 mPhoneInfos.addAll(contacts.getPhones());
             }
 
@@ -953,25 +953,26 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 				public void run() {
 					groupOrderBy();
 
-					ArrayList<PhoneInfo> mPhoneInfos = new ArrayList<PhoneInfo>();
-					// ArrayList<Contacts> com = new ArrayList<Contacts>();
-					// ArrayList<Contacts> benben = new ArrayList<Contacts>();
-					for (ContactsGroup cg : mContactsGroups) {
-						// 记录所有的phone信息
-						ArrayList<Contacts> mContacts = cg.getmContacts();
-						// com.clear();
-						// benben.clear();
-
-						for (Contacts contacts : mContacts) {
-							// if (!contacts.getIs_benben().equals("0")) {
-							// benben.add(contacts);
-							// } else {
-							// com.add(contacts);
-							// }
-							ArrayList<PhoneInfo> phones = contacts.getPhones();
-							mPhoneInfos.addAll(contacts.getPhones());
-						}
-					}
+////					ArrayList<PhoneInfo> mPhoneInfos = new ArrayList<PhoneInfo>();
+//					// ArrayList<Contacts> com = new ArrayList<Contacts>();
+//					// ArrayList<Contacts> benben = new ArrayList<Contacts>();
+//					for (ContactsGroup cg : mContactsGroups) {
+//						// 记录所有的phone信息
+//						ArrayList<Contacts> mContacts = cg.getmContacts();
+//						// com.clear();
+//						// benben.clear();
+//
+//						for (Contacts contacts : mContacts) {
+//							// if (!contacts.getIs_benben().equals("0")) {
+//							// benben.add(contacts);
+//							// } else {
+//							// com.add(contacts);
+//							// }
+//							ArrayList<PhoneInfo> phones = contacts.getPhones();
+//                            Log.d("ltf","phones======"+phones.size());
+//							mPhoneInfos.addAll(contacts.getPhones());
+//						}
+//					}
 
 					// // 持久化一个环信与本地数据的hashmap
 					// HashMap<String, Object> huanXinMap = new HashMap<String,

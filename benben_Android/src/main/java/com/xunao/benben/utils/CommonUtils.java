@@ -100,6 +100,20 @@ public class CommonUtils {
 		return false;
 	}
 
+
+    /** 检查是否有网络,不提示 */
+    public static boolean isNetworkAvailableNoShow(Context context) {
+        NetworkInfo info = getNetworkInfo(context);
+        if (info != null) {
+            boolean available = info.isAvailable();
+            if (!available) {
+                ToastUtils.ErrorToastNoNet(context);
+            }
+            return available;
+        }
+        return false;
+    }
+
 	/** 检查是否是WIFI */
 	public static boolean isWifi(Context context) {
 		NetworkInfo info = getNetworkInfo(context);

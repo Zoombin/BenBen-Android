@@ -337,7 +337,6 @@ public class ActivityWriteBuyInfo extends BaseActivity implements
             int size = Bimp.tempSelectBitmap.size();
             String[] images = new String[size];
             for (int i = 0; i < size; i++) {
-                Log.d("ltf","Bimp.tempSelectBitmap.get(i).getImagePath()==="+Bimp.tempSelectBitmap.get(i).getImagePath());
                 images[i] = Bimp.tempSelectBitmap.get(i).getImagePath();
             }
 

@@ -705,4 +705,7 @@ public class AndroidConfig {
 
     // 首页获取通讯录
     public static final String AddressBook = "/contact/addressBook";
+
+    // 通过id获取联系人详情
+    public static final String AddressDetail = "/contact/AddressDetail";
 }

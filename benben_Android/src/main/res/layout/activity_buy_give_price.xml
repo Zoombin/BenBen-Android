@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EBEBEB"
+    >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/set_item_Line_5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="商家简称:"
+                        android:textSize="15sp"
+                        android:textColor="#000000" />
+
+                    <com.xunao.benben.view.MyTextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:hint="输入商家的简称"
+                        android:singleLine="true"
+                        android:textColorHint="#B4B4B4"
+                        android:textSize="15sp"
+                        android:textColor="#B4B4B4" />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="补充说明:"
+                        android:textSize="15sp"
+                        android:textColor="#000000" />
+
+
+                    <EditText
+                        android:id="@+id/info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:gravity="top"
+                        android:hint="简单说明一下呗"
+                        android:maxLines="5"
+                        android:minLines="5"
+                        android:textSize="15sp"
+                        android:textColor="#B4B4B4"
+                        android:textColorHint="#B4B4B4"/>
+                </LinearLayout>
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+                <com.xunao.benben.utils.NoScrollGridView
+                    android:id="@+id/noScrollgridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dip"
+                    android:horizontalSpacing="3dp"
+                    android:numColumns="4"
+                    android:scrollbars="none" >
+                </com.xunao.benben.utils.NoScrollGridView>
+
+            </LinearLayout>
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                >
+                <View
+                    style="@style/set_item_Line_5"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="我的报价:"
+                        android:textSize="15sp"
+                        android:textColor="#000000"
+                        />
+
+                    <EditText
+                        android:id="@+id/price"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:textColorHint="#B4B4B4"
+                        android:textSize="15sp"
+                        android:textColor="#B4B4B4"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:inputType="numberDecimal"
+                        />
+
+                    <ImageView
+                        android:layout_width="14dip"
+                        android:layout_height="18dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_right_bar" />
+                </LinearLayout>
+
+                <View
+                    android:layout_marginLeft="10dp"
+                    style="@style/set_item_Line_5"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:background="@drawable/fragment_private_bg"
+                    android:clickable="true"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    >
+
+                    <com.xunao.benben.view.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="14dip"
+                        android:singleLine="true"
+                        android:text="运费:"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/fee"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:textColorHint="#B4B4B4"
+                        android:textSize="15sp"
+                        android:textColor="#B4B4B4"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:inputType="numberDecimal"
+                        />
+
+                    <ImageView
+                        android:layout_width="14dip"
+                        android:layout_height="18dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_right_bar" />
+                </LinearLayout>
+
+
+                <View
+                    style="@style/set_item_Line_5"/>
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:padding="10dp"
+                android:background="@drawable/green_but"
+                android:text="提交报价"
+                android:textSize="15dp"
+                android:textColor="#FFFFFF"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+</LinearLayout>

@@ -165,7 +165,7 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 				R.drawable.icon_com_title_left, 0);
 
 
-        if (CommonUtils.isNetworkAvailable(mContext)) {
+        if (CommonUtils.isNetworkAvailableNoShow(mContext)) {
             showLoding("请稍后...");
             InteNetUtils.getInstance(mContext).enterpriseMember(id, "",
                     mRequestCallBack);

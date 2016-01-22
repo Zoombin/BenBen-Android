@@ -526,7 +526,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:text="商家促销"
-                        android:textColor="#848484"
+                        android:textColor="@color/red"
                         android:textSize="16dp"
                         android:layout_marginRight="5dp"
                         />

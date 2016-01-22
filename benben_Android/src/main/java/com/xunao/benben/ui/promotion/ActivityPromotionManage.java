@@ -207,6 +207,9 @@ public class ActivityPromotionManage extends BaseActivity implements View.OnClic
             TextView tv_edittxt = (TextView) convertView
                     .findViewById(R.id.tv_edittxt);
             tv_edittxt.setVisibility(View.VISIBLE);
+            TextView tv_price = (TextView) convertView
+                    .findViewById(R.id.tv_price);
+            tv_price.setText(promotion.getPromotion_price()+"元");
             RoundedImageView iv_promotion = (RoundedImageView) convertView
                     .findViewById(R.id.iv_promotion);
 //            iv_promotion

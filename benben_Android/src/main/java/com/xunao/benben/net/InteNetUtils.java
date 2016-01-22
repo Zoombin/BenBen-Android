@@ -1470,15 +1470,36 @@ public class InteNetUtils {
 				callBack);
 	}
 
-	public void submitBuyPrice(int buyId, String price, String description,
-			RequestCallBack<String> requestCallBack) {
-		HashMap<String, String> hashMap = new HashMap<String, String>();
-		hashMap.put("key", "android");
-		hashMap.put("buyid", buyId + "");
-		hashMap.put("price", price);
-		hashMap.put("description", description);
-		ComPost(AndroidConfig.NETHOST + AndroidConfig.submitPrice, hashMap,
-				requestCallBack);
+	public void submitBuyPrice(final int buyId, final String price, final String description, final String[] images,
+			final RequestCallBack<String> requestCallBack) {
+//		HashMap<String, String> hashMap = new HashMap<String, String>();
+//		hashMap.put("key", "android");
+//		hashMap.put("buyid", buyId + "");
+//		hashMap.put("price", price);
+//		hashMap.put("description", description);
+//		ComPost(AndroidConfig.NETHOST + AndroidConfig.submitPrice, hashMap,
+//				requestCallBack);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("key", "android");
+                hashMap.put("buyid", buyId + "");
+                hashMap.put("price", price);
+                hashMap.put("description", description);
+                RequestParams params = new RequestParams();
+                int length = images.length;
+                for (int i = 1; i <= length; i++) {
+                    addImageUpload(params, "pic" + i, new File(images[i - 1]));
+                }
+                Set<Entry<String, String>> entrySet = hashMap.entrySet();
+                for (Entry<String, String> entry : entrySet) {
+                    params.addBodyParameter(entry.getKey(), entry.getValue());
+                }
+                httpUtils.send(HttpMethod.POST, AndroidConfig.NETHOST
+                        + AndroidConfig.submitPrice, params, requestCallBack);
+            }
+        }).start();
 
 	}
 
@@ -2013,7 +2034,20 @@ public class InteNetUtils {
 
 	}
 
-	// 政企通讯录添加常用联系人
+    public void AddressDetail(int infoid,RequestCallBack<String> requestCallBack) {
+
+
+            HashMap<String, String> hashMap = new HashMap<String, String>();
+            hashMap.put("key", "android");
+            hashMap.put("infoid", infoid+"");
+            ComPost(AndroidConfig.NETHOST + AndroidConfig.AddressDetail,
+                    hashMap, requestCallBack);
+
+
+    }
+
+
+    // 政企通讯录添加常用联系人
 	public void addCommon(String enterpriseId, String memberId,
 			RequestCallBack<String> requestCallBack) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();

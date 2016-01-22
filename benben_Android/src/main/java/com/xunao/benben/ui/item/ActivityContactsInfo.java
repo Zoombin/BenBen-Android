@@ -99,7 +99,7 @@ public class ActivityContactsInfo extends BaseActivity implements
 
 	@Override
 	public void initView(Bundle savedInstanceState) {
-		initTitle_Right_Left_bar("联系人详情", "", "编辑",
+		initTitle_Right_Left_bar("联系人详情", "", "",
 				R.drawable.icon_com_title_left, 0);
 
 		contacts_poster = (CubeImageView) findViewById(R.id.contacts_poster);
@@ -134,12 +134,17 @@ public class ActivityContactsInfo extends BaseActivity implements
         if(mContacts==null){
             String id = getIntent().getStringExtra("id");
             String username = getIntent().getStringExtra("username");
+            int infoid = getIntent().getIntExtra("infoid",0);
             getIntent().putExtra("username", "");
             setShowLoding(false);
-            if (CommonUtils.isNetworkAvailable(mContext)) {
+            if (CommonUtils.isNetworkAvailableNoShow(mContext)) {
                 showLoding("请稍后...");
-                InteNetUtils.getInstance(mContext).getContactInfoFromQR(id,
-                        username, mRequestCallBack);
+                if(infoid==0) {
+                    InteNetUtils.getInstance(mContext).getContactInfoFromQR(id,
+                            username, mRequestCallBack);
+                }else{
+                    InteNetUtils.getInstance(mContext).AddressDetail(infoid, mRequestCallBack);
+                }
             }
         }else{
             getData();
@@ -149,6 +154,8 @@ public class ActivityContactsInfo extends BaseActivity implements
 	}
 
 	private void getData() {
+        initTitle_Right_Left_bar("联系人详情", "", "编辑",
+                R.drawable.icon_com_title_left, 0);
         contacts_name.setText(mContacts.getName());
         if (user.getHuanxin_username().equals(mContacts.getHuanxin_username())) {
             send_message.setVisibility(View.GONE);

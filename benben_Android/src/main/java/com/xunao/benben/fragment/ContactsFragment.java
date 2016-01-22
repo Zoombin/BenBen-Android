@@ -224,6 +224,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 				initlocakData();
 			}
 		} else if (mActivity.getFrom().equals("register")) {
+            CrashApplication.getInstance().getSpUtil().setSnapshot("1");
 			// 匹配通讯录 由于耗时长 所以另开线程
 			mActivity.showLoding("匹配通讯录...");
 			new Thread() {
@@ -378,9 +379,105 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
 		mActivity.dissLoding();
-		getData(jsonObject);
+        getMatchData(jsonObject);
 
 	}
+
+    /**
+     * 获取服务器拉取过来的数据
+     *
+     * @param jsonObject
+     */
+    private void getMatchData(JSONObject jsonObject) {
+        final ContactsObject contactsObject = new ContactsObject();
+        try {
+//			XunaoLog.yLog().i(jsonObject.toString());
+
+            contactsObject.parseJSON(jsonObject);
+            crashApplication.setContactsObject(contactsObject);
+            mContactsGroups = crashApplication.contactsObject
+                    .getmContactsGroups();
+
+
+            final ArrayList<PhoneInfo> mPhoneInfos = new ArrayList<PhoneInfo>();
+            for (Contacts contacts : contactsObject.getmContactss()) {
+                ArrayList<PhoneInfo> phones = contacts.getPhones();
+                mPhoneInfos.addAll(contacts.getPhones());
+            }
+
+            new Thread() {
+                @Override
+                public void run() {
+                    groupOrderBy();
+
+                    ArrayList<PhoneInfo> mPhoneInfos = new ArrayList<PhoneInfo>();
+                    // ArrayList<Contacts> com = new ArrayList<Contacts>();
+                    // ArrayList<Contacts> benben = new ArrayList<Contacts>();
+                    for (ContactsGroup cg : mContactsGroups) {
+                        // 记录所有的phone信息
+                        ArrayList<Contacts> mContacts = cg.getmContacts();
+                        // com.clear();
+                        // benben.clear();
+
+                        for (Contacts contacts : mContacts) {
+                            // if (!contacts.getIs_benben().equals("0")) {
+                            // benben.add(contacts);
+                            // } else {
+                            // com.add(contacts);
+                            // }
+                            ArrayList<PhoneInfo> phones = contacts.getPhones();
+                            mPhoneInfos.addAll(contacts.getPhones());
+                        }
+                    }
+
+                    // // 持久化一个环信与本地数据的hashmap
+                    // HashMap<String, Object> huanXinMap = new HashMap<String,
+                    // Object>();
+                    // if (mContacts != null && mContacts.size() > 0) {
+                    // for (Contacts cs : mContacts) {
+                    // if (!"0".equals(cs.getIs_benben())) {
+                    // huanXinMap.put(cs.getHuanxin_username(), cs);
+                    // }
+                    // }
+                    // }
+                    // crashApplication.getInstance().setHuanXinMap(huanXinMap);
+
+                    try {
+
+                        dbUtil.deleteAll(ContactsGroup.class);
+                        dbUtil.deleteAll(Contacts.class);
+                        dbUtil.deleteAll(PhoneInfo.class);
+
+                        dbUtil.saveOrUpdateAll(mContactsGroups);
+                        dbUtil.saveOrUpdateAll(contactsObject.getmContactss());
+                        // }
+                        dbUtil.saveOrUpdateAll(mPhoneInfos);
+
+                        mActivity.runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                initlocakData();
+                                mActivity.dissLoding();
+                                nodata.setVisibility(View.GONE);
+                                if (lodingDialog != null) {
+                                    lodingDialog.dismiss();
+                                }
+                            }
+                        });
+
+                    } catch (DbException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+
+        } catch (NetRequestException e) {
+            e.getError().print(mActivity);
+            nodata.setVisibility(View.VISIBLE);
+            // initlocakData();
+        }
+    }
 
 	@Override
 	protected void onFailure(HttpException exception, String strMsg) {
@@ -1107,12 +1204,14 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 						Intent intent = new Intent(mActivity,
 								ActivityContactsInfo.class);
 //						intent.putExtra("contacts", cs);
-                        String hxName =  cs.getHuanxin_username();
-                        if(hxName!=null && !hxName.equals("")) {
-                            intent.putExtra("username", cs.getHuanxin_username());
-                        }else{
-                            intent.putExtra("contacts", cs);
-                        }
+//                        String hxName =  cs.getHuanxin_username();
+//                        if(hxName!=null && !hxName.equals("")) {
+//                            intent.putExtra("username", cs.getHuanxin_username());
+//                        }else{
+//                            intent.putExtra("contacts", cs);
+//                        }
+                        intent.putExtra("infoid", cs.getId());
+
 						startActivityForResult(intent,
 								AndroidConfig.ContactsFragmentRequestCode);
 						mActivity.overridePendingTransition(

@@ -132,7 +132,10 @@ public class BxContacts extends BaseBean<BxContacts> implements Comparable {
 		is_benben = jsonObj.optString("is_benben");
 		group_id = jsonObj.optString("group_id");
 		poster = jsonObj.optString("poster");
-		pinyin = jsonObj.optString("pinyin").substring(0, 1);
+        pinyin = jsonObj.optString("pinyin");
+        if(pinyin!=null && pinyin.length()>0){
+            pinyin = pinyin.substring(0, 1);
+        }
 		hasPinYin = true;
 		return this;
 	}

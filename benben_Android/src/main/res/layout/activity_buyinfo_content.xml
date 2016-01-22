@@ -95,7 +95,8 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:scrollbars="none"
-
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
                                 >
                                 <FrameLayout
                                     android:layout_width="fill_parent"
@@ -113,9 +114,8 @@
                                             android:layout_height="100dp"
                                             android:stretchMode="none"
                                             android:numColumns="auto_fit"
-                                            android:columnWidth="80dp"
-                                            android:horizontalSpacing="5dp"
-                                            android:padding="10dp"
+                                            android:horizontalSpacing="10dp"
+                                            android:columnWidth="100dp"
                                             />
                                     </LinearLayout>
                                 </FrameLayout>
@@ -440,9 +440,7 @@
                                 android:textSize="16sp" />
                         </RelativeLayout>
 
-                        <View
-                            style="@style/set_item_Line_5"
-                            />
+
 
                         <LinearLayout
                             android:id="@+id/listview"
@@ -450,6 +448,10 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical" >
                         </LinearLayout>
+
+                        <View
+                            style="@style/set_item_Line_5"
+                            />
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>

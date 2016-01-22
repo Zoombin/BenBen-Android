@@ -1,6 +1,7 @@
 package com.xunao.benben.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,6 +40,8 @@ public class BuyInfoContent extends BaseBean {
 	private String address;// 地区
 
 	private long created_time;
+
+    private List<BuyInfoPic> infoPics = new ArrayList<>();
 
 	public ArrayList<QuoteContent> getmQuoteContents() {
 		return mQuoteContents;
@@ -181,7 +184,15 @@ public class BuyInfoContent extends BaseBean {
 		this.created_time = created_time;
 	}
 
-	@Override
+    public List<BuyInfoPic> getInfoPics() {
+        return infoPics;
+    }
+
+    public void setInfoPics(List<BuyInfoPic> infoPics) {
+        this.infoPics = infoPics;
+    }
+
+    @Override
 	public BuyInfoContent parseJSON(JSONObject jsonObj)
 			throws NetRequestException {
 
@@ -219,6 +230,21 @@ public class BuyInfoContent extends BaseBean {
 					}
 				}
 			}
+
+
+            JSONArray picJSONArray = jsonObj.optJSONArray("sell_pic");
+            if (picJSONArray != null && picJSONArray.length()>0) {
+                int length = picJSONArray.length();
+                BuyInfoPic buyInfoPic = null;
+                for (int i = 0; i < length; i++) {
+                    JSONObject optJSONObject = picJSONArray.optJSONObject(i);
+                    if (optJSONObject != null) {
+                        buyInfoPic = new BuyInfoPic();
+                        buyInfoPic.parseJSON(optJSONObject);
+                        infoPics.add(buyInfoPic);
+                    }
+                }
+            }
 			return this;
 		}
 		return null;

@@ -860,6 +860,9 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
 //                iv_over_time.setVisibility(View.GONE);
 //            }
             tv_title.setText(promotion.getName());
+            TextView tv_price = (TextView) convertView
+                    .findViewById(R.id.tv_price);
+            tv_price.setText(promotion.getPromotion_price()+"元");
             CubeImageView iv_promotion = (CubeImageView) convertView
                     .findViewById(R.id.iv_promotion);
             iv_promotion.setLayoutParams(new RelativeLayout.LayoutParams(

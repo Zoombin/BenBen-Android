@@ -85,7 +85,7 @@ public class ActivityEnterprisesContacts extends BaseActivity implements ActionS
     }
 
     private void initNetDate() {
-        if (CommonUtils.isNetworkAvailable(mContext)) {
+        if (CommonUtils.isNetworkAvailableNoShow(mContext)) {
             InteNetUtils.getInstance(mContext).getEnterprises(mRequestCallBack);
         } else {
             getDataFromLocal();

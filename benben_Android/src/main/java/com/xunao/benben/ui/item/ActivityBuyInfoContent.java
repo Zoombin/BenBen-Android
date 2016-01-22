@@ -1,6 +1,7 @@
 package com.xunao.benben.ui.item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import in.srain.cube.image.CubeImageView;
 import in.srain.cube.image.ImageTask;
@@ -9,21 +10,28 @@ import in.srain.cube.image.impl.DefaultImageLoadHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -41,7 +49,9 @@ import com.xunao.benben.base.BaseActivity.TitleMode;
 import com.xunao.benben.base.IA.CrashApplication;
 import com.xunao.benben.bean.BuyInfo;
 import com.xunao.benben.bean.BuyInfoContent;
+import com.xunao.benben.bean.BuyInfoPic;
 import com.xunao.benben.bean.LatelyLinkeMan;
+import com.xunao.benben.bean.NumberTrainPoster;
 import com.xunao.benben.bean.PhoneInfo;
 import com.xunao.benben.bean.QuoteContent;
 import com.xunao.benben.bean.SuccessMsg;
@@ -53,9 +63,12 @@ import com.xunao.benben.dialog.BuyDialog.onSuccessLinstener;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.hx.chatuidemo.activity.ChatActivity;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.mybuy.ActivityBuyGivePrice;
+import com.xunao.benben.utils.Bimp;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.PhoneUtils;
 import com.xunao.benben.utils.PixelUtil;
+import com.xunao.benben.utils.PublicWay;
 import com.xunao.benben.utils.TimeUtil;
 import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.utils.ViewHolderUtil;
@@ -64,7 +77,7 @@ import com.xunao.benben.view.MyTextView;
 import com.xunao.benben.view.ActionSheet.ActionSheetListener;
 
 public class ActivityBuyInfoContent extends BaseActivity implements
-		OnClickListener, onSuccessLinstener {
+		OnClickListener {
 
 	private MyTextView item_name;
 	private MyTextView item_address;
@@ -85,7 +98,13 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 	private View nodota;
 	private String iD;
 	private MyTextView publicTime;
-	private int priceNum = 0;;
+	private int priceNum = 0;
+
+    private LinearLayout ll_poster;
+    private List<BuyInfoPic> pics = new ArrayList<>();
+    private GridView noScrollgridview;
+    private GridAdapter adapter;
+    private int mWidth = 0;
 
 	@Override
 	public void loadLayout(Bundle savedInstanceState) {
@@ -120,7 +139,7 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 				}
 			}
 		});
-
+        mWidth = (mScreenWidth - PixelUtil.dp2px(60))*2 / 7;
 	}
 
 	@Override
@@ -167,6 +186,25 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 		// FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
 		// FrameLayout.LayoutParams.MATCH_PARENT, mScreenHeight);
 		// buy_box.setLayoutParams(params);
+        ll_poster = (LinearLayout) findViewById(R.id.ll_poster);
+        noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
+        noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        noScrollgridview.setColumnWidth(mWidth);
+        adapter = new GridAdapter(this);
+        adapter.update();
+        noScrollgridview.setAdapter(adapter);
+        noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+//                int size = Bimp.tempSelectBitmap.size()+picList.size();
+//                if (arg2 == size) {
+//                    if (size < 6) {
+//                        PublicWay.num = 6-picList.size();
+//                        changeImage();
+//                    }
+//                }
+            }
+        });
 
 	}
 
@@ -261,6 +299,13 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 				}
 				listview.addView(creatItem(q));
 			}
+            pics = info.getInfoPics();
+            if(pics!=null && pics.size()>0){
+                ll_poster.setVisibility(View.VISIBLE);
+                adapter.update();
+            }else{
+                ll_poster.setVisibility(View.GONE);
+            }
 
 			// listview.setAdapter(adapter);
 		}
@@ -606,11 +651,16 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 
 			if (user != null && user.getZhiId() != 0) {
 				if (priceNum < 2) {
-					BuyDialog buyDialog = new BuyDialog(mContext,
-							R.style.BuyDialog);
-					buyDialog.setSuccessLinstener(ActivityBuyInfoContent.this);
-					buyDialog.setBuyId(Integer.parseInt(info.getId()));
-					buyDialog.show();
+//					BuyDialog buyDialog = new BuyDialog(mContext,
+//							R.style.BuyDialog);
+//					buyDialog.setSuccessLinstener(ActivityBuyInfoContent.this);
+//					buyDialog.setBuyId(Integer.parseInt(info.getId()));
+//					buyDialog.show();
+                    Intent intent = new Intent(ActivityBuyInfoContent.this, ActivityBuyGivePrice.class);
+                    intent.putExtra("buyId", Integer.parseInt(info.getId()));
+                    startActivityForResult(intent, 1);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
 				} else {
 					ToastUtils.Infotoast(mContext, "您已经报价两次");
 				}
@@ -694,14 +744,118 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 		}
 	}
 
-	@Override
-	public void onSuccess(String name, String pricr, String info) {
-		if (CommonUtils.isNetworkAvailable(mContext)) {
-			setResult(AndroidConfig.writeFriendRefreshResultCode);
-			InteNetUtils.getInstance(mContext).getBuyInfoContent(iD,
-					mRequestCallBack);
-		} else {
-			nodota.setVisibility(View.VISIBLE);
-		}
-	}
+//	@Override
+//	public void onSuccess(String name, String pricr, String info) {
+//		if (CommonUtils.isNetworkAvailable(mContext)) {
+//			setResult(AndroidConfig.writeFriendRefreshResultCode);
+//			InteNetUtils.getInstance(mContext).getBuyInfoContent(iD,
+//					mRequestCallBack);
+//		} else {
+//			nodota.setVisibility(View.VISIBLE);
+//		}
+//	}
+
+    @SuppressLint("HandlerLeak")
+    public class GridAdapter extends BaseAdapter {
+        private LayoutInflater inflater;
+        private int selectedPosition = -1;
+        private boolean shape;
+
+        public boolean isShape() {
+            return shape;
+        }
+
+        public void setShape(boolean shape) {
+            this.shape = shape;
+        }
+
+        public GridAdapter(Context context) {
+            inflater = LayoutInflater.from(context);
+        }
+
+        public void update() {
+            loading();
+        }
+
+        public int getCount() {
+            return pics.size();
+        }
+
+        public Object getItem(int arg0) {
+            return null;
+        }
+
+        public long getItemId(int arg0) {
+            return 0;
+        }
+
+        public void setSelectedPosition(int position) {
+            selectedPosition = position;
+        }
+
+        public int getSelectedPosition() {
+            return selectedPosition;
+        }
+
+        public View getView(final int position, View convertView,
+                            ViewGroup parent) {
+            ViewHolder holder = null;
+//            if (convertView == null) {
+            convertView = inflater.inflate(R.layout.item_buy_poster_grida,
+                    parent, false);
+            holder = new ViewHolder();
+            holder.image = (RoundedImageView) convertView
+                    .findViewById(R.id.item_grida_image);
+            View v = convertView.findViewById(R.id.box);
+            convertView.setTag(holder);
+            v.setLayoutParams(new RelativeLayout.LayoutParams(mWidth, mWidth));
+            holder.image.getLayoutParams().width = mWidth;
+            holder.image.getLayoutParams().height = mWidth;
+
+//            } else {
+//                holder = (ViewHolder) convertView.getTag();
+//            }
+
+            CommonUtils.startImageLoader(cubeimageLoader,
+                    pics.get(position).getPoster(), holder.image);
+
+
+            return convertView;
+        }
+
+        public class ViewHolder {
+            public RoundedImageView image;
+        }
+
+
+        public void loading() {
+            int size = pics.size();
+            int width=0;
+            if(size==0) {
+                width = mWidth;
+            }else {
+                width = mWidth * size  + PixelUtil.dp2px(10) * (size - 1);
+            }
+            noScrollgridview.setLayoutParams(new LinearLayout.LayoutParams(width, mWidth+PixelUtil.dp2px(20)));
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                if(resultCode==RESULT_OK){
+                    if (CommonUtils.isNetworkAvailable(mContext)) {
+                        setResult(AndroidConfig.writeFriendRefreshResultCode);
+                        InteNetUtils.getInstance(mContext).getBuyInfoContent(iD,
+                                mRequestCallBack);
+                    } else {
+                        nodota.setVisibility(View.VISIBLE);
+                    }
+                }
+                break;
+        }
+    }
 }

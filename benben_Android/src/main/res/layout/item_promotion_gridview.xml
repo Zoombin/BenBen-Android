@@ -59,12 +59,36 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal|top"
-        android:textSize="15dip"
-        android:textColor="#848484"
+        android:textSize="13sp"
+        android:textColor="#000000"
         android:layout_marginTop="3dp"
-        android:minLines="2"
+        android:singleLine="true"
+        android:ellipsize="end"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="#848484"
+            android:text="促销价:"
+            />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/red"
+            />
+
+    </LinearLayout>
 
 
     </LinearLayout>

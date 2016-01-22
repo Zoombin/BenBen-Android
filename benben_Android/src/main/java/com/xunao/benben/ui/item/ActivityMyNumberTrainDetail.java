@@ -745,6 +745,10 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                     .findViewById(R.id.tv_edittxt);
             ImageView iv_over_time = (ImageView) convertView.findViewById(R.id.iv_over_time);
 
+            TextView tv_price = (TextView) convertView
+                    .findViewById(R.id.tv_price);
+            tv_price.setText(promotion.getPromotion_price()+"元");
+
             if(numberTrainDetail.getIs_promotion()==0) {
 
                 tv_edittxt.setText("商品已下架");

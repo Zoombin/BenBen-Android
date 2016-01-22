@@ -64,7 +64,8 @@
         android:background="#FFFFFF"
         >
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_pic"
             android:layout_width="110dp"
             android:layout_height="70dp"
             android:src="@drawable/bg_buy_no_pic"

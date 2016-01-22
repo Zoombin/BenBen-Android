@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EBEBEB"
+    >
+
+    <include layout="@layout/com_title_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择举报原因"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <View
+                android:layout_marginTop="3dp"
+                style="@style/set_item_Line_5"/>
+
+            <com.xunao.benben.view.ListViewForScrollView
+                android:id="@+id/lv_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#dcdcdc"
+                android:dividerHeight="0.5dp"
+                android:background="#FFFFFF"
+                android:paddingLeft="10dp"
+                ></com.xunao.benben.view.ListViewForScrollView>
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/set_item_Line_5"/>
+
+            <EditText
+                android:id="@+id/edt_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="15dp"
+                android:hint="详细描述举报原因(选填)"
+                android:minLines="3"
+                android:gravity="top"
+                android:background="#FFFFFF"
+                />
+
+            <View
+                style="@style/set_item_Line_5"/>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/green_but"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:text="提交"
+                android:textSize="15dp"
+                android:textColor="#FFFFFF"
+                />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

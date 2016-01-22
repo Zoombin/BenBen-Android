@@ -39,6 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="请叫我都教授"
+                    android:layout_centerVertical="true"
                     android:textColor="#0f72aa"
                     android:textSize="14dip" />
 
@@ -46,10 +47,23 @@
                     android:id="@+id/item_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_toLeftOf="@+id/report"
+                    android:layout_centerVertical="true"
                     android:text="2小时前"
                     android:textColor="#a6a6a6"
                     android:textSize="13dip" />
+
+                <ImageView
+                    android:id="@+id/report"
+                    android:layout_width="25dip"
+                    android:layout_height="27dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dip"
+                    android:layout_alignParentRight="true"
+                    android:padding="5dip"
+                    android:paddingBottom="2dip"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_report" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -138,17 +152,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_click_zan" />
 
-                <ImageView
-                    android:id="@+id/report"
-                    android:layout_width="25dip"
-                    android:layout_height="27dip"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dip"
-                    android:layout_toLeftOf="@id/click_zan"
-                    android:padding="5dip"
-                    android:paddingBottom="2dip"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/icon_report" />
+
             </RelativeLayout>
 
             <com.xunao.benben.view.MyTextView

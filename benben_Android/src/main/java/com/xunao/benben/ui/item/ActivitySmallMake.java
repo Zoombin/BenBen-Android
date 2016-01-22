@@ -71,6 +71,7 @@ import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.hx.chatuidemo.utils.SmileUtils;
 import com.xunao.benben.hx.chatuidemo.widget.PasteEditText;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.ActivityReport;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.PixelUtil;
 import com.xunao.benben.utils.TimeUtil;
@@ -1472,22 +1473,25 @@ public class ActivitySmallMake extends BaseActivity implements OnClickListener {
                 holderTextAImg.report.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (CommonUtils.isNetworkAvailable(mContext)) {
-                            String context = "creationid:"+item.getId();
-                            InteNetUtils.getInstance(mContext).doComplain(context,new RequestCallBack<String>() {
-                                @Override
-                                public void onSuccess(ResponseInfo<String> stringResponseInfo) {
-                                    ToastUtils.Infotoast(mContext,"我们已收到您的举报，将会尽快处理！");
-                                }
+                        String context = "creationid:"+item.getId();
+                        startAnimActivity2Obj(ActivityReport.class,"reason",context);
 
-                                @Override
-                                public void onFailure(HttpException e, String s) {
-                                    ToastUtils.Infotoast(mContext,"举报失败");
-                                }
-                            });
-                        }else{
-                            ToastUtils.Infotoast(mContext,"网络不可用");
-                        }
+//                        if (CommonUtils.isNetworkAvailable(mContext)) {
+//
+//                            InteNetUtils.getInstance(mContext).doComplain(context,new RequestCallBack<String>() {
+//                                @Override
+//                                public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+//                                    ToastUtils.Infotoast(mContext,"我们已收到您的举报，将会尽快处理！");
+//                                }
+//
+//                                @Override
+//                                public void onFailure(HttpException e, String s) {
+//                                    ToastUtils.Infotoast(mContext,"举报失败");
+//                                }
+//                            });
+//                        }else{
+//                            ToastUtils.Infotoast(mContext,"网络不可用");
+//                        }
                     }
                 });
 				holderTextAImg.item_friend_singleImg.setVisibility(View.GONE);

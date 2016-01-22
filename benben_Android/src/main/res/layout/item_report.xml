@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:gravity="center_vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_reason"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="欺诈"
+        android:textSize="15dp"
+        android:textColor="#000000"
+        />
+
+    <CheckBox
+        android:id="@+id/cb_select"
+        style="@style/MyCheckboxStyle"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:clickable="false"
+        android:checked="true"
+        android:layout_gravity="center_vertical"
+        android:visibility="invisible"
+        />
+
+</LinearLayout>

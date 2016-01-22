@@ -1,12 +1,14 @@
 package com.xunao.benben.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.lidroid.xutils.db.annotation.Id;
 import com.lidroid.xutils.db.annotation.NoAutoIncrement;
+import com.lidroid.xutils.db.annotation.Transient;
 import com.xunao.benben.base.BaseBean;
 import com.xunao.benben.exception.NetRequestException;
 
@@ -30,7 +32,9 @@ public class BuyInfo extends BaseBean {
 	private long deadline;// 截止日期
 	private long createdTime;// 创建日期
 	private int quotedNumber;// 报价人数
-	private int haveQuote; 
+	private int haveQuote;
+    @Transient
+    private List<BuyInfoPic> infoPics = new ArrayList<>();
 	
 	public int getId() {
 		return id;
@@ -161,7 +165,15 @@ public class BuyInfo extends BaseBean {
 		this.haveQuote = haveQuote;
 	}
 
-	@Override
+    public List<BuyInfoPic> getInfoPics() {
+        return infoPics;
+    }
+
+    public void setInfoPics(List<BuyInfoPic> infoPics) {
+        this.infoPics = infoPics;
+    }
+
+    @Override
 	public JSONObject toJSON() {
 		return null;
 	}
@@ -197,6 +209,20 @@ public class BuyInfo extends BaseBean {
 				}
 			}
 		}
+
+        JSONArray picJSONArray = jsonObj.optJSONArray("poster");
+        if (picJSONArray != null && picJSONArray.length()>0) {
+            int length = picJSONArray.length();
+            BuyInfoPic buyInfoPic = null;
+            for (int i = 0; i < length; i++) {
+                JSONObject optJSONObject = picJSONArray.optJSONObject(i);
+                if (optJSONObject != null) {
+                    buyInfoPic = new BuyInfoPic();
+                    buyInfoPic.parseJSON(optJSONObject);
+                    infoPics.add(buyInfoPic);
+                }
+            }
+        }
 		return this;
 	}
 }

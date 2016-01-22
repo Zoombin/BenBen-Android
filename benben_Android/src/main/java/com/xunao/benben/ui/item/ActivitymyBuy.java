@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,9 +49,11 @@ import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.bean.BuyInfo;
+import com.xunao.benben.bean.BuyInfoPic;
 import com.xunao.benben.bean.BuyInfolist;
 import com.xunao.benben.bean.Quote;
 import com.xunao.benben.config.AndroidConfig;
@@ -65,6 +68,10 @@ import com.xunao.benben.utils.TimeUtil;
 import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.utils.ViewHolderUtil;
 import com.xunao.benben.view.MyTextView;
+
+import in.srain.cube.image.CubeImageView;
+import in.srain.cube.image.ImageTask;
+import in.srain.cube.image.impl.DefaultImageLoadHandler;
 
 public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 		OnRefreshListener<ListView>, OnLastItemVisibleListener,
@@ -107,6 +114,54 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 		broadCast = new refreshBroadCast();
 		registerReceiver(broadCast, new IntentFilter(
 				AndroidConfig.refreshBuyInfo));
+
+
+        cubeimageLoader.setImageLoadHandler(new DefaultImageLoadHandler(
+                mContext) {
+            @Override
+            public void onLoading(ImageTask imageTask,
+                                  CubeImageView cubeImageView) {
+                Boolean ispost = (Boolean) cubeImageView
+                        .getTag(R.string.ispost);
+                if (cubeImageView != null) {
+                    if (ispost != null && ispost) {
+                        cubeImageView.setImageResource(R.drawable.bg_buy_no_pic);
+                    } else {
+                        cubeImageView.setImageResource(R.drawable.loading);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onLoadFinish(ImageTask imageTask,
+                                     CubeImageView cubeImageView, BitmapDrawable drawable) {
+                if (cubeImageView != null) {
+                    if (imageTask.getIdentityUrl().equalsIgnoreCase(
+                            (String) cubeImageView.getTag())) {
+
+                        cubeImageView.setVisibility(View.VISIBLE);
+                        cubeImageView.setImageDrawable(drawable);
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onLoadError(ImageTask imageTask,
+                                    CubeImageView imageView, int errorCode) {
+                if (imageView != null) {
+                    Boolean ispost = (Boolean) imageView
+                            .getTag(R.string.ispost);
+                    if (ispost != null && ispost) {
+                        imageView.setImageResource(R.drawable.bg_buy_no_pic);
+                    } else {
+                        imageView.setImageResource(R.drawable.bg_buy_no_pic);
+                    }
+                }
+            }
+        });
 	}
 
 	@Override
@@ -353,6 +408,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject=========="+jsonObject);
 		dissLoding();
 		listview.onRefreshComplete();
 		BuyInfolist buyInfolist = new BuyInfolist();
@@ -715,8 +771,17 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
                         R.id.item_name);
                 MyTextView tv_min_price = ViewHolderUtil.get(arg1,
                         R.id.tv_min_price);
+                RoundedImageView iv_pic = ViewHolderUtil.get(arg1,
+                        R.id.iv_pic);
 
 				final BuyInfo item = getItem(arg0);
+
+                List<BuyInfoPic> list = item.getInfoPics();
+                if(list!=null && list.size()>0){
+                    CommonUtils.startImageLoader(cubeimageLoader,list.get(0).getPoster(),iv_pic);
+                }else{
+                    CommonUtils.startImageLoader(cubeimageLoader,"www.baidu.com",iv_pic);
+                }
 
 				item_buyinfo_title.setText(item.getTitle());
 				item_buyinfo_n.setText("x" + item.getAmount());

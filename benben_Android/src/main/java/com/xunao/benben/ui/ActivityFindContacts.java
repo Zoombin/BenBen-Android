@@ -138,7 +138,8 @@ public class ActivityFindContacts extends BaseActivity {
 					Intent intent = new Intent(mContext,
 							ActivityContactsInfo.class);
 //					intent.putExtra("contacts", contactsList.get(position));
-                    intent.putExtra("username", contactsList.get(position).getHuanxin_username());
+//                    intent.putExtra("username", contactsList.get(position).getHuanxin_username());
+                    intent.putExtra("infoid", contactsList.get(position).getId());
 					startActivityForResult(intent,
 							AndroidConfig.ContactsFragmentRequestCode);
 					mContext.overridePendingTransition(R.anim.in_from_right,
@@ -409,11 +410,11 @@ public class ActivityFindContacts extends BaseActivity {
 					item_phone_poster);
 			item_phone_name.setText(contacts.getName());
 
-			if (contacts.getIs_baixing().equals("0")) {
-				item_phone_single_bxw.setVisibility(View.GONE);
-			} else {
-				item_phone_single_bxw.setVisibility(View.VISIBLE);
-			}
+//			if (contacts.getIs_baixing().equals("0")) {
+//				item_phone_single_bxw.setVisibility(View.GONE);
+//			} else {
+//				item_phone_single_bxw.setVisibility(View.VISIBLE);
+//			}
 
 			if (contacts.getIs_benben().equals("0")) {
 				item_phone_single_bb.setVisibility(View.GONE);
@@ -430,6 +431,7 @@ public class ActivityFindContacts extends BaseActivity {
                 e.printStackTrace();
             }
             boolean ztcFlag = false;
+            boolean baixingFlag = false;
             ArrayList<String> pString = new ArrayList<String>();
             if (phonesArrayList != null && phonesArrayList.size() > 0) {
                 for (int i = 0; i < phonesArrayList.size(); i++) {
@@ -441,9 +443,18 @@ public class ActivityFindContacts extends BaseActivity {
                     if(train_id!=null && !train_id.equals("") && !train_id.equals("0")){
                         ztcFlag = true;
                     }
+                    String bx = phonesArrayList.get(i).getIs_baixing();
+                    if(!bx.equals("0") && !phoneString.equals("")){
+                        baixingFlag = true;
+                    }
                 }
             }
-            if(ztcFlag){
+            if (baixingFlag && !contacts.getGroup_id().equals("10000")) {
+                item_phone_single_bxw.setVisibility(View.VISIBLE);
+            } else {
+                item_phone_single_bxw.setVisibility(View.GONE);
+            }
+            if(ztcFlag && !contacts.getGroup_id().equals("10000")){
                 item_phone_single_ztc.setVisibility(View.VISIBLE);
             }else{
                 item_phone_single_ztc.setVisibility(View.GONE);

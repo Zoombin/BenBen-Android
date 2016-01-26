@@ -97,6 +97,7 @@ public class ActivityGroupBuyOperate extends BaseActivity implements View.OnClic
     private int promotionid=0;
     private static final int TAKE_PICTURE = 0x000001;
     private static final int PIC_Select_CODE_ImageFromLoacal = 2; // 从相册
+    private static final int SEND_PUBLIC = 3;
     public static Bitmap bimap;
     private String lastTime;
     private String startTime;
@@ -392,9 +393,16 @@ public class ActivityGroupBuyOperate extends BaseActivity implements View.OnClic
 
                                 break;
                             case 2:
-                                startAnimActivity2Obj(
-                                        ActivitySmallPublic.class,
-                                        "promotion", "我开通了新的团购,"+ AndroidConfig.NETHOST+"/promotion/promotiondetail/key/android?promotionid="+promotionid+",来给我捧捧场吧!");
+                                Bimp.tempSelectBitmap.clear();
+                                startAnimActivityForResult3(
+                                        ActivitySmallPublic.class,SEND_PUBLIC,
+                                        "promotion", "我开通了新的团购,来给我捧捧场吧!",
+                                        "url",AndroidConfig.NETHOST+"/groupBuy/groupbuyDetail/key/android?promotionid="+promotionid);
+
+//                                startAnimActivity2Obj(
+//                                        ActivitySmallPublic.class,
+//                                        "promotion", "我开通了新的团购,来给我捧捧场吧!",
+//                                        "url",AndroidConfig.NETHOST+"/groupBuy/groupbuyDetail/key/android?promotionid="+promotionid);
 
                                 break;
                             default:
@@ -1000,6 +1008,9 @@ public class ActivityGroupBuyOperate extends BaseActivity implements View.OnClic
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+            case SEND_PUBLIC:
+                Bimp.tempSelectBitmap.clear();
+                break;
             case TAKE_PICTURE:
                 if(resultCode == RESULT_OK) {
                     String fileName = String.valueOf(System.currentTimeMillis());

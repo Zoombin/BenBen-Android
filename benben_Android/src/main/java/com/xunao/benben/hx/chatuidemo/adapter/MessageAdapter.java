@@ -974,15 +974,26 @@ public class MessageAdapter extends BaseAdapter {
         int type = message.getIntAttribute("type",0);
         if(train_id.equals("")){
             TextMessageBody txtBody = (TextMessageBody) message.getBody();
-            Spannable span = SmileUtils
-                    .getSmiledText(context, txtBody.getMessage());
+            final String textContent = txtBody.getMessage();
+
             // 设置内容
-            holder.tv.setText(span, BufferType.SPANNABLE);
-            holder.tv.setTextColor(Color.parseColor("#000000"));
+            if(textContent.contains("groupBuy/groupbuyDetail") || textContent.contains("promotion/promotiondetail")){
+                String content = textContent.substring(0,textContent.indexOf("http"));
+                Spannable span = SmileUtils.getSmiledText(context, content);
+                holder.tv.setText(Html.fromHtml("<u>" + span + "</u>"));
+                holder.tv.setTextColor(Color.parseColor("#068cd9"));
+            }else {
+                Spannable span = SmileUtils.getSmiledText(context, textContent);
+                holder.tv.setText(span, BufferType.SPANNABLE);
+                holder.tv.setTextColor(Color.parseColor("#000000"));
+            }
+
+
+
 			//自定义处理文本消息点击（有链接需要内部跳转）
 			String linktype = message.getStringAttribute("link_type", "");//暂时没用
 			//[小喇叭]我开通了新的促销,http://112.124.101.177:81/index.php/v2/promotion/promotiondetail/key/android?promotionid=44,来给我捧捧场吧!
-			final String textContent = holder.tv.getText().toString();
+//			final String textContent = holder.tv.getText().toString();
 			holder.tv.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -1021,7 +1032,7 @@ public class MessageAdapter extends BaseAdapter {
                                     ContextMenu.class)).putExtra("position", position)
                                     .putExtra("type", EMMessage.Type.TXT.ordinal()),
                             ChatActivity.REQUEST_CODE_CONTEXT_MENU);
-                    return true;
+                    return false;
                 }
             });
         }else{
@@ -1040,7 +1051,7 @@ public class MessageAdapter extends BaseAdapter {
                                         ContextMenu.class)).putExtra("position", position)
                                         .putExtra("type", EMMessage.Type.IMAGE.ordinal()),
                                 ChatActivity.REQUEST_CODE_CONTEXT_MENU);
-                        return true;
+                        return false;
                     }
                 });
                 holder.tv.setOnClickListener(new OnClickListener() {
@@ -1077,7 +1088,7 @@ public class MessageAdapter extends BaseAdapter {
                                         ContextMenu.class)).putExtra("position", position)
                                         .putExtra("type", EMMessage.Type.IMAGE.ordinal()),
                                 ChatActivity.REQUEST_CODE_CONTEXT_MENU);
-                        return true;
+                        return false;
                     }
                 });
                 holder.ll_number_train.setOnClickListener(new OnClickListener() {
@@ -1203,7 +1214,7 @@ public class MessageAdapter extends BaseAdapter {
 						ContextMenu.class)).putExtra("position", position)
 						.putExtra("type", EMMessage.Type.IMAGE.ordinal()),
 						ChatActivity.REQUEST_CODE_CONTEXT_MENU);
-				return true;
+				return false;
 			}
 		});
 
@@ -1334,7 +1345,7 @@ public class MessageAdapter extends BaseAdapter {
 						ContextMenu.class).putExtra("position", position)
 						.putExtra("type", EMMessage.Type.VIDEO.ordinal()),
 						ChatActivity.REQUEST_CODE_CONTEXT_MENU);
-				return true;
+				return false;
 			}
 		});
 
@@ -1474,7 +1485,7 @@ public class MessageAdapter extends BaseAdapter {
 						ContextMenu.class)).putExtra("position", position)
 						.putExtra("type", EMMessage.Type.VOICE.ordinal()),
 						ChatActivity.REQUEST_CODE_CONTEXT_MENU);
-				return true;
+				return false;
 			}
 		});
 		if (((ChatActivity) activity).playMsgId != null

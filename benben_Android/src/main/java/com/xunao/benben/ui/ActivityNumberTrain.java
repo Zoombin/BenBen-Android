@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -38,6 +40,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -120,7 +123,10 @@ public class ActivityNumberTrain extends BaseActivity implements
 	protected InfoMsgHint hint;
     private String from="";
 
-    private LinearLayout ll_search_range,ll_search_industry;
+//    private LinearLayout ll_search_range,ll_search_industry;
+    private RelativeLayout rl_search_area;
+    private PopupWindow popupWindow;
+    private TextView tv_search_range,tv_search_industry;
     private LinearLayout ll_industry;
     private TextView tv_industry;
     private String industryId="";
@@ -174,6 +180,8 @@ public class ActivityNumberTrain extends BaseActivity implements
 
 		search_edittext = (EditText) findViewById(R.id.search_edittext);
 		((TextView) findViewById(R.id.searchName)).setText("商铺简称/服务项目/店铺号");
+        rl_search_area = (RelativeLayout) findViewById(R.id.rl_search_area);
+        rl_search_area.setOnClickListener(this);
 		iv_search_content_delect = (ImageView) findViewById(R.id.iv_search_content_delect);
 		ll_seach_icon = (LinearLayout) findViewById(R.id.ll_seach_icon);
 		listView = (PullToRefreshListView) findViewById(R.id.listView);
@@ -307,12 +315,14 @@ public class ActivityNumberTrain extends BaseActivity implements
 		adapter = new myAdapter();
 		listView.setAdapter(adapter);
 
-        ll_search_range = (LinearLayout) findViewById(R.id.ll_search_range);
-        ll_search_range.setOnClickListener(this);
-        ll_search_industry = (LinearLayout) findViewById(R.id.ll_search_industry);
-        ll_search_industry.setOnClickListener(this);
+//        ll_search_range = (LinearLayout) findViewById(R.id.ll_search_range);
+//        ll_search_range.setOnClickListener(this);
+//        ll_search_industry = (LinearLayout) findViewById(R.id.ll_search_industry);
+//        ll_search_industry.setOnClickListener(this);
         ll_industry = (LinearLayout) findViewById(R.id.ll_industry);
         tv_industry = (TextView) findViewById(R.id.tv_industry);
+
+        initPopWindow();
 	}
 
 	// 初始化本地数据
@@ -888,21 +898,36 @@ public class ActivityNumberTrain extends BaseActivity implements
 //			startAnimActivityForResult2(ActivityChoiceAddress.class,
 //					CHOCE_ADDRESS, "level", "0");
 			break;
-        case R.id.ll_search_range:
-            isSearch = true;
-            startAnimActivityForResult3(ActivityChoiceAddress.class,
-                    CHOCE_ADDRESS, "level", "0","from","train");
-            break;
-        case R.id.ll_search_industry:
-            isSearch = true;
-            Intent intent = new Intent(this, ActivityChoiceIndusrty.class);
-            intent.putExtra("from","train");
-            startActivityForResult(intent, CHOCE_INDUSTRY);
-            overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-
-            break;
-		default:
-			break;
+//        case R.id.ll_search_range:
+//            isSearch = true;
+//            startAnimActivityForResult3(ActivityChoiceAddress.class,
+//                    CHOCE_ADDRESS, "level", "0","from","train");
+//            break;
+//        case R.id.ll_search_industry:
+//            isSearch = true;
+//            Intent intent = new Intent(this, ActivityChoiceIndusrty.class);
+//            intent.putExtra("from","train");
+//            startActivityForResult(intent, CHOCE_INDUSTRY);
+//            overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+//            break;
+            case R.id.rl_search_area:
+                popupWindow.showAsDropDown(rl_search_area, -PixelUtil.dp2px(45), 0);
+                break;
+            case R.id.tv_search_range:
+                isSearch = true;
+                startAnimActivityForResult3(ActivityChoiceAddress.class,
+                        CHOCE_ADDRESS, "level", "0","from","train");
+                popupWindow.dismiss();
+                break;
+            case R.id.tv_search_industry:
+                isSearch = true;
+                Intent intent = new Intent(this, ActivityChoiceIndusrty.class);
+                intent.putExtra("from","train");
+                startActivityForResult(intent, CHOCE_INDUSTRY);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                popupWindow.dismiss();
+            default:
+                break;
 		}
 	}
 
@@ -966,4 +991,33 @@ public class ActivityNumberTrain extends BaseActivity implements
 		initlocalData();
 		super.onResume();
 	}
+
+    /**
+     * 创建PopupWindow
+     */
+    protected void initPopWindow() {
+        // TODO Auto-generated method stub
+        View popupWindow_view = getLayoutInflater().inflate(R.layout.search_pop_window, null,
+                false);
+        // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
+        popupWindow = new PopupWindow(popupWindow_view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+//        // 设置动画效果
+//        popupWindow.setAnimationStyle(R.style.AnimationFade);
+        // 点击其他地方消失
+        popupWindow_view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+                return false;
+            }
+        });
+        tv_search_range = (TextView) popupWindow_view.findViewById(R.id.tv_search_range);
+        tv_search_industry = (TextView) popupWindow_view.findViewById(R.id.tv_search_industry);
+        tv_search_range.setOnClickListener(this);
+        tv_search_industry.setOnClickListener(this);
+    }
 }

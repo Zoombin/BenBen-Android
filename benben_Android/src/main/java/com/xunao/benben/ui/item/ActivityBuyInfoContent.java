@@ -28,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
@@ -75,6 +76,7 @@ import com.xunao.benben.utils.ViewHolderUtil;
 import com.xunao.benben.view.ActionSheet;
 import com.xunao.benben.view.MyTextView;
 import com.xunao.benben.view.ActionSheet.ActionSheetListener;
+import com.xunao.benben.view.NoScrollGridView;
 
 public class ActivityBuyInfoContent extends BaseActivity implements
 		OnClickListener {
@@ -320,6 +322,7 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 		MyTextView item_content = ViewHolderUtil.get(arg1, R.id.item_content);
 		MyTextView item_content_info = ViewHolderUtil.get(arg1,
 				R.id.item_content_info);
+        NoScrollGridView item_quote_gridView =  ViewHolderUtil.get(arg1, R.id.item_quote_gridView);
 		ImageView item_but = ViewHolderUtil.get(arg1, R.id.item_but);
 
 		String poster = item.getPoster();
@@ -354,18 +357,46 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 		String spa = "报价:" + item.getPrice() + "元"
 				+ (item.getAccept() == 1 ? "(已接受)" : "");
 
-		SpannableStringBuilder style = new SpannableStringBuilder(spa);
-		// SpannableStringBuilder实现CharSequence接口
-		style.setSpan(new ForegroundColorSpan(Color.parseColor("#3c3c3c")), 0,
-				3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		style.setSpan(
-				new ForegroundColorSpan(Color.parseColor("#c00909")),
-				3,
-				4 + (item.getPrice() + (item.getAccept() == 1 ? "(已接受)" : "") + "")
-						.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		SpannableStringBuilder style = new SpannableStringBuilder(spa);
+//		// SpannableStringBuilder实现CharSequence接口
+//		style.setSpan(new ForegroundColorSpan(Color.parseColor("#3c3c3c")), 0,
+//				3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		style.setSpan(
+//				new ForegroundColorSpan(Color.parseColor("#c00909")),
+//				3,
+//				4 + (item.getPrice() + (item.getAccept() == 1 ? "(已接受)" : "") + "")
+//						.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		item_content_info.setText("备注:"+item.getDescription());
-		item_content.setText(style);
+		item_content_info.setText("描述:"+item.getDescription());
+		item_content.setText(spa);
+        item_content.setTextColor(Color.parseColor("#6ABC4D"));
+
+        String images = item.getImages();
+        if (!TextUtils.isEmpty(images)) {
+            String[] split = images.split("\\^");
+//					int length = split.length;
+//					if (length > 1) {
+            // 多图用GridView
+            item_quote_gridView
+                    .setVisibility(View.VISIBLE);
+            MyGridViewAdapter adapter = new MyGridViewAdapter(split);
+            item_quote_gridView.setAdapter(adapter);
+            item_quote_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(
+                                AdapterView<?> arg0, View arg1,
+                                int arg2, long arg3) {
+                            Intent intent = new Intent(ActivityBuyInfoContent.this, ActivityContentPicSet.class);
+                            intent.putExtra("IMAGES",  item.getImages());
+                            intent.putExtra("POSITION", arg2);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.in_from_small2big_,
+                                    R.anim.in_from_nochange);
+                        }
+                    });
+        }
+
 		long deadline = info.getDeadline();
 		if (info.getMemberId() == user.getId()
 				&& (deadline) - (System.currentTimeMillis() / 1000) > 0) {
@@ -857,5 +888,56 @@ public class ActivityBuyInfoContent extends BaseActivity implements
                 }
                 break;
         }
+    }
+
+    private class MyGridViewAdapter extends BaseAdapter {
+
+        String[] images;
+
+        public MyGridViewAdapter(String[] images) {
+            super();
+            this.images = images;
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return images.length;
+        }
+
+        @Override
+        public String getItem(int position) {
+            // TODO Auto-generated method stub
+            return images[position];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = View.inflate(mContext,
+                        R.layout.item_friend_gridview, null);
+            }
+
+            convertView
+                    .setLayoutParams(new AbsListView.LayoutParams(
+                            AbsListView.LayoutParams.MATCH_PARENT, PixelUtil
+                            .dp2px(60)));
+            String poster = getItem(position);
+            if (!TextUtils.isEmpty(poster)) {
+                CommonUtils.startImageLoader(cubeimageLoader,
+                        getItem(position), ((CubeImageView) convertView));
+            } else {
+                CommonUtils.startImageLoader(cubeimageLoader, "www.baidu.com",
+                        ((CubeImageView) convertView));
+            }
+            return convertView;
+        }
+
     }
 }

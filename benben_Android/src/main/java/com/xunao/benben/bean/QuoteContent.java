@@ -1,11 +1,15 @@
 package com.xunao.benben.bean;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.lidroid.xutils.db.annotation.Id;
 import com.lidroid.xutils.db.annotation.NoAutoIncrement;
 import com.xunao.benben.base.BaseBean;
 import com.xunao.benben.exception.NetRequestException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuoteContent extends BaseBean<QuoteContent> {
 	@Id
@@ -31,6 +35,9 @@ public class QuoteContent extends BaseBean<QuoteContent> {
 	private String huanxinUsername;
 	private String name;
 	private int accept;// 1代表接受他的保价
+
+    private List<BuyInfoPic> infoPics = new ArrayList<>();
+    private String Images;// 使用||分割
 
 	public QuoteContent() {
 		super();
@@ -131,7 +138,23 @@ public class QuoteContent extends BaseBean<QuoteContent> {
 		this.short_name = short_name;
 	}
 
-	@Override
+    public List<BuyInfoPic> getInfoPics() {
+        return infoPics;
+    }
+
+    public void setInfoPics(List<BuyInfoPic> infoPics) {
+        this.infoPics = infoPics;
+    }
+
+    public String getImages() {
+        return Images;
+    }
+
+    public void setImages(String images) {
+        Images = images;
+    }
+
+    @Override
 	public JSONObject toJSON() {
 		// TODO Auto-generated method stub
 		return null;
@@ -153,6 +176,28 @@ public class QuoteContent extends BaseBean<QuoteContent> {
 		poster = jsonObj.optString("poster");
 		huanxinUsername = jsonObj.optString("huanxin_username");
 		name = jsonObj.optString("name");
+
+        JSONArray picJSONArray = jsonObj.optJSONArray("quote_pic");
+        if (picJSONArray != null && picJSONArray.length()>0) {
+            int length = picJSONArray.length();
+            BuyInfoPic buyInfoPic = null;
+            for (int i = 0; i < length; i++) {
+                JSONObject optJSONObject = picJSONArray.optJSONObject(i);
+                if (optJSONObject != null) {
+                    buyInfoPic = new BuyInfoPic();
+                    buyInfoPic.parseJSON(optJSONObject);
+                    infoPics.add(buyInfoPic);
+                    if (Images != null) {
+                        Images += "^" + buyInfoPic.getPoster();
+                    } else {
+                        Images = buyInfoPic.getPoster();
+                    }
+
+                }
+            }
+        }
+
+
 
 		return this;
 	}

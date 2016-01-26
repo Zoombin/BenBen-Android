@@ -357,7 +357,13 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 							} else {
 								message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 								if (url != null && !url.equals("")) {
-									TextMessageBody txtBody = new TextMessageBody("这个商品不错哦，快来看看吧!" + url);
+                                    String content = "";
+                                    if(url.contains("groupBuy/groupbuyDetail")){
+                                        content = "我开通了新的团购,来给我捧捧场吧!";
+                                    }else if( url.contains("promotion/promotiondetail")){
+                                        content = "我开通了新的促销,来给我捧捧场吧!";
+                                    }
+									TextMessageBody txtBody = new TextMessageBody(content + url);
 									// 设置消息body
 									message.addBody(txtBody);
 								} else {

@@ -60,7 +60,7 @@ import java.util.Date;
 public class ActivityPromotionAddAlbum extends BaseActivity implements View.OnClickListener {
     private RoundedImageView rv_album_cover;
     private EditText edt_name;
-    private TextView tv_time,tv_num;
+    private TextView tv_time,tv_max_num,tv_num;
     private GridView noScrollgridview;
     private GridAdapter adapter;
     private boolean isCover = false;
@@ -95,6 +95,8 @@ public class ActivityPromotionAddAlbum extends BaseActivity implements View.OnCl
         edt_name = (EditText) findViewById(R.id.edt_name);
         tv_num = (TextView) findViewById(R.id.tv_num);
         tv_time = (TextView) findViewById(R.id.tv_time);
+        tv_max_num = (TextView) findViewById(R.id.tv_max_num);
+        tv_max_num.setText("(每次可上传6张,仅限20张图片)");
         tv_time.setText(simpleDateFormat.format(new Date()));
         noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -153,6 +155,12 @@ public class ActivityPromotionAddAlbum extends BaseActivity implements View.OnCl
                 for (int i = 0; i < size; i++) {
                     images[i] = Bimp.tempSelectBitmap.get(i).getImagePath();
                 }
+                setOnRightClickLinester(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
                 InteNetUtils.getInstance(mContext).Addalbum(name, poster_cover, images,mRequestCallBack);
             }else{
                 ToastUtils.Infotoast(mContext, "网络不可用");
@@ -182,6 +190,12 @@ public class ActivityPromotionAddAlbum extends BaseActivity implements View.OnCl
     @Override
     protected void onFailure(HttpException exception, String strMsg) {
         ToastUtils.Infotoast(mContext,"添加失败");
+        setOnRightClickLinester(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveAlbum();
+            }
+        });
     }
 
     protected void onRestart() {

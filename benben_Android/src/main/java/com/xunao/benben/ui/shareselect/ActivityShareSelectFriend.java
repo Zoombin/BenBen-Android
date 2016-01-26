@@ -35,6 +35,7 @@ import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.bean.Contacts;
 import com.xunao.benben.bean.ContactsGroup;
+import com.xunao.benben.bean.PhoneInfo;
 import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.hx.chatuidemo.utils.ImageUtils;
@@ -176,8 +177,24 @@ public class ActivityShareSelectFriend extends BaseActivity {
 				
 				
 				for (Contacts contacts : arrayList) {
+                    contactsLArrayList.add(contacts);
+                    // 获得联系人下的 phoneInfo
+                    List<PhoneInfo> phonelists = dbUtil.findAll(Selector.from(PhoneInfo.class).where(
+                            "contacts_id", "=", contacts.getId()));
+                    if (phonelists != null && phonelists.size() > 0) {
+                        for (PhoneInfo phoneInfo : phonelists) {
+                            if (!phoneInfo.getIs_benben().equals("") && !phoneInfo.getIs_benben().equals("0") && !phoneInfo.getIs_benben().equals(contacts.getIs_benben())) {
+                                Contacts newContact = new Contacts();
+                                newContact.setHuanxin_username(phoneInfo.getHuanxin_username());
+                                newContact.setIs_benben(phoneInfo.getIs_benben());
+                                newContact.setNick_name(phoneInfo.getNick_name());
+                                newContact.setPoster(phoneInfo.getPoster());
+                                newContact.setName(phoneInfo.getName());
+                                contactsLArrayList.add(newContact);
+                            }
+                        }
+                    }
 
-					contactsLArrayList.add(contacts);
 				}
 
 				group.setmContacts(contactsLArrayList);
@@ -323,7 +340,13 @@ public class ActivityShareSelectFriend extends BaseActivity {
 							} else {
 								message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 								if (url != null && !url.equals("")) {
-									TextMessageBody txtBody = new TextMessageBody("这个商品不错哦，快来看看吧!" + url);
+                                    String content = "";
+                                    if(url.contains("groupBuy/groupbuyDetail")){
+                                        content = "我开通了新的团购,来给我捧捧场吧!";
+                                    }else if( url.contains("promotion/promotiondetail")){
+                                        content = "我开通了新的促销,来给我捧捧场吧!";
+                                    }
+									TextMessageBody txtBody = new TextMessageBody(content + url);
 									// 设置消息body
 									message.addBody(txtBody);
 								} else {

@@ -138,15 +138,15 @@ public class BaiduMapActivity extends BaseActivity {
 	private void showMap(double latitude, double longtitude, String address) {
 		sendButton.setVisibility(View.GONE);
 		LatLng llA = new LatLng(latitude, longtitude);
-		CoordinateConverter converter= new CoordinateConverter();
-		converter.coord(llA);
-		converter.from(CoordinateConverter.CoordType.COMMON);
-		LatLng convertLatLng = converter.convert();
-		OverlayOptions ooA = new MarkerOptions().position(convertLatLng).icon(BitmapDescriptorFactory
+//		CoordinateConverter converter= new CoordinateConverter();
+//		converter.coord(llA);
+//		converter.from(CoordinateConverter.CoordType.COMMON);
+//		LatLng convertLatLng = converter.convert();
+		OverlayOptions ooA = new MarkerOptions().position(llA).icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.icon_marka))
 				.zIndex(4).draggable(true);
 		mBaiduMap.addOverlay(ooA);
-		MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(convertLatLng, 17.0f);
+		MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(llA, 17.0f);
 		mBaiduMap.animateMapStatus(u);
 	}
 
@@ -229,6 +229,7 @@ public class BaiduMapActivity extends BaseActivity {
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}
+            Log.d("ltf","loc============"+location.getLatitude()+"===="+location.getLongitude());
 
 			if (lastLocation != null) {
 				if (lastLocation.getLatitude() == location.getLatitude() && lastLocation.getLongitude() == location.getLongitude()) {
@@ -241,15 +242,15 @@ public class BaiduMapActivity extends BaseActivity {
 			lastLocation = location;
 			mBaiduMap.clear();
 			LatLng llA = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-			CoordinateConverter converter= new CoordinateConverter();
-			converter.coord(llA);
-			converter.from(CoordinateConverter.CoordType.COMMON);
-			LatLng convertLatLng = converter.convert();
-			OverlayOptions ooA = new MarkerOptions().position(convertLatLng).icon(BitmapDescriptorFactory
+//			CoordinateConverter converter= new CoordinateConverter();
+//			converter.coord(llA);
+//			converter.from(CoordinateConverter.CoordType.COMMON);
+//			LatLng convertLatLng = converter.convert();
+			OverlayOptions ooA = new MarkerOptions().position(llA).icon(BitmapDescriptorFactory
 					.fromResource(R.drawable.icon_marka))
 					.zIndex(4).draggable(true);
 			mBaiduMap.addOverlay(ooA);
-			MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(convertLatLng, 17.0f);
+			MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(llA, 17.0f);
 			mBaiduMap.animateMapStatus(u);
 			tvaddress.setText(lastLocation.getAddrStr());
 		}

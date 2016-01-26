@@ -7,66 +7,66 @@
 
     <include layout="@layout/com_title_bar" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        >
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="#FFFFFF"-->
+        <!-->-->
 
-        <LinearLayout
-            android:id="@+id/ll_search_range"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_search_range"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!-->-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="范围"
-                android:padding="8dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:drawableRight="@drawable/ico_arrow_down"
-                android:textSize="15dp"
-                />
-
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#dcdcdc"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            />
-
-        <LinearLayout
-            android:id="@+id/ll_search_industry"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="行业"
-                android:padding="8dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:drawableRight="@drawable/ico_arrow_down"
-                android:textSize="15dp"
-                />
-
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="范围"-->
+                <!--android:padding="8dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:gravity="center"-->
+                <!--android:drawableRight="@drawable/ico_arrow_down"-->
+                <!--android:textSize="15dp"-->
+                <!--/>-->
 
 
-    </LinearLayout>
+        <!--</LinearLayout>-->
+
+        <!--<View-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#dcdcdc"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--/>-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_search_industry"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!-->-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="行业"-->
+                <!--android:padding="8dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:gravity="center"-->
+                <!--android:drawableRight="@drawable/ico_arrow_down"-->
+                <!--android:textSize="15dp"-->
+                <!--/>-->
+
+        <!--</LinearLayout>-->
+
+
+    <!--</LinearLayout>-->
 
     <View
         style="@style/set_item_Line_5"

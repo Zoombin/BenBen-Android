@@ -134,6 +134,7 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
     private MsgDialog msgDialog;
     private TextView tv_record_time;
     private String promotion;
+    private String url="";
 
 
 	@Override
@@ -357,6 +358,7 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
 
 		numberTrain = getIntent().getStringExtra("numberTrain");
         promotion = getIntent().getStringExtra("promotion");
+        url = getIntent().getStringExtra("url");
 
 		sendContacts = (BroadCasting) getIntent().getSerializableExtra(
 				"sendContacts");
@@ -528,6 +530,10 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 if (numberTrain != null) {
                                     if (send == 1) {
                                         send = 2;
+                                        if (promotion != null && !promotion.equals("")){
+                                            content += url;
+                                        }
+
                                         InteNetUtils.getInstance(mContext).doPublicVoice(
                                                 friendUnionId, content, phone,legphone, "1", videoPath,recordLength,
                                                 requestCallBack);
@@ -535,6 +541,9 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 } else {
                                     if (send == 1) {
                                         send = 2;
+                                        if (promotion != null && !promotion.equals("")){
+                                            content += url;
+                                        }
                                         InteNetUtils.getInstance(mContext).doPublicVoice(
                                                 friendUnionId, content, phone,legphone, "0", videoPath,recordLength,
                                                 requestCallBack);
@@ -564,12 +573,18 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 if (numberTrain != null) {
                                     if (send == 1) {
                                         send = 2;
+                                        if (promotion != null && !promotion.equals("")){
+                                            content += url;
+                                        }
                                         InteNetUtils.getInstance(mContext).doPublicVoice("",
                                                 content, phone,"", "1", videoPath,recordLength, requestCallBack);
                                     }
                                 } else {
                                     if (send == 1) {
                                         send = 2;
+                                        if (promotion != null && !promotion.equals("")){
+                                            content += url;
+                                        }
                                         InteNetUtils.getInstance(mContext).doPublicVoice("",
                                                 content, phone,"", "0", videoPath,recordLength, requestCallBack);
                                     }
@@ -630,6 +645,9 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 if (numberTrain != null) {
                                     if (send == 1) {
                                         send = 2;
+                                        if (promotion != null && !promotion.equals("")){
+                                            content += url;
+                                        }
                                         InteNetUtils.getInstance(mContext).doPublic(
                                                 friendUnionId, content, phone,legphone, "1", images,
                                                 requestCallBack);
@@ -637,6 +655,9 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 } else {
                                     if (send == 1) {
                                         send = 2;
+                                        if (promotion != null && !promotion.equals("")){
+                                            content += url;
+                                        }
                                         InteNetUtils.getInstance(mContext).doPublic(
                                                 friendUnionId, content, phone,legphone, "0", images,
                                                 requestCallBack);
@@ -666,12 +687,18 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 if (numberTrain != null) {
                                     if (send == 1) {
                                         send = 2;
+                                        if (promotion != null && !promotion.equals("")){
+                                            content += url;
+                                        }
                                         InteNetUtils.getInstance(mContext).doPublic("",
                                                 content, phone,"", "1", images, requestCallBack);
                                     }
                                 } else {
                                     if (send == 1) {
                                         send = 2;
+                                        if (promotion != null && !promotion.equals("")){
+                                            content += url;
+                                        }
                                         InteNetUtils.getInstance(mContext).doPublic("",
                                                 content, phone, "","0", images, requestCallBack);
                                     }
@@ -700,7 +727,6 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject============="+jsonObject);
 		friendUnion = new FriendUnion();
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("info");
@@ -709,7 +735,6 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
             }else {
                 JSONObject job = jsonArray.getJSONObject(0);
                 friendUnion = friendUnion.parseJSON(job);
-                Log.d("lif","friendUnion==========="+friendUnion.getId());
                 if(friendUnion.getType().equals("1")){
                     iv_arrow.setVisibility(View.VISIBLE);
                     item_all.setVisibility(View.GONE);

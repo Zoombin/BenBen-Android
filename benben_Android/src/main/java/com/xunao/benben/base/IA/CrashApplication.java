@@ -393,7 +393,7 @@ public class CrashApplication extends Application {
 
 			@Override
 			public void run() {
-				System.exit(0);
+//				System.exit(0);
 			}
 		}, 1000);
 	}

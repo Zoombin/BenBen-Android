@@ -213,7 +213,7 @@ public class Contacts extends BaseBean<Contacts> implements Comparable {
 				PhoneInfo phone = new PhoneInfo(name);
 				phone.parseJSON(jsonObject);
 				phone.setContacts_id(id);
-				if (!isFirst && !phone.getIs_benben().equals("0")) {
+				if (!isFirst && !phone.getIs_benben().equals("0") && !is_friend.equals("0")) {
 					isFirst = true;
 					is_benben = phone.getIs_benben();
 					is_baixing = phone.getIs_baixing();

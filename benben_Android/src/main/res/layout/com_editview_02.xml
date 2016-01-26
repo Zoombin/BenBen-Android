@@ -40,7 +40,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_toLeftOf="@+id/btn_search_range"
+            android:layout_toLeftOf="@+id/rl_search_area"
             >
 
             <LinearLayout
@@ -62,7 +62,7 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:textColor="#c1c1c1"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
 

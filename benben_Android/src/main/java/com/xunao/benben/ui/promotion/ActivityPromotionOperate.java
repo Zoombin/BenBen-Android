@@ -91,6 +91,7 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
     private static final int TAKE_PICTURE = 0x000001;
     private static final int PIC_REQUEST_CODE_SELECT_CAMERA = 1; // 从相机
     private static final int PIC_Select_CODE_ImageFromLoacal = 2; // 从相册
+    private static final int SEND_PUBLIC = 3;
     public static Bitmap bimap;
     private String lastTime;
     private String startTime;
@@ -167,16 +168,16 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
         edt_promotion_price = (EditText) findViewById(R.id.edt_promotion_price);
         edt_model = (EditText) findViewById(R.id.edt_model);
         edt_description = (EditText) findViewById(R.id.edt_description);
-        edt_description.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                //这句话说的意思告诉父View我自己的事件我自己处理
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
+//        edt_description.setOnTouchListener(new View.OnTouchListener() {
+//
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                // TODO Auto-generated method stub
+//                //这句话说的意思告诉父View我自己的事件我自己处理
+//                v.getParent().requestDisallowInterceptTouchEvent(true);
+//                return false;
+//            }
+//        });
         tv_start_date = (TextView) findViewById(R.id.tv_start_date);
         tv_start_date.setOnClickListener(this);
         tv_end_date = (TextView) findViewById(R.id.tv_end_date);
@@ -342,10 +343,16 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
                                 break;
                             case 2:
                                 if(type==1) {
-
-                                    startAnimActivity2Obj(
-                                            ActivitySmallPublic.class,
-                                            "promotion", "我开通了新的促销," + AndroidConfig.NETHOST + "/promotion/promotiondetail/key/android?promotionid=" + promotionid + ",来给我捧捧场吧!");
+                                    Bimp.tempSelectBitmap.clear();
+                                    PublicWay.num = 6;
+                                    startAnimActivityForResult3(
+                                            ActivitySmallPublic.class,SEND_PUBLIC,
+                                            "promotion", "我开通了新的促销,来给我捧捧场吧!" ,
+                                            "url",AndroidConfig.NETHOST + "/promotion/promotiondetail/key/android?promotionid=" + promotionid);
+//                                    startAnimActivity2Obj(
+//                                            ActivitySmallPublic.class,
+//                                            "promotion", "我开通了新的促销,来给我捧捧场吧!" ,
+//                                            "url",AndroidConfig.NETHOST + "/promotion/promotiondetail/key/android?promotionid=" + promotionid);
                                 }else{
                                     ToastUtils.Infotoast(mContext,"该商品已下架，无法发送小喇叭!");
                                 }
@@ -876,6 +883,10 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+            case SEND_PUBLIC:
+                PublicWay.num = 3;
+                Bimp.tempSelectBitmap.clear();
+                break;
             case TAKE_PICTURE:
                 if(resultCode == RESULT_OK) {
                     String fileName = String.valueOf(System.currentTimeMillis());

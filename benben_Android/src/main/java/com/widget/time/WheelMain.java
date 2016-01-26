@@ -175,10 +175,14 @@ public class WheelMain {
 
 		// 根据屏幕密度来指定选择器字体的大小(不同屏幕可能不同)
 		int textSize = 0;
-		if (hasSelectTime)
-			textSize = (screenheight / 100) * 3;
-		else
-			textSize = (screenheight / 100) * 4;
+//		if (hasSelectTime)
+//			textSize = (screenheight / 100) * 3;
+//		else
+//			textSize = (screenheight / 100) * 4;
+        if (hasSelectTime)
+            textSize = (screenheight / 100) * 2;
+        else
+            textSize = (screenheight / 100) * 3;
 		wv_day.TEXT_SIZE = textSize;
 		wv_month.TEXT_SIZE = textSize;
 		wv_year.TEXT_SIZE = textSize;

@@ -293,82 +293,82 @@ public class ActivitySmallPublics extends BaseActivity {
 //			}
 //		});
 
-		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					final int position, long arg3) {
-
-				inputDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
-				inputDialog.setContent("删除小喇叭", "是否删除本条小喇叭", "确认", "取消");
-				inputDialog.setCancleListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						inputDialog.dismiss();
-					}
-				});
-				inputDialog.setOKListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						InteNetUtils.getInstance(mContext).deleteBroadCasting(
-								broadCastings.get(position).getId(), "0",
-								new RequestCallBack<String>() {
-									@Override
-									public void onSuccess(
-											ResponseInfo<String> arg0) {
-										String result = arg0.result;
-										try {
-											JSONObject jsonObject = new JSONObject(
-													result);
-											String ret_num = jsonObject
-													.optString("ret_num");
-											String ret_msg = jsonObject
-													.optString("ret_msg");
-
-											if ("0".equals(ret_num)) {
-												ToastUtils.Infotoast(mContext,
-														"小喇叭删除成功");
-												new Handler().postDelayed(
-														new Runnable() {
-
-															@Override
-															public void run() {
-																if (broadCastings
-																		.size() - 1 > position) {
-																	broadCastings
-																			.remove(position);
-																	adapter.notifyDataSetChanged();
-
-																}
-															}
-														}, 300);
-												return;
-											} else {
-												ToastUtils.Infotoast(mContext,
-														ret_msg);
-												return;
-											}
-										} catch (JSONException e) {
-											e.printStackTrace();
-											ToastUtils.Infotoast(mContext,
-													"小喇叭删除失败!");
-											return;
-										}
-									}
-
-									@Override
-									public void onFailure(HttpException arg0,
-											String arg1) {
-										ToastUtils.Errortoast(mContext,
-												"网络不可用!");
-									}
-								});
-						inputDialog.dismiss();
-					}
-				});
-				inputDialog.show();
-				return true;
-			}
-		});
+//		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
+//			@Override
+//			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+//					final int position, long arg3) {
+//
+//				inputDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
+//				inputDialog.setContent("删除小喇叭", "是否删除本条小喇叭", "确认", "取消");
+//				inputDialog.setCancleListener(new OnClickListener() {
+//					@Override
+//					public void onClick(View v) {
+//						inputDialog.dismiss();
+//					}
+//				});
+//				inputDialog.setOKListener(new OnClickListener() {
+//					@Override
+//					public void onClick(View v) {
+//						InteNetUtils.getInstance(mContext).deleteBroadCasting(
+//								broadCastings.get(position).getId(), "0",
+//								new RequestCallBack<String>() {
+//									@Override
+//									public void onSuccess(
+//											ResponseInfo<String> arg0) {
+//										String result = arg0.result;
+//										try {
+//											JSONObject jsonObject = new JSONObject(
+//													result);
+//											String ret_num = jsonObject
+//													.optString("ret_num");
+//											String ret_msg = jsonObject
+//													.optString("ret_msg");
+//
+//											if ("0".equals(ret_num)) {
+//												ToastUtils.Infotoast(mContext,
+//														"小喇叭删除成功");
+//												new Handler().postDelayed(
+//														new Runnable() {
+//
+//															@Override
+//															public void run() {
+//																if (broadCastings
+//																		.size() - 1 > position) {
+//																	broadCastings
+//																			.remove(position);
+//																	adapter.notifyDataSetChanged();
+//
+//																}
+//															}
+//														}, 300);
+//												return;
+//											} else {
+//												ToastUtils.Infotoast(mContext,
+//														ret_msg);
+//												return;
+//											}
+//										} catch (JSONException e) {
+//											e.printStackTrace();
+//											ToastUtils.Infotoast(mContext,
+//													"小喇叭删除失败!");
+//											return;
+//										}
+//									}
+//
+//									@Override
+//									public void onFailure(HttpException arg0,
+//											String arg1) {
+//										ToastUtils.Errortoast(mContext,
+//												"网络不可用!");
+//									}
+//								});
+//						inputDialog.dismiss();
+//					}
+//				});
+//				inputDialog.show();
+//				return true;
+//			}
+//		});
 	}
 
 	@Override
@@ -449,7 +449,12 @@ public class ActivitySmallPublics extends BaseActivity {
                     .findViewById(R.id.item_friend_voice_error);
 
 			tv_time.setText(broadCastings.get(position).getCreatedTime());
-			tv_content.setText(broadCastings.get(position).getContentdetail());
+            String content = broadCastings.get(position).getContentdetail();
+            if(content.contains("groupBuy/groupbuyDetail") || content.contains("promotion/promotiondetail")){
+                content = content.substring(0,content.indexOf("http"));
+            }
+
+			tv_content.setText(content);
 			tv_senders.setText(broadCastings.get(position)
 					.getShortDescription());
 
@@ -461,15 +466,15 @@ public class ActivitySmallPublics extends BaseActivity {
             if (item.getType() == 1) {// 图文
                 if (!TextUtils.isEmpty(images)) {
                     String[] split = images.split("\\^");
-                    int length = split.length;
-                    if (length > 1) {
+//                    int length = split.length;
+//                    if (length > 1) {
                         // 多图用GridView
                         item_friend_gridView
                                 .setVisibility(View.VISIBLE);
-                        MyGridViewAdapter adapter = new MyGridViewAdapter(
+                        MyGridViewAdapter gridAdapter = new MyGridViewAdapter(
                                 split);
                         item_friend_gridView
-                                .setAdapter(adapter);
+                                .setAdapter(gridAdapter);
                         item_friend_gridView
                                 .setOnItemClickListener(new OnItemClickListener() {
 
@@ -483,32 +488,109 @@ public class ActivitySmallPublics extends BaseActivity {
                                                 arg2);
                                     }
                                 });
-                    } else {
-                        // 单图
-                        item_friend_singleImg
-                                .setVisibility(View.VISIBLE);
 
-                        item_friend_singleImg
-                                .getLayoutParams().width = item
-                                .getSingImageW();
-                        item_friend_singleImg
-                                .getLayoutParams().height = item
-                                .getSingImageH();
-                        CommonUtils.startImageLoader(cubeimageLoader,
-                                split[0],
-                                item_friend_singleImg);
-                        item_friend_singleImg
-                                .setOnClickListener(new OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        startActivity2StringAndPosition(
-                                                ActivityContentPicSet.class,
-                                                "IMAGES", item.getImages(),
-                                                0);
-                                    }
-                                });
 
-                    }
+
+                    item_friend_gridView.setOnItemLongClickListener(new OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            inputDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
+                            inputDialog.setContent("删除小喇叭", "是否删除本条小喇叭", "确认", "取消");
+                            inputDialog.setCancleListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    inputDialog.dismiss();
+                                }
+                            });
+                            inputDialog.setOKListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    InteNetUtils.getInstance(mContext).deleteBroadCasting(
+                                            broadCastings.get(position).getId(), "0",
+                                            new RequestCallBack<String>() {
+                                                @Override
+                                                public void onSuccess(
+                                                        ResponseInfo<String> arg0) {
+                                                    String result = arg0.result;
+                                                    try {
+                                                        JSONObject jsonObject = new JSONObject(
+                                                                result);
+                                                        String ret_num = jsonObject
+                                                                .optString("ret_num");
+                                                        String ret_msg = jsonObject
+                                                                .optString("ret_msg");
+
+                                                        if ("0".equals(ret_num)) {
+                                                            ToastUtils.Infotoast(mContext,
+                                                                    "小喇叭删除成功");
+                                                            new Handler().postDelayed(
+                                                                    new Runnable() {
+
+                                                                        @Override
+                                                                        public void run() {
+                                                                            if (broadCastings
+                                                                                    .size() - 1 > position) {
+                                                                                broadCastings
+                                                                                        .remove(position);
+                                                                                adapter.notifyDataSetChanged();
+
+                                                                            }
+                                                                        }
+                                                                    }, 300);
+                                                            return;
+                                                        } else {
+                                                            ToastUtils.Infotoast(mContext,
+                                                                    ret_msg);
+                                                            return;
+                                                        }
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                        ToastUtils.Infotoast(mContext,
+                                                                "小喇叭删除失败!");
+                                                        return;
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(HttpException arg0,
+                                                                      String arg1) {
+                                                    ToastUtils.Errortoast(mContext,
+                                                            "网络不可用!");
+                                                }
+                                            });
+                                    inputDialog.dismiss();
+                                }
+                            });
+                            inputDialog.show();
+                            return true;
+                        }
+                    });
+//                    } else {
+//                        // 单图
+//                        item_friend_singleImg
+//                                .setVisibility(View.VISIBLE);
+//
+//                        item_friend_singleImg
+//                                .getLayoutParams().width = item
+//                                .getSingImageW();
+//                        item_friend_singleImg
+//                                .getLayoutParams().height = item
+//                                .getSingImageH();
+//                        CommonUtils.startImageLoader(cubeimageLoader,
+//                                split[0],
+//                                item_friend_singleImg);
+//                        item_friend_singleImg
+//                                .setOnClickListener(new OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        startActivity2StringAndPosition(
+//                                                ActivityContentPicSet.class,
+//                                                "IMAGES", item.getImages(),
+//                                                0);
+//                                    }
+//                                });
+//
+//                    }
                 }
             } else {// 音频
                 item_friend_voice_box
@@ -539,6 +621,81 @@ public class ActivitySmallPublics extends BaseActivity {
                             hint.dismiss();
                         }
                     });
+                }
+            });
+
+            convertView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    inputDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
+                    inputDialog.setContent("删除小喇叭", "是否删除本条小喇叭", "确认", "取消");
+                    inputDialog.setCancleListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            inputDialog.dismiss();
+                        }
+                    });
+                    inputDialog.setOKListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            InteNetUtils.getInstance(mContext).deleteBroadCasting(
+                                    broadCastings.get(position).getId(), "0",
+                                    new RequestCallBack<String>() {
+                                        @Override
+                                        public void onSuccess(
+                                                ResponseInfo<String> arg0) {
+                                            String result = arg0.result;
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(
+                                                        result);
+                                                String ret_num = jsonObject
+                                                        .optString("ret_num");
+                                                String ret_msg = jsonObject
+                                                        .optString("ret_msg");
+
+                                                if ("0".equals(ret_num)) {
+                                                    ToastUtils.Infotoast(mContext,
+                                                            "小喇叭删除成功");
+                                                    new Handler().postDelayed(
+                                                            new Runnable() {
+
+                                                                @Override
+                                                                public void run() {
+                                                                    if (broadCastings
+                                                                            .size() - 1 > position) {
+                                                                        broadCastings
+                                                                                .remove(position);
+                                                                        adapter.notifyDataSetChanged();
+
+                                                                    }
+                                                                }
+                                                            }, 300);
+                                                    return;
+                                                } else {
+                                                    ToastUtils.Infotoast(mContext,
+                                                            ret_msg);
+                                                    return;
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                                ToastUtils.Infotoast(mContext,
+                                                        "小喇叭删除失败!");
+                                                return;
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(HttpException arg0,
+                                                              String arg1) {
+                                            ToastUtils.Errortoast(mContext,
+                                                    "网络不可用!");
+                                        }
+                                    });
+                            inputDialog.dismiss();
+                        }
+                    });
+                    inputDialog.show();
+                    return false;
                 }
             });
 

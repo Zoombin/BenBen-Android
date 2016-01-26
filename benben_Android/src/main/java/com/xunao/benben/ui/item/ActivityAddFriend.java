@@ -205,6 +205,9 @@ public class ActivityAddFriend extends BaseActivity implements OnClickListener,
                                 }
                                 tv_recommend_num.setText("好友推荐 （"+recommendNum+"人)");
                                 recommendFriendAdapter.notifyDataSetChanged();
+                                isShow = true;
+                                iv_arrow.setImageResource(R.drawable.ico_arrow_up_blue);
+                                lv_recommend_friend.setVisibility(View.VISIBLE);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

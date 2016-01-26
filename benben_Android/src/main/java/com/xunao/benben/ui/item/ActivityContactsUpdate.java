@@ -292,7 +292,7 @@ public class ActivityContactsUpdate extends BaseActivity implements View.OnClick
             values.clear();
             values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
             values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE);
-            values.put(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME, name);
+            values.put(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, name);
             getContentResolver().insert(ContactsContract.Data.CONTENT_URI,
                     values);
         }

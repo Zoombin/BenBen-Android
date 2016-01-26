@@ -297,6 +297,8 @@ public class ChatAllHistoryFragment extends Fragment {
 			}
 
 		});
+
+
 		// 搜索框
 		query = (EditText) getView().findViewById(R.id.query);
 		String strSearch = getResources().getString(R.string.search);

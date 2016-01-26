@@ -182,7 +182,7 @@ public class ActivityChoiceAddress extends BaseActivity implements
 			listview.setAdapter(myAdatper);
 
 		} catch (NetRequestException e) {
-			e.getError().print(mContext);
+//			e.getError().print(mContext);
 			Intent intent = new Intent();
 			intent.putExtra("address", addressname);
 			intent.putExtra("addressId", addressId);

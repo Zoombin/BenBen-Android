@@ -10,11 +10,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -103,6 +106,7 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 	private static final int CHOCE_ADDRESS = 4;
 	private static final int CHOCE_DETAIL_ADDRESS = 5;
 	private static final int CHOCE_INDUSTRY = 6;
+    private static final int SEND_PUBLIC = 7;
 	private NumberTrainDetail numberTrainDetail;
 	private double latitude;
 	private double longitude;
@@ -121,6 +125,7 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 //    private FinalBitmap fb;
     private String ids="";
     private boolean isRemoveOriginPoster = false;
+    private HorizontalScrollView hsv;
 
 	class myBoradCast extends BroadcastReceiver {
 		@Override
@@ -194,6 +199,7 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 		tv_set_detailaddress.setOnClickListener(this);
 		rl_industry.setOnClickListener(this);
 
+        hsv = (HorizontalScrollView) findViewById(R.id.hsv);
         noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridAdapter(this);
@@ -650,9 +656,11 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 
 								@Override
 								public void onClick(View v) {
-									startAnimActivity2Obj(
-											ActivitySmallPublic.class,
-											"numberTrain", "我开通了号码直通车来给我捧捧场吧!");
+                                    Bimp.tempSelectBitmap.clear();
+//									startAnimActivity2Obj(
+//											ActivitySmallPublic.class,
+//											"numberTrain", "我开通了号码直通车来给我捧捧场吧!");
+                                    startAnimActivityForResult2(ActivitySmallPublic.class,SEND_PUBLIC,"numberTrain", "我开通了号码直通车来给我捧捧场吧!");
 									hint.dismiss();
 								}
 							});
@@ -951,6 +959,9 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
+            case SEND_PUBLIC:
+                Bimp.tempBitmap.clear();
+                break;
 //		case PIC_REQUEST_CODE_WITH_DATA:
 //			if (data != null) {
 //				Uri uri = data.getData();
@@ -1214,6 +1225,7 @@ public class ActivityMyNumberTrain extends BaseActivity implements
                             }
                             picList.remove(position);
                         }else {
+                            Log.d("ltf",Bimp.tempSelectBitmap.size()+"==="+(position-picList.size()));
                             Bimp.tempSelectBitmap.remove(position-picList.size());
                         }
                         adapter.update();
@@ -1246,8 +1258,20 @@ public class ActivityMyNumberTrain extends BaseActivity implements
             }
             noScrollgridview.setLayoutParams(new LinearLayout.LayoutParams(mWidth, PixelUtil.dp2px(100)));
             adapter.notifyDataSetChanged();
+
+            new Handler().post(new Runnable() {
+
+
+                @Override
+                public void run() {
+                    hsv.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
+                }
+            });
+
         }
     }
+
+
 
     @Override
     protected void onDestroy() {
@@ -1256,5 +1280,7 @@ public class ActivityMyNumberTrain extends BaseActivity implements
         CrashApplication.getInstance().removeActivity(this);
         super.onDestroy();
     }
+
+
 
 }

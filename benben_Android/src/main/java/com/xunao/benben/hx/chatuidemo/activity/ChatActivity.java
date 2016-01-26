@@ -97,6 +97,8 @@ import com.easemob.exceptions.EaseMobException;
 import com.easemob.util.EMLog;
 import com.easemob.util.PathUtil;
 import com.easemob.util.VoiceRecorder;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
@@ -193,7 +195,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	private View recordingContainer;
 	private ImageView micImage;
 	private TextView recordingHint;
-	private ListView listView;
+	private PullToRefreshListView listView;
 	private PasteEditText mEditTextContent;
 	private View buttonSetModeKeyboard;
 	private View buttonSetModeVoice;
@@ -300,7 +302,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
         tv_record_time = (TextView)findViewById(R.id.tv_record_time);
 		micImage = (ImageView) findViewById(R.id.mic_image);
 		recordingHint = (TextView) findViewById(R.id.recording_hint);
-		listView = (ListView) findViewById(R.id.list);
+		listView = (PullToRefreshListView) findViewById(R.id.list);
 		mEditTextContent = (PasteEditText) findViewById(R.id.et_sendmessage);
 		buttonSetModeKeyboard = findViewById(R.id.btn_set_mode_keyboard);
 		edittext_layout = (RelativeLayout) findViewById(R.id.edittext_layout);
@@ -566,12 +568,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				cubeImageLoader, user);
 		// 显示消息
 		listView.setAdapter(adapter);
-		listView.setOnScrollListener(new ListScrollListener());
-		int count = listView.getCount();
+//		listView.setOnScrollListener(new ListScrollListener());
+
+        listView.setOnRefreshListener(new ListScrollListener());
+
+		int count = adapter.getCount();
 		if (count > 0) {
 			listView.setSelection(count - 1);
 		}
-
 		listView.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -1148,7 +1152,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 			conversation.addMessage(message);
 			// 通知adapter有消息变动，adapter会根据加入的这条message显示消息和调用sdk的发送方法
 			adapter.refresh();
-			listView.setSelection(listView.getCount() - 1);
+			listView.setSelection(adapter.getCount() - 1);
 			mEditTextContent.setText("");
 
 			setResult(RESULT_OK);
@@ -1180,7 +1184,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
         conversation.addMessage(message);
         // 通知adapter有消息变动，adapter会根据加入的这条message显示消息和调用sdk的发送方法
         adapter.refresh();
-        listView.setSelection(listView.getCount() - 1);
+        listView.setSelection(adapter.getCount() - 1);
         mEditTextContent.setText("");
 
         setResult(RESULT_OK);
@@ -1214,7 +1218,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 			conversation.addMessage(message);
 			adapter.refresh();
-			listView.setSelection(listView.getCount() - 1);
+			listView.setSelection(adapter.getCount() - 1);
 			setResult(RESULT_OK);
 			// send file
 			// sendVoiceSub(filePath, fileName, message);
@@ -1246,7 +1250,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 		listView.setAdapter(adapter);
 		adapter.refresh();
-		listView.setSelection(listView.getCount() - 1);
+		listView.setSelection(adapter.getCount() - 1);
 		setResult(RESULT_OK);
 		// more(more);
 	}
@@ -1310,7 +1314,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 			conversation.addMessage(message);
 			listView.setAdapter(adapter);
 			adapter.refresh();
-			listView.setSelection(listView.getCount() - 1);
+			listView.setSelection(adapter.getCount() - 1);
 			setResult(RESULT_OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1378,7 +1382,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		conversation.addMessage(message);
 		listView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
-		listView.setSelection(listView.getCount() - 1);
+		listView.setSelection(adapter.getCount() - 1);
 		setResult(RESULT_OK);
 
 	}
@@ -1434,7 +1438,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		conversation.addMessage(message);
 		listView.setAdapter(adapter);
 		adapter.refresh();
-		listView.setSelection(listView.getCount() - 1);
+		listView.setSelection(adapter.getCount() - 1);
 		setResult(RESULT_OK);
 	}
 
@@ -1562,7 +1566,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	 * @param v
 	 */
 	public void editClick(View v) {
-		listView.setSelection(listView.getCount() - 1);
+		listView.setSelection(adapter.getCount() - 1);
 		if (more.getVisibility() == View.VISIBLE) {
 			more.setVisibility(View.GONE);
 			iv_emoticons_normal.setVisibility(View.VISIBLE);
@@ -1985,62 +1989,121 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		}
 	}
 
-	/**
-	 * listview滑动监听listener
-	 * 
-	 */
-	private class ListScrollListener implements OnScrollListener {
 
-		@Override
-		public void onScrollStateChanged(AbsListView view, int scrollState) {
-			switch (scrollState) {
-			case OnScrollListener.SCROLL_STATE_IDLE:
-				if (view.getFirstVisiblePosition() == 0 && !isloading
-						&& haveMoreData) {
-					loadmorePB.setVisibility(View.VISIBLE);
-					// sdk初始化加载的聊天记录为20条，到顶时去db里获取更多
-					List<EMMessage> messages;
-					try {
-						// 获取更多messges，调用此方法的时候从db获取的messages
-						// sdk会自动存入到此conversation中
-						if (chatType == CHATTYPE_SINGLE)
-							messages = conversation.loadMoreMsgFromDB(adapter
-									.getItem(0).getMsgId(), pagesize);
-						else
-							messages = conversation.loadMoreGroupMsgFromDB(
-									adapter.getItem(0).getMsgId(), pagesize);
-					} catch (Exception e1) {
-						loadmorePB.setVisibility(View.GONE);
-						return;
-					}
-					try {
-						Thread.sleep(300);
-					} catch (InterruptedException e) {
-					}
-					if (messages.size() != 0) {
-						// 刷新ui
-						adapter.notifyDataSetChanged();
-						listView.setSelection(messages.size() - 1);
-						if (messages.size() != pagesize)
-							haveMoreData = false;
-					} else {
-						haveMoreData = false;
-					}
-					loadmorePB.setVisibility(View.GONE);
-					isloading = false;
+    /**
+     * listview滑动监听listener
+     *
+     */
+    private class ListScrollListener implements PullToRefreshBase.OnRefreshListener {
 
-				}
-				break;
-			}
-		}
+        @Override
+        public void onRefresh(PullToRefreshBase refreshView) {
+//            loadmorePB.setVisibility(View.VISIBLE);
+            // sdk初始化加载的聊天记录为20条，到顶时去db里获取更多
+            List<EMMessage> messages;
+            try {
+                // 获取更多messges，调用此方法的时候从db获取的messages
+                // sdk会自动存入到此conversation中
+                if (chatType == CHATTYPE_SINGLE)
+                    messages = conversation.loadMoreMsgFromDB(adapter
+                            .getItem(0).getMsgId(), pagesize);
+                else
+                    messages = conversation.loadMoreGroupMsgFromDB(
+                            adapter.getItem(0).getMsgId(), pagesize);
+            } catch (Exception e1) {
+//                loadmorePB.setVisibility(View.GONE);
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        listView.onRefreshComplete();
+                    }
+                });
+                return;
+            }
 
-		@Override
-		public void onScroll(AbsListView view, int firstVisibleItem,
-				int visibleItemCount, int totalItemCount) {
+            new Handler().post(new Runnable() {
+                @Override
+                public void run() {
+                    listView.onRefreshComplete();
+                }
+            });
 
-		}
 
-	}
+//            try {
+//                Thread.sleep(300);
+//            } catch (InterruptedException e) {
+//            }
+            if (messages.size() != 0) {
+                // 刷新ui
+                adapter.notifyDataSetChanged();
+                listView.setSelection(messages.size() - 1);
+                if (messages.size() != pagesize)
+                    haveMoreData = false;
+            } else {
+                haveMoreData = false;
+            }
+            loadmorePB.setVisibility(View.GONE);
+            isloading = false;
+        }
+    }
+
+//	/**
+//	 * listview滑动监听listener
+//	 *
+//	 */
+//	private class ListScrollListener implements OnScrollListener {
+//
+//		@Override
+//		public void onScrollStateChanged(AbsListView view, int scrollState) {
+//
+//            Log.d("ltf","scrollState==========="+scrollState);
+//			switch (scrollState) {
+//			case OnScrollListener.SCROLL_STATE_IDLE:
+//				if (view.getFirstVisiblePosition() == 0 && !isloading
+//						&& haveMoreData) {
+//					loadmorePB.setVisibility(View.VISIBLE);
+//					// sdk初始化加载的聊天记录为20条，到顶时去db里获取更多
+//					List<EMMessage> messages;
+//					try {
+//						// 获取更多messges，调用此方法的时候从db获取的messages
+//						// sdk会自动存入到此conversation中
+//						if (chatType == CHATTYPE_SINGLE)
+//							messages = conversation.loadMoreMsgFromDB(adapter
+//									.getItem(0).getMsgId(), pagesize);
+//						else
+//							messages = conversation.loadMoreGroupMsgFromDB(
+//									adapter.getItem(0).getMsgId(), pagesize);
+//					} catch (Exception e1) {
+//						loadmorePB.setVisibility(View.GONE);
+//						return;
+//					}
+//					try {
+//						Thread.sleep(300);
+//					} catch (InterruptedException e) {
+//					}
+//					if (messages.size() != 0) {
+//						// 刷新ui
+//						adapter.notifyDataSetChanged();
+//						listView.setSelection(messages.size() - 1);
+//						if (messages.size() != pagesize)
+//							haveMoreData = false;
+//					} else {
+//						haveMoreData = false;
+//					}
+//					loadmorePB.setVisibility(View.GONE);
+//					isloading = false;
+//
+//				}
+//				break;
+//			}
+//		}
+//
+//		@Override
+//		public void onScroll(AbsListView view, int firstVisibleItem,
+//				int visibleItemCount, int totalItemCount) {
+//		}
+//
+//	}
 
 	@Override
 	protected void onNewIntent(Intent intent) {

@@ -286,11 +286,11 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
                                     message = EMMessage
                                             .createSendMessage(EMMessage.Type.IMAGE);
 									ImageMessageBody iBody = (ImageMessageBody) forward_msg.getBody();
-									String localUrl = iBody.getLocalUrl();
+									final String localUrl = iBody.getLocalUrl();
 									if (new File(localUrl).exists()) {
                                         ImageMessageBody body = new ImageMessageBody(new File(localUrl));
                                         message.addBody(body);
-//                                        sendMsgToGroup(conversation, tG, message, false);
+                                        sendMsgToGroup(conversation, tG, message, false);
 									} else {
 										try {
 											new File(localUrl).createNewFile();
@@ -303,7 +303,7 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 											@Override
 											public void DownLoadComplete(String url, String outPath) {
 //												sendMsgToGroup(conversation, tG, forward_msg, false);
-                                                ImageMessageBody body = new ImageMessageBody(new File(url));
+                                                ImageMessageBody body = new ImageMessageBody(new File(localUrl));
                                                 finalMessage.addBody(body);
                                                 sendMsgToGroup(conversation, tG, finalMessage, false);
 											}
@@ -339,7 +339,7 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 											@Override
 											public void DownLoadComplete(String url, String outPath) {
 //												sendMsgToGroup(conversation, tG, forward_msg, false);
-                                                File videoFile = new File(url);
+                                                File videoFile = new File(localUrl);
                                                 VideoMessageBody body = new VideoMessageBody(videoFile, vBody.getLocalThumb(),
                                                         vBody.getLength(), videoFile.length());
                                                 finalMessage1.addBody(body);
@@ -359,9 +359,9 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 								if (url != null && !url.equals("")) {
                                     String content = "";
                                     if(url.contains("groupBuy/groupbuyDetail")){
-                                        content = "我开通了新的团购,来给我捧捧场吧!";
+                                        content = "团购新品,大家快来看看吧!";
                                     }else if( url.contains("promotion/promotiondetail")){
-                                        content = "我开通了新的促销,来给我捧捧场吧!";
+                                        content = "促销新品,大家快来看看吧!";
                                     }
 									TextMessageBody txtBody = new TextMessageBody(content + url);
 									// 设置消息body
@@ -376,8 +376,9 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 									message.setAttribute("train_poster", train_poster);
 									message.setAttribute("shop", shop);
 								}
+                                sendMsgToGroup(conversation,tG,message,true);
 							}
-							sendMsgToGroup(conversation,tG,message,true);
+
 						}
 					});
 					msgDialog.show();

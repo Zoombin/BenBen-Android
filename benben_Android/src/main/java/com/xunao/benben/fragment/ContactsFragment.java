@@ -1111,8 +1111,13 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 			}
 
 			String poster = cs.getPoster();
-			CommonUtils.startImageLoader(cubeimageLoader, poster,
-					holder.item_phone_poster);
+            if(poster!=null && !poster.equals("")) {
+                CommonUtils.startImageLoader(cubeimageLoader, poster,
+                        holder.item_phone_poster);
+            }else{
+                CommonUtils.startImageLoader(cubeimageLoader, "www.baidu.com",
+                        holder.item_phone_poster);
+            }
 
 			// if (cs.getId().equals("-1")) {
 			// convertView.setLayoutParams(new LayoutParams(0, 0));

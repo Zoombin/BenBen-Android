@@ -26,8 +26,10 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.bean.AuthMessage;
+import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.ActivityWeb;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.CutImageUtils;
 import com.xunao.benben.utils.ToastUtils;
@@ -97,6 +99,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
         ll_merchant =  (LinearLayout) findViewById(R.id.ll_merchant);
         tv_agreement = (TextView) findViewById(R.id.tv_agreement);
         tv_agreement.setText(Html.fromHtml("<u>奔犇认证协议</u>"));
+        tv_agreement.setOnClickListener(this);
 
         iv_person_identityCode1 = (CubeImageView) findViewById(R.id.iv_person_identityCode1);
         iv_person_identityCode2 = (CubeImageView) findViewById(R.id.iv_person_identityCode2);
@@ -273,6 +276,14 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
                         merchantAuth();
                         break;
                 }
+
+                break;
+            case R.id.tv_agreement:
+                Intent intent = new Intent(this, ActivityWeb.class);
+                intent.putExtra("title", "认证协议");
+                intent.putExtra("url", AndroidConfig.NETHOST3 + AndroidConfig.Setting + "key/android/type/" + 4);
+
+                startActivity(intent);
 
                 break;
         }

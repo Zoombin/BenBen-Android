@@ -137,6 +137,7 @@ import com.xunao.benben.utils.Bimp;
 import com.xunao.benben.utils.PixelUtil;
 import com.xunao.benben.utils.PublicWay;
 import com.xunao.benben.utils.Res;
+import com.xunao.benben.utils.TimeUtil;
 import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.view.ActionSheet;
 import com.xunao.benben.view.MyTextView;
@@ -1061,8 +1062,42 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 						AndroidConfig.writeFriendResultCode);
 			}
 		}else if(id == R.id.com_title_bar_right_tv){
+            com_title_bar_right_tv.setClickable(false);
 			//查看群公告
-			startActivity(new Intent(ChatActivity.this, ActivityGroupNoticeDetails.class).putExtra("hx_groupid",toChatUsername));
+            InteNetUtils.getInstance(ChatActivity.this).getSingleGroupInfo(toChatUsername,
+                    new RequestCallBack<String>() {
+                        @Override
+                        public void onSuccess(ResponseInfo<String> arg0) {
+                            com_title_bar_right_tv.setClickable(true);
+                            try {
+                                //改用gson
+                                TalkGroup mTalkGroup = new TalkGroup();
+                                JSONObject jsonObj = new JSONObject(arg0.result);
+                                mTalkGroup.checkJson(jsonObj);
+                                JSONObject optJSONObject = jsonObj
+                                        .optJSONObject("group_info");
+                                mTalkGroup.parseJSON(optJSONObject);
+                                String content = mTalkGroup.getBulletin();
+                                if(!TextUtils.isEmpty(content)){
+                                    startActivity(new Intent(ChatActivity.this, ActivityGroupNoticeDetails.class).putExtra("content",content).putExtra("time",mTalkGroup.getCreated_time()));
+                                }else{
+                                    ToastUtils.Errortoast(ChatActivity.this, "没有公告！");
+                                }
+                            } catch (Exception e) {
+                                ToastUtils.Errortoast(ChatActivity.this, "当前网络不可用");
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(HttpException arg0, String arg1) {
+                            com_title_bar_right_tv.setClickable(true);
+                            ToastUtils.Errortoast(ChatActivity.this, "当前网络不可用");
+                        }
+                    });
+
+
+
 		}
 	}
 
@@ -1511,7 +1546,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 
 	/**
 	 * 点击清空聊天记录
-	 * 
+	 *
 	 * @param view
 	 */
 	public void emptyHistory(View view) {

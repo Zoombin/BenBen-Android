@@ -295,10 +295,12 @@ public class ActivitySetting extends BaseActivity implements OnClickListener,
 
 	// 检查更新
 	private void chekVersionUpdate() {
-        showLoding("");
-        UmengUpdateAgent.setUpdateOnlyWifi(false); //false 则非wifi也检测更新
-        UmengUpdateAgent.update(this);
-        UmengUpdateAgent.setUpdateListener(this);
+        if(CommonUtils.isNetworkAvailable(mContext)) {
+            showLoding("");
+            UmengUpdateAgent.setUpdateOnlyWifi(false); //false 则非wifi也检测更新
+            UmengUpdateAgent.update(this);
+            UmengUpdateAgent.setUpdateListener(this);
+        }
 
 //		setShowLoding(false);
 //		if (CommonUtils.isNetworkAvailable(mContext)) {
@@ -353,8 +355,8 @@ public class ActivitySetting extends BaseActivity implements OnClickListener,
 
                 new Thread() {
                     public void run() {
-                        ContentResolver resolver = getContentResolver();
-                        resolver.delete(ContactsContract.RawContacts.CONTENT_URI.buildUpon().appendQueryParameter(ContactsContract.CALLER_IS_SYNCADAPTER,"true").build(), null, null);
+//                        ContentResolver resolver = getContentResolver();
+//                        resolver.delete(ContactsContract.RawContacts.CONTENT_URI.buildUpon().appendQueryParameter(ContactsContract.CALLER_IS_SYNCADAPTER,"true").build(), null, null);
                         for (int i = 0; i < myContacts.size(); i++) {
                             Contacts contacts = myContacts.get(i);
                             List<PhoneInfo> phoneInfos = null;
@@ -396,21 +398,29 @@ public class ActivitySetting extends BaseActivity implements OnClickListener,
                         if(newmyContacts!=null && newmyContacts.size()>0){
                             try {
                                 BatchAddContact(newmyContacts);
+                                mContext.runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        dissLoding();
+                                        ToastUtils.Infotoast(mContext,"覆盖成功！");
+                                    }
+                                });
                             } catch (RemoteException e) {
+                                dissLoding();
+                                ToastUtils.Infotoast(mContext,"覆盖失败！");
                                 e.printStackTrace();
                             } catch (OperationApplicationException e) {
+                                dissLoding();
+                                ToastUtils.Infotoast(mContext,"覆盖失败！");
                                 e.printStackTrace();
                             }
+                        }else{
+                            dissLoding();
+                            ToastUtils.Infotoast(mContext,"当前无联系人覆盖！");
                         }
 
-                        mContext.runOnUiThread(new Runnable() {
 
-                            @Override
-                            public void run() {
-                                dissLoding();
-                                ToastUtils.Infotoast(mContext,"覆盖成功！");
-                            }
-                        });
                     };
                 }.start();
 
@@ -464,10 +474,13 @@ public class ActivitySetting extends BaseActivity implements OnClickListener,
      * @throws android.content.OperationApplicationException
      * @throws android.os.RemoteException
      */
-    public  void BatchAddContact(List<Contacts> list)
-            throws RemoteException, OperationApplicationException {
-
+    public  void BatchAddContact(List<Contacts> list) throws RemoteException, OperationApplicationException {
         ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+
+//        resolver.delete(ContactsContract.RawContacts.CONTENT_URI.buildUpon().appendQueryParameter(ContactsContract.CALLER_IS_SYNCADAPTER,"true").build(), null, null);
+//       Uri uri = ContactsContract.RawContacts.CONTENT_URI.buildUpon().appendQueryParameter(ContactsContract.CALLER_IS_SYNCADAPTER,"true").build();
+        ops.add(ContentProviderOperation.newDelete(ContactsContract.RawContacts.CONTENT_URI).build());
+
         int rawContactInsertIndex = 0;
         for (Contacts contact : list) {
             rawContactInsertIndex = ops.size(); // 有了它才能给真正的实现批量添加

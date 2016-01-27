@@ -266,11 +266,11 @@ public class ActivityShareSelectFriend extends BaseActivity {
                                             .createSendMessage(EMMessage.Type.IMAGE);
 
 									ImageMessageBody iBody = (ImageMessageBody) forward_msg.getBody();
-									String localUrl = iBody.getLocalUrl();
+									final String localUrl = iBody.getLocalUrl();
 									if (new File(localUrl).exists()) {
                                         ImageMessageBody body = new ImageMessageBody(new File(localUrl));
                                         message.addBody(body);
-//                                        sendMsgToFriend(conversation,contact,message,false);
+                                        sendMsgToFriend(conversation,contact,message,false);
 									} else {
 										try {
 											new File(localUrl).createNewFile();
@@ -282,7 +282,7 @@ public class ActivityShareSelectFriend extends BaseActivity {
                                         SimpleDownLoadUtils.download(iBody.getRemoteUrl(), localUrl, new SimpleDownLoadUtils.DownloadListener() {
 											@Override
 											public void DownLoadComplete(String url, String outPath) {
-                                                ImageMessageBody body = new ImageMessageBody(new File(url));
+                                                ImageMessageBody body = new ImageMessageBody(new File(localUrl));
                                                 finalMessage.addBody(body);
                                                 sendMsgToFriend(conversation,contact, finalMessage,false);
 											}
@@ -309,7 +309,7 @@ public class ActivityShareSelectFriend extends BaseActivity {
                                         VideoMessageBody body = new VideoMessageBody(videoFile, vBody.getLocalThumb(),
                                                 vBody.getLength(), videoFile.length());
                                         message.addBody(body);
-//                                        sendMsgToFriend(conversation,contact, message,false);
+                                        sendMsgToFriend(conversation,contact, message,false);
 									} else {
 										try {
 											new File(localUrl).createNewFile();
@@ -322,7 +322,7 @@ public class ActivityShareSelectFriend extends BaseActivity {
 											@Override
 											public void DownLoadComplete(String url, String outPath) {
 //												sendMsgToFriend(conversation,contact,forward_msg,false);
-                                                File videoFile = new File(url);
+                                                File videoFile = new File(localUrl);
                                                 VideoMessageBody body = new VideoMessageBody(videoFile, vBody.getLocalThumb(),
                                                         vBody.getLength(), videoFile.length());
                                                 finalMessage.addBody(body);
@@ -342,9 +342,9 @@ public class ActivityShareSelectFriend extends BaseActivity {
 								if (url != null && !url.equals("")) {
                                     String content = "";
                                     if(url.contains("groupBuy/groupbuyDetail")){
-                                        content = "我开通了新的团购,来给我捧捧场吧!";
+                                        content = "团购新品,大家快来看看吧!";
                                     }else if( url.contains("promotion/promotiondetail")){
-                                        content = "我开通了新的促销,来给我捧捧场吧!";
+                                        content = "促销新品,大家快来看看吧!";
                                     }
 									TextMessageBody txtBody = new TextMessageBody(content + url);
 									// 设置消息body
@@ -359,8 +359,9 @@ public class ActivityShareSelectFriend extends BaseActivity {
 									message.setAttribute("train_poster", train_poster);
 									message.setAttribute("shop", shop);
 								}
+                                sendMsgToFriend(conversation, contact, message, true);
 							}
-							sendMsgToFriend(conversation, contact, message, true);
+
 						}
 					});
                     msgDialog.show();

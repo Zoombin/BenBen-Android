@@ -385,6 +385,7 @@ public class ActivityWriteSmallMake extends FragmentActivity implements
 			}
 			if (CommonUtils.isNetworkAvailable(ActivityWriteSmallMake.this)) {
 				dialog.show();
+                Bimp.tempSelectBitmap.clear();
 				InteNetUtils.getInstance(ActivityWriteSmallMake.this)
 						.publicSmallMake(statueType, con, friendUnion, images,
 								null, addressId, callBack);

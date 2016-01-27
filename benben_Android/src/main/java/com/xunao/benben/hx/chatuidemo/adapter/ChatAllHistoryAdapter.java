@@ -43,6 +43,7 @@ import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.ImageMessageBody;
+import com.easemob.chat.LocationMessageBody;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.util.DateUtils;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
@@ -412,18 +413,21 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<BenbenEMConversation> {
 		String digest = "";
 		switch (message.getType()) {
 		case LOCATION: // 位置消息
-			if (message.direct == EMMessage.Direct.RECEIVE) {
-				// 从sdk中提到了ui中，使用更简单不犯错的获取string的方法
-				// digest = EasyUtils.getAppResourceString(context,
-				// "location_recv");
-				digest = getStrng(context, R.string.location_recv);
-				digest = String.format(digest, message.getFrom());
-				return digest;
-			} else {
-				// digest = EasyUtils.getAppResourceString(context,
-				// "location_prefix");
-				digest = getStrng(context, R.string.location_prefix);
-			}
+//			if (message.direct == EMMessage.Direct.RECEIVE) {
+//				// 从sdk中提到了ui中，使用更简单不犯错的获取string的方法
+//				// digest = EasyUtils.getAppResourceString(context,
+//				// "location_recv");
+//				digest = getStrng(context, R.string.location_recv);
+//				digest = String.format(digest, message.getFrom());
+//				return digest;
+//			} else {
+//				// digest = EasyUtils.getAppResourceString(context,
+//				// "location_prefix");
+//				digest = getStrng(context, R.string.location_prefix);
+//			}
+            LocationMessageBody locBody = (LocationMessageBody) message.getBody();
+            digest = getStrng(context, R.string.location_recv)
+                    + locBody.getAddress();
 			break;
 		case IMAGE: // 图片消息
 			ImageMessageBody imageBody = (ImageMessageBody) message.getBody();

@@ -563,11 +563,12 @@ public class ActivityPacketInfo extends BaseActivity implements
                         Intent intent = new Intent(mContext,
 							ActivityContactsInfo.class);
 //					intent.putExtra("contacts", contacts);
-                    intent.putExtra("username", contacts.getHuanxin_username());
-					startActivityForResult(intent,
-							AndroidConfig.ContactsFragmentRequestCode);
-					mContext.overridePendingTransition(R.anim.in_from_right,
-							R.anim.out_to_left);
+//                    intent.putExtra("username", contacts.getHuanxin_username());
+                        intent.putExtra("infoid", contacts.getId());
+                        startActivityForResult(intent,
+                                AndroidConfig.ContactsFragmentRequestCode);
+                        mContext.overridePendingTransition(R.anim.in_from_right,
+                                R.anim.out_to_left);
                     }
                 }
             });

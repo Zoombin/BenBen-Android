@@ -116,7 +116,7 @@ public class ActivityComplain extends BaseActivity {
 
 		@Override
 		public void onFailure(HttpException arg0, String arg1) {
-			ToastUtils.Infotoast(mContext, "服务器出错!");
+			ToastUtils.Infotoast(mContext, "网络不可用!");
 		}
 	};
 

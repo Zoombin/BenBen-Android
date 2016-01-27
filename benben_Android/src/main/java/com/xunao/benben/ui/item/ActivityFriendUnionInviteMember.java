@@ -292,13 +292,13 @@ public class ActivityFriendUnionInviteMember extends BaseActivity {
 				for (FriendUnionInviteMember unionInviteMember : memberGroups
 						.get(i).getMember()) {
 					if (category.equals("2")) {
-						if(!type.equals("0")){
+//						if(!type.equals("0")){
 							unionInviteMember.setChecked(false);
-						}else{
-							unionInviteMember.setChecked(true);
-							memberGroups.get(i).setSelect(true);
-							inviteMembers.add(unionInviteMember);
-						}
+//						}else{
+//							unionInviteMember.setChecked(true);
+//							memberGroups.get(i).setSelect(true);
+//							inviteMembers.add(unionInviteMember);
+//						}
 						// inviteMembers.add(unionInviteMember);
 					}
 				}
@@ -491,11 +491,18 @@ public class ActivityFriendUnionInviteMember extends BaseActivity {
 							myAdapter.this.notifyDataSetChanged();
 						} else {
 
-                            if((inviteMembers.size()+group.getMember().size())<=max_num) {
+                            ArrayList<FriendUnionInviteMember> addMembers = new ArrayList<FriendUnionInviteMember>();
+                            for(int i=0;i<group.getMember().size();i++){
+                                if (!inviteMembers.contains(group.getMember().get(i))) {
+                                    addMembers.add(group.getMember().get(i));
+                                }
+                            }
+
+                            if((inviteMembers.size()+addMembers.size())<=max_num) {
 
                                 group.setSelect(true);
                                 holder.item_all.setChecked(true);
-                                for (FriendUnionInviteMember c : group.getMember()) {
+                                for (FriendUnionInviteMember c : addMembers) {
                                     c.setChecked(true);
                                     inviteMembers.add(c);
                                 }

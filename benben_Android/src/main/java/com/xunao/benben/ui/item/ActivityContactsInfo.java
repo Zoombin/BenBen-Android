@@ -146,6 +146,15 @@ public class ActivityContactsInfo extends BaseActivity implements
                 }else{
                     InteNetUtils.getInstance(mContext).AddressDetail(infoid, mRequestCallBack);
                 }
+            }else{
+                if(infoid!=0){
+                    try {
+                        mContacts = dbUtil.findById(Contacts.class,infoid);
+                        getData();
+                    } catch (DbException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }else{
             getData();

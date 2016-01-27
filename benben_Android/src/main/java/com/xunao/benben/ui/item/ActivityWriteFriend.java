@@ -161,6 +161,7 @@ public class ActivityWriteFriend extends FragmentActivity {
 			images[i] = Bimp.tempSelectBitmap.get(i).getImagePath();
 		}
 		if (CommonUtils.isNetworkAvailable(ActivityWriteFriend.this)) {
+            Bimp.tempSelectBitmap.clear();
 			final LodingDialog dialog = new LodingDialog(this);
 			dialog.setContent("发送中");
 			dialog.show();

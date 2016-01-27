@@ -163,6 +163,7 @@ public class ActivityInviteContactsToBenBen extends BaseActivity implements
 						List<Contacts> findAll = dbUtil.findAll(Selector
 								.from(Contacts.class)
 								.where("group_id", "=", cg.getId())
+                                .and("is_benben", "=", "0")
 								.orderBy("pinyin", false));
 						if (findAll != null) {
 							getmContacts.clear();
@@ -172,8 +173,8 @@ public class ActivityInviteContactsToBenBen extends BaseActivity implements
 										.findAll(Selector
 												.from(PhoneInfo.class)
 												.where("contacts_id", "=",
-														contacts.getId())
-												.and("is_benben", "=", "0"));
+														contacts.getId()));
+//												.and("is_benben", "=", "0"));
 
 								for (PhoneInfo phoneInfo : findAll3) {
 									// phone += phoneInfo.getPhone() + ",";

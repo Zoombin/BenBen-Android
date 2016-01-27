@@ -47,54 +47,67 @@ public class ActivityGroupNoticeDetails extends BaseActivity implements
 
     @Override
     public void initDate(Bundle savedInstanceState) {
-        showLoding("");
-        String hx_groupid = getIntent().getStringExtra("hx_groupid");
-        InteNetUtils.getInstance(mContext).getSingleGroupInfo(hx_groupid,
-                new RequestCallBack<String>() {
-                    @Override
-                    public void onSuccess(ResponseInfo<String> arg0) {
-                        dissLoding();
-                        try {
-                            //改用gson
-                            TalkGroup mTalkGroup = new TalkGroup();
-                            JSONObject jsonObj = new JSONObject(arg0.result);
-                            mTalkGroup.checkJson(jsonObj);
-                            JSONObject optJSONObject = jsonObj
-                                    .optJSONObject("group_info");
-                            mTalkGroup.parseJSON(optJSONObject);
-                            String content = mTalkGroup.getBulletin();
-                            if(!TextUtils.isEmpty(content)){
-                                long time = 0;
-                                try {
-                                    time = Long.parseLong(mTalkGroup.getCreated_time());
-                                }catch (Exception e){}
-                                if(time >0){
-                                    tv_time.setText("发布时间:"+TimeUtil.getTimeString(time * 1000));
-                                }else{
-                                    tv_time.setText("发布时间:");
-                                }
-                                tvcontent.setText(content);
-                            }else{
-                                ToastUtils.Errortoast(mContext, "没有公告！");
-                                AnimFinsh();
-                            }
+//        showLoding("");
+//        String hx_groupid = getIntent().getStringExtra("hx_groupid");
+        String content = getIntent().getStringExtra("content");
+        String timeStr = getIntent().getStringExtra("time");
+        long time = 0;
+        try {
+            time = Long.parseLong(timeStr);
+        }catch (Exception e){}
+        if(time >0){
+            tv_time.setText("发布时间:"+TimeUtil.getTimeString(time * 1000));
+        }else{
+            tv_time.setText("发布时间:");
+        }
+        tvcontent.setText(content);
 
-
-
-//                            InteNetUtils.getInstance(mContext).Getbulletin(mTalkGroup.getId(), user.getToken(), mRequestCallBack);
-                        } catch (Exception e) {
-                            dissLoding();
-                            ToastUtils.Errortoast(mContext, "当前网络不可用");
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(HttpException arg0, String arg1) {
-                        dissLoding();
-                        ToastUtils.Errortoast(mContext, "当前网络不可用");
-                    }
-                });
+//        InteNetUtils.getInstance(mContext).getSingleGroupInfo(hx_groupid,
+//                new RequestCallBack<String>() {
+//                    @Override
+//                    public void onSuccess(ResponseInfo<String> arg0) {
+//                        dissLoding();
+//                        try {
+//                            //改用gson
+//                            TalkGroup mTalkGroup = new TalkGroup();
+//                            JSONObject jsonObj = new JSONObject(arg0.result);
+//                            mTalkGroup.checkJson(jsonObj);
+//                            JSONObject optJSONObject = jsonObj
+//                                    .optJSONObject("group_info");
+//                            mTalkGroup.parseJSON(optJSONObject);
+//                            String content = mTalkGroup.getBulletin();
+//                            if(!TextUtils.isEmpty(content)){
+//                                long time = 0;
+//                                try {
+//                                    time = Long.parseLong(mTalkGroup.getCreated_time());
+//                                }catch (Exception e){}
+//                                if(time >0){
+//                                    tv_time.setText("发布时间:"+TimeUtil.getTimeString(time * 1000));
+//                                }else{
+//                                    tv_time.setText("发布时间:");
+//                                }
+//                                tvcontent.setText(content);
+//                            }else{
+//                                ToastUtils.Errortoast(mContext, "没有公告！");
+//                                AnimFinsh();
+//                            }
+//
+//
+//
+////                            InteNetUtils.getInstance(mContext).Getbulletin(mTalkGroup.getId(), user.getToken(), mRequestCallBack);
+//                        } catch (Exception e) {
+//                            dissLoding();
+//                            ToastUtils.Errortoast(mContext, "当前网络不可用");
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(HttpException arg0, String arg1) {
+//                        dissLoding();
+//                        ToastUtils.Errortoast(mContext, "当前网络不可用");
+//                    }
+//                });
     }
 
     @Override

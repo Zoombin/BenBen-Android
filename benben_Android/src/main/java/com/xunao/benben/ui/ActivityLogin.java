@@ -358,6 +358,8 @@ public class ActivityLogin extends BaseActivity implements OnClickListener {
                     CommonUtils.hideSoftInputFromWindow(mContext);
                     InteNetUtils.getInstance(mContext).Login(name, password,
                             getPhoneInfo(), mRequestCallBack);
+                }else{
+                    dissLoding();
                 }
                 break;
             case R.id.login_register:

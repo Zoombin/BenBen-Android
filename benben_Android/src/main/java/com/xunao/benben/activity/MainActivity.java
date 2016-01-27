@@ -1906,7 +1906,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 
     @Override
     public void onUpdateReturned(int i, UpdateResponse updateResponse) {
-        if(updateResponse.hasUpdate){
+        if(updateResponse!=null && updateResponse.hasUpdate){
             CrashApplication.getInstance().updateFlag = true;
         }
     }

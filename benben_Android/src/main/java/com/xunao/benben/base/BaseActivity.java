@@ -435,7 +435,10 @@ public abstract class BaseActivity extends FragmentActivity {
 		if (titleMode.rightListener != null) {
 			com_title_bar_right_bt.setOnClickListener(titleMode.rightListener);
 			com_title_bar_right_tv.setOnClickListener(titleMode.rightListener);
-		}
+		}else{
+            com_title_bar_right_bt.setOnClickListener(null);
+            com_title_bar_right_tv.setOnClickListener(null);
+        }
 		if (titleMode.leftListener != null) {
 			com_title_bar_left_bt.setOnClickListener(titleMode.leftListener);
 			com_title_bar_left_tv.setOnClickListener(titleMode.leftListener);

@@ -133,19 +133,22 @@ public class ActivityInviteFriendToBx extends BaseActivity implements
 				}
 				String invite = "";
 				for (int i = 0; i < bxArrayList.size(); i++) {
-					if (TextUtils.isEmpty(bxArrayList.get(i).getAddress())) {
-						ToastUtils.Infotoast(mContext, "请选择地区！");
-						return;
-					} else if (TextUtils.isEmpty(bxArrayList.get(i).getName())) {
+//					if (TextUtils.isEmpty(bxArrayList.get(i).getAddress())) {
+//						ToastUtils.Infotoast(mContext, "请选择地区！");
+//						return;
+//					} else
+                    if (TextUtils.isEmpty(bxArrayList.get(i).getName())) {
 						ToastUtils.Infotoast(mContext, "请填写姓名！");
 						return;
 					} else {
-						invite += bxArrayList.get(i).getName() + "::"
-								+ bxArrayList.get(i).getPhone() + "::"
-								+ bxArrayList.get(i).getAddressId()[0] + "::"
-								+ bxArrayList.get(i).getAddressId()[1] + "::"
-								+ bxArrayList.get(i).getAddressId()[2] + "::"
-								+ bxArrayList.get(i).getAddressId()[3] + "|";
+//						invite += bxArrayList.get(i).getName() + "::"
+//								+ bxArrayList.get(i).getPhone() + "::"
+//								+ bxArrayList.get(i).getAddressId()[0] + "::"
+//								+ bxArrayList.get(i).getAddressId()[1] + "::"
+//								+ bxArrayList.get(i).getAddressId()[2] + "::"
+//								+ bxArrayList.get(i).getAddressId()[3] + "|";
+                        invite += bxArrayList.get(i).getName() + "::"
+                                + bxArrayList.get(i).getPhone() + "::0::0::0::0|";
 					}
 				}
 

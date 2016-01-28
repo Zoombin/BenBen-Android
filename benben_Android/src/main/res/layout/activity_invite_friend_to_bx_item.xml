@@ -41,7 +41,9 @@
         android:background="@drawable/fragment_private_bg"
         android:clickable="true"
         android:paddingLeft="15dip"
-        android:paddingRight="15dip" >
+        android:paddingRight="15dip"
+        android:visibility="gone"
+        >
 
         <TextView
             android:id="@+id/tv_area"

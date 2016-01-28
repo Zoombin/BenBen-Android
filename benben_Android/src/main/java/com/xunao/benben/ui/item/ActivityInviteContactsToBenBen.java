@@ -387,6 +387,9 @@ public class ActivityInviteContactsToBenBen extends BaseActivity implements
             @Override
             public void onClick(View v) {
                 search_edittext.setText("");
+                isLoadMore = false;
+                enterNum = false;
+                initLocalData();
             }
         });
 	}

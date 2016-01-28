@@ -307,6 +307,10 @@ public class ActivityChoiceFriend extends BaseActivity implements
             @Override
             public void onClick(View v) {
                 search_edittext.setText("");
+                searchKey = search_edittext.getText().toString().trim();
+                isLoadMore = false;
+                enterNum = false;
+                keySearchContacts();
             }
         });
 

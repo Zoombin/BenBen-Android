@@ -172,15 +172,15 @@ public class BaiduMapActivity extends BaseActivity {
 		mLocClient = new LocationClient(this);
 		mLocClient.registerLocationListener(myListener);
 
-		LocationClientOption option = new LocationClientOption();
-		option.setOpenGps(true);// 打开gps
-		option.setCoorType("bd09ll"); //设置坐标类型
-		option.setIsNeedAddress(true);
-		// Johnson change to use gcj02 coordination. chinese national standard
-		// so need to conver to bd09 everytime when draw on baidu map
-//		option.setCoorType("gcj02");
-		option.setScanSpan(30000);
-		mLocClient.setLocOption(option);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);// 打开gps
+        // option.setCoorType("bd09ll"); //设置坐标类型
+        // Johnson change to use gcj02 coordination. chinese national standard
+        // so need to conver to bd09 everytime when draw on baidu map
+        option.setCoorType("gcj02");
+        option.setScanSpan(30000);
+        option.setAddrType("all");
+        mLocClient.setLocOption(option);
 	}
 
 	@Override
@@ -241,15 +241,15 @@ public class BaiduMapActivity extends BaseActivity {
 			lastLocation = location;
 			mBaiduMap.clear();
 			LatLng llA = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-//			CoordinateConverter converter= new CoordinateConverter();
-//			converter.coord(llA);
-//			converter.from(CoordinateConverter.CoordType.COMMON);
-//			LatLng convertLatLng = converter.convert();
-			OverlayOptions ooA = new MarkerOptions().position(llA).icon(BitmapDescriptorFactory
+			CoordinateConverter converter= new CoordinateConverter();
+			converter.coord(llA);
+			converter.from(CoordinateConverter.CoordType.COMMON);
+			LatLng convertLatLng = converter.convert();
+			OverlayOptions ooA = new MarkerOptions().position(convertLatLng).icon(BitmapDescriptorFactory
 					.fromResource(R.drawable.icon_marka))
 					.zIndex(4).draggable(true);
 			mBaiduMap.addOverlay(ooA);
-			MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(llA, 17.0f);
+			MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(convertLatLng, 17.0f);
 			mBaiduMap.animateMapStatus(u);
 			tvaddress.setText(lastLocation.getAddrStr());
 		}
@@ -271,14 +271,9 @@ public class BaiduMapActivity extends BaseActivity {
 	}
 
 	public void sendLocation(View view) {
-        LatLng llA = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-        CoordinateConverter converter= new CoordinateConverter();
-        converter.coord(llA);
-        converter.from(CoordinateConverter.CoordType.COMMON);
-        LatLng convertLatLng = converter.convert();
 		Intent intent = this.getIntent();
-		intent.putExtra("latitude", convertLatLng.latitude);
-		intent.putExtra("longitude", convertLatLng.longitude);
+		intent.putExtra("latitude", lastLocation.getLatitude());
+		intent.putExtra("longitude", lastLocation.getLongitude());
 		intent.putExtra("address", lastLocation.getAddrStr());
 		this.setResult(RESULT_OK, intent);
 		finish();

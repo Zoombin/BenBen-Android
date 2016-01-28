@@ -245,8 +245,8 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 	}
 
 	// 读取本地数据库数据
-	public void initlocakData() {
-		try {
+    public void initlocakData() {
+        try {
 //			mContactsGroups = (ArrayList<ContactsGroup>) dbUtil
 //					.findAll(ContactsGroup.class);
             mContactsGroups = new ArrayList<>();
@@ -256,112 +256,159 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
                 mContactsGroups.add(list.get(i));
             }
 
-			ArrayList<Contacts> getmContacts = null;
-			ArrayList<Contacts> com = new ArrayList<Contacts>();
-			ArrayList<Contacts> benben = new ArrayList<Contacts>();
-			for (ContactsGroup cg : mContactsGroups) {
-				getmContacts = cg.getmContacts();
-				getmContacts.clear();
+            ArrayList<Contacts> getmContacts = null;
+            ArrayList<Contacts> com = new ArrayList<Contacts>();
+            ArrayList<Contacts> baixing = new ArrayList<Contacts>();
+            for (ContactsGroup cg : mContactsGroups) {
+                getmContacts = cg.getmContacts();
+                getmContacts.clear();
+                com.clear();
+                baixing.clear();
+                List<Contacts> benbenContacts = dbUtil.findAll(Selector
+                        .from(Contacts.class)
+                        .where("group_id", "=", cg.getId())
+                        .and("is_benben", "!=", "0")
+                        .orderBy("pinyin", false));
 
-				List<Contacts> findAll = dbUtil.findAll(Selector
-						.from(Contacts.class)
-						.where("group_id", "=", cg.getId())
-						.and("is_benben", "!=", "0")
-						.and("is_baixing", "!=", "0").orderBy("pinyin", false));
+                if (benbenContacts != null) {
+                    getmContacts.addAll(benbenContacts);
+                }
 
-				List<Contacts> isbenben = dbUtil.findAll(Selector
-						.from(Contacts.class)
-						.where("group_id", "=", cg.getId())
-						.and("is_benben", "!=", "0")
-						.and("is_baixing", "=", "0").orderBy("pinyin", false));
+                List<Contacts> otherContacts = dbUtil.findAll(Selector
+                        .from(Contacts.class)
+                        .where("group_id", "=", cg.getId())
+                        .and("is_benben", "=", "0")
+                        .orderBy("pinyin", false));
+                if(otherContacts!=null && otherContacts.size()>0) {
+                    for(int i=0;i<otherContacts.size();i++) {
+                        List<PhoneInfo> phonesArrayList = null;
+                        try {
+                            phonesArrayList = dbUtil.findAll(Selector.from(PhoneInfo.class)
+                                    .where("contacts_id", "=", otherContacts.get(i).getId()));
+                        } catch (DbException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        boolean baixingFlag = false;
+                        if (phonesArrayList != null && phonesArrayList.size() > 0) {
+                            for (int j = 0; j < phonesArrayList.size(); j++) {
+                                String phoneString = phonesArrayList.get(j).getPhone();
+                                String bx = phonesArrayList.get(j).getIs_baixing();
+                                if (!bx.equals("0") && !phoneString.equals("")) {
+                                    baixingFlag = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if(baixingFlag){
+                            baixing.add(otherContacts.get(i));
+                        }else{
+                            com.add(otherContacts.get(i));
+                        }
+                    }
+                }
+                getmContacts.addAll(baixing);
+                getmContacts.addAll(com);
 
-				List<Contacts> isbaixing = dbUtil.findAll(Selector
-						.from(Contacts.class)
-						.where("group_id", "=", cg.getId())
-						.and("is_benben", "=", "0")
-						.and("is_baixing", "!=", "0").orderBy("pinyin", false));
+//				List<Contacts> findAll = dbUtil.findAll(Selector
+//						.from(Contacts.class)
+//						.where("group_id", "=", cg.getId())
+//						.and("is_benben", "!=", "0")
+//						.and("is_baixing", "!=", "0").orderBy("pinyin", false));
+//
+//				List<Contacts> isbenben = dbUtil.findAll(Selector
+//						.from(Contacts.class)
+//						.where("group_id", "=", cg.getId())
+//						.and("is_benben", "!=", "0")
+//						.and("is_baixing", "=", "0").orderBy("pinyin", false));
+//
+//				List<Contacts> isbaixing = dbUtil.findAll(Selector
+//						.from(Contacts.class)
+//						.where("group_id", "=", cg.getId())
+//						.and("is_benben", "=", "0")
+//						.and("is_baixing", "!=", "0").orderBy("pinyin", false));
+//
+//				List<Contacts> common = dbUtil.findAll(Selector
+//						.from(Contacts.class)
+//						.where("group_id", "=", cg.getId())
+//						.and("is_benben", "=", "0").and("is_baixing", "=", "0")
+//						.orderBy("pinyin", false));
+//
+//				if (findAll != null) {
+//					getmContacts.addAll(findAll);
+//				}
+//
+//				if (isbenben != null) {
+//					getmContacts.addAll(isbenben);
+//				}
+//
+//				if (isbaixing != null) {
+//					getmContacts.addAll(isbaixing);
+//				}
+//				if (common != null) {
+//					getmContacts.addAll(common);
+//				}
+//
+//				// if (findAll != null) {
+//
+//				com.clear();
+//				benben.clear();
+//
+//				for (Contacts contacts : getmContacts) {
+//
+//					// PhoneInfo firstPhone =
+//					// dbUtil.findFirst(Selector.from(
+//					// PhoneInfo.class).where("contacts_id", "=",
+//					// contacts.getId()));
+//					// if (firstPhone != null) {
+//					// contacts.setIs_baixing(firstPhone.getIs_baixing());
+//					// contacts.setIs_benben(firstPhone.getIs_benben());
+//					// } else {
+//					// contacts.setIs_baixing("0");
+//					// contacts.setIs_benben("0");
+//					// }
+//					if (!contacts.getIs_benben().equals("0")) {
+//						benben.add(contacts);
+//					} else {
+//						com.add(contacts);
+//					}
+//				}
+//				// Collections.sort(com);
+//				// Collections.sort(benben);
+//				// }
+//				getmContacts.clear();
+//				getmContacts.addAll(benben);
+//				getmContacts.addAll(com);
+                cg.setProportion(benbenContacts.size() + "/" + getmContacts.size());
+            }
+            ContactsObject contactsObject = new ContactsObject();
+            contactsObject.setmContactsGroups(mContactsGroups);
+            crashApplication.setContactsObject(contactsObject);
 
-				List<Contacts> common = dbUtil.findAll(Selector
-						.from(Contacts.class)
-						.where("group_id", "=", cg.getId())
-						.and("is_benben", "=", "0").and("is_baixing", "=", "0")
-						.orderBy("pinyin", false));
+            groupOrderBy();
 
-				if (findAll != null) {
-					getmContacts.addAll(findAll);
-				}
+            if (wrapperAdapter == null) {
+                ContatctsAdapter adapter = new ContatctsAdapter();
+                wrapperAdapter = new WrapperExpandableListAdapter(adapter);
+                listView.setAdapter(wrapperAdapter);
+            } else {
+                wrapperAdapter.notifyDataSetChanged();
+            }
+            // 获得所有数据 方便传值
+            crashApplication.contactsObject = new ContactsObject();
+            crashApplication.contactsObject.setmContactsGroups(mContactsGroups);
 
-				if (isbenben != null) {
-					getmContacts.addAll(isbenben);
-				}
-
-				if (isbaixing != null) {
-					getmContacts.addAll(isbaixing);
-				}
-				if (common != null) {
-					getmContacts.addAll(common);
-				}
-
-				// if (findAll != null) {
-
-				com.clear();
-				benben.clear();
-
-				for (Contacts contacts : getmContacts) {
-
-					// PhoneInfo firstPhone =
-					// dbUtil.findFirst(Selector.from(
-					// PhoneInfo.class).where("contacts_id", "=",
-					// contacts.getId()));
-					// if (firstPhone != null) {
-					// contacts.setIs_baixing(firstPhone.getIs_baixing());
-					// contacts.setIs_benben(firstPhone.getIs_benben());
-					// } else {
-					// contacts.setIs_baixing("0");
-					// contacts.setIs_benben("0");
-					// }
-					if (!contacts.getIs_benben().equals("0")) {
-						benben.add(contacts);
-					} else {
-						com.add(contacts);
-					}
-				}
-				// Collections.sort(com);
-				// Collections.sort(benben);
-				// }
-				getmContacts.clear();
-				getmContacts.addAll(benben);
-				getmContacts.addAll(com);
-				cg.setProportion(benben.size() + "/" + getmContacts.size());
-			}
-			ContactsObject contactsObject = new ContactsObject();
-			contactsObject.setmContactsGroups(mContactsGroups);
-			crashApplication.setContactsObject(contactsObject);
-
-			groupOrderBy();
-
-			if (wrapperAdapter == null) {
-				ContatctsAdapter adapter = new ContatctsAdapter();
-				wrapperAdapter = new WrapperExpandableListAdapter(adapter);
-				listView.setAdapter(wrapperAdapter);
-			} else {
-				wrapperAdapter.notifyDataSetChanged();
-			}
-			// 获得所有数据 方便传值
-			crashApplication.contactsObject = new ContactsObject();
-			crashApplication.contactsObject.setmContactsGroups(mContactsGroups);
-
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DbException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+        } catch (NumberFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (DbException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	protected void onHttpStart() {

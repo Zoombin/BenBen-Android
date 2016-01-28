@@ -278,6 +278,8 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 					msgDialog.setOKListener(new OnClickListener() {
 						@Override
 						public void onClick(View view) {
+                            msgDialog.dismiss();
+                            showLoding("");
 							final EMConversation conversation = EMChatManager.getInstance().getConversation(tG.getHuanxin_groupid());
 							EMMessage message = null;
 							if (!TextUtils.isEmpty(type)) {
@@ -310,6 +312,7 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 
 											@Override
 											public void DownLoadFailed(String url, String outPath) {
+                                                dissLoding();
 												ToastUtils.Infotoast(mContext, "分享失败");
 											}
 										});
@@ -348,6 +351,7 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 
 											@Override
 											public void DownLoadFailed(String url, String outPath) {
+                                                dissLoding();
 												ToastUtils.Infotoast(mContext,"分享失败");
 											}
 										});
@@ -376,7 +380,7 @@ public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClic
 									message.setAttribute("train_poster", train_poster);
 									message.setAttribute("shop", shop);
 								}
-                                sendMsgToGroup(conversation,tG,message,true);
+                                sendMsgToGroup(conversation,tG,message,false);
 							}
 
 						}

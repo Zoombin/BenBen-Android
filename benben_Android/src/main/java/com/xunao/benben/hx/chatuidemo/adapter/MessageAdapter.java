@@ -1049,7 +1049,7 @@ public class MessageAdapter extends BaseAdapter {
                     public boolean onLongClick(View v) {
                         activity.startActivityForResult((new Intent(activity,
                                         ContextMenu.class)).putExtra("position", position)
-                                        .putExtra("type", EMMessage.Type.IMAGE.ordinal()),
+                                        .putExtra("type", EMMessage.Type.LOCATION.ordinal()),
                                 ChatActivity.REQUEST_CODE_CONTEXT_MENU);
                         return false;
                     }
@@ -1086,7 +1086,7 @@ public class MessageAdapter extends BaseAdapter {
                     public boolean onLongClick(View v) {
                         activity.startActivityForResult((new Intent(activity,
                                         ContextMenu.class)).putExtra("position", position)
-                                        .putExtra("type", EMMessage.Type.IMAGE.ordinal()),
+                                        .putExtra("type", EMMessage.Type.LOCATION.ordinal()),
                                 ChatActivity.REQUEST_CODE_CONTEXT_MENU);
                         return false;
                     }

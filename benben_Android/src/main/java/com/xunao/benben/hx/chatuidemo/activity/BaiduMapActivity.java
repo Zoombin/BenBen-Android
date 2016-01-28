@@ -138,15 +138,15 @@ public class BaiduMapActivity extends BaseActivity {
 	private void showMap(double latitude, double longtitude, String address) {
 		sendButton.setVisibility(View.GONE);
 		LatLng llA = new LatLng(latitude, longtitude);
-//		CoordinateConverter converter= new CoordinateConverter();
-//		converter.coord(llA);
-//		converter.from(CoordinateConverter.CoordType.COMMON);
-//		LatLng convertLatLng = converter.convert();
-		OverlayOptions ooA = new MarkerOptions().position(llA).icon(BitmapDescriptorFactory
+		CoordinateConverter converter= new CoordinateConverter();
+		converter.coord(llA);
+		converter.from(CoordinateConverter.CoordType.COMMON);
+		LatLng convertLatLng = converter.convert();
+		OverlayOptions ooA = new MarkerOptions().position(convertLatLng).icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.icon_marka))
 				.zIndex(4).draggable(true);
 		mBaiduMap.addOverlay(ooA);
-		MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(llA, 17.0f);
+		MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(convertLatLng, 17.0f);
 		mBaiduMap.animateMapStatus(u);
 	}
 
@@ -229,7 +229,6 @@ public class BaiduMapActivity extends BaseActivity {
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}
-            Log.d("ltf","loc============"+location.getLatitude()+"===="+location.getLongitude());
 
 			if (lastLocation != null) {
 				if (lastLocation.getLatitude() == location.getLatitude() && lastLocation.getLongitude() == location.getLongitude()) {
@@ -272,11 +271,15 @@ public class BaiduMapActivity extends BaseActivity {
 	}
 
 	public void sendLocation(View view) {
+        LatLng llA = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+        CoordinateConverter converter= new CoordinateConverter();
+        converter.coord(llA);
+        converter.from(CoordinateConverter.CoordType.COMMON);
+        LatLng convertLatLng = converter.convert();
 		Intent intent = this.getIntent();
-		intent.putExtra("latitude", lastLocation.getLatitude());
-		intent.putExtra("longitude", lastLocation.getLongitude());
+		intent.putExtra("latitude", convertLatLng.latitude);
+		intent.putExtra("longitude", convertLatLng.longitude);
 		intent.putExtra("address", lastLocation.getAddrStr());
-		Log.d("map", "lat = "+lastLocation.getLatitude()+",lng = "+lastLocation.getLongitude()+",Addr = "+lastLocation.getAddrStr());
 		this.setResult(RESULT_OK, intent);
 		finish();
 		overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);

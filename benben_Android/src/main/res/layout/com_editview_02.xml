@@ -27,7 +27,6 @@
             android:padding="5dp"
             android:singleLine="true"
             android:textSize="15dp"
-            android:gravity="center"
             />
         <!-- android:inputType="text" -->
 
@@ -80,9 +79,10 @@
             android:id="@+id/rl_search_area"
             android:layout_width="60dip"
             android:layout_height="39dp"
-            android:layout_toLeftOf="@+id/btn_search_range"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="#068CD9"
+            android:layout_marginRight="10dip"
             >
 
             <TextView
@@ -110,7 +110,9 @@
             android:background="@drawable/btn_range_bg"
             android:text="搜索"
             android:textColor="#ffffff"
-            android:textSize="16dip" />
+            android:textSize="16dip"
+            android:visibility="gone"
+            />
     </RelativeLayout>
 
 </LinearLayout>

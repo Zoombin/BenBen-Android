@@ -257,6 +257,8 @@ public class ActivityShareSelectFriend extends BaseActivity {
                     msgDialog.setOKListener(new OnClickListener() {
 						@Override
 						public void onClick(View view) {
+                            msgDialog.dismiss();
+                            showLoding("");
 							final EMConversation conversation = EMChatManager.getInstance().getConversation(contact.getHuanxin_username());
 							EMMessage message = null;
 							if (!TextUtils.isEmpty(type)) {
@@ -289,6 +291,7 @@ public class ActivityShareSelectFriend extends BaseActivity {
 
 											@Override
 											public void DownLoadFailed(String url, String outPath) {
+                                                dissLoding();
 												ToastUtils.Infotoast(mContext,"分享失败");
 											}
 										});
@@ -331,6 +334,7 @@ public class ActivityShareSelectFriend extends BaseActivity {
 
 											@Override
 											public void DownLoadFailed(String url, String outPath) {
+                                                dissLoding();
 												ToastUtils.Infotoast(mContext,"分享失败");
 											}
 										});
@@ -359,7 +363,7 @@ public class ActivityShareSelectFriend extends BaseActivity {
 									message.setAttribute("train_poster", train_poster);
 									message.setAttribute("shop", shop);
 								}
-                                sendMsgToFriend(conversation, contact, message, true);
+                                sendMsgToFriend(conversation, contact, message, false);
 							}
 
 						}

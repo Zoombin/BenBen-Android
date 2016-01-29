@@ -35,6 +35,7 @@ import com.easemob.chat.EMMessage;
 import com.easemob.util.EMLog;
 import com.easemob.util.EasyUtils;
 import com.xunao.benben.hx.applib.controller.HXSDKHelper;
+import com.xunao.benben.utils.HintUtil;
 
 /**
  * 新消息提醒class
@@ -262,22 +263,42 @@ public class HXNotifier {
                     mBuilder.setSmallIcon(smallIcon);
                 }
             }
-
             summaryBody = "您有新的消息";
             mBuilder.setContentTitle(contentTitle);
-            mBuilder.setTicker(notifyText);
+//            mBuilder.setTicker(notifyText);
+            mBuilder.setTicker(summaryBody);
             mBuilder.setContentText(summaryBody);
             mBuilder.setContentIntent(pendingIntent);
             // mBuilder.setNumber(notificationNum);
             Notification notification = mBuilder.build();
 
+//            if (isForeground) {
+//                notificationManager.notify(foregroundNotifyID, notification);
+//                notificationManager.cancel(foregroundNotifyID);
+//            } else {
+//                notificationManager.notify(notifyID, notification);
+//            }
+
             if (isForeground) {
-                notificationManager.notify(foregroundNotifyID, notification);
-                notificationManager.cancel(foregroundNotifyID);
+//                notificationManager.notify(foregroundNotifyID, notification);
+//                notificationManager.cancel(foregroundNotifyID);
             } else {
                 notificationManager.notify(notifyID, notification);
-            }
 
+
+                int count=notificationNum;
+                if (Build.MANUFACTURER.equalsIgnoreCase("Xiaomi")){
+                    HintUtil.setBadgeCount(appContext, count, HintUtil.Platform.mi);
+                }else if(Build.MANUFACTURER.equalsIgnoreCase("samsung")){
+                    HintUtil.setBadgeCount(appContext, count, HintUtil.Platform.samsung);
+                }else if(Build.MANUFACTURER.equalsIgnoreCase("htc")){
+                    HintUtil.setBadgeCount(appContext, count, HintUtil.Platform.htc);
+                }else if(Build.MANUFACTURER.equalsIgnoreCase("lg")){
+                    HintUtil.setBadgeCount(appContext, count, HintUtil.Platform.lg);
+                }else if(Build.MANUFACTURER.equalsIgnoreCase("sony")){
+                    HintUtil.setBadgeCount(appContext, count, HintUtil.Platform.sony);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

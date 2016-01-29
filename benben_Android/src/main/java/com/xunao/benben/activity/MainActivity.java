@@ -114,6 +114,7 @@ import com.xunao.benben.ui.item.ActivityNews;
 import com.xunao.benben.ui.order.ActivityMyOrder;
 import com.xunao.benben.ui.order.ActivityOrderCheck;
 import com.xunao.benben.utils.CommonUtils;
+import com.xunao.benben.utils.HintUtil;
 import com.xunao.benben.utils.PlayPhoneUtils;
 import com.xunao.benben.utils.SharePreferenceUtil;
 import com.xunao.benben.utils.TimeUtil;
@@ -916,7 +917,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 
 	/**
 	 * 获取未读申请与通知消息
-	 * 
+	 *
 	 * @return
 	 */
 	public int getUnreadAddressCountTotal() {
@@ -931,7 +932,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 
 	/**
 	 * 获取未读消息数
-	 * 
+	 *
 	 * @return
 	 */
 	private CrashApplication mCrashApplication;
@@ -1001,9 +1002,9 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 //		SharedPreferences.Editor editor = mySharedPreferences.edit();
 //		editor.putInt("pbNum", pbNum);
 //		editor.commit();
-		
+
 //		unreadMsgCountTotal -= pbNum;
-		
+
 		// unreadMsgCountTotal =
 		// EMChatManager.getInstance().getUnreadMsgsCount()
 		// - emConversations.size();
@@ -1916,7 +1917,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 
     /***
 	 * 好友变化listener
-	 * 
+	 *
 	 */
 	private class MyContactListener implements EMContactListener {
 
@@ -2131,7 +2132,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 
 	/**
 	 * set head
-	 * 
+	 *
 	 * @param username
 	 * @return
 	 */
@@ -2162,7 +2163,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 
 	/**
 	 * 连接监听listener
-	 * 
+	 *
 	 */
 	private class MyConnectionListener implements EMConnectionListener {
 
@@ -2382,13 +2383,28 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 		MobclickAgent.onPageStart("main");
 		MobclickAgent.onResume(mContext);
 		sendBadgeNumber(0);
-	}
+        HXSDKHelper.getInstance().getNotifier().reset();
+//        HintUtil.resetBadgeCount();
+    }
 
 	// 必须使用，Activity启动页
 	private final static String lancherActivityClassName = SplashActivity.class
 			.getName();
 
 	private void sendBadgeNumber(int number) {
+        if (Build.MANUFACTURER.equalsIgnoreCase("Xiaomi")){
+            HintUtil.resetBadgeCount(mContext, HintUtil.Platform.mi);
+        }else if(Build.MANUFACTURER.equalsIgnoreCase("samsung")){
+            HintUtil.resetBadgeCount(mContext, HintUtil.Platform.samsung);
+        }else if(Build.MANUFACTURER.equalsIgnoreCase("htc")){
+            HintUtil.resetBadgeCount(mContext,  HintUtil.Platform.htc);
+        }else if(Build.MANUFACTURER.equalsIgnoreCase("lg")){
+            HintUtil.resetBadgeCount(mContext,  HintUtil.Platform.lg);
+        }else if(Build.MANUFACTURER.equalsIgnoreCase("sony")){
+            HintUtil.resetBadgeCount(mContext, HintUtil.Platform.sony);
+        }
+
+
 
 		if (Build.MANUFACTURER.equalsIgnoreCase("Xiaomi")) {
 			sendToXiaoMi(number);

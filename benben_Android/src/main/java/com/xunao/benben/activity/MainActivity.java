@@ -114,6 +114,7 @@ import com.xunao.benben.ui.item.ActivityNews;
 import com.xunao.benben.ui.order.ActivityMyOrder;
 import com.xunao.benben.ui.order.ActivityOrderCheck;
 import com.xunao.benben.utils.CommonUtils;
+import com.xunao.benben.utils.HintUtil;
 import com.xunao.benben.utils.PlayPhoneUtils;
 import com.xunao.benben.utils.SharePreferenceUtil;
 import com.xunao.benben.utils.TimeUtil;
@@ -2380,6 +2381,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 		MobclickAgent.onPageStart("main");
 		MobclickAgent.onResume(mContext);
 		sendBadgeNumber(0);
+        HXSDKHelper.getInstance().getNotifier().reset();
 	}
 
 	// 必须使用，Activity启动页
@@ -2387,6 +2389,18 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 			.getName();
 
 	private void sendBadgeNumber(int number) {
+
+        if (Build.MANUFACTURER.equalsIgnoreCase("Xiaomi")){
+            HintUtil.resetBadgeCount(mContext, HintUtil.Platform.mi);
+        }else if(Build.MANUFACTURER.equalsIgnoreCase("samsung")){
+            HintUtil.resetBadgeCount(mContext, HintUtil.Platform.samsung);
+        }else if(Build.MANUFACTURER.equalsIgnoreCase("htc")){
+            HintUtil.resetBadgeCount(mContext,  HintUtil.Platform.htc);
+        }else if(Build.MANUFACTURER.equalsIgnoreCase("lg")){
+            HintUtil.resetBadgeCount(mContext,  HintUtil.Platform.lg);
+        }else if(Build.MANUFACTURER.equalsIgnoreCase("sony")){
+            HintUtil.resetBadgeCount(mContext, HintUtil.Platform.sony);
+        }
 
 		if (Build.MANUFACTURER.equalsIgnoreCase("Xiaomi")) {
 			sendToXiaoMi(number);

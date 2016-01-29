@@ -703,8 +703,10 @@ public class ActivityChoiceFriend extends BaseActivity implements
 							group.setChecked(true);
 							holder.item_all.setChecked(true);
 							for (BxContacts c : group.getBxContactslist()) {
-								c.setChecked(true);
-								groupListContacts.add(c);
+                                if (!c.isChecked()) {
+                                    c.setChecked(true);
+                                    groupListContacts.add(c);
+                                }
 							}
 							myAdapter.this.notifyDataSetChanged();
 							boolean allSelect = true;

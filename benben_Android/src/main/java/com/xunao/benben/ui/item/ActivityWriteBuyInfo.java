@@ -243,7 +243,7 @@ public class ActivityWriteBuyInfo extends BaseActivity implements
                 break;
             case R.id.select_industry:
                 startAnimActivityForResult2(ActivityChoiceIndusrty.class,
-                        CHOCE_INDUSTRY, "from", "mybuy");
+                        CHOCE_INDUSTRY, "level", "0");
 
                 break;
 		}

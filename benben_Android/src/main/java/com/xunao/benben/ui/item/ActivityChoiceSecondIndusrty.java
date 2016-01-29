@@ -39,6 +39,7 @@ public class ActivityChoiceSecondIndusrty extends BaseActivity implements
 	private MyAdapter myAdatper;
 	private String industry;
 	private String industryId;
+    private String level="0";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,14 @@ public class ActivityChoiceSecondIndusrty extends BaseActivity implements
 		setContentView(R.layout.activity_choice_address);
         industryId = getIntent().getStringExtra("industryId");
         industry =  getIntent().getStringExtra("industry");
-        initTitle_Right_Left_bar(industry, "", "",
-                R.drawable.icon_com_title_left, 0);
+        level = getIntent().getStringExtra("level");
+        if(level.equals("0")) {
+            initTitle_Right_Left_bar(industry, "", "",
+                    R.drawable.icon_com_title_left, 0);
+        }else if(level.equals("1")) {
+            initTitle_Right_Left_bar(industry, "", "完成",
+                    R.drawable.icon_com_title_left, 0);
+        }
 
 	}
 
@@ -77,6 +84,18 @@ public class ActivityChoiceSecondIndusrty extends BaseActivity implements
 	public void initLinstener(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		setOnLeftClickLinester(this);
+
+        setOnRightClickLinester(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra("industryId", industryId);
+                intent.putExtra("industry", industry);
+                setResult(AndroidConfig.ChoiceIndustryResultCode, intent);
+                AnimFinsh();
+            }
+
+        });
 	}
 
 	@Override
@@ -155,8 +174,12 @@ public class ActivityChoiceSecondIndusrty extends BaseActivity implements
                     intent.putExtra("industryId", industryId);
                     String last = industryInfo.getLast();
                     if(last.equals("0")){
+                        if(level.equals("1")) {
+                            industry += " "+industryInfo.getName();
+                        }
                         intent.putExtra("industry", industry);
                         intent.setClass(ActivityChoiceSecondIndusrty.this,ActivityChoiceThirdIndusrty.class);
+                        intent.putExtra("level",level);
                         startActivityForResult(intent, 1);
                         overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                     }else{

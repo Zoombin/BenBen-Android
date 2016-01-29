@@ -214,13 +214,13 @@ public class DemoHXSDKHelper extends HXSDKHelper{
 //                    notNotifyIds = ((DemoHXSDKModel) hxModel).getDisabledIds();
 //                }
 //                if (notNotifyIds == null || !notNotifyIds.contains(chatUsename)) {
-                    // 判断app是否在后台
-//                    if (!EasyUtils.isAppRunningForeground(appContext)) {
-//                        sendNotification(message, false);
-//                    } else {
-//                        sendNotification(message, true);
-//
-//                    }
+//                    判断app是否在后台
+                    if (!EasyUtils.isAppRunningForeground(appContext)) {
+                        sendNotification(message, false);
+                    } else {
+                        sendNotification(message, true);
+
+                    }
                     Log.d("ltf","sendNotification============================");
 
                     viberateAndPlayTone(message);

@@ -622,7 +622,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
         case R.id.tv_search_industry:
             isSearchRange = true;
             startAnimActivityForResult2(ActivityChoiceIndusrty.class,
-                    CHOCE_INDUSTRY, "from", "mybuy");
+                    CHOCE_INDUSTRY, "level", "1");
             popupWindow.dismiss();
             break;
 		}

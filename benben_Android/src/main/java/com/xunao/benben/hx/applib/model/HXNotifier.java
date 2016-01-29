@@ -242,7 +242,6 @@ public class HXNotifier {
                 // prepare latest event info section
                 if(!isForeground){
                     notificationNum++;
-                    Log.d("ltf","message.getFrom()=========="+message.getFrom());
                     fromUsers.add(message.getFrom());
                 }
             }
@@ -264,7 +263,7 @@ public class HXNotifier {
                 }
             }
 
-            Log.d("ltf","contentTitle=========="+contentTitle+"notifyText=========="+notifyText+"summaryBody=========="+summaryBody+"pendingIntent=========="+pendingIntent);
+            summaryBody = "您有新的消息";
             mBuilder.setContentTitle(contentTitle);
             mBuilder.setTicker(notifyText);
             mBuilder.setContentText(summaryBody);

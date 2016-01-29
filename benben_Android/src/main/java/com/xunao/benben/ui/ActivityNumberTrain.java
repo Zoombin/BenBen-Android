@@ -922,7 +922,7 @@ public class ActivityNumberTrain extends BaseActivity implements
             case R.id.tv_search_industry:
                 isSearch = true;
                 Intent intent = new Intent(this, ActivityChoiceIndusrty.class);
-                intent.putExtra("from","train");
+                intent.putExtra("level","1");
                 startActivityForResult(intent, CHOCE_INDUSTRY);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 popupWindow.dismiss();

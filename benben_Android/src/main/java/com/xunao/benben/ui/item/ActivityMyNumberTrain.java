@@ -881,8 +881,8 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 
 			break;
 		case R.id.rl_industry:
-			startAnimActivityForResult(ActivityChoiceIndusrty.class,
-					CHOCE_INDUSTRY);
+            startAnimActivityForResult2(ActivityChoiceIndusrty.class,
+                    CHOCE_INDUSTRY, "level", "0");
 		default:
 			break;
 		}

@@ -837,6 +837,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 		super.onDestroy();
 		// 注销广播接收者
 		try {
+            EMChatManager.getInstance().unregisterEventListener(this);
 			unregisterReceiver(mrefreshBrocast);
 			unregisterReceiver(msgCenterReceiver);
 //			unregisterReceiver(msgReceiver);

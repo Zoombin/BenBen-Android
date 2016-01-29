@@ -166,7 +166,9 @@
                 android:background="@drawable/fragment_private_bg"
                 android:clickable="true"
                 android:paddingLeft="25dip"
-                android:paddingRight="15dip" >
+                android:paddingRight="15dip"
+                android:visibility="gone"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,7 +186,7 @@
                     android:src="@drawable/icon_right_bar" />
             </RelativeLayout>
 
-            <View style="@style/set_item_Line_5" />
+
 
             <RelativeLayout
                 android:id="@+id/rl_my_numberttain"
@@ -210,6 +212,10 @@
                     android:layout_centerVertical="true"
                     android:src="@drawable/icon_right_bar" />
             </RelativeLayout>
+
+            <View
+                android:layout_marginTop="15dp"
+                style="@style/set_item_Line_5" />
 
             <View style="@style/set_item_Line_5" />
 

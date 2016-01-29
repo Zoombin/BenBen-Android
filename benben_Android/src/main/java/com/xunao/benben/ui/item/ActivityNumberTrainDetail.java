@@ -345,7 +345,13 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
 				String collection = numberTrainDetail.getCollection();
                 promotions = numberTrainDetail.getPromotions();
                 vip_type = numberTrainDetail.getVip_type();
-
+                if(vip_type==1){
+                    vip_type=0;
+                    numberTrainDetail.setVip_type(0);
+                    numberTrainDetail.setNo_auth(1);
+                    numberTrainDetail.setIs_promotion(0);
+                    numberTrainDetail.setShopnum(0);
+                }
 //                adapter.notifyDataSetChanged();
 
 

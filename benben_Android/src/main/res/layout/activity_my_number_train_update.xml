@@ -520,7 +520,9 @@
                         android:gravity="center"
                         android:text="转让号码直通车"
                         android:textColor="#ffffff"
-                        android:textSize="@dimen/size_16" />
+                        android:textSize="@dimen/size_16"
+                        android:visibility="gone"
+                        />
                 </LinearLayout>
 
                 <View

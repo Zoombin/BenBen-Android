@@ -234,8 +234,8 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                         mCurrentLantitude + "", mCurrentLongitude + "",
                         mRequestCallBack);
 
-                //群组公告弹窗
-                getPopInfo();
+//                //群组公告弹窗
+//                getPopInfo();
 			}
 		}
 
@@ -428,7 +428,13 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
 				String views = numberTrainDetail.getViews();
                 promotions = numberTrainDetail.getPromotions();
                 vip_type = numberTrainDetail.getVip_type();
-
+                if(vip_type==1){
+                    vip_type=0;
+                    numberTrainDetail.setVip_type(0);
+                    numberTrainDetail.setNo_auth(1);
+                    numberTrainDetail.setIs_promotion(0);
+                    numberTrainDetail.setShopnum(0);
+                }
                 ll_tag.removeAllViews();
 				String[] tagArr = tag.split("\\s+");
 

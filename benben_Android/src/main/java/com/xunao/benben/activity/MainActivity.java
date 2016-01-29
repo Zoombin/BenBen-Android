@@ -749,12 +749,14 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 			curTouchTab = 3;
 			break;
 		case R.id.tab_five:
-			chanageTitle(new TitleMode("#068cd9", "", R.drawable.icon_order_check, new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startAnimActivity(ActivityOrderCheck.class);
-                }
-            }, "消息", 0, null,"我的", 0));
+            chanageTitle(new TitleMode("#068cd9", "", 0, null, "消息", 0, null,
+                    "我的", 0));
+//			chanageTitle(new TitleMode("#068cd9", "", R.drawable.icon_order_check, new OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    startAnimActivity(ActivityOrderCheck.class);
+//                }
+//            }, "消息", 0, null,"我的", 0));
 			curTouchTab = 4;
 			break;
 

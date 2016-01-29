@@ -6,13 +6,13 @@ public class AndroidConfig {
 
 	public static final String SHARENAME = "BenBen";
 
-	public static final String NETHOST ="http://112.124.101.177:81/index.php/v2";
-    public static final String NETHOST2 ="http://112.124.101.177:81/index.php/v2";
-    public static final String NETHOST3 ="http://112.124.101.177:81/index.php/v1";
+//	public static final String NETHOST ="http://112.124.101.177:81/index.php/v2";
+//    public static final String NETHOST2 ="http://112.124.101.177:81/index.php/v2";
+//    public static final String NETHOST3 ="http://112.124.101.177:81/index.php/v1";
 
-//    public static final String NETHOST = "http://112.124.101.177/index.php/v2";
-//	public static final String NETHOST2 ="http://112.124.101.177/index.php/v2";
-//    public static final String NETHOST3 ="http://112.124.101.177/index.php/v1";
+    public static final String NETHOST = "http://112.124.101.177/index.php/v2";
+	public static final String NETHOST2 ="http://112.124.101.177/index.php/v2";
+    public static final String NETHOST3 ="http://112.124.101.177/index.php/v1";
 
     // 商户PID
     public static final String PARTNER = "2088121516774084";

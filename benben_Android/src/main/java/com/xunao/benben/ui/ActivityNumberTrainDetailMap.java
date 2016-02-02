@@ -372,7 +372,7 @@ public class ActivityNumberTrainDetailMap extends BaseActivity implements
                 para.startPoint(pt1);
                 para.startName("从这里开始");
                 para.endPoint(pt2);
-                para.endName("从这里开始");
+                para.endName("到这里结束");
 
                 try {
 //                    BaiduMapNavigation.setSupportWebNavi(false);

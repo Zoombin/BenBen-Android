@@ -54,6 +54,25 @@
         android:minHeight="60dp"
         android:padding="8dp"
         android:textColor="@color/black"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        android:layout_toLeftOf="@+id/btn_go"
+        />
+
+
+    <Button
+        android:id="@+id/btn_go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvaddress"
+        android:layout_alignBottom="@+id/tvaddress"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/green_but"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        android:text="到这里去"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

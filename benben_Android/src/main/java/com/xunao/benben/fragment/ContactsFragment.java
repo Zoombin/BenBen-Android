@@ -256,7 +256,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
                 mContactsGroups.add(list.get(i));
             }
 
-            ArrayList<Contacts> getmContacts = null;
+            ArrayList<Contacts> getmContacts = new ArrayList<>();
             ArrayList<Contacts> com = new ArrayList<Contacts>();
             ArrayList<Contacts> baixing = new ArrayList<Contacts>();
             for (ContactsGroup cg : mContactsGroups) {
@@ -270,7 +270,9 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
                         .and("is_benben", "!=", "0")
                         .orderBy("pinyin", false));
 
+                int benbenSize=0;
                 if (benbenContacts != null) {
+                    benbenSize = benbenContacts.size();
                     getmContacts.addAll(benbenContacts);
                 }
 
@@ -379,7 +381,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 //				getmContacts.clear();
 //				getmContacts.addAll(benben);
 //				getmContacts.addAll(com);
-                cg.setProportion(benbenContacts.size() + "/" + getmContacts.size());
+                cg.setProportion(benbenSize + "/" + getmContacts.size());
             }
             ContactsObject contactsObject = new ContactsObject();
             contactsObject.setmContactsGroups(mContactsGroups);

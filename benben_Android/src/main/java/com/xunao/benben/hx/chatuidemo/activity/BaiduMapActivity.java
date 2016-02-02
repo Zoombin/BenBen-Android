@@ -47,10 +47,15 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.navi.BaiduMapAppNotSupportNaviException;
+import com.baidu.mapapi.navi.BaiduMapNavigation;
+import com.baidu.mapapi.navi.NaviParaOption;
 import com.baidu.mapapi.utils.CoordinateConverter;
+import com.baidu.mapapi.utils.OpenClientUtil;
 import com.xunao.benben.R;
+import com.xunao.benben.dialog.MsgDialog;
 
-public class BaiduMapActivity extends BaseActivity {
+public class BaiduMapActivity extends BaseActivity implements View.OnClickListener {
 
 	private final static String TAG = "map";
 	static MapView mMapView = null;
@@ -72,8 +77,13 @@ public class BaiduMapActivity extends BaseActivity {
 	
 	private LocationMode mCurrentMode;
 	private TextView tvaddress;
-	
-	/**
+	private Button btn_go;
+    private LatLng showConvertLatLng;
+    private BDLocation startLocation = null;
+    private NowLocationListener nowListener = new NowLocationListener();
+
+
+    /**
 	 * 构造广播监听类，监听 SDK key 验证以及网络异常广播
 	 */
 	public class BaiduSDKReceiver extends BroadcastReceiver {
@@ -102,6 +112,8 @@ public class BaiduMapActivity extends BaseActivity {
         SDKInitializer.initialize(getApplicationContext());
 		setContentView(R.layout.activity_baidumap);
 		tvaddress = (TextView) findViewById(R.id.tvaddress);
+        btn_go = (Button) findViewById(R.id.btn_go);
+        btn_go.setOnClickListener(this);
 		mMapView = (MapView) findViewById(R.id.bmapView);
 		mMapView.showZoomControls(false);
 		sendButton = (Button) findViewById(R.id.btn_location_send);
@@ -141,14 +153,48 @@ public class BaiduMapActivity extends BaseActivity {
 		CoordinateConverter converter= new CoordinateConverter();
 		converter.coord(llA);
 		converter.from(CoordinateConverter.CoordType.COMMON);
-		LatLng convertLatLng = converter.convert();
-		OverlayOptions ooA = new MarkerOptions().position(convertLatLng).icon(BitmapDescriptorFactory
+        showConvertLatLng = converter.convert();
+		OverlayOptions ooA = new MarkerOptions().position(showConvertLatLng).icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.icon_marka))
 				.zIndex(4).draggable(true);
 		mBaiduMap.addOverlay(ooA);
-		MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(convertLatLng, 17.0f);
+		MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(showConvertLatLng, 17.0f);
 		mBaiduMap.animateMapStatus(u);
+        myLocation();
 	}
+
+    private void myLocation() {
+        String str1 = getResources().getString(R.string.Making_sure_your_location);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage(str1);
+
+        progressDialog.setOnCancelListener(new OnCancelListener() {
+
+            public void onCancel(DialogInterface arg0) {
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                Log.d("map", "cancel retrieve location");
+                finish();
+            }
+        });
+
+        progressDialog.show();
+        mLocClient = new LocationClient(this);
+        mLocClient.registerLocationListener(nowListener);
+
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);// 打开gps
+        option.setCoorType("bd09ll"); //设置坐标类型
+        // Johnson change to use gcj02 coordination. chinese national standard
+        // so need to conver to bd09 everytime when draw on baidu map
+//        option.setCoorType("gcj02");
+        option.setScanSpan(30000);
+        option.setAddrType("all");
+        mLocClient.setLocOption(option);
+    }
 
 	private void showMapWithLocationClient() {
 		String str1 = getResources().getString(R.string.Making_sure_your_location);
@@ -261,6 +307,31 @@ public class BaiduMapActivity extends BaseActivity {
 		}
 	}
 
+    /**
+     * 监听函数，有新位置的时候，格式化成字符串，输出到屏幕中
+     */
+    public class NowLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            if (location == null) {
+                return;
+            }
+            btn_go.setVisibility(View.VISIBLE);
+            sendButton.setEnabled(true);
+            if (progressDialog != null) {
+                progressDialog.dismiss();
+            }
+            startLocation = location;
+
+        }
+
+        public void onReceivePoi(BDLocation poiLocation) {
+            if (poiLocation == null) {
+                return;
+            }
+        }
+    }
+
 	public class NotifyLister extends BDNotifyListener {
 		public void onNotify(BDLocation mlocation, float distance) {
 		}
@@ -280,4 +351,46 @@ public class BaiduMapActivity extends BaseActivity {
 		overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
 	}
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_go:
+                LatLng pt1 = new LatLng(startLocation.getLatitude(),startLocation.getLongitude());
+
+                LatLng pt2 = new LatLng(showConvertLatLng.latitude,showConvertLatLng.longitude);
+
+                NaviParaOption para = new NaviParaOption();
+                para.startPoint(pt1);
+                para.startName("从这里开始");
+                para.endPoint(pt2);
+                para.endName("到这里结束");
+
+                try {
+//                    BaiduMapNavigation.setSupportWebNavi(false);
+                    BaiduMapNavigation.openBaiduMapNavi(para, this);
+
+                } catch (BaiduMapAppNotSupportNaviException e) {
+//                    e.printStackTrace();e.printStackTrace();
+                    final MsgDialog msgDialog = new MsgDialog(BaiduMapActivity.this, R.style.MyDialogStyle);
+                    msgDialog.setContent("您尚未安装百度地图app或app版本过低，点击确认安装？", "", "确认", "取消");
+                    msgDialog.setCancleListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            msgDialog.dismiss();
+                        }
+                    });
+                    msgDialog.setOKListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            OpenClientUtil.getLatestBaiduMapApp(BaiduMapActivity.this);
+//                            BaiduMapNavigation.
+//                            BaiduMapNavigation.GetLatestBaiduMapApp(ActivityNumberTrainDetailMap.this);
+                            msgDialog.dismiss();
+                        }
+                    });
+                    msgDialog.show();
+                }
+                break;
+        }
+    }
 }

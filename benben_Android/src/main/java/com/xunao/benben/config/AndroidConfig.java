@@ -189,10 +189,12 @@ public class AndroidConfig {
 	// 邀请加入政企通讯录
 	public static final String EnterpriseInvite = "/enterprise/joinmember";
 
-	public static final String EnterpriseVInvite = "/enterprise/newjoin/";
+	public static final String EnterpriseApplyJoin = "/enterprise/ApplyJoin/";
 
 	// 主动加入政企
 	public static final String EnterpriseAdd = "/enterprise/joinvirtual";
+
+    public static final String EnterpriseVInvite = "/enterprise/newjoin/";
 
 	// 政企通讯录分组管理
 	public static final String EnterpriseGroup = "/enterprise/egroup/";

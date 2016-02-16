@@ -1864,6 +1864,18 @@ public class InteNetUtils {
 				hashMap, requestCallBack);
 	}
 
+
+    // 政企通讯录申请加入
+    public void EnterpriseApplyJoin(String enterpriseId, String name, RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("enterprise_id", enterpriseId);
+        hashMap.put("remark_name", name);
+
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.EnterpriseApplyJoin,
+                hashMap, requestCallBack);
+    }
+
 	// 政企通讯录邀请好友
 	public void enterpriseVInviteFriendshort(String enterpriseId, String name,
 			String manual, RequestCallBack<String> requestCallBack) {

@@ -26,6 +26,7 @@ public class Enterprise extends BaseBean<Enterprise> {
     private String enterprise_id;
     private int sort;
     private String benben_id;
+    private int enterprise_apply;
 
 	public String getId() {
 		return id;
@@ -184,6 +185,14 @@ public class Enterprise extends BaseBean<Enterprise> {
         this.benben_id = benben_id;
     }
 
+    public int getEnterprise_apply() {
+        return enterprise_apply;
+    }
+
+    public void setEnterprise_apply(int enterprise_apply) {
+        this.enterprise_apply = enterprise_apply;
+    }
+
     @Override
 	public Enterprise parseJSON(JSONObject jsonObj) throws NetRequestException {
 
@@ -205,6 +214,7 @@ public class Enterprise extends BaseBean<Enterprise> {
         tag = jsonObj.optString("tag");
         firstin = jsonObj.optString("firstin");
         enterprise_id = jsonObj.optString("enterprise_id");
+        enterprise_apply = jsonObj.optInt("enterprise_apply");
 		return this;
 	}
 

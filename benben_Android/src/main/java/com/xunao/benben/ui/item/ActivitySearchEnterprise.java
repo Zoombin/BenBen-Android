@@ -43,6 +43,7 @@ import com.xunao.benben.bean.EnterpriseMemberGroup;
 import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.dialog.InputDialog;
+import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.utils.CommonUtils;
@@ -224,6 +225,7 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject================"+jsonObject);
         try {
 			enterpriseList = new EnterpriseList();
 			enterpriseList = enterpriseList.parseJSON(jsonObject);
@@ -319,8 +321,15 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 					iv_add.setVisibility(View.GONE);
 					tv_add.setVisibility(View.GONE);
 				} else {
-					iv_add.setVisibility(View.VISIBLE);
-					iv_add.setVisibility(View.VISIBLE);
+                    if(enterprises.get(position).getEnterprise_apply()==3){
+                        iv_add.setVisibility(View.GONE);
+                        tv_add.setVisibility(View.GONE);
+                    }else{
+                        iv_add.setVisibility(View.VISIBLE);
+                        iv_add.setVisibility(View.VISIBLE);
+                    }
+
+
 
 				}
 
@@ -343,10 +352,52 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 							// user.getId() + ":"
 							// + user.getUserNickname()
 							// + ":" + user.getPhone()
-							InteNetUtils.getInstance(mContext)
-									.enterpriseVInviteFriend(
-											enterprises.get(position).getId(),
-											"", "", requestCallBack);
+                            if(enterprises.get(position).getEnterprise_apply()==2){
+                                final MsgDialog msgDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
+                                msgDialog.setContent("确定申请加入吗?", "", "确定", "取消");
+                                msgDialog.setCancleListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        msgDialog.dismiss();
+                                    }
+                                });
+                                msgDialog.setOKListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        msgDialog.dismiss();
+                                        InteNetUtils.getInstance(mContext)
+                                                .EnterpriseApplyJoin(
+                                                        enterprises.get(position).getId(),
+                                                        "", new RequestCallBack<String>() {
+                                                            @Override
+                                                            public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                                                                try {
+                                                                    JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
+                                                                    if(jsonObject.optInt("ret_num")==0){
+                                                                        ToastUtils.Errortoast(mContext,"提交申请成功!");
+                                                                    }else{
+                                                                        ToastUtils.Errortoast(mContext,jsonObject.optString("ret_msg"));
+                                                                    }
+                                                                } catch (JSONException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onFailure(HttpException e, String s) {
+                                                                ToastUtils.Errortoast(mContext,"提交申请失败!");
+                                                            }
+                                                        });
+                                    }
+                                });
+                                msgDialog.show();
+
+                            }else {
+                                InteNetUtils.getInstance(mContext)
+                                        .enterpriseVInviteFriend(
+                                                enterprises.get(position).getId(),
+                                                "", "", requestCallBack);
+                            }
 						}
 					} else {
 						inputDialog = new InputDialog(mContext,
@@ -365,13 +416,59 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 								pecketName = inputDialog.getInputText();
 								enterpriseAdd = enterprises.get(position);
 								
-								if (CommonUtils.isNetworkAvailable(mContext))
-									InteNetUtils
-											.getInstance(mContext)
-											.enterpriseAdd(
-													enterprises.get(position)
-															.getId(),
-													pecketName, requestCallBack);
+								if (CommonUtils.isNetworkAvailable(mContext)) {
+                                    if(enterprises.get(position).getEnterprise_apply()==2){
+                                        final MsgDialog msgDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
+                                        msgDialog.setContent("确定申请加入吗?", "", "确定", "取消");
+                                        msgDialog.setCancleListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                msgDialog.dismiss();
+                                            }
+                                        });
+                                        msgDialog.setOKListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                msgDialog.dismiss();
+                                                InteNetUtils.getInstance(mContext)
+                                                        .EnterpriseApplyJoin(
+                                                                enterprises.get(position).getId(),
+                                                                pecketName, new RequestCallBack<String>() {
+                                                                    @Override
+                                                                    public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                                                                        try {
+                                                                            JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
+                                                                            if(jsonObject.optInt("ret_num")==0){
+                                                                                ToastUtils.Errortoast(mContext,"提交申请成功!");
+                                                                            }else{
+                                                                                ToastUtils.Errortoast(mContext,jsonObject.optString("ret_msg"));
+                                                                            }
+                                                                        } catch (JSONException e) {
+                                                                            e.printStackTrace();
+                                                                        }
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onFailure(HttpException e, String s) {
+                                                                        ToastUtils.Errortoast(mContext,"提交申请失败!");
+                                                                    }
+                                                                });
+
+
+                                            }
+                                        });
+                                        msgDialog.show();
+
+                                    }else {
+
+                                        InteNetUtils
+                                                .getInstance(mContext)
+                                                .enterpriseAdd(
+                                                        enterprises.get(position)
+                                                                .getId(),
+                                                        pecketName, requestCallBack);
+                                    }
+                                }
 								inputDialog.dismiss();
 							}
 						});

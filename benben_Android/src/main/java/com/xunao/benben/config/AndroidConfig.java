@@ -711,4 +711,7 @@ public class AndroidConfig {
 
     // 获取积分
     public static final String GetIntegral = "/user/GetIntegral";
+
+    // 获取二维码大图
+    public static final String Qr12 = "/user/Qr12";
 }

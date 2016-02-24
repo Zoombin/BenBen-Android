@@ -227,7 +227,7 @@ public class ActivitySearchEnterprise extends BaseActivity implements
         try {
 			enterpriseList = new EnterpriseList();
 			enterpriseList = enterpriseList.parseJSON(jsonObject);
-
+            enterprises.clear();
 			if (enterpriseList.getEnterprises().size() <= 0) {
 				no_data.setVisibility(View.VISIBLE);
 				listView.setVisibility(View.GONE);

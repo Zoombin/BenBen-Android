@@ -3311,4 +3311,12 @@ public class InteNetUtils {
         ComPost(AndroidConfig.NETHOST + AndroidConfig.GetIntegral, hashMap,
                 callBack);
     }
+
+    public void Qr12(String benben_id,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("benben_id", benben_id);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.Qr12, hashMap,
+                callBack);
+    }
 }

@@ -55,7 +55,7 @@ import com.xunao.benben.ui.item.ActivityContactsInfo;
 public final class CaptureActivity extends Activity implements
 		SurfaceHolder.Callback {
 	private static final String Link = AndroidConfig.NETHOST+"/user/getqrcode/qr_name/";
-	private static final String Link2 = AndroidConfig.NETHOST2+"/user/getqrcode/qr_name/";
+	private static final String Link2 = AndroidConfig.NETHOST3+"/user/getqrcode/qr_name/";
 	private static final String TAG = CaptureActivity.class.getSimpleName();
 	private CameraManager cameraManager;
 	private CaptureActivityHandler handler;

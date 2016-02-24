@@ -39,6 +39,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.squareup.okhttp.internal.Util;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.base.IA.CrashApplication;
@@ -349,8 +350,31 @@ public class ActivityPersonal extends BaseActivity implements OnClickListener,
 							.toString());
 			break;
 		case R.id.rl_two_code:
-			CommonUtils.showQrCode(mContext, user.getUserQrCode(),
-					cubeimageLoader);
+            InteNetUtils.getInstance(mContext).Qr12(user.getBenbenId(), new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
+                        if(jsonObject.optInt("ret_num")==0){
+                            String code = jsonObject.optString("UserQrcode");
+                            CommonUtils.showQrCode(mContext, code,
+                                    cubeimageLoader);
+                        }else{
+                            ToastUtils.Errortoast(mContext,jsonObject.optString("ret_msg"));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    ToastUtils.Errortoast(mContext,"加载二维码失败!");
+                }
+            });
+
+
 			break;
             case R.id.rl_integral:
                 Intent intent = new Intent(this, ActivityWeb.class);

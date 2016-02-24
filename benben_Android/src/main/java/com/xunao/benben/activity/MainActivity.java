@@ -705,6 +705,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 			break;
 		case R.id.tab_five:
 			setTabStyle(tab_five, 4, true);
+            ((MyFragment) fragments[4]).refreshIntegral();
 			break;
 		}
 	}

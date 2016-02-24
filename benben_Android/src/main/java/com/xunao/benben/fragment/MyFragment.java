@@ -733,6 +733,34 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 				mActivity.user.getPoster(), rv_poster);
 	}
 
+    public void refreshIntegral() {
+
+        InteNetUtils.getInstance(mActivity).GetIntegral(new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                try {
+                    JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
+                    if(jsonObject.optInt("ret_num")==0){
+                        String integral = jsonObject.optString("integral");
+                        mActivity.user.setIntegral(integral);
+                        tv_coin.setText(integral);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+
+            }
+        });
+
+
+
+    }
+
 	@Override
 	public void onRefresh() {
 

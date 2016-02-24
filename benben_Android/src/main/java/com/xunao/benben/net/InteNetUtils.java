@@ -3316,4 +3316,11 @@ public class InteNetUtils {
         ComPost(AndroidConfig.NETHOST + AndroidConfig.AddressBook, hashMap,
                 callBack);
     }
+
+    public void GetIntegral(RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.GetIntegral, hashMap,
+                callBack);
+    }
 }

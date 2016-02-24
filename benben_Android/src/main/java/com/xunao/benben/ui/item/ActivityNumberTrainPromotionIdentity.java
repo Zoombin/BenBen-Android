@@ -281,7 +281,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
             case R.id.tv_agreement:
                 Intent intent = new Intent(this, ActivityWeb.class);
                 intent.putExtra("title", "认证协议");
-                intent.putExtra("url", AndroidConfig.NETHOST3 + AndroidConfig.Setting + "key/android/type/" + 4);
+                intent.putExtra("url", AndroidConfig.NETHOST  + "/store/declaration");
 
                 startActivity(intent);
 

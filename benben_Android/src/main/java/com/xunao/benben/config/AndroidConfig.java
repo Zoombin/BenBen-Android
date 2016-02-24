@@ -710,4 +710,7 @@ public class AndroidConfig {
 
     // 通过id获取联系人详情
     public static final String AddressDetail = "/contact/AddressDetail";
+
+    // 获取积分
+    public static final String GetIntegral = "/user/GetIntegral";
 }

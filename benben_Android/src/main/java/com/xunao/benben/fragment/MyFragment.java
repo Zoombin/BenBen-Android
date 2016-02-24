@@ -17,6 +17,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -732,6 +733,35 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 		CommonUtils.startImageLoader(cubeimageLoader,
 				mActivity.user.getPoster(), rv_poster);
 	}
+
+    public void refreshIntegral() {
+
+        InteNetUtils.getInstance(mActivity).GetIntegral(new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                try {
+                    JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
+                    Log.d("ltf","jsonObject================"+jsonObject);
+                    if(jsonObject.optInt("ret_num")==0){
+                        String integral = jsonObject.optString("integral");
+                        mActivity.user.setIntegral(integral);
+                        tv_coin.setText(integral);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+
+            }
+        });
+
+
+
+    }
 
 	@Override
 	public void onRefresh() {

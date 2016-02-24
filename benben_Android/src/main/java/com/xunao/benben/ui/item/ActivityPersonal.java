@@ -349,8 +349,29 @@ public class ActivityPersonal extends BaseActivity implements OnClickListener,
 							.toString());
 			break;
 		case R.id.rl_two_code:
-			CommonUtils.showQrCode(mContext, user.getUserQrCode(),
-					cubeimageLoader);
+            InteNetUtils.getInstance(mContext).Qr12(user.getBenbenId(), new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
+                        if(jsonObject.optInt("ret_num")==0){
+                            String code = jsonObject.optString("UserQrcode");
+                            CommonUtils.showQrCode(mContext, code,
+                                    cubeimageLoader);
+                        }else{
+                            ToastUtils.Errortoast(mContext,jsonObject.optString("ret_msg"));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    ToastUtils.Errortoast(mContext,"加载二维码失败!");
+                }
+            });
 			break;
             case R.id.rl_integral:
                 Intent intent = new Intent(this, ActivityWeb.class);

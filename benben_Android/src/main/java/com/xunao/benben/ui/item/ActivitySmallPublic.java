@@ -1,7 +1,9 @@
 package com.xunao.benben.ui.item;
 
 import java.lang.ref.SoftReference;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -135,6 +137,7 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
     private TextView tv_record_time;
     private String promotion;
     private String url="";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
 
 	@Override
@@ -249,13 +252,13 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                         String content = "";
                         if (isSelectUnion) {
                             int size2 = contacts.size() + friendUnion.getNumber();
-                            content = size2 + "位收件人：好友联盟和";
+                            content = size2 + "位收件人：英雄联盟,";
                         } else {
                             content = contacts.size() + "位收件人：";
                         }
 
                         for (int i = 0; i < size; i++) {
-                            content += contacts.get(i).getName() + "、";
+                            content += contacts.get(i).getName() + ",";
                         }
                         content = content.substring(0, content.length() - 1);
                         content += "等好友";
@@ -264,7 +267,7 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                     } else {
                         if (item_all.isChecked()) {
                             tv_receivers.setText(friendUnion.getNumber()
-                                    + "位收件人：好友联盟");
+                                    + "位收件人：英雄联盟");
                         } else {
                             tv_receivers.setText("0位收件人");
                         }
@@ -494,6 +497,7 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                         String videoPath = "";
                         if(voiceRecorder!=null) {
                             videoPath =voiceRecorder.getVoiceFilePath();
+                            Log.d("ltf","videoPath============"+videoPath);
                         }
                         if (user.getSysLeague() == 2) {
                             if (!item_all.isChecked() && contacts.size() <= 0 && friendUnionContacts.size() <=0) {
@@ -501,12 +505,17 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 return;
                             }
 
+                            String description = "";
                             if (item_all.isChecked()) {
                                 friendUnionId = friendUnion.getId();
+                                if(friendUnion.getType().equals("1")){
+                                    description = "工作联盟,";
+                                }else{
+                                    description = "英雄联盟,";
+                                }
                             } else {
                                 friendUnionId = "";
                             }
-
                             String legphone = "";
                             if (friendUnionContacts.size() > 0) {
                                 friendUnionId = friendUnion.getId();
@@ -515,15 +524,22 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 }
                                 legphone = legphone.substring(0, legphone.length() - 1);
                             }
-
                             String phone = "";
                             if (contacts.size() > 0) {
                                 for (Contacts contact : contacts) {
                                     phone += contact.getIs_benben() + ",";
+                                    description += contact.getName()+",";
                                 }
                                 phone = phone.substring(0, phone.length() - 1);
+                                description = description.substring(0, description.length() - 1);
                             }
-
+                            int num=0;
+                            if(friendUnion.getType().equals("1")) {
+                                num = contacts.size() + friendUnionContacts.size();
+                            }else{
+                                num = contacts.size() + friendUnion.getNumber();
+                            }
+                            description = num+"位收件人:"+description;
 
                             if (CommonUtils.isNetworkAvailable(mContext)) {
                                 com_title_bar_right_tv.setClickable(false);
@@ -550,6 +566,17 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                     }
                                 }
                                 ToastUtils.Infotoast(mContext, "小喇叭已发送");
+                                BroadCasting message = new BroadCasting();
+                                message.setId("");
+                                message.setContentdetail(content);
+                                message.setCreatedTime(simpleDateFormat.format(new Date()));
+                                message.setShortDescription(tv_receivers.getText().toString());
+                                message.setDescription(description);
+                                message.setType(2);
+                                message.setImages(videoPath);
+                                Intent intent = new Intent();
+                                intent.putExtra("message",message);
+                                setResult(RESULT_OK,intent);
                                 AnimFinsh();
                             }else{
                                 ToastUtils.Errortoast(mContext, "当前网络不可用!");
@@ -557,12 +584,14 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
 
                         } else {
                             String phone = "";
+                            String description="";
                             if (contacts.size() > 0) {
                                 for (Contacts contact : contacts) {
                                     phone += contact.getIs_benben() + ",";
+                                    description += contact.getName() + ",";
                                 }
                                 phone = phone.substring(0, phone.length() - 1);
-
+                                description = description.substring(0, description.length() - 1);
                             } else {
                                 ToastUtils.Errortoast(mContext, "请选择要发送的好友!");
                                 return;
@@ -590,6 +619,17 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                     }
                                 }
                                 ToastUtils.Infotoast(mContext, "小喇叭已发送");
+                                BroadCasting message = new BroadCasting();
+                                message.setId("");
+                                message.setContentdetail(content);
+                                message.setCreatedTime(simpleDateFormat.format(new Date()));
+                                message.setShortDescription(tv_receivers.getText().toString());
+                                message.setDescription(description);
+                                message.setType(2);
+                                message.setImages(videoPath);
+                                Intent intent = new Intent();
+                                intent.putExtra("message",message);
+                                setResult(RESULT_OK,intent);
                                 AnimFinsh();
                             }else{
                                 ToastUtils.Errortoast(mContext, "当前网络不可用!");
@@ -607,8 +647,15 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                         }
                         int size = Bimp.tempSelectBitmap.size();
                         String[] images = new String[size];
+                        String Images = null;
+
                         for (int i = 0; i < size; i++) {
                             images[i] = Bimp.tempSelectBitmap.get(i).getImagePath();
+                            if (Images != null) {
+                                Images += "^" + Bimp.tempSelectBitmap.get(i).getImagePath();
+                            } else {
+                                Images = Bimp.tempSelectBitmap.get(i).getImagePath();
+                            }
                         }
 
                         if (user.getSysLeague() == 2) {
@@ -616,9 +663,14 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 ToastUtils.Errortoast(mContext, "请选择要发送的好友联盟或好友!");
                                 return;
                             }
-
+                            String description = "";
                             if (item_all.isChecked()) {
                                 friendUnionId = friendUnion.getId();
+                                if(friendUnion.getType().equals("1")){
+                                    description = "工作联盟,";
+                                }else{
+                                    description = "英雄联盟,";
+                                }
                             } else {
                                 friendUnionId = "";
                             }
@@ -632,13 +684,24 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                 legphone = legphone.substring(0, legphone.length() - 1);
                             }
 
+
                             String phone = "";
+
                             if (contacts.size() > 0) {
                                 for (Contacts contact : contacts) {
                                     phone += contact.getIs_benben() + ",";
+                                    description += contact.getName()+",";
                                 }
                                 phone = phone.substring(0, phone.length() - 1);
+                                description = description.substring(0, description.length() - 1);
                             }
+                            int num=0;
+                            if(friendUnion.getType().equals("1")) {
+                                num = contacts.size() + friendUnionContacts.size();
+                            }else{
+                                num = contacts.size() + friendUnion.getNumber();
+                            }
+                            description = num+"位收件人:"+description;
 
                             if (CommonUtils.isNetworkAvailable(mContext)) {
                                 com_title_bar_right_tv.setClickable(false);
@@ -664,6 +727,18 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                     }
                                 }
                                 ToastUtils.Infotoast(mContext, "小喇叭已发送");
+                                BroadCasting message = new BroadCasting();
+                                message.setId("");
+                                message.setContentdetail(content);
+                                message.setCreatedTime(simpleDateFormat.format(new Date()));
+                                message.setShortDescription(tv_receivers.getText().toString());
+                                message.setDescription(description);
+                                message.setType(1);
+                                message.setImages(Images);
+                                Intent intent = new Intent();
+                                intent.putExtra("message",message);
+                                setResult(RESULT_OK,intent);
+
                                 AnimFinsh();
                             }else{
                                 ToastUtils.Errortoast(mContext, "当前网络不可用!");
@@ -671,12 +746,14 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
 
                         } else {
                             String phone = "";
+                            String description="";
                             if (contacts.size() > 0) {
                                 for (Contacts contact : contacts) {
                                     phone += contact.getIs_benben() + ",";
+                                    description += contact.getName() + ",";
                                 }
                                 phone = phone.substring(0, phone.length() - 1);
-
+                                description = description.substring(0, description.length() - 1);
                             } else {
                                 ToastUtils.Errortoast(mContext, "请选择要发送的好友!");
                                 return;
@@ -704,6 +781,17 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                                     }
                                 }
                                 ToastUtils.Infotoast(mContext, "小喇叭已发送");
+                                BroadCasting message = new BroadCasting();
+                                message.setId("");
+                                message.setContentdetail(content);
+                                message.setCreatedTime(simpleDateFormat.format(new Date()));
+                                message.setShortDescription(tv_receivers.getText().toString());
+                                message.setDescription(description);
+                                message.setType(1);
+                                message.setImages(Images);
+                                Intent intent = new Intent();
+                                intent.putExtra("message",message);
+                                setResult(RESULT_OK,intent);
                                 AnimFinsh();
                             }else{
                                 ToastUtils.Errortoast(mContext, "当前网络不可用!");
@@ -912,13 +1000,17 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                     String content = "";
                     if (isSelectUnion && friendUnion != null) {
                         int size2 = contacts.size() + friendUnion.getNumber();
-                        content = size2 + "位收件人：好友联盟和";
+                        if(friendUnion.getType().equals("1")){
+                            content = size2 + "位收件人：工作联盟,";
+                        }else {
+                            content = size2 + "位收件人：英雄联盟,";
+                        }
                     } else {
                         content = contacts.size() + "位收件人：";
                     }
 
                     for (int i = 0; i < size; i++) {
-                        content += contacts.get(i).getName() + "、";
+                        content += contacts.get(i).getName() + ",";
                     }
                     content = content.substring(0, content.length() - 1);
                     content += "等好友";

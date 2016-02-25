@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -45,6 +46,7 @@ import com.xunao.benben.utils.PixelUtil;
 import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.utils.click.VoiceCastPlayClickListener;
 import com.xunao.benben.utils.click.VoicelistSelfPlayClickListener;
+import com.xunao.benben.utils.click.XunAoVoicePlayClickListener;
 import com.xunao.benben.view.NoScrollGridView;
 
 import in.srain.cube.image.CubeImageView;
@@ -60,6 +62,7 @@ public class ActivitySmallPublics extends BaseActivity {
 	private MsgDialog inputDialog;
 	private myBroadCast myBroadCast;
     public String playMsgId;
+    private BitmapUtils bitmapUtils;
 
 
     @Override
@@ -160,7 +163,7 @@ public class ActivitySmallPublics extends BaseActivity {
 	public void initView(Bundle savedInstanceState) {
 		initTitle_Right_Left_bar("小喇叭", "", "", R.drawable.icon_com_title_left,
 				R.drawable.icon_delete_01);
-
+        bitmapUtils = new BitmapUtils(mContext);
 		listview = (ListView) findViewById(R.id.listview);
 		adapter = new myAdapter();
 		listview.setAdapter(adapter);
@@ -187,7 +190,7 @@ public class ActivitySmallPublics extends BaseActivity {
 
                         hint.show();
                     } else {
-                        startAnimActivity(ActivitySmallPublic.class);
+                        startAnimActivityForResult(ActivitySmallPublic.class, 1);
                     }
                 }else{
                     ToastUtils.Infotoast(mContext,"当前网络不可用");
@@ -505,59 +508,78 @@ public class ActivitySmallPublics extends BaseActivity {
                             inputDialog.setOKListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    InteNetUtils.getInstance(mContext).deleteBroadCasting(
-                                            broadCastings.get(position).getId(), "0",
-                                            new RequestCallBack<String>() {
-                                                @Override
-                                                public void onSuccess(
-                                                        ResponseInfo<String> arg0) {
-                                                    String result = arg0.result;
-                                                    try {
-                                                        JSONObject jsonObject = new JSONObject(
-                                                                result);
-                                                        String ret_num = jsonObject
-                                                                .optString("ret_num");
-                                                        String ret_msg = jsonObject
-                                                                .optString("ret_msg");
+                                    if(broadCastings.get(position).getId().equals("")){
+                                        ToastUtils.Infotoast(mContext,
+                                                "小喇叭删除成功");
+                                        new Handler().postDelayed(
+                                                new Runnable() {
 
-                                                        if ("0".equals(ret_num)) {
-                                                            ToastUtils.Infotoast(mContext,
-                                                                    "小喇叭删除成功");
-                                                            new Handler().postDelayed(
-                                                                    new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        if (broadCastings
+                                                                .size() - 1 > position) {
+                                                            broadCastings
+                                                                    .remove(position);
+                                                            adapter.notifyDataSetChanged();
 
-                                                                        @Override
-                                                                        public void run() {
-                                                                            if (broadCastings
-                                                                                    .size() - 1 > position) {
-                                                                                broadCastings
-                                                                                        .remove(position);
-                                                                                adapter.notifyDataSetChanged();
+                                                        }
+                                                    }
+                                                }, 300);
+                                    }else {
+                                        InteNetUtils.getInstance(mContext).deleteBroadCasting(
+                                                broadCastings.get(position).getId(), "0",
+                                                new RequestCallBack<String>() {
+                                                    @Override
+                                                    public void onSuccess(
+                                                            ResponseInfo<String> arg0) {
+                                                        String result = arg0.result;
+                                                        try {
+                                                            JSONObject jsonObject = new JSONObject(
+                                                                    result);
+                                                            String ret_num = jsonObject
+                                                                    .optString("ret_num");
+                                                            String ret_msg = jsonObject
+                                                                    .optString("ret_msg");
 
+                                                            if ("0".equals(ret_num)) {
+                                                                ToastUtils.Infotoast(mContext,
+                                                                        "小喇叭删除成功");
+                                                                new Handler().postDelayed(
+                                                                        new Runnable() {
+
+                                                                            @Override
+                                                                            public void run() {
+                                                                                if (broadCastings
+                                                                                        .size() - 1 > position) {
+                                                                                    broadCastings
+                                                                                            .remove(position);
+                                                                                    adapter.notifyDataSetChanged();
+
+                                                                                }
                                                                             }
-                                                                        }
-                                                                    }, 300);
-                                                            return;
-                                                        } else {
+                                                                        }, 300);
+                                                                return;
+                                                            } else {
+                                                                ToastUtils.Infotoast(mContext,
+                                                                        ret_msg);
+                                                                return;
+                                                            }
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
                                                             ToastUtils.Infotoast(mContext,
-                                                                    ret_msg);
+                                                                    "小喇叭删除失败!");
                                                             return;
                                                         }
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                        ToastUtils.Infotoast(mContext,
-                                                                "小喇叭删除失败!");
-                                                        return;
                                                     }
-                                                }
 
-                                                @Override
-                                                public void onFailure(HttpException arg0,
-                                                                      String arg1) {
-                                                    ToastUtils.Errortoast(mContext,
-                                                            "网络不可用!");
-                                                }
-                                            });
+                                                    @Override
+                                                    public void onFailure(HttpException arg0,
+                                                                          String arg1) {
+                                                        ToastUtils.Errortoast(mContext,
+                                                                "网络不可用!");
+                                                    }
+                                                });
+                                    }
                                     inputDialog.dismiss();
                                 }
                             });
@@ -596,13 +618,20 @@ public class ActivitySmallPublics extends BaseActivity {
                 item_friend_voice_box
                         .setVisibility(View.VISIBLE);
                 if (images != null) {
-                    item_friend_voice_box
-                            .setOnClickListener(new VoiceCastPlayClickListener(
-                                    item,
-                                    item_friend_voice,
-                                    item_friend_voice_error,
-                                    item_friend_voice_loding,
-                                    mContext));
+                    if(!item.getId().equals("")) {
+                        item_friend_voice_box
+                                .setOnClickListener(new VoiceCastPlayClickListener(
+                                        item,
+                                        item_friend_voice,
+                                        item_friend_voice_error,
+                                        item_friend_voice_loding,
+                                        mContext));
+                    }else {
+
+                        item_friend_voice_box.setOnClickListener(new XunAoVoicePlayClickListener(
+                                item.getImages(),
+                                mContext));
+                    }
                 }
             }
 
@@ -638,59 +667,78 @@ public class ActivitySmallPublics extends BaseActivity {
                     inputDialog.setOKListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            InteNetUtils.getInstance(mContext).deleteBroadCasting(
-                                    broadCastings.get(position).getId(), "0",
-                                    new RequestCallBack<String>() {
-                                        @Override
-                                        public void onSuccess(
-                                                ResponseInfo<String> arg0) {
-                                            String result = arg0.result;
-                                            try {
-                                                JSONObject jsonObject = new JSONObject(
-                                                        result);
-                                                String ret_num = jsonObject
-                                                        .optString("ret_num");
-                                                String ret_msg = jsonObject
-                                                        .optString("ret_msg");
+                            if(broadCastings.get(position).getId().equals("")){
+                                ToastUtils.Infotoast(mContext,
+                                        "小喇叭删除成功");
+                                new Handler().postDelayed(
+                                        new Runnable() {
 
-                                                if ("0".equals(ret_num)) {
-                                                    ToastUtils.Infotoast(mContext,
-                                                            "小喇叭删除成功");
-                                                    new Handler().postDelayed(
-                                                            new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                if (broadCastings
+                                                        .size() - 1 > position) {
+                                                    broadCastings
+                                                            .remove(position);
+                                                    adapter.notifyDataSetChanged();
 
-                                                                @Override
-                                                                public void run() {
-                                                                    if (broadCastings
-                                                                            .size() - 1 > position) {
-                                                                        broadCastings
-                                                                                .remove(position);
-                                                                        adapter.notifyDataSetChanged();
+                                                }
+                                            }
+                                        }, 300);
+                            }else {
+                                InteNetUtils.getInstance(mContext).deleteBroadCasting(
+                                        broadCastings.get(position).getId(), "0",
+                                        new RequestCallBack<String>() {
+                                            @Override
+                                            public void onSuccess(
+                                                    ResponseInfo<String> arg0) {
+                                                String result = arg0.result;
+                                                try {
+                                                    JSONObject jsonObject = new JSONObject(
+                                                            result);
+                                                    String ret_num = jsonObject
+                                                            .optString("ret_num");
+                                                    String ret_msg = jsonObject
+                                                            .optString("ret_msg");
 
+                                                    if ("0".equals(ret_num)) {
+                                                        ToastUtils.Infotoast(mContext,
+                                                                "小喇叭删除成功");
+                                                        new Handler().postDelayed(
+                                                                new Runnable() {
+
+                                                                    @Override
+                                                                    public void run() {
+                                                                        if (broadCastings
+                                                                                .size() - 1 > position) {
+                                                                            broadCastings
+                                                                                    .remove(position);
+                                                                            adapter.notifyDataSetChanged();
+
+                                                                        }
                                                                     }
-                                                                }
-                                                            }, 300);
-                                                    return;
-                                                } else {
+                                                                }, 300);
+                                                        return;
+                                                    } else {
+                                                        ToastUtils.Infotoast(mContext,
+                                                                ret_msg);
+                                                        return;
+                                                    }
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
                                                     ToastUtils.Infotoast(mContext,
-                                                            ret_msg);
+                                                            "小喇叭删除失败!");
                                                     return;
                                                 }
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                                ToastUtils.Infotoast(mContext,
-                                                        "小喇叭删除失败!");
-                                                return;
                                             }
-                                        }
 
-                                        @Override
-                                        public void onFailure(HttpException arg0,
-                                                              String arg1) {
-                                            ToastUtils.Errortoast(mContext,
-                                                    "网络不可用!");
-                                        }
-                                    });
+                                            @Override
+                                            public void onFailure(HttpException arg0,
+                                                                  String arg1) {
+                                                ToastUtils.Errortoast(mContext,
+                                                        "网络不可用!");
+                                            }
+                                        });
+                            }
                             inputDialog.dismiss();
                         }
                     });
@@ -756,8 +804,9 @@ public class ActivitySmallPublics extends BaseActivity {
                             .dp2px(60)));
             String poster = getItem(position);
             if (!TextUtils.isEmpty(poster)) {
-                CommonUtils.startImageLoader(cubeimageLoader,
-                        getItem(position), ((CubeImageView) convertView));
+                bitmapUtils.display(((CubeImageView) convertView),getItem(position));
+//                CommonUtils.startImageLoader(cubeimageLoader,
+//                        getItem(position), ((CubeImageView) convertView));
             } else {
                 CommonUtils.startImageLoader(cubeimageLoader, "www.baidu.com",
                         ((CubeImageView) convertView));
@@ -780,5 +829,23 @@ public class ActivitySmallPublics extends BaseActivity {
         super.onDestroy();
         if(VoiceCastPlayClickListener.currentPlayListener.isPlaying)
             VoiceCastPlayClickListener.currentPlayListener.stopPlayVoice();
+        if(XunAoVoicePlayClickListener.currentPlayListener.isPlaying)
+            XunAoVoicePlayClickListener.currentPlayListener.stopPlayVoice();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                if(resultCode==RESULT_OK && data!=null){
+                    BroadCasting broadCasting = (BroadCasting) data.getSerializableExtra("message");
+                    broadCastings.add(0,broadCasting);
+                    adapter.notifyDataSetChanged();
+                }
+
+
+                break;
+        }
     }
 }

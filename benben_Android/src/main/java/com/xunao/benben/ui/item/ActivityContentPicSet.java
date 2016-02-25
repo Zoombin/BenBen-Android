@@ -45,6 +45,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.xunao.benben.R;
@@ -70,11 +71,12 @@ public class ActivityContentPicSet extends BaseActivity implements
 	private int position;
 	private ArrayList<View> points;
 	private HashMap<Integer, PhotoView> photoViews;
+    private BitmapUtils bitmapUtils;
 
 	@Override
 	public void loadLayout(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_pic_set);
-
+        bitmapUtils = new BitmapUtils(mContext);
 		cubeimageLoader.setImageLoadHandler(new DefaultImageLoadHandler(
 				mContext) {
 			@Override
@@ -242,7 +244,7 @@ public class ActivityContentPicSet extends BaseActivity implements
 
 	// 初始化Viewpager的image与point
 	private void initTopImageAndPoint(int size) {
-		android.widget.LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				PixelUtil.dp2px(6), PixelUtil.dp2px(6));
 		layoutParams.rightMargin = PixelUtil.dp2px(4);
 		points = new ArrayList<View>();
@@ -280,9 +282,12 @@ public class ActivityContentPicSet extends BaseActivity implements
 					.findViewById(R.id.img_photo_view);
 			final LinearLayout pb_box = (LinearLayout) view
 					.findViewById(R.id.pb_box);
-			// 加载图片
-			CommonUtils.startImageLoader(cubeimageLoader, splits[position],
-					photoView);
+//			// 加载图片
+//			CommonUtils.startImageLoader(cubeimageLoader, splits[position],
+//					photoView);
+            bitmapUtils.display(photoView,splits[position]);
+
+
 			photoView.setTag(R.string.pb, pb_box);
 			photoViews.put(position, photoView);
 			view.setTag(photoView);

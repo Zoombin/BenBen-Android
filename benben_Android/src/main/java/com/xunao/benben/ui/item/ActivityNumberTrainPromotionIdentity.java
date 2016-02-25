@@ -98,7 +98,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
         ll_person =  (LinearLayout) findViewById(R.id.ll_person);
         ll_merchant =  (LinearLayout) findViewById(R.id.ll_merchant);
         tv_agreement = (TextView) findViewById(R.id.tv_agreement);
-        tv_agreement.setText(Html.fromHtml("<u>奔犇认证协议</u>"));
+        tv_agreement.setText(Html.fromHtml("<u>号码直通车服务协议</u>"));
         tv_agreement.setOnClickListener(this);
 
         iv_person_identityCode1 = (CubeImageView) findViewById(R.id.iv_person_identityCode1);
@@ -280,7 +280,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
                 break;
             case R.id.tv_agreement:
                 Intent intent = new Intent(this, ActivityWeb.class);
-                intent.putExtra("title", "认证协议");
+                intent.putExtra("title", "服务协议");
                 intent.putExtra("url", AndroidConfig.NETHOST  + "/store/declaration");
 
                 startActivity(intent);
@@ -314,7 +314,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
             }
         }
         if (!cb_agree.isChecked()) {
-            ToastUtils.Errortoast(mContext, "请同意奔犇认证协议!");
+            ToastUtils.Errortoast(mContext, "请同意号码直通车服务协议!");
             return;
         }
 
@@ -359,7 +359,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
             }
         }
         if (!cb_agree.isChecked()) {
-            ToastUtils.Errortoast(mContext, "请同意奔犇认证协议!");
+            ToastUtils.Errortoast(mContext, "请同意号码直通车服务协议!");
             return;
         }
 

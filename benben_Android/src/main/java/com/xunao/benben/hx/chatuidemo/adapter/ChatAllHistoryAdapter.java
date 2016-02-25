@@ -346,17 +346,18 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<BenbenEMConversation> {
 				EMMessage lastMessage = conversation.getLastMessage();
                 holder.tv_union_type.setVisibility(View.GONE);
                 if(String.valueOf(holder.name.getText()).equals("")){
-                    holder.name.setText(lastMessage.getFrom());
                     String img= lastMessage.getStringAttribute("leg_poster","");
                     CommonUtils.startImageLoader(cubeimageLoader,img, holder.avatar);
                     String leg_type= lastMessage.getStringAttribute("leg_type","");
                     holder.tv_union_type.setVisibility(View.VISIBLE);
                     if(leg_type.equals("2")){
+                        holder.name.setText(lastMessage.getFrom());
                         holder.tv_union_type.setVisibility(View.VISIBLE);
                         holder.tv_union_type.setText("英雄");
                         holder.tv_union_type.setTextColor(Color.rgb(33, 207, 213));
                         holder.tv_union_type.setBackgroundResource(R.drawable.textview_friend_union_2);
                     }else if(leg_type.equals("1")){
+                        holder.name.setText(lastMessage.getFrom());
                         holder.tv_union_type.setVisibility(View.VISIBLE);
                         holder.tv_union_type.setText("工作");
                         holder.tv_union_type.setTextColor(Color.rgb(233,81,135));

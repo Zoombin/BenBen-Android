@@ -23,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ import android.widget.TextView;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.sitech.oncon.barcode.core.CaptureActivity;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
@@ -40,6 +43,7 @@ import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.dialog.InputDialog;
 import com.xunao.benben.dialog.LodingDialog;
+import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.ActivityWeb;
 import com.xunao.benben.utils.CommonUtils;
@@ -261,6 +265,8 @@ public class ActivityInviteFriendToBx extends BaseActivity implements
 						R.id.rl_area);
 				TextView tv_area = ViewHolderUtil
 						.get(convertView, R.id.tv_area);
+                ImageView iv_delete = ViewHolderUtil
+                        .get(convertView, R.id.iv_delete);
 
 				final BxContacts bxContacts = bxArrayList.get(position);
 				tv_name.setText(Html.fromHtml(RegexUtils.minganciCheck2(bxContacts.getName())));
@@ -280,6 +286,31 @@ public class ActivityInviteFriendToBx extends BaseActivity implements
 					tv_area.setText("请选择所在地区");
 					tv_area.setTextColor(Color.parseColor("#848484"));
 				}
+
+
+                iv_delete.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final MsgDialog msgDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
+                        msgDialog.setContent("确定删除"+bxContacts.getName()+"吗?", "", "确认", "取消");
+                        msgDialog.setCancleListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                msgDialog.dismiss();
+                            }
+                        });
+                        msgDialog.setOKListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                msgDialog.dismiss();
+                                bxArrayList.remove(bxContacts);
+                                bxContactsArrayList.remove(bxContacts);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                        msgDialog.show();
+                    }
+                });
 
 				tv_name.setOnClickListener(new OnClickListener() {
 
@@ -386,6 +417,8 @@ public class ActivityInviteFriendToBx extends BaseActivity implements
 						}
 					}
 				});
+
+
 			} else {
 				convertView = getLayoutInflater().inflate(
 						R.layout.mytextview_item, null);

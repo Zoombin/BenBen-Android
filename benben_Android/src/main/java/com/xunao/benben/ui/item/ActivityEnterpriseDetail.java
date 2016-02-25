@@ -338,6 +338,7 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 						}
 						if (pecketName.length() > 12) {
 							ToastUtils.Errortoast(mContext, "号码长度不能超过12位!");
+                            return;
 						}
 
 						if (CommonUtils.isNetworkAvailable(mContext)) {

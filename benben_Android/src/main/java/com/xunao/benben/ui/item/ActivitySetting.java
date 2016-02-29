@@ -559,7 +559,7 @@ public class ActivitySetting extends BaseActivity implements OnClickListener,
     @Override
     public void onUpdateReturned(int i, UpdateResponse updateResponse) {
         dissLoding();
-        if(!updateResponse.hasUpdate){
+        if(updateResponse!=null && !updateResponse.hasUpdate){
             ToastUtils.Infotoast(this,"当前已是最新版本！");
         }
     }

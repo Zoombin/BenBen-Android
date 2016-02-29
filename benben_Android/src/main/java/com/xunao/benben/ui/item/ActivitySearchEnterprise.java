@@ -317,7 +317,7 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 				iv_add.setVisibility(View.VISIBLE);
 				tv_add.setVisibility(View.VISIBLE);
 
-				if (enterprises.get(position).getOrigin() == 2) {
+				if (enterprises.get(position).getOrigin() == 2 && enterprises.get(position).getType().equals("2")) {
 					iv_add.setVisibility(View.GONE);
 					tv_add.setVisibility(View.GONE);
 				} else {

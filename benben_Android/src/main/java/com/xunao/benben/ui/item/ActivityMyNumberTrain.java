@@ -414,7 +414,7 @@ public class ActivityMyNumberTrain extends BaseActivity implements
         }
 
         if ((tv_set_detailaddress.getText().toString().trim())
-                .equals("去地图设置详细地址")) {
+                .equals("")) {
             ToastUtils.Infotoast(mContext, "请去地图设置详细地址！");
             return;
         }

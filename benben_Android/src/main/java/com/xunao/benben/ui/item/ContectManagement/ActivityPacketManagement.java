@@ -527,27 +527,31 @@ public class ActivityPacketManagement extends BaseActivity implements
 										.setOKListener(new OnClickListener() {
 											@Override
 											public void onClick(View v) {
-												pecketName = inputDialog
-														.getInputText();
-												
+                                                pecketName = String.valueOf(inputDialog.getInputText()).trim();
+
+                                                if(pecketName.equals(mContactsGroups.get(position).getName())){
+                                                    inputDialog.dismiss();
+                                                }else {
+
 //												if(pecketName.length() > 8){
 //													ToastUtils.Errortoast(mContext, "分组在8个字以内");
 //													return;
 //												}
-												if(!CommonUtils.StringIsSurpass2(pecketName, 2, 8)){
-													ToastUtils.Errortoast(mContext, "名称限制在1-8个字之间");
-													return;
-												}
-												if (CommonUtils
-														.isNetworkAvailable(mContext)) {
-													InteNetUtils.getInstance(
-															mContext)
-															.EditPacket(
-																	pecketName,
-																	pecketId,
-																	changeName);
+                                                    if (!CommonUtils.StringIsSurpass2(pecketName, 2, 8)) {
+                                                        ToastUtils.Errortoast(mContext, "名称限制在1-8个字之间");
+                                                        return;
+                                                    }
+                                                    if (CommonUtils
+                                                            .isNetworkAvailable(mContext)) {
+                                                        InteNetUtils.getInstance(
+                                                                mContext)
+                                                                .EditPacket(
+                                                                        pecketName,
+                                                                        pecketId,
+                                                                        changeName);
 
-												}
+                                                    }
+                                                }
 											}
 										});
 								inputDialog.show();
@@ -596,23 +600,27 @@ public class ActivityPacketManagement extends BaseActivity implements
 										.setOKListener(new OnClickListener() {
 											@Override
 											public void onClick(View v) {
-												pecketName = inputDialog
-														.getInputText();
-												
-												if(pecketName.length() > 8){
-													ToastUtils.Errortoast(mContext, "分组在8个字以内");
-													return;
-												}
-												if (CommonUtils
-														.isNetworkAvailable(mContext)) {
-													InteNetUtils.getInstance(
-															mContext)
-															.EditPacket(
-																	pecketName,
-																	pecketId,
-																	changeName);
+                                                pecketName = String.valueOf(inputDialog.getInputText()).trim();
 
-												}
+                                                if(pecketName.equals(mContactsGroups.get(position).getName())){
+                                                    inputDialog.dismiss();
+                                                }else {
+
+                                                    if (pecketName.length() > 8) {
+                                                        ToastUtils.Errortoast(mContext, "分组在8个字以内");
+                                                        return;
+                                                    }
+                                                    if (CommonUtils
+                                                            .isNetworkAvailable(mContext)) {
+                                                        InteNetUtils.getInstance(
+                                                                mContext)
+                                                                .EditPacket(
+                                                                        pecketName,
+                                                                        pecketId,
+                                                                        changeName);
+
+                                                    }
+                                                }
 											}
 										});
 								inputDialog.show();
@@ -663,23 +671,27 @@ public class ActivityPacketManagement extends BaseActivity implements
 										.setOKListener(new OnClickListener() {
 											@Override
 											public void onClick(View v) {
-												pecketName = inputDialog
-														.getInputText();
-												
-												if(!CommonUtils.StringIsSurpass2(pecketName, 2, 8)){
-													ToastUtils.Errortoast(mContext, "名称限制在1-8个字之间");
-													return;
-												}
-												if (CommonUtils
-														.isNetworkAvailable(mContext)) {
-													InteNetUtils.getInstance(
-															mContext)
-															.EditPacket(
-																	pecketName,
-																	pecketId,
-																	changeName);
+                                                pecketName = String.valueOf(inputDialog.getInputText()).trim();
 
-												}
+                                                if(pecketName.equals(mContactsGroups.get(position).getName())){
+                                                    inputDialog.dismiss();
+                                                }else {
+
+                                                    if (!CommonUtils.StringIsSurpass2(pecketName, 2, 8)) {
+                                                        ToastUtils.Errortoast(mContext, "名称限制在1-8个字之间");
+                                                        return;
+                                                    }
+                                                    if (CommonUtils
+                                                            .isNetworkAvailable(mContext)) {
+                                                        InteNetUtils.getInstance(
+                                                                mContext)
+                                                                .EditPacket(
+                                                                        pecketName,
+                                                                        pecketId,
+                                                                        changeName);
+
+                                                    }
+                                                }
 											}
 										});
 								inputDialog.show();
@@ -720,23 +732,27 @@ public class ActivityPacketManagement extends BaseActivity implements
 										.setOKListener(new OnClickListener() {
 											@Override
 											public void onClick(View v) {
-												pecketName = inputDialog
-														.getInputText();
-												
-												if(!CommonUtils.StringIsSurpass2(pecketName, 2, 8)){
-													ToastUtils.Errortoast(mContext, "名称限制在1-8个字之间");
-													return;
-												}
-												if (CommonUtils
-														.isNetworkAvailable(mContext)) {
-													InteNetUtils.getInstance(
-															mContext)
-															.EditPacket(
-																	pecketName,
-																	pecketId,
-																	changeName);
+                                                pecketName = String.valueOf(inputDialog.getInputText()).trim();
 
-												}
+                                                if(pecketName.equals(mContactsGroups.get(position).getName())){
+                                                    inputDialog.dismiss();
+                                                }else {
+
+                                                    if (!CommonUtils.StringIsSurpass2(pecketName, 2, 8)) {
+                                                        ToastUtils.Errortoast(mContext, "名称限制在1-8个字之间");
+                                                        return;
+                                                    }
+                                                    if (CommonUtils
+                                                            .isNetworkAvailable(mContext)) {
+                                                        InteNetUtils.getInstance(
+                                                                mContext)
+                                                                .EditPacket(
+                                                                        pecketName,
+                                                                        pecketId,
+                                                                        changeName);
+
+                                                    }
+                                                }
 											}
 										});
 								inputDialog.show();

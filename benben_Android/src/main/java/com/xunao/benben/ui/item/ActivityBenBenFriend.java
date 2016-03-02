@@ -78,7 +78,7 @@ public class ActivityBenBenFriend extends BaseActivity {
 
 		try {
 			List<Contacts> findAll = dbUtil.findAll(Selector.from(
-					Contacts.class).where("is_benben", "!=", "0"));
+					Contacts.class).where("is_benben", "!=", "0").and("group_id","!=","10000"));
 			contactsList = (ArrayList<Contacts>) findAll;
 		} catch (DbException e) {
 			// TODO Auto-generated catch block

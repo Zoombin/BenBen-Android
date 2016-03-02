@@ -422,32 +422,33 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case PIC_REQUEST_CODE_SELECT_CAMERA:
-                File temp = CommonUtils.getImagePath(mContext, imageName);
-                imagePath = temp.getAbsolutePath();
-                switch (imgType){
-                    case 1:
-                        file1 = CommonUtils.getImagePath(mContext, imageName);
-                        iv_person_identityCode1.setImageBitmap(getBitmap(imagePath));
-                        break;
-                    case 2:
-                        file2 = CommonUtils.getImagePath(mContext, imageName);
-                        iv_person_identityCode2.setImageBitmap(getBitmap(imagePath));
-                        break;
-                    case 3:
-                        file3 = CommonUtils.getImagePath(mContext, imageName);
-                        iv_merchant_identityCode1.setImageBitmap(getBitmap(imagePath));
-                        break;
-                    case 4:
-                        file4 = CommonUtils.getImagePath(mContext, imageName);
-                        iv_merchant_identityCode2.setImageBitmap(getBitmap(imagePath));
-                        break;
-                    case 5:
-                        file5 = CommonUtils.getImagePath(mContext, imageName);
-                        iv_merchant_license.setImageBitmap(getBitmap(imagePath));
-                        break;
+                if(resultCode==RESULT_OK) {
+                    File temp = CommonUtils.getImagePath(mContext, imageName);
+                    imagePath = temp.getAbsolutePath();
+                    switch (imgType) {
+                        case 1:
+                            file1 = CommonUtils.getImagePath(mContext, imageName);
+                            iv_person_identityCode1.setImageBitmap(getBitmap(imagePath));
+                            break;
+                        case 2:
+                            file2 = CommonUtils.getImagePath(mContext, imageName);
+                            iv_person_identityCode2.setImageBitmap(getBitmap(imagePath));
+                            break;
+                        case 3:
+                            file3 = CommonUtils.getImagePath(mContext, imageName);
+                            iv_merchant_identityCode1.setImageBitmap(getBitmap(imagePath));
+                            break;
+                        case 4:
+                            file4 = CommonUtils.getImagePath(mContext, imageName);
+                            iv_merchant_identityCode2.setImageBitmap(getBitmap(imagePath));
+                            break;
+                        case 5:
+                            file5 = CommonUtils.getImagePath(mContext, imageName);
+                            iv_merchant_license.setImageBitmap(getBitmap(imagePath));
+                            break;
+                    }
+
                 }
-
-
                 break;
             case PIC_Select_CODE_ImageFromLoacal:
                 if (data != null) {

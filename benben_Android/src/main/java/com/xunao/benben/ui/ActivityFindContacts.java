@@ -416,7 +416,7 @@ public class ActivityFindContacts extends BaseActivity {
 //				item_phone_single_bxw.setVisibility(View.VISIBLE);
 //			}
 
-			if (contacts.getIs_benben().equals("0")) {
+			if (contacts.getIs_benben().equals("0") || contacts.getGroup_id().equals("10000")) {
 				item_phone_single_bb.setVisibility(View.GONE);
 			} else {
 				item_phone_single_bb.setVisibility(View.VISIBLE);

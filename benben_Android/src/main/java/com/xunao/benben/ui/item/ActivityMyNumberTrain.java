@@ -644,28 +644,48 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 					rl_broad_cast.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View arg0) {
-							final InfoSimpleMsgHint hint = new InfoSimpleMsgHint(
-									ActivityMyNumberTrain.this,
-									R.style.MyDialog1);
-							hint.setContent("该只有"
-									+ numberTrainDetail.getHaveRight()
-									+ "条，确定发送");
-							hint.setBtnContent("知道了");
-							hint.show();
-							hint.setOKListener(new OnClickListener() {
+                            if (numberTrainDetail.getIs_close() == 0) {
+                                final InfoSimpleMsgHint hint = new InfoSimpleMsgHint(
+                                        ActivityMyNumberTrain.this,
+                                        R.style.MyDialog1);
+                                hint.setContent("该只有"
+                                        + numberTrainDetail.getHaveRight()
+                                        + "条，确定发送");
+                                hint.setBtnContent("知道了");
+                                hint.show();
+                                hint.setOKListener(new OnClickListener() {
 
-								@Override
-								public void onClick(View v) {
-                                    Bimp.tempSelectBitmap.clear();
+                                    @Override
+                                    public void onClick(View v) {
+                                        Bimp.tempSelectBitmap.clear();
 //									startAnimActivity2Obj(
 //											ActivitySmallPublic.class,
 //											"numberTrain", "我开通了号码直通车来给我捧捧场吧!");
-                                    startAnimActivityForResult2(ActivitySmallPublic.class,SEND_PUBLIC,"numberTrain", "我开通了号码直通车来给我捧捧场吧!");
-									hint.dismiss();
-								}
-							});
+                                        startAnimActivityForResult2(ActivitySmallPublic.class,SEND_PUBLIC,"numberTrain", "我开通了号码直通车来给我捧捧场吧!");
+                                        hint.dismiss();
+                                    }
+                                });
 
-							hint.show();
+                                hint.show();
+                            }else{
+                                final InfoSimpleMsgHint hint = new InfoSimpleMsgHint(
+                                        ActivityMyNumberTrain.this,
+                                        R.style.MyDialog1);
+                                hint.setContent("请先开启号码直通车");
+                                hint.setBtnContent("知道了");
+                                hint.show();
+                                hint.setOKListener(new OnClickListener() {
+
+                                    @Override
+                                    public void onClick(View v) {
+                                        hint.dismiss();
+                                    }
+                                });
+
+                                hint.show();
+                            }
+
+
 						}
 					});
 				}

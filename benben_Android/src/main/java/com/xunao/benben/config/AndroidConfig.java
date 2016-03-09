@@ -9,10 +9,12 @@ public class AndroidConfig {
 	public static final String NETHOST ="http://112.124.101.177:81/index.php/v2";
     public static final String NETHOST2 ="http://112.124.101.177:81/index.php/v2";
     public static final String NETHOST3 ="http://112.124.101.177:81/index.php/v1";
+    public static final String NETHOST4 ="http://112.124.101.177:81/index.php";
 
 //    public static final String NETHOST = "http://112.124.101.177/index.php/v2";
 //	public static final String NETHOST2 ="http://112.124.101.177/index.php/v2";
 //    public static final String NETHOST3 ="http://112.124.101.177/index.php/v1";
+//public static final String NETHOST4 ="http://112.124.101.177/index.php";
 
     // 商户PID
     public static final String PARTNER = "2088121516774084";
@@ -716,4 +718,8 @@ public class AndroidConfig {
 
     // 获取二维码大图
     public static final String Qr12 = "/user/Qr12";
+
+
+    // 大喇叭
+    public static final String CreateBroadcast = "/enterpriseSite/createBroadcast";
 }

@@ -319,15 +319,36 @@ public class CrashApplication extends Application {
 	}
 
 	private void createDB() {
-		db = DbUtils.create(this, "benben", 11, new DbUpgradeListener() {
+		db = DbUtils.create(this, "benben", 15, new DbUpgradeListener() {
 			@Override
 			public void onUpgrade(DbUtils arg0, int arg1, int arg2) {
                 getInstance().getSpUtil().setSnapshot("1");
-			}
+                try {
+                    arg0.dropDb();
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+            }
 		});
 
-		db.configAllowTransaction(true);
-		db.configDebug(AndroidConfig.isDebug);
+
+
+//        DbUtils.DaoConfig config = new DbUtils.DaoConfig(this);
+//
+//        config.setDbName("benben"); //db名
+//
+//        config.setDbVersion(17);  //db版本
+//        config.setDbUpgradeListener(new DbUpgradeListener() {
+//            @Override
+//            public void onUpgrade(DbUtils dbUtils, int i, int i2) {
+//                getInstance().getSpUtil().setSnapshot("1");
+//            }
+//        });
+//
+//        db = DbUtils.create(config);//db还有其他的一些构造方法，比如含有更新表版本的监听器的
+        db.configAllowTransaction(true);
+        db.configDebug(AndroidConfig.isDebug);
+
 
 	}
 

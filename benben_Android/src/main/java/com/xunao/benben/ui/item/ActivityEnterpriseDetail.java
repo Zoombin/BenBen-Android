@@ -37,6 +37,8 @@ import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.ActivityLogin;
+import com.xunao.benben.ui.ActivityMyWeb;
+import com.xunao.benben.ui.ActivityWeb;
 import com.xunao.benben.ui.item.ActivityEnterpriseInviteMember.MyBroadcastReceiver;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.RegexUtils;
@@ -153,6 +155,18 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 				AnimFinsh();
 			}
 		});
+
+        setOnRightClickLinester(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, ActivityMyWeb.class);
+                intent.putExtra("title", "大喇叭");
+                intent.putExtra("url", AndroidConfig.NETHOST4 + AndroidConfig.CreateBroadcast + "?enterprise_id="+id+"&token="+user.getToken());
+                startActivity(intent);
+
+
+            }
+        });
 	}
 
 	@Override
@@ -167,6 +181,7 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject==========="+jsonObject);
 		String optString = jsonObject.optString("ret_num");
 
 		if (optString != null) {
@@ -182,24 +197,42 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 				enterprise.parseJSON(object);
 				zz.setVisibility(View.GONE);
 
-				if (enterprise.getOrigin() == 2) {
-					addBut.setVisibility(View.GONE);
-					rl_inivite.setOnClickListener(null);
-					rl_add_common.setOnClickListener(null);
-					rl_add_common.setVisibility(View.GONE);
+                if(enterprise.getIs_admin()==1){
+                    initTitle_Right_Left_bar("政企通讯录详情", "", "大喇叭",
+                            R.drawable.icon_com_title_left, 0);
+                }
+
+
+				if (enterprise.getOrigin() == 2 && "2".equals(enterprise.getType())) {
+                    rl_my_phone.setClickable(false);
 					btn_tuichu.setVisibility(View.GONE);
 					btn_tuichu.setOnClickListener(null);
-					
-					rl_inivite.setClickable(false);
-					rl_my_phone.setClickable(false);
+                    addBut.setVisibility(View.GONE);
+                    rl_inivite.setOnClickListener(null);
+                    rl_add_common.setOnClickListener(null);
+                    rl_add_common.setVisibility(View.GONE);
+                    rl_inivite.setClickable(false);
+
 					
 				}else{
-					line_group.setVisibility(View.VISIBLE);
-					addBut.setVisibility(View.VISIBLE);
-					line_5.setVisibility(View.VISIBLE);
+                    if(enterprise.getIs_guard()==1 && enterprise.getIs_admin()!=1){
+                        addBut.setVisibility(View.GONE);
+                        rl_inivite.setOnClickListener(null);
+                        rl_add_common.setOnClickListener(null);
+                        rl_add_common.setVisibility(View.GONE);
+                        rl_inivite.setClickable(false);
+
+                    }else{
+                        line_group.setVisibility(View.VISIBLE);
+                        addBut.setVisibility(View.VISIBLE);
+                        rl_add_common.setVisibility(View.VISIBLE);
+                    }
+
+                    line_5.setVisibility(View.VISIBLE);
+                    rl_phone.setVisibility(View.VISIBLE);
 					btn_tuichu.setVisibility(View.VISIBLE);
-					rl_phone.setVisibility(View.VISIBLE);
-					rl_add_common.setVisibility(View.VISIBLE);
+
+
 				}
 				tv_name.setText(enterprise.getName());
 				tv_number.setText("通讯录成员 ( " + enterprise.getNumber() + "人)");

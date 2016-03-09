@@ -1,5 +1,6 @@
 package com.xunao.benben.ui.item;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +11,11 @@ import com.lidroid.xutils.exception.HttpException;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.base.IA.CrashApplication;
+import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.ActivityMyWeb;
+import com.xunao.benben.ui.ActivityWeb;
 import com.xunao.benben.utils.ToastUtils;
 
 import org.json.JSONObject;
@@ -208,10 +212,36 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
                 }
                 break;
             case R.id.btleft_is_gb:
+                if(btleftisgb.getTag()==1){
+
+                }else{
+                    Intent intent = new Intent(mContext, ActivityMyWeb.class);
+                    intent.putExtra("title", "团购");
+                    intent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService/serviceDetail?type=1&token="+user.getToken());
+                    startActivity(intent);
+                }
                 break;
             case R.id.btleft_is_po:
+                if(btleftispo.getTag()==1){
+
+                }else{
+                    Intent intent = new Intent(mContext, ActivityMyWeb.class);
+                    intent.putExtra("title", "促销");
+                    intent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService/serviceDetail?type=0&token="+user.getToken());
+                    startActivity(intent);
+                }
+
+
                 break;
             case R.id.btleft_is_vip:
+                if(btleftisvip.getTag()==1){
+
+                }else{
+                    Intent intent = new Intent(mContext, ActivityMyWeb.class);
+                    intent.putExtra("title", "会员号");
+                    intent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService/serviceDetail?type=11&token="+user.getToken());
+                    startActivity(intent);
+                }
                 break;
             case R.id.btleft_rest_num:
                 startAnimActivity2Obj(

@@ -1421,8 +1421,25 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
 					} catch (DbException e) {
 						e.printStackTrace();
 					}
-				}
-
+				}else if(t4==7){
+                    //政企申请加入结果
+                    String name = message.getStringAttribute("t6", "");
+                    try {
+                        PublicMessage mPublicMessage = new PublicMessage();
+                        mPublicMessage.setHuanxin_username("");
+                        mPublicMessage.setName(name);
+                        mPublicMessage.setReason(((TextMessageBody) message.getBody()).getMessage());
+                        mPublicMessage.setClassType(PublicMessage.ENTERPRISE);
+                        mPublicMessage.setStatus(type);
+                        mPublicMessage.setCreatTime(TimeUtil.now());
+                        if (!mApplication.mPublicMessage.contains(mPublicMessage)) {
+                            mApplication.mPublicMessage.add(0, mPublicMessage);
+                        }
+                        dbUtil.saveOrUpdate(mPublicMessage);
+                    } catch (DbException e) {
+                        e.printStackTrace();
+                    }
+                }
                 EMConversation conversation = EMChatManager.getInstance().getConversation(from);
                 conversation.removeMessage(msgId);
                 notifyNewIviteMessage();

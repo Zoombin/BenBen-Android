@@ -27,6 +27,8 @@ public class Enterprise extends BaseBean<Enterprise> {
     private int sort;
     private String benben_id;
     private int enterprise_apply;
+    private int is_admin;
+    private int is_guard;
 
 	public String getId() {
 		return id;
@@ -193,6 +195,22 @@ public class Enterprise extends BaseBean<Enterprise> {
         this.enterprise_apply = enterprise_apply;
     }
 
+    public int getIs_admin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(int is_admin) {
+        this.is_admin = is_admin;
+    }
+
+    public int getIs_guard() {
+        return is_guard;
+    }
+
+    public void setIs_guard(int is_guard) {
+        this.is_guard = is_guard;
+    }
+
     @Override
 	public Enterprise parseJSON(JSONObject jsonObj) throws NetRequestException {
 
@@ -215,6 +233,9 @@ public class Enterprise extends BaseBean<Enterprise> {
         firstin = jsonObj.optString("firstin");
         enterprise_id = jsonObj.optString("enterprise_id");
         enterprise_apply = jsonObj.optInt("enterprise_apply");
+        is_admin = jsonObj.optInt("is_admin");
+        is_guard = jsonObj.optInt("is_guard");
+
 		return this;
 	}
 

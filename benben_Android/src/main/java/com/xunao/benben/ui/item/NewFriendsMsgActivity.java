@@ -301,28 +301,33 @@ public class NewFriendsMsgActivity extends BaseActivity {
 				addFriend.setText("已同意");
 				addFriend.setBackgroundResource(R.drawable.but_bg_public_agree);
 				switch (item.getClassType()) {
-				case PublicMessage.GROUP:
-					item_name.setText(item.getName());
-//					item_content.setText(item.getName() + "请求加入【"
-//							+ item.getNick_name() + "】");
-                    item_content.setText(item.getName() + "同意了您的加群请求");
-                    item_user_name.setText("");
-					break;
-				case PublicMessage.FRIEND:
-                    item_name.setText(item.getNick_name());
-					item_content.setText(item.getReason());
-                    item_user_name.setText("");
-					break;
-                case PublicMessage.Union:
-                    item_name.setText(item.getName());
-                    item_user_name.setText(Html.fromHtml("<u>"+item.getNick_name()+"</u>"));
-                    item_content.setText(item.getReason());
-                    break;
-                case PublicMessage.GROUPCHANGE:
-                    item_name.setText(item.getName());
-                    item_user_name.setText("");
-                    item_content.setText(item.getReason());
-                    break;
+                    case PublicMessage.GROUP:
+                        item_name.setText(item.getName());
+    //					item_content.setText(item.getName() + "请求加入【"
+    //							+ item.getNick_name() + "】");
+                        item_content.setText(item.getName() + "同意了您的加群请求");
+                        item_user_name.setText("");
+                        break;
+                    case PublicMessage.FRIEND:
+                        item_name.setText(item.getNick_name());
+                        item_content.setText(item.getReason());
+                        item_user_name.setText("");
+                        break;
+                    case PublicMessage.Union:
+                        item_name.setText(item.getName());
+                        item_user_name.setText(Html.fromHtml("<u>"+item.getNick_name()+"</u>"));
+                        item_content.setText(item.getReason());
+                        break;
+                    case PublicMessage.GROUPCHANGE:
+                        item_name.setText(item.getName());
+                        item_user_name.setText("");
+                        item_content.setText(item.getReason());
+                        break;
+                    case PublicMessage.ENTERPRISE:
+                        item_name.setText(item.getName());
+                        item_user_name.setText("");
+                        item_content.setText(item.getReason());
+                        break;
 				}
 
 

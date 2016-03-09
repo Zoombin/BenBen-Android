@@ -38,6 +38,8 @@ public class PublicMessage extends BaseBean {
     public static final int GROUPCHANGE = 3;
 	@Transient
 	public static final int NUMBERTRAIN_CHANGE = 6;
+    @Transient
+    public static final int ENTERPRISE = 7;
 	@Id
 	private int id;
 	private int sid;

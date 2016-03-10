@@ -180,6 +180,13 @@ public class ActivityOrderCheck extends BaseActivity implements View.OnClickList
                 AnimFinsh();
             }
         });
+
+        setOnRightClickLinester(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startAnimActivity(ActivityOrderCheckRecord.class);
+            }
+        });
     }
 
     @Override

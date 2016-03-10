@@ -29,6 +29,9 @@ public class Enterprise extends BaseBean<Enterprise> {
     private int enterprise_apply;
     private int is_admin;
     private int is_guard;
+    private String bulletin;
+    private long created_time;
+    private long update_time;
 
 	public String getId() {
 		return id;
@@ -211,6 +214,30 @@ public class Enterprise extends BaseBean<Enterprise> {
         this.is_guard = is_guard;
     }
 
+    public String getBulletin() {
+        return bulletin;
+    }
+
+    public void setBulletin(String bulletin) {
+        this.bulletin = bulletin;
+    }
+
+    public long getCreated_time() {
+        return created_time;
+    }
+
+    public void setCreated_time(long created_time) {
+        this.created_time = created_time;
+    }
+
+    public long getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(long update_time) {
+        this.update_time = update_time;
+    }
+
     @Override
 	public Enterprise parseJSON(JSONObject jsonObj) throws NetRequestException {
 
@@ -235,6 +262,9 @@ public class Enterprise extends BaseBean<Enterprise> {
         enterprise_apply = jsonObj.optInt("enterprise_apply");
         is_admin = jsonObj.optInt("is_admin");
         is_guard = jsonObj.optInt("is_guard");
+        bulletin = jsonObj.optString("bulletin");
+        created_time = jsonObj.optLong("created_time");
+        update_time = jsonObj.optLong("update_time");
 
 		return this;
 	}

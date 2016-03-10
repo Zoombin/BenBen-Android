@@ -722,4 +722,7 @@ public class AndroidConfig {
 
     // 大喇叭
     public static final String CreateBroadcast = "/enterpriseSite/createBroadcast";
+
+    // 积分转换
+    public static final String Exchange = "/splash/Exchange";
 }

@@ -268,6 +268,7 @@
                 android:layout_marginTop="15dip" />
 
             <RelativeLayout
+                android:id="@+id/rl_mall"
                 android:layout_width="fill_parent"
                 android:layout_height="40dip"
                 android:background="@drawable/fragment_private_bg"

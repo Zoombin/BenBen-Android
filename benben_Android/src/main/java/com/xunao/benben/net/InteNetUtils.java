@@ -3331,4 +3331,12 @@ public class InteNetUtils {
         ComPost(AndroidConfig.NETHOST + AndroidConfig.Qr12, hashMap,
                 callBack);
     }
+
+    public void Exchange(String token,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("token", token);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.Exchange, hashMap,
+                callBack);
+    }
 }

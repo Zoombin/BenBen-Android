@@ -938,6 +938,11 @@
         </activity>
 
         <activity
+            android:name="com.xunao.benben.ui.order.ActivityOrderCheckRecord"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
             android:name="com.xunao.benben.ui.account.ActivityAccountAddressManage"
             android:screenOrientation="portrait" >
         </activity>

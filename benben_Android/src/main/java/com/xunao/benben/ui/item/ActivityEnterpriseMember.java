@@ -2,7 +2,9 @@ package com.xunao.benben.ui.item;
 
 import in.srain.cube.image.CubeImageView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,6 +72,7 @@ import com.xunao.benben.bean.PhoneInfo;
 import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.InfoMsgHint;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
+import com.xunao.benben.dialog.InfobulletinHint;
 import com.xunao.benben.dialog.InputDialog;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
@@ -85,6 +88,9 @@ import com.xunao.benben.view.ActionSheet.ActionSheetListener;
 
 public class ActivityEnterpriseMember extends BaseActivity implements
 		OnClickListener, ActionSheetListener {
+    private ImageView com_title_bar_left_bt,com_title_bar_right_bt;
+    private TextView com_title_bar_content,com_title_bar_right_tv;
+
 	private EditText search_edittext;
     private TextView searchName;
 	private LinearLayout ll_seach_icon;
@@ -92,6 +98,8 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 	private ImageView iv_search_content_delect;
 	private String id;
 	private String name;
+    private int origin;
+    private String type;
 	private FloatingGroupExpandableListView listView;
 	private myAdapter adapter;
 	private LinearLayout no_data;
@@ -132,9 +140,13 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 
 	@Override
 	public void initView(Bundle savedInstanceState) {
-		initTitle_Right_Left_bar("通讯录成员", "", "详情",
-				R.drawable.icon_com_title_left, 0);
-
+        com_title_bar_left_bt = (ImageView) findViewById(R.id.com_title_bar_left_bt);
+        com_title_bar_left_bt.setOnClickListener(this);
+        com_title_bar_right_bt = (ImageView) findViewById(R.id.com_title_bar_right_bt);
+        com_title_bar_right_bt.setOnClickListener(this);
+        com_title_bar_content = (TextView) findViewById(R.id.com_title_bar_content);
+        com_title_bar_right_tv = (TextView) findViewById(R.id.com_title_bar_right_tv);
+        com_title_bar_right_tv.setOnClickListener(this);
 		search_edittext = (EditText) findViewById(R.id.search_edittext);
         searchName = (TextView) findViewById(R.id.searchName);
         searchName.setText("搜索其他联系人");
@@ -160,10 +172,12 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 		Intent intent = getIntent();
 		id = intent.getStringExtra("id");
 		name = intent.getStringExtra("name");
-
-		initTitle_Right_Left_bar(name, "", "详情",
-				R.drawable.icon_com_title_left, 0);
-
+        origin = intent.getIntExtra("origin",1);
+        type = intent.getStringExtra("type");
+        com_title_bar_content.setText(name);
+        if(origin==2 && type.equals("1")){
+            com_title_bar_right_bt.setVisibility(View.VISIBLE);
+        }
 
         if (CommonUtils.isNetworkAvailableNoShow(mContext)) {
             showLoding("请稍后...");
@@ -176,20 +190,20 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 
 	@Override
 	public void initLinstener(Bundle savedInstanceState) {
-		setOnLeftClickLinester(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				AnimFinsh();
-			}
-		});
-
-		setOnRightClickLinester(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				startAnimActivityForResult5(ActivityEnterpriseDetail.class,
-						"id", id, "member", eMemberDetails, INVITE_FRIEND);
-			}
-		});
+//		setOnLeftClickLinester(new OnClickListener() {
+//			@Override
+//			public void onClick(View arg0) {
+//				AnimFinsh();
+//			}
+//		});
+//
+//		setOnRightClickLinester(new OnClickListener() {
+//			@Override
+//			public void onClick(View arg0) {
+//				startAnimActivityForResult5(ActivityEnterpriseDetail.class,
+//						"id", id, "member", eMemberDetails, INVITE_FRIEND);
+//			}
+//		});
 
 		search_edittext.setOnClickListener(new OnClickListener() {
 			@Override
@@ -425,6 +439,61 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 	@Override
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
+            case R.id.com_title_bar_left_bt:
+                AnimFinsh();
+                break;
+            case R.id.com_title_bar_right_bt:
+                showLoding("");
+                InteNetUtils.getInstance(mContext).enterprisesDetail(id,
+                        new RequestCallBack<String>() {
+
+                            @Override
+                            public void onSuccess(ResponseInfo<String> arg0) {
+                                dissLoding();
+                                try {
+                                    JSONObject jsonObject = new JSONObject(
+                                            arg0.result);
+                                    JSONObject object = jsonObject
+                                            .optJSONObject("enterprise_info");
+                                    Log.d("ltf","object============="+object);
+                                    Enterprise enterprise = new Enterprise();
+                                    enterprise.parseJSON(object);
+                                    String content="暂无公告";
+                                    if(!enterprise.getBulletin().equals("")){
+                                        content = enterprise.getBulletin();
+                                    }
+                                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                    Date date = new Date(enterprise.getUpdate_time()*1000);
+                                    final InfobulletinHint hint = new InfobulletinHint(
+                                            mContext, R.style.MyDialog1);
+                                    hint.setContent(content,format.format(date));
+                                    hint.show();
+                                    hint.setOKListener(new OnClickListener() {
+
+                                        @Override
+                                        public void onClick(View v) {
+                                            hint.dismiss();
+                                        }
+                                    });
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(HttpException arg0, String arg1) {
+                                dissLoding();
+                                ToastUtils.Errortoast(mContext, "获取公告失败!");
+                            }
+                        });
+
+
+                break;
+            case R.id.com_title_bar_right_tv:
+                startAnimActivityForResult5(ActivityEnterpriseDetail.class,
+						"id", id, "member", eMemberDetails, INVITE_FRIEND);
+                break;
+
 		case R.id.iv_search_content_delect:
 			iv_search_content_delect.setVisibility(View.GONE);
 			ll_seach_icon.setVisibility(View.VISIBLE);

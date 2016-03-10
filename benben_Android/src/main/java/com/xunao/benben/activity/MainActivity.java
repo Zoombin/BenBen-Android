@@ -365,6 +365,18 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
             ToastUtils.Errortoast(mContext, "网络不可用!");
         }
 
+        InteNetUtils.getInstance(mContext).Exchange(user.getToken(), new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+
+            }
+        });
+
 		if (savedInstanceState != null
 				&& savedInstanceState.getBoolean(Constant.ACCOUNT_REMOVED,
 						false)) {

@@ -344,9 +344,13 @@ public class ActivityEnterprisesContacts extends BaseActivity implements ActionS
 
 						hint.show();
 					}else{
-						startAnimActivity2Obj(ActivityEnterpriseMember.class, "id",
-								enterprises.get(position).getId(), "name",
-								enterprises.get(position).getName());
+                        Intent intent = new Intent(mContext, ActivityEnterpriseMember.class);
+                        intent.putExtra("id", enterprises.get(position).getId());
+                        intent.putExtra("name", enterprises.get(position).getName());
+                        intent.putExtra("origin", enterprises.get(position).getOrigin());
+                        intent.putExtra("type", enterprises.get(position).getType());
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 					}
 
 

@@ -1,6 +1,7 @@
 package com.xunao.benben.ui.account;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +14,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
+import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.ActivityMyWeb;
 import com.xunao.benben.ui.auction.ActivityTopAuctionNotice;
 import com.xunao.benben.ui.order.ActivityBusinessOrder;
 import com.xunao.benben.ui.order.ActivityMyOrder;
@@ -34,7 +37,7 @@ public class ActivityMyAccount extends BaseActivity implements View.OnClickListe
     private TextView tv_fee;
     private LinearLayout ll_my_order,ll_collection;
     private TextView tv_my_order,tv_my_collection;
-    private RelativeLayout rl_business_order;
+    private RelativeLayout rl_business_order,rl_mall;
     private int[] rankTypes = {R.drawable.icon_rating_select1,R.drawable.icon_rating_select2,R.drawable.icon_rating_select3,R.drawable.icon_rating_select4};
     private String fee="0.00";
     private RelativeLayout rl_auction;
@@ -66,6 +69,8 @@ public class ActivityMyAccount extends BaseActivity implements View.OnClickListe
         rl_business_order.setOnClickListener(this);
         rl_auction = (RelativeLayout) findViewById(R.id.rl_auction);
         rl_auction.setOnClickListener(this);
+        rl_mall = (RelativeLayout) findViewById(R.id.rl_mall);
+        rl_mall.setOnClickListener(this);
     }
 
     @Override
@@ -168,6 +173,12 @@ public class ActivityMyAccount extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.rl_auction:
                 startAnimActivity(ActivityTopAuctionNotice.class);
+                break;
+            case R.id.rl_mall:
+                Intent intent = new Intent(mContext, ActivityMyWeb.class);
+                intent.putExtra("title", "奔犇商场");
+                intent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService?token="+user.getToken());
+                startActivity(intent);
                 break;
         }
     }

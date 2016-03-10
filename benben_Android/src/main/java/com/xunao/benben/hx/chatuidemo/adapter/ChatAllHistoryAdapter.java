@@ -28,6 +28,7 @@ import u.aly.cp;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Spannable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,7 +170,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<BenbenEMConversation> {
 				
 				// 群聊消息，显示群聊头像
 				holder.avatar.setTag(R.string.type, "group");
-				holder.avatar.setBackgroundResource(R.drawable.ic_group_poster);
+				holder.avatar.setImageResource(R.drawable.ic_group_poster);
 				TalkGroup contactsGroup = mCrashApplication.mTalkGroupMap
 						.get(username);
 				
@@ -254,9 +255,10 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<BenbenEMConversation> {
 
 			} else {
 				// 本地或者服务器获取用户详情，以用来显示头像和nick
-				holder.avatar.setBackgroundResource(R.drawable.default_face);
+				holder.avatar.setImageResource(R.drawable.default_face);
 				holder.avatar.setTag(R.string.type, "default");
 				contacts = mCrashApplication.mContactsMap.get(username);
+                Log.d("ltf","contacts============="+contacts);
 				if (contacts != null) {
 					CommonUtils.startImageLoader(cubeimageLoader,
 							contacts.getPoster(), holder.avatar);
@@ -264,6 +266,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<BenbenEMConversation> {
 					holder.name.setText(contacts.getName());
 				} else {
 					ContactsTemp contactsTemp = mContactsTempMap.get(username);
+                    Log.d("ltf","contactsTemp============="+contactsTemp);
 					if (contactsTemp != null) {
 						CommonUtils.startImageLoader(cubeimageLoader,
 								contactsTemp.getPoster(), holder.avatar);
@@ -289,12 +292,14 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<BenbenEMConversation> {
 													contacts.parseJSONSingle(jsonObject);
 													mContactsTempMap.put(
 															username, contacts);
-
-													CommonUtils
-															.startImageLoader(
-																	cubeimageLoader,
-																	contacts.getPoster(),
-																	holder.avatar);
+                                                    Log.d("ltf","getPoster============="+contacts.getPoster());
+                                                    if(!contacts.getPoster().equals("")) {
+                                                        CommonUtils
+                                                                .startImageLoader(
+                                                                        cubeimageLoader,
+                                                                        contacts.getPoster(),
+                                                                        holder.avatar);
+                                                    }
 
 													holder.name
 															.setText(contacts
@@ -341,28 +346,34 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<BenbenEMConversation> {
 
 			if (conversation.getMsgCount() != 0) {
 				// 把最后一条消息的内容作为item的message内容
-
-
 				EMMessage lastMessage = conversation.getLastMessage();
                 holder.tv_union_type.setVisibility(View.GONE);
                 if(String.valueOf(holder.name.getText()).equals("")){
-                    String img= lastMessage.getStringAttribute("leg_poster","");
-                    CommonUtils.startImageLoader(cubeimageLoader,img, holder.avatar);
                     String leg_type= lastMessage.getStringAttribute("leg_type","");
                     holder.tv_union_type.setVisibility(View.VISIBLE);
                     if(leg_type.equals("2")){
+                        String img= lastMessage.getStringAttribute("leg_poster","");
+                        CommonUtils.startImageLoader(cubeimageLoader,img, holder.avatar);
                         holder.name.setText(lastMessage.getFrom());
                         holder.tv_union_type.setVisibility(View.VISIBLE);
                         holder.tv_union_type.setText("英雄");
                         holder.tv_union_type.setTextColor(Color.rgb(33, 207, 213));
                         holder.tv_union_type.setBackgroundResource(R.drawable.textview_friend_union_2);
                     }else if(leg_type.equals("1")){
+                        String img= lastMessage.getStringAttribute("leg_poster","");
+                        CommonUtils.startImageLoader(cubeimageLoader,img, holder.avatar);
                         holder.name.setText(lastMessage.getFrom());
                         holder.tv_union_type.setVisibility(View.VISIBLE);
                         holder.tv_union_type.setText("工作");
                         holder.tv_union_type.setTextColor(Color.rgb(233,81,135));
                         holder.tv_union_type.setBackgroundResource(R.drawable.textview_friend_union_1);
                     }else{
+                        String enterprise_id= lastMessage.getStringAttribute("enterprise_id","");
+                        if(!enterprise_id.equals("")){
+                            holder.avatar.setImageResource(R.drawable.icon_contacts_zqtxl);
+                            holder.name.setText(lastMessage.getFrom());
+                        }
+
                         holder.tv_union_type.setVisibility(View.GONE);
                     }
                 }

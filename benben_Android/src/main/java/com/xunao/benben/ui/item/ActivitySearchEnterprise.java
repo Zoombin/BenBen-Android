@@ -305,6 +305,8 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 			TextView tv_add = ViewHolderUtil.get(convertView, R.id.tv_add);
             ImageView iv_tag = ViewHolderUtil.get(convertView,
                     R.id.iv_tag);
+            TextView tv_introduce = ViewHolderUtil.get(convertView, R.id.tv_introduce);
+
 
             if(enterprises.get(position).getTag().equals("东阳百姓网")){
                 iv_tag.setImageResource(R.drawable.icon_enterprises_baixing);
@@ -546,6 +548,30 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 					}
 				}
 			});
+
+            tv_introduce.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final Enterprise enterprise = enterprises.get(position);
+                    String content = "暂无简介";
+                    if(!enterprise.getDescription().equals("")){
+                        content = enterprise.getDescription();
+                    }
+
+                    final InfoSimpleMsgHint hint = new InfoSimpleMsgHint(
+                            mContext, R.style.MyDialog1);
+                    hint.setContent(content);
+                    hint.show();
+                    hint.setOKListener(new OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            hint.dismiss();
+                        }
+                    });
+
+                }
+            });
 			return convertView;
 		}
 	}

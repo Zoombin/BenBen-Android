@@ -89,6 +89,7 @@ import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.groupbuy.ActivityGroupBuyDetail;
 import com.xunao.benben.ui.item.ActivityChatPicSet;
 import com.xunao.benben.ui.item.ActivityContactsInfo;
+import com.xunao.benben.ui.item.ActivityEnterpriseDetail;
 import com.xunao.benben.ui.item.ActivityFriendUnionDetail;
 import com.xunao.benben.ui.item.ActivityMyNumberTrainDetail;
 import com.xunao.benben.ui.item.ActivityNumberTrainDetail;
@@ -757,9 +758,14 @@ public class MessageAdapter extends BaseAdapter {
 							CommonUtils.startImageLoader(cubeImageLoader,
 									findFirst.getPoster(), holder.head_iv);
 						}else{
-                            String img = message.getStringAttribute("leg_poster","");
-                            CommonUtils.startImageLoader(cubeImageLoader,
-                                    img, holder.head_iv);
+                            String enterprise_id= message.getStringAttribute("enterprise_id","");
+                            if(!enterprise_id.equals("")){
+                                holder.head_iv.setImageResource(R.drawable.icon_contacts_zqtxl);
+                            }else {
+                                String img = message.getStringAttribute("leg_poster", "");
+                                CommonUtils.startImageLoader(cubeImageLoader,
+                                        img, holder.head_iv);
+                            }
                         }
 					} catch (DbException e) {
 						// TODO Auto-generated catch block
@@ -916,7 +922,20 @@ public class MessageAdapter extends BaseAdapter {
 					// R.anim.in_from_right, R.anim.out_to_left);
 					// } else {
                     String leg_id = message.getStringAttribute("leg_id","");
-                    if(leg_id.equals("")) {
+                    String enterprise_id= message.getStringAttribute("enterprise_id","");
+                    if(!leg_id.equals("")) {
+                        Intent intentUnion = new Intent(context, ActivityFriendUnionDetail.class);
+                        ((BaseActivity) context).overridePendingTransition(R.anim.in_from_right,
+                                R.anim.out_to_left);
+                        intentUnion.putExtra("legid", leg_id);
+                        ((BaseActivity) context).startActivityForResult(intentUnion, AndroidConfig.ContactsFragmentRequestCode);
+                    }else if(!enterprise_id.equals("")) {
+                        Intent intent= new Intent(context, ActivityEnterpriseDetail.class);
+                        ((BaseActivity) context).overridePendingTransition(R.anim.in_from_right,
+                                R.anim.out_to_left);
+                        intent.putExtra("id", enterprise_id);
+                        ((BaseActivity) context).startActivityForResult(intent, AndroidConfig.ContactsFragmentRequestCode);
+                    }else{
                         Intent intent = new Intent(context,
                                 ActivityContactsInfo.class);
                         intent.putExtra("username", name);
@@ -924,13 +943,23 @@ public class MessageAdapter extends BaseAdapter {
                                 AndroidConfig.ContactsFragmentRequestCode);
                         ((BaseActivity) context).overridePendingTransition(
                                 R.anim.in_from_right, R.anim.out_to_left);
-                    }else{
-                        Intent intentUnion = new Intent(context, ActivityFriendUnionDetail.class);
-                        ((BaseActivity) context).overridePendingTransition(R.anim.in_from_right,
-                                R.anim.out_to_left);
-                        intentUnion.putExtra("legid", leg_id);
-                        ((BaseActivity) context).startActivityForResult(intentUnion, AndroidConfig.ContactsFragmentRequestCode);
                     }
+
+//                    if(leg_id.equals("")) {
+//                        Intent intent = new Intent(context,
+//                                ActivityContactsInfo.class);
+//                        intent.putExtra("username", name);
+//                        ((BaseActivity) context).startActivityForResult(intent,
+//                                AndroidConfig.ContactsFragmentRequestCode);
+//                        ((BaseActivity) context).overridePendingTransition(
+//                                R.anim.in_from_right, R.anim.out_to_left);
+//                    }else{
+//                        Intent intentUnion = new Intent(context, ActivityFriendUnionDetail.class);
+//                        ((BaseActivity) context).overridePendingTransition(R.anim.in_from_right,
+//                                R.anim.out_to_left);
+//                        intentUnion.putExtra("legid", leg_id);
+//                        ((BaseActivity) context).startActivityForResult(intentUnion, AndroidConfig.ContactsFragmentRequestCode);
+//                    }
 				}
 
 				// }

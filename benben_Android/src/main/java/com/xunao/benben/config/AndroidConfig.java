@@ -725,4 +725,16 @@ public class AndroidConfig {
 
     // 积分转换
     public static final String Exchange = "/splash/Exchange";
+
+    // 商家查看到店付款交易记录
+    public static final String ConsumeRecords = "/order/ConsumeRecords";
+
+    // 保证金页面
+    public static final String SearchGuarantee = "/guarantee/SearchGuarantee";
+
+    // 缴纳保证金
+    public static final String GiveGuarantee = "/guarantee/GiveGuarantee";
+
+    // 解冻保证金
+    public static final String ReleaseGuarantee = "/guarantee/ReleaseGuarantee";
 }

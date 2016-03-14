@@ -35,7 +35,7 @@ import in.srain.cube.image.CubeImageView;
  * Created by ltf on 2015/12/22.
  */
 public class ActivityOrderPayResult extends BaseActivity implements View.OnClickListener {
-    private String order_id;
+    private String order_id,extension_code;
     private Order order;
 
     private TextView tv_order_text1,tv_order_text2;
@@ -99,8 +99,9 @@ public class ActivityOrderPayResult extends BaseActivity implements View.OnClick
     @Override
     public void initDate(Bundle savedInstanceState) {
         order_id = getIntent().getStringExtra("order_id");
+        extension_code = getIntent().getStringExtra("extension_code");
         if(CommonUtils.isNetworkAvailable(mContext)){
-            InteNetUtils.getInstance(mContext).Orderdetail(order_id, mRequestCallBack);
+            InteNetUtils.getInstance(mContext).Orderdetail(order_id,extension_code, mRequestCallBack);
         }else{
             ToastUtils.Infotoast(mContext, "网络不可用");
         }

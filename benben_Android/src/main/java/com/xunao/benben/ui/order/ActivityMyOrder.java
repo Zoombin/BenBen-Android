@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,6 +56,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.srain.cube.image.CubeImageView;
+import in.srain.cube.image.ImageTask;
+import in.srain.cube.image.impl.DefaultImageLoadHandler;
 
 /**
  * Created by ltf on 2015/12/19.
@@ -87,6 +90,53 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.activity_my_oreder);
         brocastReceiver = new NewsBrocastReceiver();
         registerReceiver(brocastReceiver, new IntentFilter("orderRefresh"));
+
+        cubeimageLoader.setImageLoadHandler(new DefaultImageLoadHandler(
+                mContext) {
+            @Override
+            public void onLoading(ImageTask imageTask,
+                                  CubeImageView cubeImageView) {
+                Boolean ispost = (Boolean) cubeImageView
+                        .getTag(R.string.ispost);
+                if (cubeImageView != null) {
+                    if (ispost != null && ispost) {
+                        cubeImageView.setImageResource(R.drawable.bg_buy_no_pic);
+                    } else {
+                        cubeImageView.setImageResource(R.drawable.loading);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onLoadFinish(ImageTask imageTask,
+                                     CubeImageView cubeImageView, BitmapDrawable drawable) {
+                if (cubeImageView != null) {
+                    if (imageTask.getIdentityUrl().equalsIgnoreCase(
+                            (String) cubeImageView.getTag())) {
+
+                        cubeImageView.setVisibility(View.VISIBLE);
+                        cubeImageView.setImageDrawable(drawable);
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onLoadError(ImageTask imageTask,
+                                    CubeImageView imageView, int errorCode) {
+                if (imageView != null) {
+                    Boolean ispost = (Boolean) imageView
+                            .getTag(R.string.ispost);
+                    if (ispost != null && ispost) {
+                        imageView.setImageResource(R.drawable.bg_buy_no_pic);
+                    } else {
+                        imageView.setImageResource(R.drawable.bg_buy_no_pic);
+                    }
+                }
+            }
+        });
     }
 
     class NewsBrocastReceiver extends BroadcastReceiver {
@@ -409,7 +459,9 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                         tv_title_right.setText(order.getPay_name());
                         if (order.getPay_status() == 2) {
                             tv_pay_status.setText("已付款");
-                            tv_apply_refund.setVisibility(View.VISIBLE);
+                            if(order.getExtension_code()!=2) {
+                                tv_apply_refund.setVisibility(View.VISIBLE);
+                            }
                         } else if (order.getPay_status() == 0){
                             if (order.getPay_id() == 3) {
                                 tv_pay_status.setText("需到店付款:" + order.getOrder_amount());
@@ -441,7 +493,9 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                         tv_order_amount.setVisibility(View.VISIBLE);
                         ll_order_operate.setVisibility(View.VISIBLE);
                         if(extension_code!=3 && extension_code!=4 && extension_code!=5) {
-                            tv_apply_refund.setVisibility(View.VISIBLE);
+                            if(order.getExtension_code()!=2) {
+                                tv_apply_refund.setVisibility(View.VISIBLE);
+                            }
                             tv_operate1.setVisibility(View.VISIBLE);
                             tv_operate2.setVisibility(View.VISIBLE);
                         }
@@ -461,7 +515,9 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                         } else if (order.getOrder_status() == 6) {
                             tv_operate3.setText("查看评价");
                         }
-                        tv_operate3.setVisibility(View.VISIBLE);
+                        if(order.getExtension_code()!=2) {
+                            tv_operate3.setVisibility(View.VISIBLE);
+                        }
                     }
                 }else{
                     tv_title_right.setText(order.getPay_name());
@@ -474,6 +530,18 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                         tv_operate2.setVisibility(View.VISIBLE);
                         tv_operate3.setText("确认收货");
                         tv_operate3.setVisibility(View.VISIBLE);
+                    }else if(order.getShipping_status()==2){
+                        if (order.getPay_id() == 1 && extension_code!=3 && extension_code!=4 && extension_code!=5) {
+                            tv_operate2.setVisibility(View.VISIBLE);
+                        }
+                        if (order.getOrder_status() == 5) {
+                            tv_operate3.setText("评价");
+                        } else if (order.getOrder_status() == 6) {
+                            tv_operate3.setText("查看评价");
+                        }
+                        if(order.getExtension_code()!=2) {
+                            tv_operate3.setVisibility(View.VISIBLE);
+                        }
                     }
                     if (order.getBack_status() == 1) {
                         tv_operate4.setText("退款申请中");
@@ -787,8 +855,8 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onClick(View view) {
                         if(extension_code!=3 && extension_code!=4 && extension_code!=5) {
-                            startAnimActivity3Obj(ActivityMyOrderDetail.class,
-                                    "order_id", order.getOrder_id(), "pay_name", order.getPay_name());
+                            startAnimActivity6Obj(ActivityMyOrderDetail.class,
+                                    "order_id", order.getOrder_id(), "pay_name", order.getPay_name(), "extension_code", order.getExtension_code()+"");
                         }
                     }
                 });

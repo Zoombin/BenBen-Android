@@ -153,6 +153,35 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <View
+                android:layout_marginTop="15dip"
+                style="@style/set_item_Line_5" />
+
+            <RelativeLayout
+                android:id="@+id/rl_my_numberttain"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="@drawable/fragment_private_bg"
+                android:clickable="true"
+                android:paddingLeft="25dip"
+                android:paddingRight="15dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="我的号码直通车"
+                    android:textColor="#3c3c3c"
+                    android:textSize="15dip" />
+
+                <ImageView
+                    android:layout_width="14dip"
+                    android:layout_height="18dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right_bar" />
+            </RelativeLayout>
+
             <View style="@style/set_item_Line_5" />
 
             <View
@@ -186,32 +215,6 @@
 
             <View style="@style/set_item_Line_5" />
 
-            <RelativeLayout
-                android:id="@+id/rl_my_numberttain"
-                android:layout_width="fill_parent"
-                android:layout_height="40dip"
-                android:background="@drawable/fragment_private_bg"
-                android:clickable="true"
-                android:paddingLeft="25dip"
-                android:paddingRight="15dip" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="我的号码直通车"
-                    android:textColor="#3c3c3c"
-                    android:textSize="15dip" />
-
-                <ImageView
-                    android:layout_width="14dip"
-                    android:layout_height="18dip"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/icon_right_bar" />
-            </RelativeLayout>
-
-            <View style="@style/set_item_Line_5" />
 
             <RelativeLayout
                 android:id="@+id/rl_myfriend_union"

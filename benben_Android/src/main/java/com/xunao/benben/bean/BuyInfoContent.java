@@ -12,7 +12,7 @@ import com.xunao.benben.exception.NetRequestException;
 public class BuyInfoContent extends BaseBean {
 
 	private ArrayList<QuoteContent> mQuoteContents;
-
+    private ArrayList<PayMethod> payMethods = new ArrayList<>();
 	private String id;
 
 	public String getId() {
@@ -192,6 +192,14 @@ public class BuyInfoContent extends BaseBean {
         this.infoPics = infoPics;
     }
 
+    public ArrayList<PayMethod> getPayMethods() {
+        return payMethods;
+    }
+
+    public void setPayMethods(ArrayList<PayMethod> payMethods) {
+        this.payMethods = payMethods;
+    }
+
     @Override
 	public BuyInfoContent parseJSON(JSONObject jsonObj)
 			throws NetRequestException {
@@ -242,6 +250,20 @@ public class BuyInfoContent extends BaseBean {
                         buyInfoPic = new BuyInfoPic();
                         buyInfoPic.parseJSON(optJSONObject);
                         infoPics.add(buyInfoPic);
+                    }
+                }
+            }
+
+            JSONArray payMethodJSONArray = jsonObj.optJSONArray("pay_methods");
+            if (payMethodJSONArray != null && payMethodJSONArray.length()>0) {
+                int length = payMethodJSONArray.length();
+                PayMethod payMethod = null;
+                for (int i = 0; i < length; i++) {
+                    JSONObject optJSONObject = payMethodJSONArray.optJSONObject(i);
+                    if (optJSONObject != null) {
+                        payMethod = new PayMethod();
+                        payMethod.parseJSON(optJSONObject);
+                        payMethods.add(payMethod);
                     }
                 }
             }

@@ -30,9 +30,16 @@ import com.sitech.oncon.barcode.core.ViewfinderView;
 import com.sitech.oncon.barcode.executor.ResultHandler;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
+import com.xunao.benben.bean.Order;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.dialog.MsgDialog;
+import com.xunao.benben.exception.NetRequestException;
+import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.utils.CommonUtils;
+import com.xunao.benben.utils.ToastUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -201,12 +208,30 @@ public class ActivityOrderCheck extends BaseActivity implements View.OnClickList
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
+        if(jsonObject.optInt("ret_num")==0){
+            try {
+                JSONArray jsonArray = jsonObject.getJSONArray("info");
+                if(jsonArray!=null && jsonArray.length()>0){
+                    Order order = new Order();
+                    order.parseJSON(jsonArray.getJSONObject(0));
+                    startAnimActivity2Obj(ActivityOrderCheckDetail.class,"order",order);
+                }else{
+                    ToastUtils.Infotoast(mContext, "无订单信息");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (NetRequestException e) {
+                e.printStackTrace();
+            }
 
+        }else{
+            ToastUtils.Infotoast(mContext,jsonObject.optString("ret_msg"));
+        }
     }
 
     @Override
     protected void onFailure(HttpException exception, String strMsg) {
-
+        ToastUtils.Infotoast(mContext,"获取订单信息失败");
     }
 
     @Override
@@ -279,7 +304,10 @@ public class ActivityOrderCheck extends BaseActivity implements View.OnClickList
                 tv_order_sn.setText(order_sn);
                 break;
             case R.id.btn_enter:
-                startAnimActivity2Obj(ActivityOrderCheckDetail.class,"order_sn",order_sn);
+//                startAnimActivity2Obj(ActivityOrderCheckDetail.class,"order_sn",order_sn);
+                if(CommonUtils.isNetworkAvailable(mContext)) {
+                    InteNetUtils.getInstance(mContext).Checkorder(order_sn, mRequestCallBack);
+                }
                 break;
         }
     }
@@ -441,7 +469,10 @@ public class ActivityOrderCheck extends BaseActivity implements View.OnClickList
                 });
                 inputDialog.show();
             } else {
-                startAnimActivity2Obj(ActivityOrderCheckDetail.class,"order_sn",url);
+//                startAnimActivity2Obj(ActivityOrderCheckDetail.class,"order_sn",url);
+                if(CommonUtils.isNetworkAvailable(mContext)) {
+                    InteNetUtils.getInstance(mContext).Checkorder(url, mRequestCallBack);
+                }
             }
         }
     }

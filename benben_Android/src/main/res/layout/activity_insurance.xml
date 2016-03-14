@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EBEBEB"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        >
+
+    <include layout="@layout/com_title_bar" />
+
+    <View
+        android:layout_marginTop="15dp"
+        style="@style/set_item_Line_5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保证金余额:"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_insurance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00元"
+                android:textColor="#EE8326"
+                android:textSize="15dp"
+                android:layout_marginTop="5dp"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_release_insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="解冻"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:background="@drawable/green_but"
+            android:layout_marginRight="10dp"
+            />
+
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="缴纳"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:background="@drawable/green_but"
+            />
+
+
+    </LinearLayout>
+
+    <View
+        style="@style/set_item_Line_5"/>
+
+    <LinearLayout
+        android:id="@+id/ll_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="#FFFFFF"
+        android:visibility="gone"
+        >
+
+
+
+        <LinearLayout
+            android:id="@+id/ll_min_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最低额度:"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                />
+
+
+            <CheckBox
+                android:id="@+id/cb_min_money"
+                style="@style/MyCheckboxStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:clickable="false"
+                android:layout_margin="10dp"
+                android:checked="false"
+                />
+
+            <TextView
+                android:id="@+id/tv_min_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000元"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最低额度:"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                android:visibility="invisible"
+                />
+
+
+            <CheckBox
+                android:id="@+id/cb_money"
+                style="@style/MyCheckboxStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:clickable="false"
+                android:layout_margin="10dp"
+                android:checked="false"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义额度"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                />
+
+            <EditText
+                android:id="@+id/edt_money"
+                android:layout_width="wrap_content"
+                android:minWidth="80dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                android:inputType="number"
+                android:textColor="#848484"
+                android:textColorHint="#848484"
+                android:textSize="15dp"
+                android:maxLength="8"
+                android:padding="3dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="元"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_go_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="前往支付"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"
+        android:background="#EE8326"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_rule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="@color/top_bar_color"
+        android:layout_gravity="right"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="10dp"
+        ></TextView>
+</LinearLayout>

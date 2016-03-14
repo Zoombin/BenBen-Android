@@ -47,6 +47,7 @@ public class Order extends BaseBean<Order>{
     private String user_poster;
     private String nick_name;
     private String shipping_sn;
+    private Long consume_time;
 
     @Override
     public JSONObject toJSON() {
@@ -91,6 +92,48 @@ public class Order extends BaseBean<Order>{
         user_poster = jsonObj.optString("user_poster");
         nick_name = jsonObj.optString("nick_name");
         shipping_sn = jsonObj.optString("shipping_sn");
+        consume_time = jsonObj.optLong("consume_time");
+        return this;
+    }
+
+    public Object parseJSON1(JSONObject jsonObj) throws NetRequestException {
+        goods_number = jsonObj.optInt("goods_number");
+        train_id = jsonObj.optString("train_id");
+        goods_name = jsonObj.optString("name");
+        short_name = jsonObj.optString("short_name");
+        order_id = jsonObj.optString("order_id");
+        order_status = jsonObj.optInt("order_status");
+        shipping_fee = jsonObj.optString("shipping_fee");
+        promotion_pic = jsonObj.optString("promotion_pic");
+        promotion_price = jsonObj.optString("promotion_price");
+        promotion_id = jsonObj.optInt("promotion_id");
+        pay_status = jsonObj.optInt("pay_status");
+        goods_amount = jsonObj.optString("goods_amount");
+        order_amount = jsonObj.optString("order_amount");
+        store_pic = jsonObj.optString("store_pic");
+        shipping_status = jsonObj.optInt("shipping_status");
+        order_sn = jsonObj.optString("order_sn");
+        pay_id = jsonObj.optInt("pay_id");
+        pay_name = jsonObj.optString("pay_name");
+        pay_time = jsonObj.optLong("pay_time");
+        add_time = jsonObj.optLong("add_time");
+        confirm_time = jsonObj.optLong("confirm_time");
+        consignee = jsonObj.optString("consignee");
+        mobile = jsonObj.optString("mobile");
+        address = jsonObj.optString("address");
+        back_status = jsonObj.optInt("back_status");
+        back_apply_time = jsonObj.optLong("back_apply_time");
+        back_deal_time = jsonObj.optLong("back_deal_time");
+        extension_code = jsonObj.optInt("extension_code");
+        huanxin_username = jsonObj.optString("huanxin_username");
+        qrcode = jsonObj.optString("qrcode");
+        is_out = jsonObj.optInt("is_out");
+        is_close = jsonObj.optInt("is_close");
+        is_consume = jsonObj.optInt("is_consume");
+        user_poster = jsonObj.optString("user_poster");
+        nick_name = jsonObj.optString("nick_name");
+        shipping_sn = jsonObj.optString("shipping_sn");
+        consume_time = jsonObj.optLong("consume_time");
         return this;
     }
 
@@ -388,5 +431,13 @@ public class Order extends BaseBean<Order>{
 
     public void setShipping_sn(String shipping_sn) {
         this.shipping_sn = shipping_sn;
+    }
+
+    public Long getConsume_time() {
+        return consume_time;
+    }
+
+    public void setConsume_time(Long consume_time) {
+        this.consume_time = consume_time;
     }
 }

@@ -46,6 +46,7 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
     private Button btleftisvip;
     private LinearLayout contentisvip;
     private LinearLayout contentlayout;
+    private TextView tv_vip_num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
         tvtitleisvip = (TextView) findViewById(R.id.tv_title_is_vip);
         btleftisvip = (Button) findViewById(R.id.btleft_is_vip);
         contentisvip = (LinearLayout) findViewById(R.id.content_is_vip);
+        tv_vip_num = (TextView) findViewById(R.id.tv_vip_num);
     }
 
     @Override
@@ -147,6 +149,7 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
                 btleftisgb.setTag(is_gb);
                 if(1 == is_gb){
                     btleftisgb.setText("已开通");
+                    contentispo.setVisibility(View.GONE);
                 }else{
                     btleftisgb.setText("立即开通");
                 }
@@ -158,6 +161,7 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
                 }else{
                     btleftisvip.setText("立即开通");
                 }
+                tv_vip_num.setText("(已开通"+jsonObject.optString("vip_num")+"人)");
             }
         }
     }

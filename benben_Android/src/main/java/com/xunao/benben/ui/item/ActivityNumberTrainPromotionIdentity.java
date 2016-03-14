@@ -29,6 +29,7 @@ import com.xunao.benben.bean.AuthMessage;
 import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.ActivityMyWeb;
 import com.xunao.benben.ui.ActivityWeb;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.CutImageUtils;
@@ -78,7 +79,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
     private Bitmap bitMap;
     private AuthMessage authMessage;
     private FinalBitmap finalBitmap;
-
+    private String from;
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
@@ -126,6 +127,7 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
 
     @Override
     public void initDate(Bundle savedInstanceState) {
+        from = getIntent().getStringExtra("from");
         if (CommonUtils.isNetworkAvailable(mContext)) {
             showLoding("");
             InteNetUtils.getInstance(mContext).Getauth(user.getToken(), new RequestCallBack<String>() {
@@ -222,6 +224,23 @@ public class ActivityNumberTrainPromotionIdentity extends BaseActivity implement
     protected void onSuccess(JSONObject jsonObject) {
         ToastUtils.Infotoast(mContext,"提交审核成功！");
         setResult(RESULT_OK,null);
+
+        Intent intent = new Intent(mContext, ActivityMyWeb.class);
+        intent.putExtra("title", "奔犇商场");
+        intent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService?token="+user.getToken());
+        startActivity(intent);
+//        if(from.equals("promotion")){
+//            Intent intent = new Intent(mContext, ActivityMyWeb.class);
+//            intent.putExtra("title", "促销");
+//            intent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService/serviceDetail?type=0&token="+user.getToken());
+//            startActivity(intent);
+//
+//        }else if(from.equals("groupbuy")){
+//            Intent intent = new Intent(mContext, ActivityMyWeb.class);
+//            intent.putExtra("title", "团购");
+//            intent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService/serviceDetail?type=1&token="+user.getToken());
+//            startActivity(intent);
+//        }
         AnimFinsh();
     }
 

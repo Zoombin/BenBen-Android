@@ -15,9 +15,9 @@ import org.json.JSONObject;
  * Created by ltf on 2016/1/4.
  */
 public class ActivityMyWallet extends BaseActivity implements View.OnClickListener {
-    private RelativeLayout rl_address;
+    private RelativeLayout rl_address,rl_insurance;
     private TextView tv_fee;
-    private TextView tv_income;
+    private TextView tv_income,tv_outcome;
 
     private String fee="0.00";
 
@@ -33,8 +33,12 @@ public class ActivityMyWallet extends BaseActivity implements View.OnClickListen
         tv_fee = (TextView) findViewById(R.id.tv_fee);
         tv_income = (TextView) findViewById(R.id.tv_income);
         tv_income.setOnClickListener(this);
+        tv_outcome = (TextView) findViewById(R.id.tv_outcome);
+        tv_outcome.setOnClickListener(this);
         rl_address = (RelativeLayout) findViewById(R.id.rl_address);
         rl_address.setOnClickListener(this);
+        rl_insurance = (RelativeLayout) findViewById(R.id.rl_insurance);
+        rl_insurance.setOnClickListener(this);
     }
 
     @Override
@@ -79,9 +83,16 @@ public class ActivityMyWallet extends BaseActivity implements View.OnClickListen
             case R.id.tv_income:
                 startAnimActivity2Obj(ActivityMoneyIncome.class,"from","wallet");
                 break;
+            case R.id.tv_outcome:
+                startAnimActivity(ActivityBindAlipay.class);
+                break;
             case R.id.rl_address:
                 startAnimActivity(ActivityAccountAddressManage.class);
                 break;
+            case R.id.rl_insurance:
+                startAnimActivity(ActivityInsurance.class);
+                break;
+
         }
     }
 }

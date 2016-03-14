@@ -19,7 +19,6 @@ import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.bean.User;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.net.InteNetUtils;
-import com.xunao.benben.ui.order.ActivityOrderPayResult;
 import com.xunao.benben.utils.PayResult;
 import com.xunao.benben.utils.PayUtils;
 import com.xunao.benben.utils.ToastUtils;
@@ -115,7 +114,7 @@ public class ActivityMoneyIncome extends BaseActivity implements View.OnClickLis
                     if(fee.equals("")){
                         ToastUtils.Infotoast(mContext,"请输入支付金额");
                     }else{
-                        InteNetUtils.getInstance(mContext).Addorder(40, "", "","","", "", "", "", 1, "快递发货",
+                        InteNetUtils.getInstance(mContext).Addorder("40", "", "","","", "", "", "", "1", "快递发货",
                                 Double.parseDouble(fee), "0",  Double.parseDouble(fee),  Integer.parseInt(fee), 4,mRequestCallBack);
                     }
                 }

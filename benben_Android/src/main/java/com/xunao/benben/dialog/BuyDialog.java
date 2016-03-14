@@ -184,7 +184,7 @@ public class BuyDialog extends AbsDialog {
                         if (CommonUtils.isNetworkAvailable(context)) {
                             String[] images = new String[0];
                             InteNetUtils.getInstance(getContext()).submitBuyPrice(
-                                    buyId, sPrice, sInfo,images,
+                                    buyId, sPrice, sInfo,images,"","",
                                     new RequestCallBack<String>() {
                                         @Override
                                         public void onFailure(HttpException arg0,

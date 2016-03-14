@@ -1,19 +1,29 @@
 package com.xunao.benben.ui.order;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.lidroid.xutils.exception.HttpException;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.bean.Order;
+import com.xunao.benben.exception.NetRequestException;
+import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.utils.CommonUtils;
+import com.xunao.benben.utils.ToastUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +33,7 @@ public class ActivityOrderCheckRecord extends BaseActivity{
     private ListView lv_record;
     private List<Order> orderList = new ArrayList<>();
     private myAdapter adapter;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
@@ -40,13 +51,9 @@ public class ActivityOrderCheckRecord extends BaseActivity{
 
     @Override
     public void initDate(Bundle savedInstanceState) {
-        Order order = new Order();
-        orderList.add(order);
-        Order order1 = new Order();
-        orderList.add(order1);
-        Order order2 = new Order();
-        orderList.add(order2);
-        adapter.notifyDataSetChanged();
+        if(CommonUtils.isNetworkAvailable(mContext)){
+            InteNetUtils.getInstance(mContext).ConsumeRecords(user.getToken(), mRequestCallBack);
+        }
     }
 
     @Override
@@ -71,12 +78,37 @@ public class ActivityOrderCheckRecord extends BaseActivity{
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject============="+jsonObject);
+        if(jsonObject.optInt("ret_num")==0){
+            try {
+                JSONArray jsonArray = jsonObject.getJSONArray("list");
+                if(jsonArray!=null && jsonArray.length()>0){
+                    for(int i=0;i<jsonArray.length();i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        Order order = new Order();
+                        order.parseJSON1(object);
+                        orderList.add(order);
+                    }
+                    adapter.notifyDataSetChanged();
+                }else{
+                    ToastUtils.Infotoast(mContext,"暂无记录");
+                }
 
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (NetRequestException e) {
+                e.printStackTrace();
+            }
+
+        }else{
+            ToastUtils.Infotoast(mContext,jsonObject.optString("ret_msg"));
+        }
     }
 
     @Override
     protected void onFailure(HttpException exception, String strMsg) {
-
+        ToastUtils.Infotoast(mContext,"获取信息失败");
     }
 
 
@@ -103,8 +135,17 @@ public class ActivityOrderCheckRecord extends BaseActivity{
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(
                         R.layout.item_order_check_record, null);
-            }
 
+            }
+            TextView tv_order_sn = (TextView) convertView.findViewById(R.id.tv_order_sn);
+            TextView tv_order_time = (TextView) convertView.findViewById(R.id.tv_order_time);
+            TextView tv_order_name = (TextView) convertView.findViewById(R.id.tv_order_name);
+
+            Order order = orderList.get(position);
+            tv_order_sn.setText("订单号:"+order.getOrder_sn());
+            long consume_time = order.getConsume_time();
+            tv_order_time.setText(simpleDateFormat.format(new Date(consume_time*1000)));
+            tv_order_name.setText("标题:"+order.getGoods_name());
 
             return convertView;
         }

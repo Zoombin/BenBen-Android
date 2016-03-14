@@ -1,9 +1,11 @@
 package com.xunao.benben.ui;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,6 +23,8 @@ import com.xunao.benben.dialog.LodingDialog;
 import com.xunao.benben.utils.ToastUtils;
 
 import org.json.JSONObject;
+
+import java.io.File;
 
 public class ActivityMyWeb extends BaseActivity {
 
@@ -194,7 +198,20 @@ public class ActivityMyWeb extends BaseActivity {
             if (null == mUploadMessage)
                 return;
 
-            Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
+            Uri uri = intent == null || resultCode != RESULT_OK ? null : intent.getData();
+
+            String[] proj = { MediaStore.Images.Media.DATA };
+
+            Cursor actualimagecursor = managedQuery(uri,proj,null,null,null);
+
+            int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+            actualimagecursor.moveToFirst();
+
+            String img_path = actualimagecursor.getString(actual_image_column_index);
+            Uri result = Uri.fromFile(new File(img_path));
+
+
             mUploadMessage.onReceiveValue(result);
             mUploadMessage = null;
         }

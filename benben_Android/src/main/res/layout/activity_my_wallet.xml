@@ -66,6 +66,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_outcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -117,6 +118,7 @@
             style="@style/set_item_Line_5" />
 
         <RelativeLayout
+            android:id="@+id/rl_insurance"
             android:layout_width="fill_parent"
             android:layout_height="40dip"
             android:background="@drawable/fragment_private_bg"

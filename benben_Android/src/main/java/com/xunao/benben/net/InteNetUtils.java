@@ -1470,7 +1470,7 @@ public class InteNetUtils {
 				callBack);
 	}
 
-	public void submitBuyPrice(final int buyId, final String price, final String description, final String[] images,
+	public void submitBuyPrice(final int buyId, final String price, final String description, final String[] images, final String pay_ids, final String shipping_fee,
 			final RequestCallBack<String> requestCallBack) {
 //		HashMap<String, String> hashMap = new HashMap<String, String>();
 //		hashMap.put("key", "android");
@@ -1487,6 +1487,8 @@ public class InteNetUtils {
                 hashMap.put("buyid", buyId + "");
                 hashMap.put("price", price);
                 hashMap.put("description", description);
+                hashMap.put("pay_ids", pay_ids);
+                hashMap.put("shipping_fee", shipping_fee);
                 RequestParams params = new RequestParams();
                 int length = images.length;
                 for (int i = 1; i <= length; i++) {
@@ -1543,7 +1545,7 @@ public class InteNetUtils {
 
 
 	public void sendBuyInfo(final String sTitle, final String sInfo, final String sNum,
-			final String sTime, final String[] areas,final String[] images,final String industry,
+			final String sTime, final String[] areas,final String[] images,final String industry,final String pay_ids,
 			final RequestCallBack<String> mRequestCallBack) {
         new Thread(new Runnable() {
             @Override
@@ -1567,6 +1569,7 @@ public class InteNetUtils {
                     hashMap.put("street", areas[3]);
                 }
                 hashMap.put("industry", industry);
+                hashMap.put("pay_ids", pay_ids);
                 RequestParams params = new RequestParams();
                 int length = images.length;
                 for (int i = 1; i <= length; i++) {
@@ -3026,11 +3029,11 @@ public class InteNetUtils {
                 requestCallBack);
     }
 
-    public void Addorder(int promotion_id,String consignee,String province,String city,String district,String street,
-                         String address,String mobile,int pay_id,String pay_name,double goods_amount,String shipping_fee,double order_amount,int goods_number,int extension_code,RequestCallBack<String> requestCallBack) {
+    public void Addorder(String promotion_id,String consignee,String province,String city,String district,String street,
+                         String address,String mobile,String pay_id,String pay_name,double goods_amount,String shipping_fee,double order_amount,int goods_number,int extension_code,RequestCallBack<String> requestCallBack) {
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("key", "android");
-        hashMap.put("promotion_id", promotion_id+"");
+        hashMap.put("promotion_id", promotion_id);
         hashMap.put("consignee", consignee);
         hashMap.put("province", province);
         hashMap.put("city", city);
@@ -3038,7 +3041,7 @@ public class InteNetUtils {
         hashMap.put("street", street);
         hashMap.put("address", address);
         hashMap.put("mobile", mobile);
-        hashMap.put("pay_id", pay_id+"");
+        hashMap.put("pay_id", pay_id);
         hashMap.put("pay_name", pay_name);
         hashMap.put("goods_amount", goods_amount+"");
         hashMap.put("shipping_fee", shipping_fee);
@@ -3069,10 +3072,11 @@ public class InteNetUtils {
                 requestCallBack);
     }
 
-    public void Orderdetail(String order_id,RequestCallBack<String> requestCallBack) {
+    public void Orderdetail(String order_id,String extension_code,RequestCallBack<String> requestCallBack) {
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("key", "android");
         hashMap.put("order_id", order_id);
+        hashMap.put("extension_code", extension_code);
         ComPost(AndroidConfig.NETHOST + AndroidConfig.Orderdetail, hashMap,
                 requestCallBack);
     }
@@ -3135,10 +3139,12 @@ public class InteNetUtils {
                 requestCallBack);
     }
 
-    public void Storderdetail(String order_id,RequestCallBack<String> requestCallBack) {
+    public void Storderdetail(String order_id,String extension_code,RequestCallBack<String> requestCallBack) {
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("key", "android");
         hashMap.put("order_id", order_id);
+        hashMap.put("extension_code", extension_code);
+
         ComPost(AndroidConfig.NETHOST + AndroidConfig.Storderdetail, hashMap,
                 requestCallBack);
     }
@@ -3337,6 +3343,39 @@ public class InteNetUtils {
         hashMap.put("key", "android");
         hashMap.put("token", token);
         ComPost(AndroidConfig.NETHOST + AndroidConfig.Exchange, hashMap,
+                callBack);
+    }
+
+
+    public void ConsumeRecords(String token,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("token", token);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.ConsumeRecords, hashMap,
+                callBack);
+    }
+
+    public void SearchGuarantee(String token,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("token", token);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.SearchGuarantee, hashMap,
+                callBack);
+    }
+
+    public void GiveGuarantee(String industry,String guarantee,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("industry", industry);
+        hashMap.put("guarantee", guarantee);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.GiveGuarantee, hashMap,
+                callBack);
+    }
+
+    public void ReleaseGuarantee(RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.ReleaseGuarantee, hashMap,
                 callBack);
     }
 }

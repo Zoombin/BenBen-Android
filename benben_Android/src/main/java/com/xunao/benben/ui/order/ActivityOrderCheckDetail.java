@@ -27,7 +27,6 @@ import in.srain.cube.image.CubeImageView;
  * Created by ltf on 2015/12/24.
  */
 public class ActivityOrderCheckDetail extends BaseActivity implements View.OnClickListener {
-    private String order_sn;
     private Order order;
 
     private TextView tv_order_sn;
@@ -61,12 +60,13 @@ public class ActivityOrderCheckDetail extends BaseActivity implements View.OnCli
 
     @Override
     public void initDate(Bundle savedInstanceState) {
-        order_sn = getIntent().getStringExtra("order_sn");
-        if(CommonUtils.isNetworkAvailable(mContext)){
-            InteNetUtils.getInstance(mContext).Checkorder(order_sn, mRequestCallBack);
-        }else{
-            ToastUtils.Infotoast(mContext, "网络不可用");
-        }
+        order = (Order) getIntent().getSerializableExtra("order");
+        initOrder();
+//        if(CommonUtils.isNetworkAvailable(mContext)){
+//            InteNetUtils.getInstance(mContext).Checkorder(order_sn, mRequestCallBack);
+//        }else{
+//            ToastUtils.Infotoast(mContext, "网络不可用");
+//        }
     }
 
     @Override

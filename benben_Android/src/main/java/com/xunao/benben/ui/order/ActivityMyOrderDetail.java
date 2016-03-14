@@ -47,6 +47,7 @@ import in.srain.cube.image.CubeImageView;
 public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickListener {
     private String order_id;
     private String pay_name;
+    private String extension_code;
     private Order order;
 
     private LinearLayout ll_address;
@@ -177,8 +178,9 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
     @Override
     public void initDate(Bundle savedInstanceState) {
         order_id = getIntent().getStringExtra("order_id");
+        extension_code = getIntent().getStringExtra("extension_code");
         if(CommonUtils.isNetworkAvailable(mContext)){
-            InteNetUtils.getInstance(mContext).Orderdetail(order_id, mRequestCallBack);
+            InteNetUtils.getInstance(mContext).Orderdetail(order_id,extension_code, mRequestCallBack);
         }else{
             ToastUtils.Infotoast(mContext, "网络不可用");
         }
@@ -269,7 +271,9 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
                     if(pay_id==1) {
                         tv_order_fee.setText("(含邮费" + order.getShipping_fee() + "元)");
                     }
-                    tv_apply_refund.setVisibility(View.VISIBLE);
+                    if(order.getExtension_code()!=2) {
+                        tv_apply_refund.setVisibility(View.VISIBLE);
+                    }
                 } else if (order.getPay_status() == 0) {
                     Date date = new Date(order.getAdd_time()*1000);
                     tv_order_time.setText("下单时间:"+simpleDateFormat.format(date));
@@ -309,7 +313,9 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
                 tv_order_time.setText("付款时间:"+simpleDateFormat.format(date));
                 tv_order_amount.setText("实付款:" + order.getOrder_amount() + "元");
                 tv_order_fee.setText("(含邮费" + order.getShipping_fee() + "元)");
-                tv_apply_refund.setVisibility(View.VISIBLE);
+                if(order.getExtension_code()!=2) {
+                    tv_apply_refund.setVisibility(View.VISIBLE);
+                }
                 ll_order_operate.setVisibility(View.VISIBLE);
                 tv_operate1.setVisibility(View.VISIBLE);
                 tv_operate2.setVisibility(View.VISIBLE);
@@ -332,7 +338,9 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
                 } else if (order.getOrder_status() == 6) {
                     tv_operate3.setText("查看评价");
                 }
-                tv_operate3.setVisibility(View.VISIBLE);
+                if(order.getExtension_code()!=2) {
+                    tv_operate3.setVisibility(View.VISIBLE);
+                }
             }
         }else{
             Date date = new Date(order.getPay_time()*1000);
@@ -347,6 +355,18 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
                 tv_operate2.setVisibility(View.VISIBLE);
                 tv_operate3.setText("确认收货");
                 tv_operate3.setVisibility(View.VISIBLE);
+            }else if(order.getShipping_status()==2){
+                ll_order_operate.setVisibility(View.VISIBLE);
+                tv_order_status.setVisibility(View.VISIBLE);
+                tv_order_status.setText("交易成功");
+                if (order.getOrder_status() == 5) {
+                    tv_operate3.setText("评价");
+                } else if (order.getOrder_status() == 6) {
+                    tv_operate3.setText("查看评价");
+                }
+                if(order.getExtension_code()!=2) {
+                    tv_operate3.setVisibility(View.VISIBLE);
+                }
             }
             tv_order_status.setVisibility(View.VISIBLE);
             if (order.getBack_status() == 1) {
@@ -457,6 +477,8 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
                             intent.putExtra("payPrice", order.getOrder_amount());
                             intent.putExtra("shipping_fee", order.getShipping_fee());
                             intent.putExtra("name", order.getGoods_name());
+                            intent.putExtra("extension_code", order.getExtension_code());
+
                             startActivity(intent);
                             overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                             AnimFinsh();

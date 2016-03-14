@@ -699,11 +699,11 @@ public class ActivityGroupBuyOperate extends BaseActivity implements View.OnClic
         }
         String description = String.valueOf(edt_description.getText()).trim();
         if (TextUtils.isEmpty(description)) {
-            ToastUtils.Errortoast(mContext, "团购品介绍不可为空!");
+            ToastUtils.Errortoast(mContext, "文字介绍不可为空!");
             return;
         }
-        if (!CommonUtils.StringIsSurpass2(description, 1, 100)) {
-            ToastUtils.Errortoast(mContext, "团购品介绍限制在1至100个字之内!");
+        if (!CommonUtils.StringIsSurpass2(description, 1, 500)) {
+            ToastUtils.Errortoast(mContext, "文字介绍限制在1至500个字之内!");
             return;
         }
         String mustknow = String.valueOf(edt_rule.getText()).trim();
@@ -808,11 +808,11 @@ public class ActivityGroupBuyOperate extends BaseActivity implements View.OnClic
         }
         String description = String.valueOf(edt_description.getText()).trim();
         if (TextUtils.isEmpty(description)) {
-            ToastUtils.Errortoast(mContext, "团购品介绍不可为空!");
+            ToastUtils.Errortoast(mContext, "文字介绍不可为空!");
             return;
         }
-        if (!CommonUtils.StringIsSurpass2(description, 1, 100)) {
-            ToastUtils.Errortoast(mContext, "团购品介绍限制在1至100个字之内!");
+        if (!CommonUtils.StringIsSurpass2(description, 1, 500)) {
+            ToastUtils.Errortoast(mContext, "文字介绍限制在1至500个字之内!");
             return;
         }
         String mustknow = String.valueOf(edt_rule.getText()).trim();

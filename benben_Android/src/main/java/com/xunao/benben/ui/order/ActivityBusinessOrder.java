@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,6 +47,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.srain.cube.image.CubeImageView;
+import in.srain.cube.image.ImageTask;
+import in.srain.cube.image.impl.DefaultImageLoadHandler;
 
 /**
  * Created by ltf on 2015/12/24.
@@ -78,6 +81,53 @@ public class ActivityBusinessOrder extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_business_oreder);
         brocastReceiver = new NewsBrocastReceiver();
         registerReceiver(brocastReceiver, new IntentFilter("businessOrderRefresh"));
+
+        cubeimageLoader.setImageLoadHandler(new DefaultImageLoadHandler(
+                mContext) {
+            @Override
+            public void onLoading(ImageTask imageTask,
+                                  CubeImageView cubeImageView) {
+                Boolean ispost = (Boolean) cubeImageView
+                        .getTag(R.string.ispost);
+                if (cubeImageView != null) {
+                    if (ispost != null && ispost) {
+                        cubeImageView.setImageResource(R.drawable.bg_buy_no_pic);
+                    } else {
+                        cubeImageView.setImageResource(R.drawable.loading);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onLoadFinish(ImageTask imageTask,
+                                     CubeImageView cubeImageView, BitmapDrawable drawable) {
+                if (cubeImageView != null) {
+                    if (imageTask.getIdentityUrl().equalsIgnoreCase(
+                            (String) cubeImageView.getTag())) {
+
+                        cubeImageView.setVisibility(View.VISIBLE);
+                        cubeImageView.setImageDrawable(drawable);
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onLoadError(ImageTask imageTask,
+                                    CubeImageView imageView, int errorCode) {
+                if (imageView != null) {
+                    Boolean ispost = (Boolean) imageView
+                            .getTag(R.string.ispost);
+                    if (ispost != null && ispost) {
+                        imageView.setImageResource(R.drawable.bg_buy_no_pic);
+                    } else {
+                        imageView.setImageResource(R.drawable.bg_buy_no_pic);
+                    }
+                }
+            }
+        });
     }
 
     class NewsBrocastReceiver extends BroadcastReceiver {
@@ -407,7 +457,7 @@ public class ActivityBusinessOrder extends BaseActivity implements View.OnClickL
                             tv_operate1.setVisibility(View.VISIBLE);
                         }
                         ll_order_operate.setVisibility(View.VISIBLE);
-                        if (order.getOrder_status() == 5 || order.getOrder_status() == 6) {
+                        if (order.getExtension_code()!=2 &&(order.getOrder_status() == 5 || order.getOrder_status() == 6)) {
                             tv_operate2.setText("评价");
                             tv_operate2.setVisibility(View.VISIBLE);
                             tv_operate6.setVisibility(View.VISIBLE);
@@ -623,8 +673,8 @@ public class ActivityBusinessOrder extends BaseActivity implements View.OnClickL
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startAnimActivity3Obj(ActivityBusinessOrderDetail.class,
-                                "order_id", order.getOrder_id(),"pay_name",order.getPay_name());
+                        startAnimActivity6Obj(ActivityBusinessOrderDetail.class,
+                                "order_id", order.getOrder_id(),"pay_name",order.getPay_name(),"extension_code",order.getExtension_code()+"");
                     }
                 });
 

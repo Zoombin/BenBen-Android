@@ -22,10 +22,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
@@ -34,6 +37,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.base.IA.CrashApplication;
+import com.xunao.benben.bean.PayMethod;
 import com.xunao.benben.bean.SuccessMsg;
 import com.xunao.benben.bean.User;
 import com.xunao.benben.config.AndroidConfig;
@@ -53,10 +57,13 @@ import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.view.ActionSheet;
 import com.xunao.benben.view.MyTextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.SoftReference;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ltf on 2016/1/22.
@@ -65,7 +72,7 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
     private int buyId=0;
 
     private MyTextView name;
-    private EditText price,fee;
+    private EditText price;
     private EditText info;
     private Button submit;
 
@@ -73,6 +80,13 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
     private GridAdapter adapter;
     public static Bitmap bimap;
     private static final int TAKE_PICTURE = 0x000001;
+
+    private ListView lv_pay_method;
+    private MyAdapter payMethodAdapter;
+    private List<PayMethod> payMethods = new ArrayList<>();
+    private int payType=0;
+    private String payName="";
+    private String shipping_fee="0";
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
@@ -94,7 +108,6 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
         initTitle_Right_Left_bar("我的报价", "", "",R.drawable.icon_com_title_left, 0);
         name = (MyTextView) findViewById(R.id.name);
         price = (EditText) findViewById(R.id.price);
-        fee = (EditText) findViewById(R.id.fee);
         info = (EditText) findViewById(R.id.info);
         submit = (Button) findViewById(R.id.submit);
         submit.setOnClickListener(this);
@@ -123,6 +136,10 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
             }
 
         });
+
+        lv_pay_method = (ListView) findViewById(R.id.lv_pay_method);
+        payMethodAdapter = new MyAdapter();
+        lv_pay_method.setAdapter(payMethodAdapter);
     }
 
     @Override
@@ -136,6 +153,8 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        payMethods = (ArrayList<PayMethod>) getIntent().getSerializableExtra("payMethods");
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -190,48 +209,6 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
             }
         });
 
-        fee.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
-                if (s.toString().contains(".")) {
-                    if (s.length() - 1 - s.toString().indexOf(".") > 2) {
-                        s = s.toString().subSequence(0,
-                                s.toString().indexOf(".") + 3);
-
-                        fee.setText(s);
-                        fee.setSelection(s.length());
-                    }
-
-                    if(s.toString().indexOf(".") > 8){
-                        //	ToastUtils.Errortoast(context, s.toString().indexOf(".") +"");
-                        s = s.toString().subSequence(1,
-                                s.toString().length());
-                        fee.setText(s);
-                        //price.setSelection(s.length());
-                    }
-                }else{
-                    if(s.length() > 8){
-                        s = s.toString().subSequence(0,
-                                8);
-                        fee.setText(s);
-                        fee.setSelection(s.length());
-                    }
-//                    charSequence = s;
-
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-
-            }
-        });
     }
 
     // 显示拍照选照片 弹窗
@@ -301,7 +278,6 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void onFailure(HttpException exception, String strMsg) {
-
     }
 
     @Override
@@ -318,6 +294,10 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
                 }
                 if (!CommonUtils.StringIsSurpass2(sInfo, 0, 200)) {
                     ToastUtils.Errortoast(mContext, "说明限制在200个字之间!");
+                    return;
+                }
+                if(payType == 0){
+                    ToastUtils.Errortoast(mContext, "请选择支付方式!");
                     return;
                 }
 
@@ -341,7 +321,7 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
                             }
 
                             InteNetUtils.getInstance(mContext).submitBuyPrice(
-                                    buyId, sPrice, sInfo,images,
+                                    buyId, sPrice, sInfo,images,payType+"",shipping_fee,
                                     new RequestCallBack<String>() {
                                         @Override
                                         public void onFailure(HttpException arg0,
@@ -358,10 +338,6 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
                                                 Log.d("ltf","jsonObject=============="+jsonObject);
                                                 SuccessMsg msg = new SuccessMsg();
                                                 msg.parseJSON(jsonObject);
-//                                                if (successLinstener != null) {
-//                                                    successLinstener.onSuccess(sName,
-//                                                            sPrice, sInfo);
-//                                                }
                                                 ToastUtils.Infotoast(mContext,
                                                         "报价成功");
                                                 setResult(RESULT_OK,null);
@@ -531,5 +507,105 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
         super.onDestroy();
         Bimp.tempSelectBitmap.clear();
         CrashApplication.getInstance().removeActivity(this);
+    }
+
+    class MyAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return payMethods.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            // TODO Auto-generated method stub
+            return payMethods.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView,
+                            ViewGroup parent) {
+
+            final PayMethod payMethod = payMethods.get(position);
+            final itemHolder itHolder;
+            if (convertView == null) {
+                itHolder = new itemHolder();
+                convertView = LayoutInflater.from(mContext).inflate(
+                        R.layout.item_pay_method, null);
+                itHolder.tv_name = (TextView) convertView
+                        .findViewById(R.id.tv_name);
+                itHolder.edt_mail_price = (EditText) convertView
+                        .findViewById(R.id.edt_mail_price);
+
+                itHolder.cb_item = (CheckBox) convertView
+                        .findViewById(R.id.cb_item);
+                convertView.setTag(itHolder);
+            } else {
+                itHolder = (itemHolder) convertView.getTag();
+            }
+            itHolder.tv_name.setText(payMethod.getPay_name());
+            if(Integer.parseInt(payMethod.getPay_id())==payType){
+                itHolder.cb_item.setChecked(true);
+            }else{
+                itHolder.cb_item.setChecked(false);
+            }
+
+            if(payMethod.getPay_id().equals("1")){
+                itHolder.edt_mail_price.setVisibility(View.VISIBLE);
+                itHolder.edt_mail_price.setText(shipping_fee);
+            }else{
+                itHolder.edt_mail_price.setVisibility(View.GONE);
+            }
+
+            itHolder.edt_mail_price.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    shipping_fee = editable.toString();
+                }
+            });
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    changeType(position);
+                }
+            });
+            return convertView;
+        }
+
+        class itemHolder {
+            TextView tv_name;
+            EditText edt_mail_price;
+            CheckBox cb_item;
+        }
+
+    }
+
+    private void changeType(int position) {
+        PayMethod payMethod = payMethods.get(position);
+        if(payMethod.isChecked()){
+            payType=0;
+            payName = "";
+        }else{
+            payType = Integer.parseInt(payMethod.getPay_id());
+            payName = payMethod.getPay_name();
+        }
+        payMethodAdapter.notifyDataSetChanged();
     }
 }

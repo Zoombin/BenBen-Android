@@ -35,6 +35,9 @@ public class QuoteContent extends BaseBean<QuoteContent> {
 	private String huanxinUsername;
 	private String name;
 	private int accept;// 1代表接受他的保价
+    private String shipping_fee;
+    private String pay_id;
+    private String pay_name;
 
     private List<BuyInfoPic> infoPics = new ArrayList<>();
     private String Images;// 使用||分割
@@ -154,6 +157,30 @@ public class QuoteContent extends BaseBean<QuoteContent> {
         Images = images;
     }
 
+    public String getShipping_fee() {
+        return shipping_fee;
+    }
+
+    public void setShipping_fee(String shipping_fee) {
+        this.shipping_fee = shipping_fee;
+    }
+
+    public String getPay_id() {
+        return pay_id;
+    }
+
+    public void setPay_id(String pay_id) {
+        this.pay_id = pay_id;
+    }
+
+    public String getPay_name() {
+        return pay_name;
+    }
+
+    public void setPay_name(String pay_name) {
+        this.pay_name = pay_name;
+    }
+
     @Override
 	public JSONObject toJSON() {
 		// TODO Auto-generated method stub
@@ -176,6 +203,9 @@ public class QuoteContent extends BaseBean<QuoteContent> {
 		poster = jsonObj.optString("poster");
 		huanxinUsername = jsonObj.optString("huanxin_username");
 		name = jsonObj.optString("name");
+        shipping_fee = jsonObj.optString("shipping_fee");
+        pay_name = jsonObj.optString("pay_name");
+        pay_id = jsonObj.optString("pay_id");
 
         JSONArray picJSONArray = jsonObj.optJSONArray("quote_pic");
         if (picJSONArray != null && picJSONArray.length()>0) {

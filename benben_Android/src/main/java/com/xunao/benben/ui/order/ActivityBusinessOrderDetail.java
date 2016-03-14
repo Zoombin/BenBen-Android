@@ -45,6 +45,7 @@ import in.srain.cube.image.CubeImageView;
 public class ActivityBusinessOrderDetail extends BaseActivity implements View.OnClickListener {
     private String order_id;
     private String pay_name;
+    private String extension_code;
     private Order order;
 
     private LinearLayout ll_address;
@@ -74,7 +75,7 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
         @Override
         public void onReceive(Context context, Intent intent) {
             if(CommonUtils.isNetworkAvailable(mContext)){
-                InteNetUtils.getInstance(mContext).Storderdetail(order_id, mRequestCallBack);
+                InteNetUtils.getInstance(mContext).Storderdetail(order_id,extension_code, mRequestCallBack);
             }else{
                 ToastUtils.Infotoast(mContext, "网络不可用");
             }
@@ -124,8 +125,9 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
     @Override
     public void initDate(Bundle savedInstanceState) {
         order_id = getIntent().getStringExtra("order_id");
+        extension_code = getIntent().getStringExtra("extension_code");
         if(CommonUtils.isNetworkAvailable(mContext)){
-            InteNetUtils.getInstance(mContext).Storderdetail(order_id, mRequestCallBack);
+            InteNetUtils.getInstance(mContext).Storderdetail(order_id,extension_code, mRequestCallBack);
         }else{
             ToastUtils.Infotoast(mContext, "网络不可用");
         }
@@ -242,7 +244,7 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
                     tv_operate1.setVisibility(View.VISIBLE);
                 }
                 ll_order_operate.setVisibility(View.VISIBLE);
-                if (order.getOrder_status() == 5 || order.getOrder_status() == 6) {
+                if (order.getExtension_code()!=2 &&(order.getOrder_status() == 5 || order.getOrder_status() == 6)) {
                     tv_operate2.setText("评价");
                     tv_operate2.setVisibility(View.VISIBLE);
                     tv_operate6.setVisibility(View.VISIBLE);
@@ -455,7 +457,7 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
         switch (requestCode){
             case 1:
                 if(CommonUtils.isNetworkAvailable(mContext)){
-                    InteNetUtils.getInstance(mContext).Storderdetail(order_id, mRequestCallBack);
+                    InteNetUtils.getInstance(mContext).Storderdetail(order_id,extension_code, mRequestCallBack);
                     sendBroadcast(new Intent("businessOrderRefresh"));
                 }else{
                     ToastUtils.Infotoast(mContext, "网络不可用");

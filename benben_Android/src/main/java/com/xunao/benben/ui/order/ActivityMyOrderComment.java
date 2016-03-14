@@ -44,7 +44,7 @@ public class ActivityMyOrderComment extends BaseActivity implements View.OnClick
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        initTitle_Right_Left_bar("评论", "", "",
+        initTitle_Right_Left_bar("评价", "", "",
                 R.drawable.icon_com_title_left, 0);
         ll_train = (LinearLayout) findViewById(R.id.ll_train);
         ll_train.setOnClickListener(this);

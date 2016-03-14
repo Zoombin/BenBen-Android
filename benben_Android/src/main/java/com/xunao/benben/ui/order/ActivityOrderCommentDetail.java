@@ -78,7 +78,7 @@ public class ActivityOrderCommentDetail extends BaseActivity implements View.OnC
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        initTitle_Right_Left_bar("评论详情", "", "",
+        initTitle_Right_Left_bar("查看评价", "", "",
                 R.drawable.icon_com_title_left, 0);
         iv_promotion_post = (CubeImageView) findViewById(R.id.iv_promotion_post);
         tv_promotion_name = (TextView) findViewById(R.id.tv_promotion_name);

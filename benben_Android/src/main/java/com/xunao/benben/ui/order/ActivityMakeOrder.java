@@ -300,11 +300,11 @@ public class ActivityMakeOrder extends BaseActivity implements View.OnClickListe
         }
         if(CommonUtils.isNetworkAvailable(mContext)){
             if(payType==1) {
-                InteNetUtils.getInstance(mContext).Addorder(promotionid, accountAddress.getConsignee(), accountAddress.getProvince(), accountAddress.getCity(),
-                        accountAddress.getArea(), accountAddress.getStreet(), accountAddress.getAddress(), accountAddress.getMobile(), payType, payName,
+                InteNetUtils.getInstance(mContext).Addorder(promotionid+"", accountAddress.getConsignee(), accountAddress.getProvince(), accountAddress.getCity(),
+                        accountAddress.getArea(), accountAddress.getStreet(), accountAddress.getAddress(), accountAddress.getMobile(), payType+"", payName,
                         totalPrice, shipping_fee, payPrice, num, 1,orderBack);
             }else{
-                InteNetUtils.getInstance(mContext).Addorder(promotionid, "", "","","", "", "", "", payType, payName,
+                InteNetUtils.getInstance(mContext).Addorder(promotionid+"", "", "","","", "", "", "", payType+"", payName,
                         totalPrice, shipping_fee, payPrice, num, 1,orderBack);
             }
         }else{
@@ -324,7 +324,7 @@ public class ActivityMakeOrder extends BaseActivity implements View.OnClickListe
                     String order_sn = jsonObject.optString("order_sn");
                     if(payType==3){
                         startAnimActivity2Obj(ActivityOrderPayResult.class,
-                                "order_id", order_id);
+                                "order_id", order_id, "extension_code","1");
                     }else{
                         Intent intent = new Intent(ActivityMakeOrder.this, ActivityOrderPayType.class);
                         intent.putExtra("payType", payType);
@@ -333,6 +333,7 @@ public class ActivityMakeOrder extends BaseActivity implements View.OnClickListe
                         intent.putExtra("payPrice", payPrice+"");
                         intent.putExtra("shipping_fee", shipping_fee);
                         intent.putExtra("name", promotion.getName());
+                        intent.putExtra("extension_code", "1");
                         startActivity(intent);
                         overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                     }

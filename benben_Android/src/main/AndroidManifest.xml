@@ -958,6 +958,16 @@
         </activity>
 
         <activity
+            android:name=".ui.account.ActivityBindAlipay"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.account.ActivityInsurance"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
             android:name=".ui.order.ActivityOrderCheck"
             android:screenOrientation="portrait" >
         </activity>
@@ -1061,6 +1071,11 @@
 
         <activity
             android:name="com.xunao.benben.ui.mybuy.ActivityBuyGivePrice"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.xunao.benben.ui.mybuy.ActivityAcceptPrice"
             android:screenOrientation="portrait" >
         </activity>
 

@@ -64,6 +64,7 @@ import com.xunao.benben.dialog.BuyDialog.onSuccessLinstener;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.hx.chatuidemo.activity.ChatActivity;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.mybuy.ActivityAcceptPrice;
 import com.xunao.benben.ui.mybuy.ActivityBuyGivePrice;
 import com.xunao.benben.utils.Bimp;
 import com.xunao.benben.utils.CommonUtils;
@@ -107,6 +108,7 @@ public class ActivityBuyInfoContent extends BaseActivity implements
     private GridView noScrollgridview;
     private GridAdapter adapter;
     private int mWidth = 0;
+    private String Images="";
 
 	@Override
 	public void loadLayout(Bundle savedInstanceState) {
@@ -305,6 +307,15 @@ public class ActivityBuyInfoContent extends BaseActivity implements
             if(pics!=null && pics.size()>0){
                 ll_poster.setVisibility(View.VISIBLE);
                 adapter.update();
+                for (int i = 0; i < pics.size(); i++) {
+                    if (!Images.equals("")) {
+                        Images += "^" + pics.get(i).getPoster();
+                    } else {
+                        Images = pics.get(i).getPoster();
+                    }
+                }
+
+
             }else{
                 ll_poster.setVisibility(View.GONE);
             }
@@ -422,85 +433,93 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 
 									switch (index) {
 									case 0:// 接受报价
-                                        final MsgDialog msgDialog = new MsgDialog(ActivityBuyInfoContent.this, R.style.MyDialogStyle);
-                                        msgDialog.setContent("确定接受报价吗？", "", "确定", "取消");
-                                        msgDialog.setCancleListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                msgDialog.dismiss();
-                                            }
-                                        });
-                                        msgDialog.setOKListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                msgDialog.dismiss();
-                                                if (CommonUtils
-                                                        .isNetworkAvailable(mContext)) {
-                                                    InteNetUtils
-                                                            .getInstance(mContext)
-                                                            .acceptPrice(
-                                                                    info.getId(),
-                                                                    item.getStore_id(),
-                                                                    item.getId() + "",
-                                                                    new RequestCallBack<String>() {
+                                        Intent intent = new Intent();
+                                        intent.setClass(mContext, ActivityAcceptPrice.class);
+                                        intent.putExtra("buyid",info.getId());
+                                        intent.putExtra("quoteContent",item);
+                                        startActivityForResult(intent,1);
+                                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 
-                                                                        @Override
-                                                                        public void onFailure(
-                                                                                HttpException arg0,
-                                                                                String arg1) {
-                                                                            ToastUtils
-                                                                                    .Errortoast(
-                                                                                            mContext,
-                                                                                            "接受报价失败");
-                                                                        }
 
-                                                                        @Override
-                                                                        public void onSuccess(
-                                                                                ResponseInfo<String> arg0) {
-
-                                                                            try {
-                                                                                JSONObject jsonObject = new JSONObject(
-                                                                                        arg0.result);
-
-                                                                                SuccessMsg msg = new SuccessMsg();
-
-                                                                                msg.parseJSON(jsonObject);
-                                                                                ToastUtils
-                                                                                        .Errortoast(
-                                                                                                mContext,
-                                                                                                "接受报价成功");
-
-                                                                                if (CommonUtils
-                                                                                        .isNetworkAvailable(mContext)) {
-                                                                                    InteNetUtils
-                                                                                            .getInstance(
-                                                                                                    mContext)
-                                                                                            .getBuyInfoContent(
-                                                                                                    iD,
-                                                                                                    mRequestCallBack);
-                                                                                }
-                                                                                // ActivityBuyInfoContent.this.item_time
-                                                                                // .setText("已经结束");
-                                                                                setResult(AndroidConfig.writeFriendRefreshResultCode);
-
-                                                                            } catch (JSONException e) {
-                                                                                ToastUtils
-                                                                                        .Errortoast(
-                                                                                                mContext,
-                                                                                                "接受报价失败");
-                                                                                e.printStackTrace();
-                                                                            } catch (NetRequestException e) {
-                                                                                e.getError()
-                                                                                        .print(mContext);
-                                                                                e.printStackTrace();
-                                                                            }
-
-                                                                        }
-                                                                    });
-                                                }
-                                            }
-                                        });
-                                        msgDialog.show();
+//                                        final MsgDialog msgDialog = new MsgDialog(ActivityBuyInfoContent.this, R.style.MyDialogStyle);
+//                                        msgDialog.setContent("确定接受报价吗？", "", "确定", "取消");
+//                                        msgDialog.setCancleListener(new View.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(View v) {
+//                                                msgDialog.dismiss();
+//                                            }
+//                                        });
+//                                        msgDialog.setOKListener(new View.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(View v) {
+//                                                msgDialog.dismiss();
+//                                                if (CommonUtils
+//                                                        .isNetworkAvailable(mContext)) {
+//                                                    InteNetUtils
+//                                                            .getInstance(mContext)
+//                                                            .acceptPrice(
+//                                                                    info.getId(),
+//                                                                    item.getStore_id(),
+//                                                                    item.getId() + "",
+//                                                                    new RequestCallBack<String>() {
+//
+//                                                                        @Override
+//                                                                        public void onFailure(
+//                                                                                HttpException arg0,
+//                                                                                String arg1) {
+//                                                                            ToastUtils
+//                                                                                    .Errortoast(
+//                                                                                            mContext,
+//                                                                                            "接受报价失败");
+//                                                                        }
+//
+//                                                                        @Override
+//                                                                        public void onSuccess(
+//                                                                                ResponseInfo<String> arg0) {
+//
+//                                                                            try {
+//                                                                                JSONObject jsonObject = new JSONObject(
+//                                                                                        arg0.result);
+//
+//                                                                                SuccessMsg msg = new SuccessMsg();
+//
+//                                                                                msg.parseJSON(jsonObject);
+//                                                                                ToastUtils
+//                                                                                        .Errortoast(
+//                                                                                                mContext,
+//                                                                                                "接受报价成功");
+//
+//                                                                                if (CommonUtils
+//                                                                                        .isNetworkAvailable(mContext)) {
+//                                                                                    InteNetUtils
+//                                                                                            .getInstance(
+//                                                                                                    mContext)
+//                                                                                            .getBuyInfoContent(
+//                                                                                                    iD,
+//                                                                                                    mRequestCallBack);
+//                                                                                }
+//                                                                                // ActivityBuyInfoContent.this.item_time
+//                                                                                // .setText("已经结束");
+//                                                                                setResult(AndroidConfig.writeFriendRefreshResultCode);
+//
+//                                                                            } catch (JSONException e) {
+//                                                                                ToastUtils
+//                                                                                        .Errortoast(
+//                                                                                                mContext,
+//                                                                                                "接受报价失败");
+//                                                                                e.printStackTrace();
+//                                                                            } catch (NetRequestException e) {
+//                                                                                e.getError()
+//                                                                                        .print(mContext);
+//                                                                                e.printStackTrace();
+//                                                                            }
+//
+//                                                                        }
+//                                                                    });
+//                                                }
+//                                            }
+//                                        });
+//                                        msgDialog.show();
 
 
 										break;
@@ -530,6 +549,7 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 			});
 		} else {
 			item_but.setVisibility(View.GONE);
+            self_but.setVisibility(View.GONE);
 		}
 		return arg1;
 	}
@@ -689,9 +709,9 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 //					buyDialog.show();
                     Intent intent = new Intent(ActivityBuyInfoContent.this, ActivityBuyGivePrice.class);
                     intent.putExtra("buyId", Integer.parseInt(info.getId()));
+                    intent.putExtra("payMethods", info.getPayMethods());
                     startActivityForResult(intent, 1);
                     overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-
 				} else {
 					ToastUtils.Infotoast(mContext, "您已经报价两次");
 				}
@@ -849,6 +869,18 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 
             CommonUtils.startImageLoader(cubeimageLoader,
                     pics.get(position).getPoster(), holder.image);
+
+            convertView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, ActivityContentPicSet.class);
+                    intent.putExtra("IMAGES", Images);
+                    intent.putExtra("POSITION", position);
+                    startActivity(intent);
+
+                }
+            });
+
 
 
             return convertView;

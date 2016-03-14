@@ -310,6 +310,11 @@ public class ActivityWriteBuyInfo extends BaseActivity implements
 			ToastUtils.Infotoast(mContext, "请选择地址");
 			return;
 		}
+
+        if(industryId.equals("")){
+            ToastUtils.Infotoast(mContext, "填写行业可让商家更快速的找到你");
+            return;
+        }
 		long sTime = 0;
 		long onDay = 60 * 60 * 24;
 		switch (checkedRadioButtonId) {
@@ -342,7 +347,7 @@ public class ActivityWriteBuyInfo extends BaseActivity implements
 
 			showLoding("发送中...");
 			InteNetUtils.getInstance(mContext).sendBuyInfo(sTitle, sInfo, sNum,
-					(sTime + TimeUtil.now()) + "", addressId,images,industryId, mRequestCallBack);
+					(sTime + TimeUtil.now()) + "", addressId,images,industryId,"1,2,3", mRequestCallBack);
 		}
 	}
 

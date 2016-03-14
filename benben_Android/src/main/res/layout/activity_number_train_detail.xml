@@ -540,6 +540,7 @@
                         android:textColor="#848484"
                         android:textSize="14dp"
                         android:padding="2dp"
+                        android:visibility="gone"
                         />
 
                 </LinearLayout>
@@ -761,6 +762,19 @@
 
 
         </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_vip"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/ll_bottom"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"
+            />
     </RelativeLayout>
 
 </LinearLayout>

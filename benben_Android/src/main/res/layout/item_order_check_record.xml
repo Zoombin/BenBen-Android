@@ -19,6 +19,7 @@
         >
 
         <TextView
+            android:id="@+id/tv_order_sn"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -28,6 +29,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_order_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2015-03-10"
@@ -38,6 +40,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_order_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="订单内容内容内容内容内容内容内容内容"

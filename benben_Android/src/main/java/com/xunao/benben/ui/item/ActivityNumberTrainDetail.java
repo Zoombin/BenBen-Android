@@ -120,6 +120,7 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
     private TextView tv_store_num;
     private TextView tv_notice;
     private TextView tv_consultant;
+    private ImageView iv_vip;
 
     private int vip_type=0;
     private TextView tv_type;
@@ -188,6 +189,8 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
         tv_consultant = (TextView) findViewById(R.id.tv_consultant);
         tv_consultant.setOnClickListener(this);
         tv_type = (TextView) findViewById(R.id.tv_type);
+        iv_vip = (ImageView) findViewById(R.id.iv_vip);
+        iv_vip.setOnClickListener(this);
 		initMyLocation();
 	}
 
@@ -436,6 +439,9 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
                     }else{
                         iv_auto_type.setImageResource(identityIcons[numberTrainDetail.getType()-1][numberTrainDetail.getAuth_grade()-1]);
                         iv_auto_type.setVisibility(View.VISIBLE);
+                        if(numberTrainDetail.getAuth_grade()==3){
+                            iv_vip.setVisibility(View.VISIBLE);
+                        }
                     }
 
                     if(vip_type==0){
@@ -557,11 +563,15 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 break;
             case R.id.ll_comment:
-                Intent commentIntent = new Intent(ActivityNumberTrainDetail.this, ActivityNumberTrainComment.class);
-                commentIntent.putExtra("store_id",id);
-                commentIntent.putExtra("mean_rate",numberTrainDetail.getMean_rate());
-                startActivity(commentIntent);
-                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                if(numberTrainDetail.getNum()==0){
+                    ToastUtils.Infotoast(mContext,"暂无评价");
+                }else {
+                    Intent commentIntent = new Intent(ActivityNumberTrainDetail.this, ActivityNumberTrainComment.class);
+                    commentIntent.putExtra("store_id", id);
+                    commentIntent.putExtra("mean_rate", numberTrainDetail.getMean_rate());
+                    startActivity(commentIntent);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                }
                 break;
             case R.id.ll_store:
                 Intent storeIntent = new Intent(ActivityNumberTrainDetail.this, ActivityNumberTrainStore.class);
@@ -583,6 +593,8 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
                         mContext, R.style.MyDialog1);
                 hint.setContent("我的公告");
                 hint.show();
+                break;
+            case R.id.iv_vip:
                 break;
         }
 	}

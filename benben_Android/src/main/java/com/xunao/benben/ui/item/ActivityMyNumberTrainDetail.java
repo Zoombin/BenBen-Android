@@ -499,7 +499,7 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 long vipTime = numberTrainDetail.getVip_time();
                 Date date = new Date(vipTime*1000);
-                tv_vip_time.setText(simpleDateFormat.format(date));
+                tv_vip_time.setText("有效期至:"+simpleDateFormat.format(date));
 
                 if(numberTrainDetail.getNo_auth()==0){
                     ll_identity.setVisibility(View.GONE);
@@ -510,7 +510,7 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                     }else if(numberTrainDetail.getAuth_status()==1){
                         wx_message.setText("实名认证审核失败，点击进入重新提交");
                     }else if(numberTrainDetail.getAuth_status()==2){
-                        wx_message.setVisibility(View.GONE);
+                        wx_message.setText("实名认证通过");
                     }
 
                     if(numberTrainDetail.getAuth_grade()==0){
@@ -640,11 +640,13 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                 break;
             case R.id.btn_promotion:
                 Intent intent = new Intent(ActivityMyNumberTrainDetail.this,ActivityNumberTrainPromotionIdentity.class);
+                intent.putExtra("from","promotion");
                 startActivityForResult(intent,3);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 break;
             case R.id.btn_group_buy:
                 Intent groupBuyTntent = new Intent(ActivityMyNumberTrainDetail.this,ActivityNumberTrainPromotionIdentity.class);
+                groupBuyTntent.putExtra("from","groupbuy");
                 startActivityForResult(groupBuyTntent,3);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 break;
@@ -668,11 +670,16 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                 }
                 break;
             case R.id.ll_comment:
-                Intent commentIntent = new Intent(ActivityMyNumberTrainDetail.this, ActivityNumberTrainComment.class);
-                commentIntent.putExtra("store_id",id);
-                commentIntent.putExtra("mean_rate",numberTrainDetail.getMean_rate());
-                startActivity(commentIntent);
-                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                if(numberTrainDetail.getNum()==0){
+                    ToastUtils.Infotoast(mContext,"暂无评价");
+                }else {
+
+                    Intent commentIntent = new Intent(ActivityMyNumberTrainDetail.this, ActivityNumberTrainComment.class);
+                    commentIntent.putExtra("store_id", id);
+                    commentIntent.putExtra("mean_rate", numberTrainDetail.getMean_rate());
+                    startActivity(commentIntent);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                }
                 break;
             case R.id.ll_store:
                 Intent storeIntent = new Intent(ActivityMyNumberTrainDetail.this, ActivityNumberTrainStore.class);

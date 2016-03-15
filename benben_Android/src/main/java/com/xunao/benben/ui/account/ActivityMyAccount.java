@@ -37,7 +37,7 @@ public class ActivityMyAccount extends BaseActivity implements View.OnClickListe
     private TextView tv_fee;
     private LinearLayout ll_my_order,ll_collection;
     private TextView tv_my_order,tv_my_collection;
-    private RelativeLayout rl_business_order,rl_mall;
+    private RelativeLayout rl_business_order,rl_mall,rl_lottery;
     private int[] rankTypes = {R.drawable.icon_rating_select1,R.drawable.icon_rating_select2,R.drawable.icon_rating_select3,R.drawable.icon_rating_select4};
     private String fee="0.00";
     private RelativeLayout rl_auction;
@@ -71,6 +71,8 @@ public class ActivityMyAccount extends BaseActivity implements View.OnClickListe
         rl_auction.setOnClickListener(this);
         rl_mall = (RelativeLayout) findViewById(R.id.rl_mall);
         rl_mall.setOnClickListener(this);
+        rl_lottery = (RelativeLayout) findViewById(R.id.rl_lottery);
+        rl_lottery.setOnClickListener(this);
     }
 
     @Override
@@ -179,6 +181,12 @@ public class ActivityMyAccount extends BaseActivity implements View.OnClickListe
                 intent.putExtra("title", "奔犇商场");
                 intent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService?token="+user.getToken());
                 startActivity(intent);
+                break;
+            case R.id.rl_lottery:
+                Intent lotteryIntent = new Intent(mContext, ActivityMyWeb.class);
+                lotteryIntent.putExtra("title", "抽奖");
+                lotteryIntent.putExtra("url", AndroidConfig.NETHOST + "/Lottery/DrawLottery?token="+user.getToken());
+                startActivity(lotteryIntent);
                 break;
         }
     }

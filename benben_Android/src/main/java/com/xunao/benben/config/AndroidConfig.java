@@ -737,4 +737,16 @@ public class AndroidConfig {
 
     // 解冻保证金
     public static final String ReleaseGuarantee = "/guarantee/ReleaseGuarantee";
+
+    // 钱包信息
+    public static final String GetPayAccount = "/user/GetPayAccount";
+
+    // 绑定信息
+    public static final String PayBind = "/user/PayBind";
+
+    // 解除绑定
+    public static final String PayUnbind = "/user/PayUnbind";
+
+    // 解除绑定
+    public static final String PayCashOut = "/user/PayCashOut";
 }

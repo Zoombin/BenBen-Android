@@ -620,7 +620,7 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 			holder.tv_enterprise_shortphone.setText(TextUtils
 					.isEmpty(shortPhone) ? "" : shortPhone);
 
-			if (TextUtils.isEmpty(shortPhone)) {
+			if (TextUtils.isEmpty(shortPhone) || shortPhone.equals("0")) {
 				holder.shortBox.setVisibility(View.GONE);
 				holder.iv_shortmessage.setVisibility(View.GONE);
 				holder.iv_make_shortphone.setVisibility(View.GONE);
@@ -630,7 +630,7 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 				holder.iv_make_shortphone.setVisibility(View.VISIBLE);
 			}
 
-			if (TextUtils.isEmpty(phone)) {
+			if (TextUtils.isEmpty(phone) || phone.equals("0")) {
 				holder.longBox.setVisibility(View.GONE);
 				holder.iv_message.setVisibility(View.GONE);
 				holder.iv_make_phone.setVisibility(View.GONE);

@@ -362,12 +362,12 @@ public class ActivityAddCommon extends BaseActivity {
 			// iv_make_phone.setVisibility(View.VISIBLE);
 			// }
 
-			if (TextUtils.isEmpty(detail.getShortPhone())) {
+			if (TextUtils.isEmpty(detail.getShortPhone()) || detail.getShortPhone().equals("0")) {
 				shortBox.setVisibility(View.GONE);
 			} else {
 				shortBox.setVisibility(View.VISIBLE);
 			}
-			if (TextUtils.isEmpty(detail.getPhone())) {
+			if (TextUtils.isEmpty(detail.getPhone()) || detail.getPhone().equals("0")) {
 				longBox.setVisibility(View.GONE);
 			} else {
 				longBox.setVisibility(View.VISIBLE);

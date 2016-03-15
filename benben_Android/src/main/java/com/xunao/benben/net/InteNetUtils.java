@@ -3378,4 +3378,37 @@ public class InteNetUtils {
         ComPost(AndroidConfig.NETHOST + AndroidConfig.ReleaseGuarantee, hashMap,
                 callBack);
     }
+
+    public void GetPayAccount(RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.GetPayAccount, hashMap,
+                callBack);
+    }
+
+    public void PayBind(String account,String type,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("account", account);
+        hashMap.put("type", type);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.PayBind, hashMap,
+                callBack);
+    }
+
+    public void PayUnbind(String type,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("type", type);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.PayUnbind, hashMap,
+                callBack);
+    }
+
+    public void PayCashOut(String fee,String type,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("fee", fee);
+        hashMap.put("type", type);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.PayCashOut, hashMap,
+                callBack);
+    }
 }

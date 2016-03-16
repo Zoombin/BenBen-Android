@@ -185,7 +185,7 @@ public class ActivityMyAccount extends BaseActivity implements View.OnClickListe
             case R.id.rl_lottery:
                 Intent lotteryIntent = new Intent(mContext, ActivityMyWeb.class);
                 lotteryIntent.putExtra("title", "抽奖");
-                lotteryIntent.putExtra("url", AndroidConfig.NETHOST + "/Lottery/DrawLottery?token="+user.getToken());
+                lotteryIntent.putExtra("url", AndroidConfig.NETHOST + "/Lottery/Lottery?benben_id="+user.getBenbenId());
                 startActivity(lotteryIntent);
                 break;
         }

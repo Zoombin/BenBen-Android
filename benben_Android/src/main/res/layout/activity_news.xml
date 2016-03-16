@@ -36,6 +36,8 @@
             android:layout_marginBottom="30dp"
             android:scrollbars="none" >
         </com.baoyz.swipemenulistview.SwipeMenuListView>
+
+
         
         <TextView 
             android:id="@+id/wx_message"

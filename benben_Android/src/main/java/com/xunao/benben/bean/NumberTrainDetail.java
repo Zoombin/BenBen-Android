@@ -54,6 +54,7 @@ public class NumberTrainDetail extends BaseBean {
     private int rank;
     private String mean_rate;
     private int num;
+    private int vip_store;
 
     @Transient
     private ArrayList<Promotion> promotions = new ArrayList<Promotion>();
@@ -404,6 +405,14 @@ public class NumberTrainDetail extends BaseBean {
         this.num = num;
     }
 
+    public int getVip_store() {
+        return vip_store;
+    }
+
+    public void setVip_store(int vip_store) {
+        this.vip_store = vip_store;
+    }
+
     @Override
 	public JSONObject toJSON() {
 
@@ -444,6 +453,7 @@ public class NumberTrainDetail extends BaseBean {
 			kil = jsonObj.optString("distance_kilometers");
 			numberStatus = jsonObj.optInt("NumberStatus");
             shop = jsonObj.optString("shop");
+            vip_store = jsonObj.optInt("vip_store");
 		}
 		return this;
 	}
@@ -494,6 +504,7 @@ public class NumberTrainDetail extends BaseBean {
             rank = jsonObj.optInt("rank");
             mean_rate = jsonObj.optString("mean_rate");
             num = jsonObj.optInt("num");
+            vip_store = jsonObj.optInt("vip_store");
 
             JSONArray phoneArray = jsonObj.optJSONArray("promotion");
             if (phoneArray != null && phoneArray.length() > 0) {

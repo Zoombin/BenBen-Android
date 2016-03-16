@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -306,6 +307,7 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject==========="+jsonObject);
 		String optString = jsonObject.optString("ret_num");
 		dissLoding();
 		if (optString != null) {
@@ -439,9 +441,12 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
                     }else{
                         iv_auto_type.setImageResource(identityIcons[numberTrainDetail.getType()-1][numberTrainDetail.getAuth_grade()-1]);
                         iv_auto_type.setVisibility(View.VISIBLE);
-                        if(numberTrainDetail.getAuth_grade()==3){
-                            iv_vip.setVisibility(View.VISIBLE);
-                        }
+                    }
+
+                    if(numberTrainDetail.getVip_store()==1){
+                        iv_vip.setVisibility(View.VISIBLE);
+                    }else{
+                        iv_vip.setVisibility(View.GONE);
                     }
 
                     if(vip_type==0){

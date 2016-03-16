@@ -2,6 +2,7 @@ package com.xunao.benben.ui.item;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -116,6 +117,7 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject==========="+jsonObject);
         dissLoding();
         String optString = jsonObject.optString("ret_num");
         dissLoding();

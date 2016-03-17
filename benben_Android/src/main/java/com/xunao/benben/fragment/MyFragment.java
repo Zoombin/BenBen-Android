@@ -87,7 +87,6 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 	private RelativeLayout rl_my_buy;
 	private RelativeLayout rl_invite_friend_tobb;
     private Dialog dialog;
-    private RelativeLayout rl_my_vip;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -135,8 +134,6 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 				.findViewById(R.id.rl_invite_friend_tobb);
         rl_my_account = (RelativeLayout) view.findViewById(R.id.rl_my_account);
         rl_my_account.setOnClickListener(this);
-        rl_my_vip = (RelativeLayout) view.findViewById(R.id.rl_my_vip);
-        rl_my_vip.setOnClickListener(this);
 		initdata();
 	}
 
@@ -711,9 +708,6 @@ public class MyFragment extends BaseFragment implements OnClickListener {
             break;
             case R.id.rl_my_account:
                 mActivity.startAnimActivity(ActivityMyAccount.class);
-                break;
-            case R.id.rl_my_vip:
-                mActivity.startAnimActivity(ActivityMyVipTrain.class);
                 break;
 		}
 

@@ -175,7 +175,7 @@ public class ActivityEnterpriseMember extends BaseActivity implements
         origin = intent.getIntExtra("origin",1);
         type = intent.getStringExtra("type");
         com_title_bar_content.setText(name);
-        if(origin==2 && type.equals("1")){
+        if(origin==2 && !type.equals("3")){
             com_title_bar_right_bt.setVisibility(View.VISIBLE);
         }
 

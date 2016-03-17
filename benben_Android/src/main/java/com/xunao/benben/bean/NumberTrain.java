@@ -26,7 +26,8 @@ public class NumberTrain extends BaseBean<NumberTrain>{
     private int auth_grade;
     private int place;
     private int is_valid;
-	
+    private int vip_store;
+
 
 	public String getTag() {
 		return tag;
@@ -181,6 +182,14 @@ public class NumberTrain extends BaseBean<NumberTrain>{
         this.is_valid = is_valid;
     }
 
+    public int getVip_store() {
+        return vip_store;
+    }
+
+    public void setVip_store(int vip_store) {
+        this.vip_store = vip_store;
+    }
+
     @Override
 	public JSONObject toJSON() {
 	
@@ -209,6 +218,7 @@ public class NumberTrain extends BaseBean<NumberTrain>{
         auth_grade =  jsonObj.optInt("auth_grade");
         place = jsonObj.optInt("place");
         is_valid = jsonObj.optInt("is_valid");
+        vip_store = jsonObj.optInt("vip_store");
 		return this;
 	}
 

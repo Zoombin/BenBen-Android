@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -61,7 +62,7 @@ import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.utils.ViewHolderUtil;
 import com.xunao.benben.view.MyTextView;
 
-public class ActivityNews extends BaseActivity {
+public class ActivityNews extends BaseActivity implements OnClickListener {
 
 	private List<News> mNews = new ArrayList<>();
 	private SwipeMenuListView listview;
@@ -70,6 +71,7 @@ public class ActivityNews extends BaseActivity {
 	private TextView wx_message;
 	private FriendAdapter friendAdapter;
     Dialog dialog;
+    private Button btn_my_vip;
 
 	@Override
 	public void loadLayout(Bundle savedInstanceState) {
@@ -108,6 +110,8 @@ public class ActivityNews extends BaseActivity {
 		nodota = (RelativeLayout) findViewById(R.id.nodota);
 
 		wx_message = (TextView) findViewById(R.id.wx_message);
+        btn_my_vip = (Button) findViewById(R.id.btn_my_vip);
+        btn_my_vip.setOnClickListener(this);
 
 		InteNetUtils.getInstanceNo(getApplicationContext()).getUpdateInfo(
 				CrashApplication.getInstance().getSpUtil().getLastTime() + "",
@@ -348,7 +352,16 @@ public class ActivityNews extends BaseActivity {
 
 	}
 
-	class FriendAdapter extends BaseAdapter {
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_my_vip:
+                startAnimActivity(ActivityMyVipTrain.class);
+                break;
+        }
+    }
+
+    class FriendAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {

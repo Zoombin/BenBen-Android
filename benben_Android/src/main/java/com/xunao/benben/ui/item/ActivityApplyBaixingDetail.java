@@ -59,13 +59,14 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 		OnClickListener, ActionSheetListener {
 	private RelativeLayout rl_status;
 	private LinearLayout ll_add_card1;
-	private RelativeLayout rl_area;
+	private RelativeLayout rl_area,rl_baixin;
 	private MyTextView register_point;
 	private TextView tv_status;
 	private EditText tv_user_phone;
 	private EditText et_name;
 	private EditText et_cardnum;
 	private TextView tv_area;
+    private TextView tv_baixin;
 	private RoundedImageView iv_idcard1;
 	private RoundedImageView iv_idcard2;
 	private LinearLayout ll_iv1;
@@ -78,6 +79,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 	private static final int PIC_REQUEST_CODE_SELECT_CAMERA = 1; // 从相机
 	private static final int PIC_Select_CODE_ImageFromLoacal = 2; // 从相册
 	private static final int CHOCE_ADDRESS = 3;
+    private static final int CHOCE_BAIXIN = 4;
 	private int uploadImage = 0;
 	private String imageName;
 	private String imagePath;
@@ -91,6 +93,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 	private int reasonNum = 0;
 	private boolean mingan = false;
 	private boolean isFirst = false;
+    private int enterprise_id=0;
 
 	@Override
 	public void loadLayout(Bundle savedInstanceState) {
@@ -134,11 +137,13 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 		cardid_rl = findViewById(R.id.cardid_rl);
 		cardid_line = findViewById(R.id.cardid_line);
 		tv_area = (TextView) findViewById(R.id.tv_area);
+        tv_baixin = (TextView) findViewById(R.id.tv_baixin);
 		iv_idcard1 = (RoundedImageView) findViewById(R.id.iv_idcard1);
 		iv_idcard2 = (RoundedImageView) findViewById(R.id.iv_idcard2);
 		ll_iv1 = (LinearLayout) findViewById(R.id.ll_iv1);
 		ll_iv2 = (LinearLayout) findViewById(R.id.ll_iv2);
 		rl_area = (RelativeLayout) findViewById(R.id.rl_area);
+        rl_baixin = (RelativeLayout) findViewById(R.id.rl_baixin);
 		rl_reason = (RelativeLayout) findViewById(R.id.rl_reason);
 		line = findViewById(R.id.line);
 
@@ -334,6 +339,8 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 				et_cardnum.setText(bxApplyInfo.getIdCard());
 				tv_area.setText(bxApplyInfo.getArea());
 				tv_area.setTextColor(Color.BLACK);
+                tv_baixin.setText(bxApplyInfo.getBx_name());
+                tv_baixin.setTextColor(Color.BLACK);
 
 				if (!CommonUtils.isEmpty(bxApplyInfo.getReason())) {
 					rl_reason.setVisibility(View.VISIBLE);
@@ -392,6 +399,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 					isClick = true;
 
 					rl_area.setOnClickListener(this);
+                    rl_baixin.setOnClickListener(this);
 
 					setOnRightClickLinester(new OnClickListener() {
 						@Override
@@ -435,6 +443,10 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 								return;
 							}
 
+                            if(enterprise_id==0){
+                                ToastUtils.Infotoast(mContext, "请选择加入的百姓网！");
+                                return;
+                            }
 							
 							if(reasonNum == 2){
 								et_name.setText(Html.fromHtml(RegexUtils.minganciCheck2(et_name.getText().toString())));
@@ -474,6 +486,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 																	file1,
 																	file2,
 																	addressId,
+                                                                    enterprise_id+"",
 																	requestCallBack);
 													inputDialog.dismiss();
 												}
@@ -483,7 +496,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 									showLoding("请稍后");
 									InteNetUtils.getInstance(mContext)
 											.editBaixing(name, phone, cardNum,
-													file1, file2, addressId,
+													file1, file2, addressId,enterprise_id+"",
 													requestCallBack);
 								}
 
@@ -533,6 +546,10 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 			startAnimActivityForResult2(ActivityChoiceAddress.class,
 					CHOCE_ADDRESS, "level", "3");
 			break;
+        case R.id.rl_baixin:
+            startAnimActivityForResult(ActivityChoiceBaiXin.class,
+                    CHOCE_BAIXIN);
+            break;
 		case R.id.iv_idcard1:
 			uploadImage = 1;
 			changeImage();
@@ -645,6 +662,16 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 				}
 			}
 			break;
+        case CHOCE_BAIXIN:
+            if (data != null) {
+                if (resultCode == RESULT_OK) {
+                    String name = data.getStringExtra("name");
+                    enterprise_id = data.getIntExtra("enterprise_id",0);
+                    tv_baixin.setText(name);
+                    tv_baixin.setTextColor(Color.BLACK);
+                }
+            }
+            break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}

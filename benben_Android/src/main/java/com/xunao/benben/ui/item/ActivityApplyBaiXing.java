@@ -53,6 +53,8 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 	private LinearLayout ll_add_card2;
 	private RelativeLayout rl_area;
 	private TextView tv_area;
+    private RelativeLayout rl_baixin;
+    private TextView tv_baixin;
 	private LinearLayout ll_iv1;
 	private LinearLayout ll_iv2;
 	private EditText tv_user_phone;
@@ -74,7 +76,9 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 	private static final int PIC_REQUEST_CODE_SELECT_CAMERA = 1; // 从相机
 	private static final int PIC_Select_CODE_ImageFromLoacal = 2; // 从相册
 	private static final int CHOCE_ADDRESS = 3;
+    private static final int CHOCE_BAIXIN = 4;
 	private View loding;
+    private int enterprise_id=0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +108,8 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 		ll_iv2 = (LinearLayout) findViewById(R.id.ll_iv2);
 		rl_area = (RelativeLayout) findViewById(R.id.rl_area);
 		tv_area = (TextView) findViewById(R.id.tv_area);
+        rl_baixin = (RelativeLayout) findViewById(R.id.rl_baixin);
+        tv_baixin = (TextView) findViewById(R.id.tv_baixin);
 
 		ll_add_card1.setOnClickListener(this);
 		ll_add_card2.setOnClickListener(this);
@@ -143,6 +149,14 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 						CHOCE_ADDRESS, "level", "3");
 			}
 		});
+
+        rl_baixin.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                startAnimActivityForResult(ActivityChoiceBaiXin.class,
+                        CHOCE_BAIXIN);
+            }
+        });
 
 		setOnLeftClickLinester(new OnClickListener() {
 			@Override
@@ -198,6 +212,11 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 					return;
 				}
 
+                if(enterprise_id==0){
+                    ToastUtils.Infotoast(mContext, "请选择加入的百姓网！");
+                    return;
+                }
+
 				if (file1 == null || file2 == null) {
 					ToastUtils.Infotoast(mContext, "请上传身份证正反面照片");
 					return;
@@ -205,7 +224,7 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 				if (CommonUtils.isNetworkAvailable(mContext))
 					showLoding("请稍后...");
 				InteNetUtils.getInstance(mContext).enterBaixing(name, phone,
-						cardNum, file1, file2, addressId, mRequestCallBack);
+						cardNum, file1, file2, addressId, enterprise_id+"",mRequestCallBack);
 
 			}
 		});
@@ -432,6 +451,17 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 			}
 
 			break;
+            case CHOCE_BAIXIN:
+
+                if (data != null) {
+                    if (resultCode == RESULT_OK) {
+                        String name = data.getStringExtra("name");
+                        enterprise_id = data.getIntExtra("enterprise_id",0);
+                        tv_baixin.setText(name);
+                        tv_baixin.setTextColor(Color.BLACK);
+                    }
+                }
+                break;
 
 		default:
 			break;

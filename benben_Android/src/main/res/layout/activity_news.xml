@@ -38,6 +38,17 @@
         </com.baoyz.swipemenulistview.SwipeMenuListView>
 
 
+
+        <Button
+            android:id="@+id/btn_my_vip"
+            android:layout_width="match_parent"
+            android:layout_height="30dip"
+            android:text="我的会员号"
+            android:layout_alignParentBottom="true"
+            android:textSize="15dip"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/green_but"
+            />
         
         <TextView 
             android:id="@+id/wx_message"
@@ -49,7 +60,9 @@
             android:textSize="15dip"
             android:textColor="#ffffff"
             android:background="#84BBD5"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            />
         
     </RelativeLayout>
 

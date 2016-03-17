@@ -1286,11 +1286,12 @@ public class InteNetUtils {
 
 	// 加入百姓网
 	public void enterBaixing(String name, String phone, String card, File file,
-			File file2, String[] address, RequestCallBack<String> callBack) {
+			File file2, String[] address,String enterprise_id, RequestCallBack<String> callBack) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("key", "android");
 		hashMap.put("name", name);
 		hashMap.put("phone", phone);
+        hashMap.put("enterprise_id", enterprise_id);
 		hashMap.put("id_card", card);
 		if (address[0] != null)
 			hashMap.put("province", address[0]);
@@ -1308,11 +1309,12 @@ public class InteNetUtils {
 
 	// 加入百姓网2
 	public void editBaixing(String name, String phone, String card, File file,
-			File file2, String[] address, RequestCallBack<String> callBack) {
+			File file2, String[] address,String enterprise_id, RequestCallBack<String> callBack) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("key", "android");
 		hashMap.put("name", name);
 		hashMap.put("phone", phone);
+        hashMap.put("enterprise_id", enterprise_id);
 		if (!CommonUtils.isEmpty(card))
 			hashMap.put("id_card", card);
 
@@ -3409,6 +3411,13 @@ public class InteNetUtils {
         hashMap.put("fee", fee);
         hashMap.put("type", type);
         ComPost(AndroidConfig.NETHOST + AndroidConfig.PayCashOut, hashMap,
+                callBack);
+    }
+
+    public void AllBx(RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.AllBx, hashMap,
                 callBack);
     }
 }

@@ -1096,6 +1096,11 @@
             android:windowSoftInputMode="adjustPan|stateHidden" >
         </activity>
 
+        <activity
+            android:name="com.xunao.benben.ui.item.ActivityChoiceBaiXin"
+            android:screenOrientation="portrait" >
+        </activity>
+
         <!-- 开机自启动服务 -->
         <receiver android:name="com.easemob.chat.StartServiceReceiver" >
             <intent-filter android:priority="1000" >

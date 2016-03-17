@@ -259,6 +259,35 @@
 
                 <View style="@style/set_item_Line_5" />
 
+
+                <RelativeLayout
+                    android:id="@+id/rl_baixin"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:background="@drawable/fragment_private_bg"
+                    android:clickable="true"
+                    android:paddingLeft="25dip"
+                    android:paddingRight="15dip" >
+
+                    <TextView
+                        android:id="@+id/tv_baixin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="请选择百姓网"
+                        android:textColor="#848484"
+                        android:textSize="16dip" />
+
+                    <ImageView
+                        android:layout_width="14dip"
+                        android:layout_height="18dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_right_bar" />
+                </RelativeLayout>
+
+                <View style="@style/set_item_Line_5" />
+
                 <com.xunao.benben.view.MyTextView
                     android:id="@+id/register_point"
                     android:layout_width="match_parent"

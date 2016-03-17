@@ -654,10 +654,15 @@ public class ActivityNumberTrain extends BaseActivity implements
                     iv_corner.setVisibility(View.GONE);
                 }else{
                     iv_corner.setVisibility(View.VISIBLE);
-                    if(auth_grade==1){
-                        iv_corner.setImageResource(R.drawable.icon_corner_cu);
-                    }else if(auth_grade==2){
-                        iv_corner.setImageResource(R.drawable.icon_corner_tuan);
+                    if(numberTrain.getVip_store()==1){
+                        iv_corner.setImageResource(R.drawable.icon_corner_hui);
+                    }else {
+
+                        if (auth_grade == 1) {
+                            iv_corner.setImageResource(R.drawable.icon_corner_cu);
+                        } else if (auth_grade == 2) {
+                            iv_corner.setImageResource(R.drawable.icon_corner_tuan);
+                        }
                     }
                 }
 

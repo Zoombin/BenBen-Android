@@ -26,6 +26,8 @@ public class BxApplyInfo extends BaseBean {
 	private String reason;
 	private String phone;
 	private String short_phone;
+    private int enterprise_id;
+    private String bx_name;
 
 	public String getName() {
 		return name;
@@ -104,7 +106,23 @@ public class BxApplyInfo extends BaseBean {
 		this.short_phone = short_phone;
 	}
 
-	@Override
+    public int getEnterprise_id() {
+        return enterprise_id;
+    }
+
+    public void setEnterprise_id(int enterprise_id) {
+        this.enterprise_id = enterprise_id;
+    }
+
+    public String getBx_name() {
+        return bx_name;
+    }
+
+    public void setBx_name(String bx_name) {
+        this.bx_name = bx_name;
+    }
+
+    @Override
 	public Object parseJSON(JSONObject jsonObj) throws NetRequestException {
 		name = jsonObj.optString("name");
 		status = jsonObj.optInt("status");
@@ -115,7 +133,8 @@ public class BxApplyInfo extends BaseBean {
 		poster = jsonObj.optString("poster1");
 		poster2 = jsonObj.optString("poster2");
 		reason = jsonObj.optString("reason");
-
+        enterprise_id = jsonObj.optInt("enterprise_id");
+        bx_name = jsonObj.optString("bx_name");
 		return this;
 	}
 

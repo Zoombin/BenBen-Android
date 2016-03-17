@@ -749,4 +749,7 @@ public class AndroidConfig {
 
     // 解除绑定
     public static final String PayCashOut = "/user/PayCashOut";
+
+    // 查询百姓网
+    public static final String AllBx = "/bxapply/AllBx";
 }

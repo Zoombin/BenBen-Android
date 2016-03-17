@@ -12,7 +12,7 @@
         android:layout_height="50dip"
         android:gravity="center_vertical"
         android:layout_marginLeft="15dip"
-        android:text="*注意：请填写真实信息，否则申请不能通过"
+        android:text="*注意：请填写真实信息，否则申请不能通过,您的好友将加入您本人所在的百姓网"
         android:textColor="#da3c3c"
         android:textSize="15dip" />
 

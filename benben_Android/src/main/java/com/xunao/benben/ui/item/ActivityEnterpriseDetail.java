@@ -203,8 +203,20 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
                 }
 
 
-				if (enterprise.getOrigin() == 2 && "2".equals(enterprise.getType())) {
+                if ("1".equals(enterprise.getType())) {
+                    other_phone.setText("我的其它号码");
+                    name.setText("企业通讯录");
                     rl_my_phone.setClickable(false);
+                } else {
+                    name.setText("虚拟网通讯录");
+                    other_phone.setText("我的短号");
+                    iv_other_phone.setVisibility(View.GONE);
+                    rl_phone.setClickable(false);
+                    rl_my_phone.setClickable(false);
+                }
+
+
+				if ("3".equals(enterprise.getType())) {
 					btn_tuichu.setVisibility(View.GONE);
 					btn_tuichu.setOnClickListener(null);
                     addBut.setVisibility(View.GONE);
@@ -212,8 +224,6 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
                     rl_add_common.setOnClickListener(null);
                     rl_add_common.setVisibility(View.GONE);
                     rl_inivite.setClickable(false);
-
-					
 				}else{
                     if(enterprise.getIs_guard()==1 && enterprise.getIs_admin()!=1){
                         addBut.setVisibility(View.GONE);
@@ -240,18 +250,7 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 				tv_phone.setText(enterprise.getPhone());
 				tv_mp.setText(enterprise.getRemark());
 				tv_my_phone.setText(enterprise.getMobliePhone());
-				if ("2".equals(enterprise.getType())) {
-					name.setText("虚拟网通讯录");
-					other_phone.setText("我的短号");
-					iv_other_phone.setVisibility(View.GONE);
-					rl_phone.setClickable(false);
-					rl_my_phone.setClickable(false);
-				} else {
-					other_phone.setText("我的其它号码");
-					name.setText("企业通讯录");
-					rl_my_phone.setClickable(false);
-					
-				}
+
                 if(enterprise.getFirstin().equals("1")){
                     inputDialog = new InputDialog(mContext, R.style.MyDialogStyle);
                     inputDialog.setContent("通讯录名片", "请输入新的通讯录名片", "确认", "取消");

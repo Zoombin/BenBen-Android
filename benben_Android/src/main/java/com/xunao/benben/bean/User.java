@@ -54,6 +54,8 @@ public class User extends BaseBean<User> {
 	private int enterprise_disable;
 	private int group_disable;
 	private int store_disable;
+    private int bx_id;
+    private String bx_name;
 
 
 	
@@ -149,6 +151,9 @@ public class User extends BaseBean<User> {
 		huanxin_username = jsonObject.optString("huanxin_username");
 		huanxin_password = jsonObject.optString("huanxin_password");
 		huanxin_uuid = jsonObject.optString("huanxin_uuid");
+
+        bx_id = jsonObject.optInt("bx_id");
+        bx_name = jsonObject.optString("bx_name");
 
 		if (jsonObjectZhitongche != null) {
 			zhiId = jsonObjectZhitongche.optInt("Id");
@@ -464,5 +469,19 @@ public class User extends BaseBean<User> {
 		this.store_disable = store_disable;
 	}
 
+    public int getBx_id() {
+        return bx_id;
+    }
 
+    public void setBx_id(int bx_id) {
+        this.bx_id = bx_id;
+    }
+
+    public String getBx_name() {
+        return bx_name;
+    }
+
+    public void setBx_name(String bx_name) {
+        this.bx_name = bx_name;
+    }
 }

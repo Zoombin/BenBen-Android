@@ -68,7 +68,7 @@ public class ActivityInviteFriendToBx extends BaseActivity implements
 	String pecketName;
 	
 	private ArrayList<Integer> minganNumArrayList = new ArrayList<Integer>();
-	
+	private TextView tv_hint;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +86,12 @@ public class ActivityInviteFriendToBx extends BaseActivity implements
 				R.drawable.icon_com_title_left, 0);
 
 		listView = (ListView) findViewById(R.id.lv_friend);
-
+        tv_hint = (TextView) findViewById(R.id.tv_hint);
 	}
 
 	@Override
 	public void initDate(Bundle savedInstanceState) {
-
+        tv_hint.setText("*注意：请填写真实信息，否则申请不能通过,您的好友将加入您本人所在的"+user.getBx_name());
 		Intent intent = getIntent();
 		bxArrayList = (ArrayList<BxContacts>) intent
 				.getSerializableExtra("contacts");

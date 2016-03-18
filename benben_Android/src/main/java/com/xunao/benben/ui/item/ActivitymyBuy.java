@@ -177,7 +177,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 			ll_industry.setVisibility(View.GONE);
 			if (CommonUtils.isNetworkAvailable(mContext)) {
 				InteNetUtils.getInstance(mContext).getBuyInfo("", page + "",
-						searchKey, addressIds, mRequestCallBack);
+						searchKey, addressIds,industryId, mRequestCallBack);
 			}
 		}
 	}
@@ -199,11 +199,11 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 				if(isSearchRange){
 					isSearchRange = false;
 					addressIds = null;
-					
+                    industryId = "";
 					ll_range.setVisibility(View.GONE);
 					tv_range.setText("");
 					InteNetUtils.getInstance(mContext).getBuyInfo("",
-							page + "", searchKey, addressIds,
+							page + "", searchKey, addressIds,industryId,
 							mRequestCallBack);
 				}else{
 					if (CommonUtils.isEmpty(searchKey)) {
@@ -216,7 +216,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 						tv_range.setText("");
 						if (CommonUtils.isNetworkAvailable(mContext)) {
 							InteNetUtils.getInstance(mContext).getBuyInfo("",
-									page + "", searchKey, addressIds,
+									page + "", searchKey, addressIds,industryId,
 									mRequestCallBack);
 						}
 						
@@ -382,7 +382,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 								&& CommonUtils.isNetworkAvailable(mContext)) {
 							isSearch = true;
 							InteNetUtils.getInstance(mContext).getBuyInfo("",
-									page + "", searchKey, addressIds,
+									page + "", searchKey, addressIds,industryId,
 									mRequestCallBack);
 						} else {
 
@@ -517,7 +517,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 				page++;
 				InteNetUtils.getInstance(mContext).getBuyInfo(
 						mQuotes.get(mQuotes.size() - 1).getCreatedTime() + "",
-						page + "", searchKey, addressIds, mRequestCallBack);
+						page + "", searchKey, addressIds,industryId, mRequestCallBack);
 			} else {
 				mHandler.postDelayed(new Runnable() {
 
@@ -541,7 +541,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
 					"最后更新:" + time);
 			page = 0;
 			InteNetUtils.getInstance(mContext).getBuyInfo("", page + "",
-					searchKey, addressIds, mRequestCallBack);
+					searchKey, addressIds,industryId, mRequestCallBack);
 		} else {
 			mHandler.postDelayed(new Runnable() {
 
@@ -601,7 +601,7 @@ public class ActivitymyBuy extends BaseActivity implements OnClickListener,
                         && CommonUtils.isNetworkAvailable(mContext)) {
                     isSearch = true;
                     InteNetUtils.getInstance(mContext).getBuyInfo("",
-                            page + "", searchKey, addressIds,
+                            page + "", searchKey, addressIds,industryId,
                             mRequestCallBack);
                 } else {
 

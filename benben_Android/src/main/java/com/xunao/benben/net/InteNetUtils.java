@@ -1442,12 +1442,13 @@ public class InteNetUtils {
 	}
 
 	public void getBuyInfo(String lastTime, String page, String searchKey,
-			String[] addressIds, RequestCallBack<String> callBack) {
+			String[] addressIds,String industry, RequestCallBack<String> callBack) {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("key", "android");
 		hashMap.put("last_time", lastTime);
 		hashMap.put("page", page);
 		hashMap.put("keyword", searchKey);
+        hashMap.put("industry", industry);
 		if (addressIds != null) {
 			String[] key = { "province", "city", "area" };
 			for (int i = 0; i < 3; i++) {

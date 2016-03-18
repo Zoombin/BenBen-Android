@@ -8,6 +8,7 @@
     <include layout="@layout/com_title_bar" />
 
     <TextView
+        android:id="@+id/tv_hint"
         android:layout_width="fill_parent"
         android:layout_height="50dip"
         android:gravity="center_vertical"

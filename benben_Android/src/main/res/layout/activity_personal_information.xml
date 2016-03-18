@@ -253,6 +253,7 @@
                 android:paddingRight="15dip" >
 
                 <TextView
+                    android:id="@+id/tv_bx_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

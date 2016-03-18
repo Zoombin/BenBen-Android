@@ -91,6 +91,7 @@ public class ActivityPersonal extends BaseActivity implements OnClickListener,
 	private RoundedImageView iv_two_code;
 	private TextView tv_integral;
 	private TextView tv_coin;
+    private TextView tv_bx_name;
 	private TextView tv_bxphone;
 	private TextView tv_otherphone;
 	private TextView tv_real_name;
@@ -184,6 +185,7 @@ public class ActivityPersonal extends BaseActivity implements OnClickListener,
 		iv_two_code = (RoundedImageView) findViewById(R.id.iv_two_code);
 		tv_integral = (TextView) findViewById(R.id.tv_integral);
 		tv_coin = (TextView) findViewById(R.id.tv_coin);
+        tv_bx_name = (TextView) findViewById(R.id.tv_bx_name);
 		tv_bxphone = (TextView) findViewById(R.id.tv_bxphone);
 		tv_otherphone = (TextView) findViewById(R.id.tv_otherphone);
 		tv_real_name = (TextView) findViewById(R.id.tv_real_name);
@@ -217,7 +219,11 @@ public class ActivityPersonal extends BaseActivity implements OnClickListener,
 		}else{
 			tv_coin.setText(Integer.parseInt(user.getIntegral())/100 +"");
 		}
-		
+
+        if(user.getBx_name()!=null && !user.getBx_name().equals("")) {
+            tv_bx_name.setText(user.getBx_name());
+        }
+
 		tv_bxphone.setText(user.getBaiXing());
 		tv_otherphone.setText(CommonUtils.isEmpty(user.getCornet()) ? "0"
 				: user.getCornet());

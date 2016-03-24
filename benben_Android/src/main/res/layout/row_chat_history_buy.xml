@@ -51,7 +51,7 @@
         android:layout_marginTop="6dp"
         android:layout_toRightOf="@id/avatar_container_buy"
         android:gravity="center_vertical"
-        android:text="报价提醒"
+        android:text="我要买状态提醒"
         android:textColor="#000"
         android:textSize="18dp" />
 

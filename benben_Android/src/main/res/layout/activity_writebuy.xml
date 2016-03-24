@@ -105,6 +105,16 @@
                     android:scrollbars="none" >
                 </com.xunao.benben.utils.NoScrollGridView>
 
+
+                <com.xunao.benben.view.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="样品图样能让商家提供更准确的服务"
+                    android:textSize="15sp"
+                    android:textColor="#787878"
+                    android:layout_marginBottom="8dp"
+                    />
+
             </LinearLayout>
 
             <View

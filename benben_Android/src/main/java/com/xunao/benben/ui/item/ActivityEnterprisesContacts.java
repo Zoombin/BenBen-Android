@@ -316,12 +316,12 @@ public class ActivityEnterprisesContacts extends BaseActivity implements ActionS
             itHolder.enterprise_number.setText("("
                     + enterprises.get(position).getNumber() + "人)");
 //
-            if(enterprises.get(position).getTag().equals("东阳百姓网")){
-                itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_baixing);
-            }else if(enterprises.get(position).getTag().equals("虚拟")){
+            if(enterprises.get(position).getTag().equals("虚拟")){
                 itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_xuni);
             }else if(enterprises.get(position).getTag().equals("企业")){
                 itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_company);
+            }else{
+                itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_baixing);
             }
 
             itHolder.item_layout.setOnClickListener(new OnClickListener() {

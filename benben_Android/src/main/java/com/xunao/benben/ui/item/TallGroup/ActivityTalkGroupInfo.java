@@ -304,6 +304,11 @@ public class ActivityTalkGroupInfo extends BaseActivity implements
 			send_message_blue.setVisibility(View.VISIBLE);
 			send_message_red.setVisibility(View.GONE);
 
+            rl_switch_message.setVisibility(View.GONE);
+            group_manage_change.setVisibility(View.GONE);
+            group_my_contact.setVisibility(View.GONE);
+            group_notice.setVisibility(View.GONE);
+
 		} else {
 			send_message_blue.setVisibility(View.GONE);
 			send_message_red.setVisibility(View.VISIBLE);

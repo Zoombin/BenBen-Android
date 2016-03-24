@@ -121,7 +121,7 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 			public void onClick(View arg0) {
 				startAnimActivity2Obj(ActivityWeb.class, "url",
 						AndroidConfig.NETHOST3 + AndroidConfig.Setting
-								+ "key/android/type/2", "title", "东阳百姓网入网声明");
+								+ "key/android/type/2", "title", "百姓网入网声明");
 			}
 		});
 		loding.setVisibility(View.GONE);
@@ -136,7 +136,7 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 				register_point.getText().toString());
 		ForegroundColorSpan greenSpan = new ForegroundColorSpan(
 				Color.parseColor("#3b96ca"));
-		builder.setSpan(greenSpan, 11, 22, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		builder.setSpan(greenSpan, 11, 20, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		register_point.setText(builder);
 	}
 

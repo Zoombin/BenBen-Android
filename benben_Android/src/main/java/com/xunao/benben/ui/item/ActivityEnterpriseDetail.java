@@ -268,7 +268,7 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
                             pecketName = inputDialog.getInputText();
 
                             if (!CommonUtils.StringIsSurpass(pecketName, 0, 10)) {
-                                ToastUtils.Infotoast(mContext, "通讯录名片限制在0-10个字数");
+                                ToastUtils.Infotoast(mContext, "通讯录名片限制在1-10个字数");
                                 return;
                             }
 

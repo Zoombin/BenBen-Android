@@ -250,7 +250,7 @@ public class ActivityEnterpriseMember extends BaseActivity implements
                         pecketName = inputDialog.getInputText();
 
                         if (!CommonUtils.StringIsSurpass(pecketName, 0, 10)) {
-                            ToastUtils.Infotoast(mContext, "通讯录名片限制在0-10个字数");
+                            ToastUtils.Infotoast(mContext, "通讯录名片限制在1-10个字数");
                             return;
                         }
 
@@ -459,14 +459,18 @@ public class ActivityEnterpriseMember extends BaseActivity implements
                                     Enterprise enterprise = new Enterprise();
                                     enterprise.parseJSON(object);
                                     String content="暂无公告";
+                                    String time = "";
+                                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                     if(!enterprise.getBulletin().equals("")){
                                         content = enterprise.getBulletin();
+                                        Date date = new Date(enterprise.getUpdate_time()*1000);
+                                        time = format.format(date);
                                     }
-                                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                                    Date date = new Date(enterprise.getUpdate_time()*1000);
+
+
                                     final InfobulletinHint hint = new InfobulletinHint(
                                             mContext, R.style.MyDialog1);
-                                    hint.setContent(content,format.format(date));
+                                    hint.setContent(content,time);
                                     hint.show();
                                     hint.setOKListener(new OnClickListener() {
 

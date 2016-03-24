@@ -59,7 +59,12 @@ public class ActivityChoiceBaiXin extends BaseActivity{
 
     @Override
     public void initLinstener(Bundle savedInstanceState) {
-
+        setOnLeftClickLinester(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AnimFinsh();
+            }
+        });
     }
 
     @Override

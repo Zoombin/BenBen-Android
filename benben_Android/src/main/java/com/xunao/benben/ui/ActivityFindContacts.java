@@ -551,6 +551,88 @@ public class ActivityFindContacts extends BaseActivity {
 			AnimFinsh();
 		}
 
+        new Thread() {
+            public void run() {
+                if (searchKey.length() > 0) {
+                    // 更新关键字
+                    contactsList.clear();
+                    temp.clear();
+                    try {
+                        List list = new ArrayList<Contacts>();
+                        list = dbUtil.findAll(Selector
+                                .from(Contacts.class)
+                                .where(WhereBuilder
+                                        .b("name", "like",
+                                                "%" + searchKey + "%")
+                                        .or("pinyin", "like",
+                                                "%" + searchKey + "%")
+                                        .or("is_baixing", "like",
+                                                "%" + searchKey + "%")
+                                        .or("is_benben", "like",
+                                                "%" + searchKey + "%"))
+                                .orderBy("pinyin", false));
+
+                        List<PhoneInfo> list2 = dbUtil
+                                .findAll(Selector
+                                        .from(PhoneInfo.class)
+                                        .where(WhereBuilder
+                                                .b("phone",
+                                                        "like",
+                                                        "%"
+                                                                + searchKey
+                                                                + "%")
+                                                .or("is_baixing",
+                                                        "like",
+                                                        "%"
+                                                                + searchKey
+                                                                + "%")
+                                                .or("is_benben",
+                                                        "like",
+                                                        "%"
+                                                                + searchKey
+                                                                + "%")));
+
+                        for (PhoneInfo p : list2) {
+                            list.addAll(dbUtil.findAll(Selector
+                                    .from(Contacts.class)
+                                    .where(WhereBuilder.b("id",
+                                            "=", p.getContacts_id()))));
+                        }
+
+                        list = CommonUtils.getNewList(list);
+
+                        for (Contacts c : (List<Contacts>) list) {
+                            if (c.getIs_benben().equals("0")) {
+                                temp.add(c);
+                            }
+                        }
+
+                        list.removeAll(temp);
+                        list.addAll(temp);
+
+                            contactsList = (ArrayList<Contacts>) list;
+                            mContext.runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    if (contactsList.size() > 0) {
+                                        adapter.notifyDataSetChanged();
+                                        no_data.setVisibility(View.GONE);
+                                    } else {
+                                        no_data.setVisibility(View.VISIBLE);
+                                    }
+
+                                }
+                            });
+
+                    } catch (DbException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }.start();
+
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

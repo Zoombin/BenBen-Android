@@ -425,7 +425,7 @@ public class ActivityInviteFriendToBx extends BaseActivity implements
 						register_point.getText().toString());
 				ForegroundColorSpan greenSpan = new ForegroundColorSpan(
 						Color.parseColor("#3b96ca"));
-				builder.setSpan(greenSpan, 11, 22,
+				builder.setSpan(greenSpan, 11, 20,
 						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				register_point.setText(builder);
 
@@ -435,7 +435,7 @@ public class ActivityInviteFriendToBx extends BaseActivity implements
 						startAnimActivity2Obj(ActivityWeb.class, "url",
 								AndroidConfig.NETHOST3 + AndroidConfig.Setting
 										+ "key/android/type/2", "title",
-								"东阳百姓网入网声明");
+								"百姓网入网声明");
 
 					}
 				});

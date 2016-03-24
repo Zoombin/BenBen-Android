@@ -285,7 +285,6 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
 		String ret_num = jsonObject.optString("ret_num");
-
 		if (ret_num.equals("0")) {
 
 			try {
@@ -341,6 +340,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 				tv_area.setTextColor(Color.BLACK);
                 tv_baixin.setText(bxApplyInfo.getBx_name());
                 tv_baixin.setTextColor(Color.BLACK);
+                enterprise_id = bxApplyInfo.getEnterprise_id();
 
 				if (!CommonUtils.isEmpty(bxApplyInfo.getReason())) {
 					rl_reason.setVisibility(View.VISIBLE);

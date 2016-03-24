@@ -503,8 +503,8 @@ public class ActivityMyNumberTrain extends BaseActivity implements
             return;
         }
 
-        if (et_description.getText().toString().length() > 200) {
-            ToastUtils.Infotoast(mContext, "业务介绍字数最多200字！");
+        if (et_description.getText().toString().length() > 1000) {
+            ToastUtils.Infotoast(mContext, "业务介绍字数最多1000字！");
             return;
         }
         if (CommonUtils.isEmpty(et_description.getText().toString())) {

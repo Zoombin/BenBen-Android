@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -308,12 +309,12 @@ public class ActivitySearchEnterprise extends BaseActivity implements
             TextView tv_introduce = ViewHolderUtil.get(convertView, R.id.tv_introduce);
 
 
-            if(enterprises.get(position).getTag().equals("东阳百姓网")){
-                iv_tag.setImageResource(R.drawable.icon_enterprises_baixing);
-            }else if(enterprises.get(position).getTag().equals("虚拟")){
+            if(enterprises.get(position).getTag().equals("虚拟")){
                 iv_tag.setImageResource(R.drawable.icon_enterprises_xuni);
             }else if(enterprises.get(position).getTag().equals("企业")){
                 iv_tag.setImageResource(R.drawable.icon_enterprises_company);
+            }else{
+                iv_tag.setImageResource(R.drawable.icon_enterprises_baixing);
             }
 			if (enterprises.get(position).getInA().equals("0")) {
 				iv_add.setVisibility(View.VISIBLE);
@@ -402,6 +403,7 @@ public class ActivitySearchEnterprise extends BaseActivity implements
                             inputDialog = new InputDialog(mContext,
                                     R.style.MyDialogStyle);
                             inputDialog.setContent("加入政企通讯录", "请输入短号", "完成", "取消");
+                            inputDialog.setInputType("");
                             inputDialog.setCancleListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

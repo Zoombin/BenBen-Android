@@ -406,41 +406,37 @@ public class NewFriendsMsgActivity extends BaseActivity {
 														try {
 															jsonObj = new JSONObject(
 																	arg0.result);
-															SuccessMsg successMsg = new SuccessMsg();
-															successMsg
-																	.parseJSON(jsonObj);
-															addFriend
-																	.setText("已同意");
-															addFriend
-																	.setBackgroundResource(R.drawable.but_bg_public_agree);
+//															SuccessMsg successMsg = new SuccessMsg();
+//															successMsg
+//																	.parseJSON(jsonObj);
+                                                            if(jsonObj.optInt("ret_mum")==0 || jsonObj.optInt("ret_mum")==107) {
+                                                                addFriend
+                                                                        .setText("已同意");
+                                                                addFriend
+                                                                        .setBackgroundResource(R.drawable.but_bg_public_agree);
 
-															item.setStatus(PublicMessage.AGREE);
+                                                                item.setStatus(PublicMessage.AGREE);
 
-															try {
-																dbUtil.saveOrUpdate(item);
-															} catch (DbException e) {
-																// TODO
-																// Auto-generated
-																// catch
-																// block
-																e.printStackTrace();
-															}
-															sendBroadcast(new Intent(
-																	AndroidConfig.ContactsRefresh));
-															return;
+                                                                try {
+                                                                    dbUtil.saveOrUpdate(item);
+                                                                } catch (DbException e) {
+                                                                    // TODO
+                                                                    // Auto-generated
+                                                                    // catch
+                                                                    // block
+                                                                    e.printStackTrace();
+                                                                }
+                                                                sendBroadcast(new Intent(
+                                                                        AndroidConfig.ContactsRefresh));
+                                                            }else{
+                                                                ToastUtils.Infotoast(mContext,jsonObj.optString("ret_msg"));
+                                                            }
+
 														} catch (JSONException e) {
 															// TODO
-															// Auto-generated
-															// catch
-															// block
-															e.printStackTrace();
-														} catch (NetRequestException e) {
-
 															e.printStackTrace();
 														}
-														ToastUtils.Errortoast(
-																mContext,
-																"同意加入失败");
+
 													}
 												});
 

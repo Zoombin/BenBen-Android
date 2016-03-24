@@ -270,39 +270,31 @@ public class ActivityNewGroupInfo extends BaseActivity implements View.OnClickLi
                                             try {
                                                 jsonObj = new JSONObject(
                                                         arg0.result);
-                                                SuccessMsg successMsg = new SuccessMsg();
-                                                successMsg
-                                                        .parseJSON(jsonObj);
+//                                                SuccessMsg successMsg = new SuccessMsg();
+//                                                successMsg
+//                                                        .parseJSON(jsonObj);
+                                                if(jsonObj.optInt("ret_mum")==0 || jsonObj.optInt("ret_mum")==107) {
 
-                                                publicMessage.setStatus(PublicMessage.AGREE);
+                                                    publicMessage.setStatus(PublicMessage.AGREE);
 
-                                                try {
-                                                    dbUtil.saveOrUpdate(publicMessage);
-                                                } catch (DbException e) {
-                                                    // TODO
-                                                    // Auto-generated
-                                                    // catch
-                                                    // block
-                                                    e.printStackTrace();
+                                                    try {
+                                                        dbUtil.saveOrUpdate(publicMessage);
+                                                    } catch (DbException e) {
+                                                        // TODO
+                                                        e.printStackTrace();
+                                                    }
+                                                    setResult(AndroidConfig.writeFriendResultCode);
+                                                    sendBroadcast(new Intent(
+                                                            AndroidConfig.ContactsRefresh));
+                                                    AnimFinsh();
+                                                }else{
+                                                    ToastUtils.Infotoast(mContext,jsonObj.optString("ret_msg"));
                                                 }
-                                                setResult(AndroidConfig.writeFriendResultCode);
-                                                sendBroadcast(new Intent(
-                                                        AndroidConfig.ContactsRefresh));
-                                                AnimFinsh();
-                                                return;
                                             } catch (JSONException e) {
                                                 // TODO
-                                                // Auto-generated
-                                                // catch
-                                                // block
-                                                e.printStackTrace();
-                                            } catch (NetRequestException e) {
-
                                                 e.printStackTrace();
                                             }
-                                            ToastUtils.Errortoast(
-                                                    mContext,
-                                                    "同意加入失败");
+
                                         }
                                     });
 

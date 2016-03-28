@@ -378,11 +378,14 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 						cardid_line.setVisibility(View.VISIBLE);
                         rl_baixin.setVisibility(View.VISIBLE);
 
-						CommonUtils.startImageLoader(cubeimageLoader,
-								bxApplyInfo.getPoster(), iv_idcard1);
-
-						CommonUtils.startImageLoader(cubeimageLoader,
-								bxApplyInfo.getPoster2(), iv_idcard2);
+                        if(bxApplyInfo.getPoster()!=null && !bxApplyInfo.getPoster().equals("")) {
+                            CommonUtils.startImageLoader(cubeimageLoader,
+                                    bxApplyInfo.getPoster(), iv_idcard1);
+                        }
+                        if(bxApplyInfo.getPoster2()!=null && !bxApplyInfo.getPoster2().equals("")) {
+                            CommonUtils.startImageLoader(cubeimageLoader,
+                                    bxApplyInfo.getPoster2(), iv_idcard2);
+                        }
 
 						iv_idcard1.setOnClickListener(this);
 						iv_idcard2.setOnClickListener(this);

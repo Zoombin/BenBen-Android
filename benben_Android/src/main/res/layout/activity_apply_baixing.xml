@@ -322,6 +322,7 @@
                         android:layout_marginLeft="25dip"
                         android:layout_marginRight="25dip"
                         android:scaleType="fitXY"
+                        android:src="@drawable/img_identity_code_front"
                         android:visibility="gone" />
                 </LinearLayout>
 
@@ -343,6 +344,7 @@
                         android:layout_marginLeft="25dip"
                         android:layout_marginRight="25dip"
                         android:scaleType="fitXY"
+                        android:src="@drawable/img_identity_code_back"
                         android:visibility="gone" />
                 </LinearLayout>
 

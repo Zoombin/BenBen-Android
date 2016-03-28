@@ -121,7 +121,7 @@ public class ActivityAcceptPrice extends BaseActivity implements View.OnClickLis
         }
         if(payId.equals("1")){
             payPrice = totalPrice+Double.parseDouble(shipping_fee);
-            tv_pay_mail.setText("含邮费("+shipping_fee+")元");
+            tv_pay_mail.setText("(含邮费"+shipping_fee+"元)");
             ll_address.setVisibility(View.VISIBLE);
         }else{
             payPrice = totalPrice;

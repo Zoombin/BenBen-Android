@@ -87,7 +87,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 	private Bitmap bitMap;
 	private File file1;
 	private File file2;
-	private String[] addressId;
+    private String[] addressId = {"0","0","0","0"};
 	private RelativeLayout rl_reason;
 	private View line;
 	private int reasonNum = 0;
@@ -365,6 +365,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 					if (!user.getPhone().equals(phoneNum)) {
 						cardid_rl.setVisibility(View.GONE);
 						cardid_line.setVisibility(View.GONE);
+                        rl_baixin.setVisibility(View.GONE);
 					}
 
 				} else {
@@ -375,6 +376,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 						ll_iv2.setVisibility(View.VISIBLE);
 						cardid_rl.setVisibility(View.VISIBLE);
 						cardid_line.setVisibility(View.VISIBLE);
+                        rl_baixin.setVisibility(View.VISIBLE);
 
 						CommonUtils.startImageLoader(cubeimageLoader,
 								bxApplyInfo.getPoster(), iv_idcard1);
@@ -391,7 +393,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 						ll_iv2.setVisibility(View.GONE);
 						cardid_rl.setVisibility(View.GONE);
 						cardid_line.setVisibility(View.GONE);
-
+                        rl_baixin.setVisibility(View.GONE);
 					}
 
 					initTitle_Right_Left_bar("百姓网申请详情", "", "提交",

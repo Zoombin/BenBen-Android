@@ -240,7 +240,7 @@ public class ActivityFindContacts extends BaseActivity {
 																	"like",
 																	"%"
 																			+ s
-																			+ "%")));
+																			+ "%")).and("phone","!=",""));
 
 									for (PhoneInfo p : list2) {
 										list.addAll(dbUtil.findAll(Selector

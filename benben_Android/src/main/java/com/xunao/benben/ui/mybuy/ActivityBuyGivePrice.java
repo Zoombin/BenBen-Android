@@ -86,7 +86,7 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
     private List<PayMethod> payMethods = new ArrayList<>();
     private int payType=0;
     private String payName="";
-    private String shipping_fee="0";
+    private String shipping_fee="";
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {

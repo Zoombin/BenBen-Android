@@ -154,6 +154,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_marginLeft="10dp"
                         android:inputType="numberDecimal"
+                        android:hint="请输入报价"
                         />
 
                     <ImageView

@@ -59,7 +59,7 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 	private LinearLayout ll_iv2;
 	private EditText tv_user_phone;
 	private TextView register_point;
-	private String[] addressId;
+	private String[] addressId = {"0","0","0","0"};
 	private EditText et_name;
 	private EditText et_cardnum;
 	private RoundedImageView iv_idcard1;
@@ -223,6 +223,8 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 				}
 				if (CommonUtils.isNetworkAvailable(mContext))
 					showLoding("请稍后...");
+
+
 				InteNetUtils.getInstance(mContext).enterBaixing(name, phone,
 						cardNum, file1, file2, addressId, enterprise_id+"",mRequestCallBack);
 

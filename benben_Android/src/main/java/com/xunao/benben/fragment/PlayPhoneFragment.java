@@ -357,7 +357,7 @@ public class PlayPhoneFragment extends BaseFragment implements OnClickListener,
 															"%" + s.toString()
 																	+ "%"))
 													.or("is_baixing", "like",
-															"%" + s + "%"));
+															"%" + s + "%").and("phone","!=",""));
 
 									if (findAll != null)
 										linkePhones = new ArrayList<PhoneInfo>(

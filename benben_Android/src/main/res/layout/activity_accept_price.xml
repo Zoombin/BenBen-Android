@@ -200,7 +200,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="在线支付总金额:"
+                    android:text="在线支付总额:"
                     android:textColor="#323232"
                     android:textSize="15dp"
                     />
@@ -218,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15dp"
-                    android:textColor="#c8c8c8"
+                    android:textColor="#FF8200"
                     />
             </LinearLayout>
 

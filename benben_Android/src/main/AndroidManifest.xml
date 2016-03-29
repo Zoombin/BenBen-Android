@@ -1090,6 +1090,11 @@
             android:name="com.xunao.benben.ui.ActivityMyWeb"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.xunao.benben.ui.ActivityFindMapAddress"
+            android:screenOrientation="portrait" >
+        </activity>
+
 
         <activity
             android:name="com.xunao.benben.ui.item.ActivityMyVipTrain"

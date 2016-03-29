@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMapOptions;
+import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
@@ -45,15 +47,25 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
+import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.navi.BaiduMapAppNotSupportNaviException;
 import com.baidu.mapapi.navi.BaiduMapNavigation;
 import com.baidu.mapapi.navi.NaviParaOption;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeOption;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.baidu.mapapi.utils.OpenClientUtil;
 import com.xunao.benben.R;
 import com.xunao.benben.dialog.MsgDialog;
+import com.xunao.benben.ui.ActivityFindContacts;
+import com.xunao.benben.ui.ActivityFindMapAddress;
 
 public class BaiduMapActivity extends BaseActivity implements View.OnClickListener {
 
@@ -70,7 +82,7 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
     EditText indexText = null;
     int index = 0;
     // LocationData locData = null;
-    static BDLocation lastLocation = null;
+//    static BDLocation lastLocation = null;
     public static BaiduMapActivity instance = null;
     ProgressDialog progressDialog;
     private BaiduMap mBaiduMap;
@@ -78,11 +90,17 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
     private LocationMode mCurrentMode;
     private TextView tvaddress;
     private Button btn_go;
-    private LatLng showConvertLatLng;
+//    private LatLng showConvertLatLng;
     private BDLocation startLocation = null;
     private NowLocationListener nowListener = new NowLocationListener();
 
-
+    private GeoCoder mSearch;
+    private LatLng mLatLng = null;
+    private String address="";
+    private boolean isFirstLoc = true;
+    private LinearLayout ll_search;
+    private EditText search_edittext;
+    private String city="";
     /**
      * 构造广播监听类，监听 SDK key 验证以及网络异常广播
      */
@@ -124,12 +142,15 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
         mBaiduMap.setMapStatus(msu);
         initMapView();
+        ll_search = (LinearLayout) findViewById(R.id.ll_search);
         if (latitude == 0) {
+            ll_search.setVisibility(View.VISIBLE);
             mMapView = new MapView(this, new BaiduMapOptions());
             mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(
                     mCurrentMode, true, null));
             showMapWithLocationClient();
         } else {
+            ll_search.setVisibility(View.GONE);
             double longtitude = intent.getDoubleExtra("longitude", 0);
             String address = intent.getStringExtra("address");
             tvaddress.setText(address);
@@ -145,20 +166,33 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
         iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
         mBaiduReceiver = new BaiduSDKReceiver();
         registerReceiver(mBaiduReceiver, iFilter);
+        search_edittext = (EditText) findViewById(R.id.search_edittext);
+        search_edittext.setFocusable(false);
+        search_edittext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent();
+                intent.setClass(BaiduMapActivity.this, ActivityFindMapAddress.class);
+                intent.putExtra("city",city);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                startActivityForResult(intent, 1);
+
+            }
+        });
     }
 
     private void showMap(double latitude, double longtitude, String address) {
         sendButton.setVisibility(View.GONE);
-        LatLng llA = new LatLng(latitude, longtitude);
-        CoordinateConverter converter= new CoordinateConverter();
-        converter.coord(llA);
-        converter.from(CoordinateConverter.CoordType.COMMON);
-        showConvertLatLng = converter.convert();
-        OverlayOptions ooA = new MarkerOptions().position(showConvertLatLng).icon(BitmapDescriptorFactory
+        mLatLng = new LatLng(latitude, longtitude);
+//        CoordinateConverter converter= new CoordinateConverter();
+//        converter.coord(llA);
+//        converter.from(CoordinateConverter.CoordType.COMMON);
+//        showConvertLatLng = converter.convert();
+        OverlayOptions ooA = new MarkerOptions().position(mLatLng).icon(BitmapDescriptorFactory
                 .fromResource(R.drawable.icon_marka))
                 .zIndex(4).draggable(true);
         mBaiduMap.addOverlay(ooA);
-        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(showConvertLatLng, 17.0f);
+        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(mLatLng, 17.0f);
         mBaiduMap.animateMapStatus(u);
         myLocation();
     }
@@ -220,14 +254,73 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
 
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true);// 打开gps
-        // option.setCoorType("bd09ll"); //设置坐标类型
+        // option.setCoorType("gcj02"); //设置坐标类型
         // Johnson change to use gcj02 coordination. chinese national standard
         // so need to conver to bd09 everytime when draw on baidu map
-        option.setCoorType("gcj02");
+        option.setCoorType("bd09ll");
         option.setScanSpan(30000);
         option.setAddrType("all");
         mLocClient.setLocOption(option);
+
+        mSearch = GeoCoder.newInstance();
+        mSearch.setOnGetGeoCodeResultListener(listener);
+        mBaiduMap.setOnMapStatusChangeListener( new BaiduMap.OnMapStatusChangeListener() {
+            /**
+             * 手势操作地图，设置地图状态等操作导致地图状态开始改变。
+             * @param status 地图状态改变开始时的地图状态
+             */
+            public void onMapStatusChangeStart(MapStatus status){
+                if (!progressDialog.isShowing()) {
+                    progressDialog.show();
+                }
+            }
+            /**
+             * 地图状态变化中
+             * @param status 当前地图状态
+             */
+            public void onMapStatusChange(MapStatus status){
+            }
+            /**
+             * 地图状态改变结束
+             * @param status 地图状态改变结束后的地图状态
+             */
+            public void onMapStatusChangeFinish(MapStatus status){
+
+                mLatLng = status.target;
+                mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(mLatLng));
+
+            }
+        });
     }
+
+    OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
+        public void onGetGeoCodeResult(GeoCodeResult result) {
+            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+                //没有检索到结果
+            }
+            //获取地理编码结果
+        }
+
+        @Override
+        public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
+            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+                //没有找到检索结果
+            }else{ //获取反向地理编码结果
+                sendButton.setEnabled(true);
+                if (progressDialog != null) {
+                    progressDialog.dismiss();
+                }
+                mBaiduMap.clear();
+                OverlayOptions ooA = new MarkerOptions().position(mLatLng).icon(BitmapDescriptorFactory
+                        .fromResource(R.drawable.icon_marka))
+                        .zIndex(4).draggable(true);
+                mBaiduMap.addOverlay(ooA);
+                address = result.getAddress();
+                tvaddress.setText(address);
+            }
+
+        }
+    };
 
     @Override
     protected void onPause() {
@@ -236,7 +329,7 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
             mLocClient.stop();
         }
         super.onPause();
-        lastLocation = null;
+
     }
 
     @Override
@@ -253,6 +346,8 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
         if (mLocClient != null)
             mLocClient.stop();
         mMapView.onDestroy();
+        if (mSearch != null)
+            mSearch.destroy();
         unregisterReceiver(mBaiduReceiver);
         super.onDestroy();
     }
@@ -269,35 +364,50 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
             if (location == null) {
                 return;
             }
-            Log.d("map", "On location change received:" + location);
-            Log.d("map", "addr:" + location.getAddrStr());
-            sendButton.setEnabled(true);
-            if (progressDialog != null) {
-                progressDialog.dismiss();
-            }
 
-            if (lastLocation != null) {
-                if (lastLocation.getLatitude() == location.getLatitude() && lastLocation.getLongitude() == location.getLongitude()) {
-                    Log.d("map", "same location, skip refresh");
-                    // mMapView.refresh(); //need this refresh?
-                    return;
-                }
+//            sendButton.setEnabled(true);
+//            if (progressDialog != null) {
+//                progressDialog.dismiss();
+//            }
+//
+//            if (lastLocation != null) {
+//                if (lastLocation.getLatitude() == location.getLatitude() && lastLocation.getLongitude() == location.getLongitude()) {
+//                    Log.d("map", "same location, skip refresh");
+//                    // mMapView.refresh(); //need this refresh?
+//                    return;
+//                }
+//            }
+//            Log.d("map", "same location, ok");
+//            lastLocation = location;
+//            mBaiduMap.clear();
+            LatLng llA = new LatLng(location.getLatitude(), location.getLongitude());
+//            CoordinateConverter converter= new CoordinateConverter();
+//            converter.coord(llA);
+//            converter.from(CoordinateConverter.CoordType.COMMON);
+//            LatLng convertLatLng = converter.convert();
+//            OverlayOptions ooA = new MarkerOptions().position(convertLatLng).icon(BitmapDescriptorFactory
+//                    .fromResource(R.drawable.icon_marka))
+//                    .zIndex(4).draggable(true);
+//            mBaiduMap.addOverlay(ooA);
+
+//            MyLocationData locData = new MyLocationData.Builder()
+//                    .accuracy(location.getRadius())
+//                            // 此处设置开发者获取到的方向信息，顺时针0-360
+//                    .direction(100).latitude(location.getLatitude())
+//                    .longitude(location.getLongitude()).build();
+//            mBaiduMap.setMyLocationData(locData);
+//            // 设置自定义图标
+//            BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
+//                    .fromResource(R.drawable.);
+//            MyLocationConfiguration config = new MyLocationConfiguration( MyLocationConfiguration.LocationMode.NORMAL, true, mCurrentMarker);
+//            mBaiduMap.setMyLocationConfigeration(config);
+            city = location.getCity();
+            if (isFirstLoc) {
+                isFirstLoc = false;
+                MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(llA, 17.0f);
+                mBaiduMap.animateMapStatus(u);
             }
-            Log.d("map", "same location, ok");
-            lastLocation = location;
-            mBaiduMap.clear();
-            LatLng llA = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-            CoordinateConverter converter= new CoordinateConverter();
-            converter.coord(llA);
-            converter.from(CoordinateConverter.CoordType.COMMON);
-            LatLng convertLatLng = converter.convert();
-            OverlayOptions ooA = new MarkerOptions().position(convertLatLng).icon(BitmapDescriptorFactory
-                    .fromResource(R.drawable.icon_marka))
-                    .zIndex(4).draggable(true);
-            mBaiduMap.addOverlay(ooA);
-            MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(convertLatLng, 17.0f);
-            mBaiduMap.animateMapStatus(u);
-            tvaddress.setText(lastLocation.getAddrStr());
+//            tvaddress.setText(lastLocation.getAddrStr());
         }
 
         public void onReceivePoi(BDLocation poiLocation) {
@@ -343,9 +453,9 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
 
     public void sendLocation(View view) {
         Intent intent = this.getIntent();
-        intent.putExtra("latitude", lastLocation.getLatitude());
-        intent.putExtra("longitude", lastLocation.getLongitude());
-        intent.putExtra("address", lastLocation.getAddrStr());
+        intent.putExtra("latitude", mLatLng.latitude);
+        intent.putExtra("longitude", mLatLng.longitude);
+        intent.putExtra("address", address);
         this.setResult(RESULT_OK, intent);
         finish();
         overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
@@ -357,7 +467,7 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_go:
                 LatLng pt1 = new LatLng(startLocation.getLatitude(),startLocation.getLongitude());
 
-                LatLng pt2 = new LatLng(showConvertLatLng.latitude,showConvertLatLng.longitude);
+                LatLng pt2 = new LatLng(mLatLng.latitude,mLatLng.longitude);
 
                 NaviParaOption para = new NaviParaOption();
                 para.startPoint(pt1);
@@ -389,6 +499,22 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
                         }
                     });
                     msgDialog.show();
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                if(resultCode==RESULT_OK && data!=null){
+                    double latitude = data.getDoubleExtra("latitude",0);
+                    double longitude = data.getDoubleExtra("longitude",0);
+                    LatLng llA = new LatLng(latitude,longitude);
+                    MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(llA, 17.0f);
+                    mBaiduMap.animateMapStatus(u);
                 }
                 break;
         }

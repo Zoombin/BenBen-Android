@@ -246,8 +246,10 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 														.Infotoast(mActivity,
 																"你已经是百姓网用户,可以通过\"将好友加入百姓网\"提交好友");
 											} else if (status == 1) {
-												ToastUtils.Infotoast(mActivity,
-														"您不符合加入百姓网条件");
+                                                mActivity
+                                                        .startAnimActivity(ActivityApplyBaixingDetail.class);
+//												ToastUtils.Infotoast(mActivity,
+//														"您不符合加入百姓网条件");
 											} else {
 												if (status == 0 || status == 2) {
 													mActivity

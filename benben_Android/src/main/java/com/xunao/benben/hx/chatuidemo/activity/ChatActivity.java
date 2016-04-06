@@ -520,7 +520,12 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 					toChatUsername, false);
 
             if(String.valueOf(com_title_bar_content.getText()).equals("")){
-                com_title_bar_content.setText(toChatUsername);
+
+                if(toChatUsername.equals("admin")){
+                    com_title_bar_content.setText("套餐提醒");
+                }else {
+                    com_title_bar_content.setText(toChatUsername);
+                }
                 bar_bottom.setVisibility(View.GONE);
                 com_title_bar_right_bt.setVisibility(View.GONE);
             }

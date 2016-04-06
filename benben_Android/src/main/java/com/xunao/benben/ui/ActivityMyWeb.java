@@ -197,23 +197,24 @@ public class ActivityMyWeb extends BaseActivity {
         if (requestCode == FILECHOOSER_RESULTCODE) {
             if (null == mUploadMessage)
                 return;
+            if(resultCode == RESULT_OK) {
+                Uri uri = intent == null || resultCode != RESULT_OK ? null : intent.getData();
 
-            Uri uri = intent == null || resultCode != RESULT_OK ? null : intent.getData();
+                String[] proj = {MediaStore.Images.Media.DATA};
 
-            String[] proj = { MediaStore.Images.Media.DATA };
+                Cursor actualimagecursor = managedQuery(uri, proj, null, null, null);
 
-            Cursor actualimagecursor = managedQuery(uri,proj,null,null,null);
+                int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 
-            int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                actualimagecursor.moveToFirst();
 
-            actualimagecursor.moveToFirst();
-
-            String img_path = actualimagecursor.getString(actual_image_column_index);
-            Uri result = Uri.fromFile(new File(img_path));
+                String img_path = actualimagecursor.getString(actual_image_column_index);
+                Uri result = Uri.fromFile(new File(img_path));
 
 
-            mUploadMessage.onReceiveValue(result);
-            mUploadMessage = null;
+                mUploadMessage.onReceiveValue(result);
+                mUploadMessage = null;
+            }
         }
     }
 }

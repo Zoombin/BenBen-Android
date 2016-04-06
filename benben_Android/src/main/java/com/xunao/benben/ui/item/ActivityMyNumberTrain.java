@@ -484,7 +484,7 @@ public class ActivityMyNumberTrain extends BaseActivity implements
                             e.printStackTrace();
                         }
                     }
-                    if (resultLen <= 1 || 13 <= resultLen) {
+                    if (resultLen <= 0 || 13 <= resultLen) {
                         isLong = true;
 
                         break;

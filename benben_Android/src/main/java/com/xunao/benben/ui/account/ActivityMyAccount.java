@@ -178,7 +178,7 @@ public class ActivityMyAccount extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.rl_mall:
                 Intent intent = new Intent(mContext, ActivityMyWeb.class);
-                intent.putExtra("title", "奔犇商场");
+                intent.putExtra("title", "奔犇商城");
                 intent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService?token="+user.getToken());
                 startActivity(intent);
                 break;

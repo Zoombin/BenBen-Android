@@ -117,7 +117,6 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject==========="+jsonObject);
         dissLoding();
         String optString = jsonObject.optString("ret_num");
         dissLoding();
@@ -163,7 +162,7 @@ public class ActivityHelpCollect extends BaseActivity implements View.OnClickLis
                 }else{
                     btleftisvip.setText("立即开通");
                 }
-                tv_vip_num.setText("(已开通"+jsonObject.optString("vip_num")+"人)");
+//                tv_vip_num.setText("(已开通"+jsonObject.optString("vip_num")+"人)");
             }
         }
     }

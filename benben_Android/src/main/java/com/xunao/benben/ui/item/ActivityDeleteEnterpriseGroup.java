@@ -76,7 +76,7 @@ public class ActivityDeleteEnterpriseGroup extends BaseActivity implements
 		enterpriseId = intent.getStringExtra("enterpriseId");
 
 		EnterpriseGroup myGroup = new EnterpriseGroup();
-		myGroup.setId("-2");
+		myGroup.setId("-1");
 		myGroup.setGroupName("同时删除分组下所有成员");
 		myGroup.setSelect(true);
 		enterpriseGroups.add(myGroup);
@@ -253,17 +253,17 @@ public class ActivityDeleteEnterpriseGroup extends BaseActivity implements
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.btn_delete:
-			if (memberDetails.size() <= 0) {
-				ToastUtils.Infotoast(mContext, "此通讯录中没有成员!");
-				return;
-			}
-			String id = "";
-			for (EnterpriseMemberDetail detail : memberDetails) {
-				id += detail.getId() + ",";
-			}
-			id = id.substring(0, id.length() - 1);
+//			if (memberDetails.size() <= 0) {
+//				ToastUtils.Infotoast(mContext, "此通讯录中没有成员!");
+//				return;
+//			}
+//			String id = "";
+//			for (EnterpriseMemberDetail detail : memberDetails) {
+//				id += detail.getId() + ",";
+//			}
+//			id = id.substring(0, id.length() - 1);
 			if (CommonUtils.isNetworkAvailable(mContext)) {
-				if (delete_id.equals("-2")) {
+				if (delete_id.equals("-1")) {
 					InteNetUtils.getInstance(mContext)
 							.delEnterpriseGroupMember("0",
 									enterpriseGroup.getId(), enterpriseId,

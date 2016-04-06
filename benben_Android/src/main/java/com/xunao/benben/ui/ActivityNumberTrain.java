@@ -353,6 +353,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 		setOnLeftClickLinester(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
+                Log.d("ltf","isSearch========="+isSearch);
 				if (isSearch || isDelete) {
 					pagerNum = 0;
 					enterNum = false;
@@ -361,6 +362,7 @@ public class ActivityNumberTrain extends BaseActivity implements
 					addressId[1] = addressId[2] = addressId[0] = "";
 					addressname = null;
                     industryId = "";
+                    lodingDialog.show();
 					InteNetUtils.getInstance(mContext).getStoreList(pagerNum,
 							"", latitude, longitude, addressId[0],
 							addressId[1], addressId[2], addressId[3],industryId,

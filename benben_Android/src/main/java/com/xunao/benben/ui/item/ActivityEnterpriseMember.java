@@ -661,6 +661,20 @@ public class ActivityEnterpriseMember extends BaseActivity implements
                 }
             });
 
+            holder.tv_enterprise_phone.setOnLongClickListener(new OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View arg0) {
+                    isDelete = true;
+                    position = groupPosition;
+                    showInfoMsgDialog("删除常用联系人",
+                            "是否将" + enterpriseMemberDetail.getName()
+                                    + "从常用联系人中删除",
+                            enterpriseMemberDetail.getId(), false);
+                    return false;
+                }
+            });
+
 			holder.iv_make_phone.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
@@ -700,6 +714,20 @@ public class ActivityEnterpriseMember extends BaseActivity implements
                     });
                     PhoneUtils.makeCall(Integer.parseInt(enterpriseMemberDetail.getId()),enterpriseMemberDetail.getName(),
                             enterpriseMemberDetail.getShortPhone(), mContext);
+                }
+            });
+
+            holder.tv_enterprise_shortphone.setOnLongClickListener(new OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View arg0) {
+                    isDelete = true;
+                    position = groupPosition;
+                    showInfoMsgDialog("删除常用联系人",
+                            "是否将" + enterpriseMemberDetail.getName()
+                                    + "从常用联系人中删除",
+                            enterpriseMemberDetail.getId(), false);
+                    return false;
                 }
             });
 

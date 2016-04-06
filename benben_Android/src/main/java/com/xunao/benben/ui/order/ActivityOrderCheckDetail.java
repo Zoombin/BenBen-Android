@@ -34,6 +34,7 @@ public class ActivityOrderCheckDetail extends BaseActivity implements View.OnCli
     private TextView tv_promotion_name,tv_goods_amount,tv_goods_number,tv_status;
     private TextView tv_order_amount,tv_pay_name;
     private TextView tv_confirm,tv_cancel;
+    private TextView tv_hint;
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class ActivityOrderCheckDetail extends BaseActivity implements View.OnCli
         tv_cancel = (TextView) findViewById(R.id.tv_cancel);
         tv_confirm.setOnClickListener(this);
         tv_cancel.setOnClickListener(this);
+        tv_hint = (TextView) findViewById(R.id.tv_hint);
     }
 
     @Override
@@ -134,13 +136,17 @@ public class ActivityOrderCheckDetail extends BaseActivity implements View.OnCli
         }
         tv_order_amount.setText(order.getOrder_amount());
         tv_pay_name.setText(order.getPay_name());
-        if(order.getIs_consume()==0){
-            tv_confirm.setVisibility(View.VISIBLE);
-            tv_cancel.setVisibility(View.VISIBLE);
-            tv_cancel.setText("取消消费");
-        }else{
-            tv_cancel.setVisibility(View.VISIBLE);
-            tv_cancel.setText("已消费");
+        if(pay_status==0){
+            tv_hint.setVisibility(View.VISIBLE);
+        }else {
+            if (order.getIs_consume() == 0) {
+                tv_confirm.setVisibility(View.VISIBLE);
+                tv_cancel.setVisibility(View.VISIBLE);
+                tv_cancel.setText("取消消费");
+            } else {
+                tv_cancel.setVisibility(View.VISIBLE);
+                tv_cancel.setText("已消费");
+            }
         }
 
     }

@@ -277,13 +277,13 @@ public class ActivityInviteFriendToBx extends BaseActivity implements
 				
 				tv_phone.setText(bxContacts.getPhone());
 
-				if (!TextUtils.isEmpty(bxContacts.getAddress())) {
-					tv_area.setText(bxContacts.getAddress());
-					tv_area.setTextColor(Color.BLACK);
-				} else {
-					tv_area.setText("请选择所在地区");
-					tv_area.setTextColor(Color.parseColor("#848484"));
-				}
+//				if (!TextUtils.isEmpty(bxContacts.getAddress())) {
+//					tv_area.setText(bxContacts.getAddress());
+//					tv_area.setTextColor(Color.BLACK);
+//				} else {
+//					tv_area.setText("请选择所在地区");
+//					tv_area.setTextColor(Color.parseColor("#848484"));
+//				}
 
                 iv_delete.setOnClickListener(new OnClickListener() {
                     @Override

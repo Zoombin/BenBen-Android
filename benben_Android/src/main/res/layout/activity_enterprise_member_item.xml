@@ -18,17 +18,17 @@
 
         <ImageView
             android:id="@+id/item_select"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dip"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/icon_com_list_delete"
+            android:padding="10dp"
             android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_enterprise_name"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dip"
+            android:layout_marginLeft="2dip"
             android:layout_weight="1"
             android:gravity="center_vertical|left"
             android:text=""

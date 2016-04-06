@@ -256,7 +256,7 @@ public class ActivityTalkGroupMember extends BaseActivity {
 	public void initDate(Bundle savedInstanceState) {
 		mTalkGroup = (TalkGroup) getIntent().getSerializableExtra("TG");
 
-//		if (Integer.parseInt(mTalkGroup.getIs_admin()) == 1) {
+		if (Integer.parseInt(mTalkGroup.getIs_admin()) == 1) {
 			initSwipeMenu();
 			listView.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -306,15 +306,15 @@ public class ActivityTalkGroupMember extends BaseActivity {
 					return false;
 				}
 			});
-//		}else{
-//			wx_message.setVisibility(View.GONE);
-//
-//			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-//					RelativeLayout.LayoutParams.WRAP_CONTENT,
-//					RelativeLayout.LayoutParams.WRAP_CONTENT);
-//			lp.bottomMargin = 0;
-//			listView.setLayoutParams(lp);
-//		}
+		}else{
+			wx_message.setVisibility(View.GONE);
+
+			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+					RelativeLayout.LayoutParams.WRAP_CONTENT,
+					RelativeLayout.LayoutParams.WRAP_CONTENT);
+			lp.bottomMargin = 0;
+			listView.setLayoutParams(lp);
+		}
 		InteNetUtils.getInstance(mContext).getTalkGroupMember(
 				mTalkGroup.getId(), mRequestCallBack);
 	}

@@ -341,20 +341,16 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 			OnClickListener add = new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-                    if (enterprises.get(position).getEnterprise_apply() == 3) {
+                    if (enterprises.get(position).getEnterprise_apply() == 3 && !enterprises.get(position).getType().equals("2")) {
                         ToastUtils.Infotoast(mContext, "该政企不允许加入");
                     } else {
 
                         if (enterprises.get(position).getType().equals("1")) {
                             if (CommonUtils.isNetworkAvailable(mContext)) {
                                 enterpriseAdd = enterprises.get(position);
-
-                                // user.getId() + ":"
-                                // + user.getUserNickname()
-                                // + ":" + user.getPhone()
                                 if (enterprises.get(position).getEnterprise_apply() == 2) {
                                     final MsgDialog msgDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
-                                    msgDialog.setContent("确定申请加入吗?", "", "确定", "取消");
+                                    msgDialog.setContent("确定加入吗?", "", "确定", "取消");
                                     msgDialog.setCancleListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -441,6 +437,28 @@ public class ActivitySearchEnterprise extends BaseActivity implements
                                                                                 JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
                                                                                 if (jsonObject.optInt("ret_num") == 0) {
                                                                                     ToastUtils.Errortoast(mContext, "提交申请成功!");
+                                                                                }else if (jsonObject.optInt("ret_num") == 1888) {
+                                                                                    final InfoSimpleMsgHint hint = new InfoSimpleMsgHint(
+                                                                                            ActivitySearchEnterprise.this, R.style.MyDialog1);
+                                                                                    hint.setContent("加入政企通讯录成功");
+                                                                                    hint.setBtnContent("确定");
+                                                                                    hint.show();
+                                                                                    hint.setOKListener(new OnClickListener() {
+
+                                                                                        @Override
+                                                                                        public void onClick(View v) {
+                                                                                            //user.setUpdate(true);
+                                                                                            startAnimActivity2Obj(
+                                                                                                    ActivityEnterpriseMember.class, "id",
+                                                                                                    enterpriseAdd.getId(), "name",
+                                                                                                    enterpriseAdd.getName());
+                                                                                            sendBroadcast(new Intent(AndroidConfig.refreshEnterpriseList));
+                                                                                            AnimFinsh();
+                                                                                        }
+                                                                                    });
+
+                                                                                    hint.show();
+                                                                                    user.setUpdate(false);
                                                                                 } else {
                                                                                     ToastUtils.Errortoast(mContext, jsonObject.optString("ret_msg"));
                                                                                 }
@@ -605,8 +623,6 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 					});
 
 					hint.show();
-
-					// ToastUtils.Infotoast(mContext, "加入政企通讯录成功!");
 					user.setUpdate(false);
 					// AnimFinsh();
 				} else {

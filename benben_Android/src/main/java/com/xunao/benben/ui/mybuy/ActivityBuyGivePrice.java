@@ -153,7 +153,19 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        payMethods = (ArrayList<PayMethod>) getIntent().getSerializableExtra("payMethods");
+        PayMethod payMethod1 = new PayMethod();
+        payMethod1.setPay_id("1");
+        payMethod1.setPay_name("在线支付，快递送货");
+        payMethods.add(payMethod1);
+        PayMethod payMethod2 = new PayMethod();
+        payMethod2.setPay_id("2");
+        payMethod2.setPay_name("在线支付，到店消费");
+        payMethods.add(payMethod2);
+        PayMethod payMethod3 = new PayMethod();
+        payMethod3.setPay_id("3");
+        payMethod3.setPay_name("在线下单，到店交易");
+        payMethods.add(payMethod3);
+//        payMethods = (ArrayList<PayMethod>) getIntent().getSerializableExtra("payMethods");
         adapter.notifyDataSetChanged();
     }
 

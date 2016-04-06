@@ -3254,9 +3254,10 @@ public class InteNetUtils {
                 requestCallBack);
     }
 
-    public void MyPayLog(RequestCallBack<String> requestCallBack) {
+    public void MyPayLog(int page,RequestCallBack<String> requestCallBack) {
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("key", "android");
+        hashMap.put("p", page+"");
         ComPost(AndroidConfig.NETHOST + AndroidConfig.MyPayLog, hashMap,
                 requestCallBack);
     }

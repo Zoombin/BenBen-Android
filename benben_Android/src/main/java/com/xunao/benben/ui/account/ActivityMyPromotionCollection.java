@@ -25,7 +25,9 @@ import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.bean.Promotion;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
+import com.xunao.benben.ui.groupbuy.ActivityGroupBuyDetail;
 import com.xunao.benben.ui.groupbuy.ActivityGroupBuyManage;
+import com.xunao.benben.ui.promotion.ActivityPromotionDetail;
 import com.xunao.benben.ui.promotion.ActivityPromotionManage;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.PixelUtil;
@@ -312,6 +314,7 @@ public class ActivityMyPromotionCollection extends BaseActivity implements View.
             TextView tv_title = (TextView) convertView
                     .findViewById(R.id.tv_title);
             ImageView iv_over_time = (ImageView) convertView.findViewById(R.id.iv_over_time);
+            TextView tv_price = (TextView) convertView.findViewById(R.id.tv_price);
             CheckBox cb_item = (CheckBox) convertView.findViewById(R.id.cb_item);
             if(isDelete){
                 cb_item.setVisibility(View.VISIBLE);
@@ -337,6 +340,7 @@ public class ActivityMyPromotionCollection extends BaseActivity implements View.
             tv_title.setText(promotion.getName());
             CubeImageView iv_promotion = (CubeImageView) convertView
                     .findViewById(R.id.iv_promotion);
+            tv_price.setText(promotion.getPrice());
 //
 //            iv_promotion.setLayoutParams(new LinearLayout.LayoutParams(
 //                            LinearLayout.LayoutParams.MATCH_PARENT, PixelUtil
@@ -359,6 +363,12 @@ public class ActivityMyPromotionCollection extends BaseActivity implements View.
                             cpLists.get(position).setChecked(true);
                         }
                         adapter.notifyDataSetChanged();
+                    }else{
+                        Intent intent = new Intent(mContext, ActivityPromotionDetail.class);
+                        intent.putExtra("ids", cpLists.get(position).getPromotionid()+"");
+                        intent.putExtra("position", 0);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                     }
                 }
             });
@@ -449,6 +459,12 @@ public class ActivityMyPromotionCollection extends BaseActivity implements View.
                             gbLists.get(position).setChecked(true);
                         }
                         buyAdapter.notifyDataSetChanged();
+                    }else{
+                        Intent intent = new Intent(mContext, ActivityGroupBuyDetail.class);
+                        intent.putExtra("ids",  gbLists.get(position).getPromotionid()+"");
+                        intent.putExtra("position", position);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                     }
                 }
             });

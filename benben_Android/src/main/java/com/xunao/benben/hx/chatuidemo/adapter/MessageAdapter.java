@@ -759,12 +759,15 @@ public class MessageAdapter extends BaseAdapter {
 									findFirst.getPoster(), holder.head_iv);
 						}else{
                             String enterprise_id= message.getStringAttribute("enterprise_id","");
-                            if(!enterprise_id.equals("")){
-                                holder.head_iv.setImageResource(R.drawable.icon_contacts_zqtxl);
-                            }else {
+                            String leg_type= message.getStringAttribute("leg_type","");
+                            if(!leg_type.equals("")){
                                 String img = message.getStringAttribute("leg_poster", "");
                                 CommonUtils.startImageLoader(cubeImageLoader,
                                         img, holder.head_iv);
+                            }else if(!enterprise_id.equals("")){
+                                holder.head_iv.setImageResource(R.drawable.icon_contacts_zqtxl);
+                            }else {
+                                holder.head_iv.setImageResource(R.drawable.ic_notofication);
                             }
                         }
 					} catch (DbException e) {
@@ -935,7 +938,7 @@ public class MessageAdapter extends BaseAdapter {
                                 R.anim.out_to_left);
                         intent.putExtra("id", enterprise_id);
                         ((BaseActivity) context).startActivityForResult(intent, AndroidConfig.ContactsFragmentRequestCode);
-                    }else{
+                    }else if(!message.getFrom().equals("admin")){
                         Intent intent = new Intent(context,
                                 ActivityContactsInfo.class);
                         intent.putExtra("username", name);

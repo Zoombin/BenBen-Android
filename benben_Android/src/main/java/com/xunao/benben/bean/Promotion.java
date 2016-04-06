@@ -35,6 +35,7 @@ public class Promotion extends BaseBean {
     private String model;
     private String mustknow;
     private String shipping_fee;
+    private String price;
 
     private boolean isChecked = false;
 
@@ -247,6 +248,14 @@ public class Promotion extends BaseBean {
         this.isChecked = isChecked;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     @Override
     public JSONObject toJSON() {
         return null;
@@ -310,6 +319,7 @@ public class Promotion extends BaseBean {
         model = jsonObj.optString("model");
         mustknow = jsonObj.optString("mustknow");
         shipping_fee = jsonObj.optString("shipping_fee");
+        price = jsonObj.optString("price");
         return this;
     }
 }

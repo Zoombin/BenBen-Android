@@ -372,6 +372,9 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<BenbenEMConversation> {
                         if(!enterprise_id.equals("")){
                             holder.avatar.setImageResource(R.drawable.icon_contacts_zqtxl);
                             holder.name.setText(lastMessage.getFrom());
+                        }else{
+                            holder.name.setText("套餐提醒");
+                            holder.avatar.setImageResource(R.drawable.ic_notofication);
                         }
 
                         holder.tv_union_type.setVisibility(View.GONE);

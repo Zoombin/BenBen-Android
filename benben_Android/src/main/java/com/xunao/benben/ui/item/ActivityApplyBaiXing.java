@@ -207,10 +207,10 @@ public class ActivityApplyBaiXing extends BaseActivity implements
 					}
 				}
 
-				if (area.equals("请选择所在地区")) {
-					ToastUtils.Infotoast(mContext, "请选择所在地区！");
-					return;
-				}
+//				if (area.equals("请选择所在地区")) {
+//					ToastUtils.Infotoast(mContext, "请选择所在地区！");
+//					return;
+//				}
 
                 if(enterprise_id==0){
                     ToastUtils.Infotoast(mContext, "请选择加入的百姓网！");

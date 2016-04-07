@@ -27,7 +27,7 @@ public class MyBuyInfo extends BaseBean {
 	private String province;// 省代码
 	private String city;// 城市代码
 	private String title;// 标题
-	private int Amount;// 数量
+	private String Amount;// 数量
 	private String description;// 详情
 	private String pro_city;// 地区
 	private long deadline;// 截止日期
@@ -92,15 +92,15 @@ public class MyBuyInfo extends BaseBean {
 		this.title = title;
 	}
 
-	public int getAmount() {
-		return Amount;
-	}
+    public String getAmount() {
+        return Amount;
+    }
 
-	public void setAmount(int amount) {
-		Amount = amount;
-	}
+    public void setAmount(String amount) {
+        Amount = amount;
+    }
 
-	public String getDescription() {
+    public String getDescription() {
 		return description;
 	}
 
@@ -158,7 +158,7 @@ public class MyBuyInfo extends BaseBean {
 
 		id = jsonObj.optString("Id");
 		memberId = jsonObj.optInt("MemberId");
-		Amount = jsonObj.optInt("Amount");
+		Amount = jsonObj.optString("Amount");
 		Poster = jsonObj.optString("Poster");
 		name = jsonObj.optString("Name");
 		title = jsonObj.optString("Title");

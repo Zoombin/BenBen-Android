@@ -425,8 +425,9 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-		mActivity.dissLoding();
-        getMatchData(jsonObject);
+//		mActivity.dissLoding();
+        InteNetUtils.getInstance(mActivity).AddressBook(snapshot, getContactBack);
+//        getMatchData(jsonObject);
 
 	}
 
@@ -788,6 +789,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
     private RequestCallBack<String> getContactBack = new RequestCallBack<String>() {
         @Override
         public void onSuccess(ResponseInfo<String> arg0) {
+            mActivity.dissLoding();
             JSONObject jsonObject = null;
             try {
                 jsonObject = new JSONObject(arg0.result);

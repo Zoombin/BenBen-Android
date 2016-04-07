@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -335,6 +336,7 @@ public class ActivityMySelfBuy extends BaseActivity implements OnClickListener,
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
+        Log.d("ltf","jsonObject==============="+jsonObject);
 		dissLoding();
 		buy_listview.onRefreshComplete();
 		MyBuyInfolist buyInfolist = new MyBuyInfolist();

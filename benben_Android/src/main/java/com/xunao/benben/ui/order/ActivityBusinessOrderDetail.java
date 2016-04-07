@@ -186,7 +186,13 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
         tv_promotion_name.setText(order.getGoods_name());
         tv_goods_amount.setText("￥:"+order.getGoods_amount());
         tv_goods_number.setText("数量:x"+order.getGoods_number());
-        tv_order_sn.setText("订单号:"+order.getOrder_sn());
+
+        if(order.getShipping_status()==0 && (order.getPay_id()==2 || order.getPay_id()==3)) {
+            tv_order_sn.setVisibility(View.GONE);
+        }else{
+            tv_order_sn.setVisibility(View.VISIBLE);
+            tv_order_sn.setText("订单号:" + order.getOrder_sn());
+        }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm");
         int pay_id = order.getPay_id();
         if(pay_id==1){

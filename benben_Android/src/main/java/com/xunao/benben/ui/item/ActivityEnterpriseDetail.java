@@ -246,7 +246,11 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 				}
 				tv_name.setText(enterprise.getName());
 				tv_number.setText("通讯录成员 ( " + enterprise.getNumber() + "人)");
-				tv_info.setText(enterprise.getDescription());
+                if(enterprise.getDescription().equals("") || enterprise.getDescription().equals("null")){
+                    tv_info.setText("暂无简介");
+                }else {
+                    tv_info.setText(enterprise.getDescription());
+                }
 				tv_phone.setText(enterprise.getPhone());
 				tv_mp.setText(enterprise.getRemark());
 				tv_my_phone.setText(enterprise.getMobliePhone());
@@ -497,7 +501,11 @@ public class ActivityEnterpriseDetail extends BaseActivity implements
 				Enterprise enterprise2 = (Enterprise) data
 						.getSerializableExtra("enterprise");
 				tv_name.setText(enterprise2.getName());
-				tv_info.setText(enterprise2.getDescription());
+                if(enterprise2.getDescription().equals("") || enterprise2.getDescription().equals("null")){
+                    tv_info.setText("暂无简介");
+                }else {
+                    tv_info.setText(enterprise2.getDescription());
+                }
 				tv_phone.setText(enterprise2.getPhone());
 				user.setUpdate(true);
 			}

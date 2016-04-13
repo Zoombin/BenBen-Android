@@ -180,7 +180,7 @@ public class ActivityEnterpriseMember extends BaseActivity implements
         }
 
         if (CommonUtils.isNetworkAvailableNoShow(mContext)) {
-            showLoding("请稍后...");
+            showLoding("请稍候...");
             InteNetUtils.getInstance(mContext).enterpriseMember(id, "",
                     mRequestCallBack);
         }else{

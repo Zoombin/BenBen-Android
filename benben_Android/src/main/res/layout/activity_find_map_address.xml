@@ -8,19 +8,50 @@
 
     <include layout="@layout/findfriend" />
 
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请在上方输入搜索字段"
+        android:padding="10dp"
+        android:textColor="#787878"
+        android:textSize="15dp"
+        />
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <ListView
-            android:id="@+id/listview"
+            android:id="@+id/lv_city"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:divider="#dcdcdc"
             android:dividerHeight="0.5dp"
             android:listSelector="@android:color/transparent"
+            android:background="#FFFFFF"
+            android:visibility="gone"
             >
         </ListView>
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/lv_poi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#dcdcdc"
+            android:dividerHeight="0.5dp"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:smoothScrollbar="true"
+            android:background="#FFFFFF"
+            >
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+
 
         <LinearLayout
             android:id="@+id/no_data"

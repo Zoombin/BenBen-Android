@@ -513,6 +513,17 @@ public class ActivityContactsInfo extends BaseActivity implements
                                 dbUtil.update(phoneInfo,
                                         WhereBuilder.b("pid","=",phoneInfo.getPid()),"is_active");
                                 ll_change.setClickable(true);
+
+                                mContacts.setHuanxin_username(phoneInfo.getHuanxin_username());
+                                mContacts.setPoster(phoneInfo.getPoster());
+                                mContacts.setNick_name(phoneInfo.getNick_name());
+                                mContacts.setIs_benben(phoneInfo.getIs_benben());
+                                mContacts.setIs_baixing(phoneInfo.getIs_baixing());
+                                dbUtil.saveOrUpdate(mContacts);
+                                sendBroadcast(new Intent(
+                                        AndroidConfig.ContactsRefresh));
+                                sendBroadcast(new Intent(
+                                        AndroidConfig.refreshActivityCaptureContactsInfo));
                                 ActivityContactsInfo.this.dissLoding();
                                 getData();
                             } catch (JSONException e) {

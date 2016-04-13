@@ -48,6 +48,8 @@
     <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
 
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/><!-- 写入通讯录权限 -->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <!-- 环信 -->
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
@@ -1148,6 +1150,8 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="3ecea51f560650b1ed8a4b99808f52e8" />
+        <!--3ecea51f560650b1ed8a4b99808f52e8-->
+
         <!-- 消息中心service -->
         <service
             android:name="com.xunao.benben.base.service.UpdateInfoService"

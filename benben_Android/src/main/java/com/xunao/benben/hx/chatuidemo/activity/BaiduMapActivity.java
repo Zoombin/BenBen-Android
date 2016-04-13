@@ -315,7 +315,11 @@ public class BaiduMapActivity extends BaseActivity implements View.OnClickListen
                         .fromResource(R.drawable.icon_marka))
                         .zIndex(4).draggable(true);
                 mBaiduMap.addOverlay(ooA);
-                address = result.getAddress();
+                if(result.getPoiList()!=null && result.getPoiList().size()>0){
+                    address = result.getPoiList().get(0).name;
+                }else {
+                    address = result.getAddress();
+                }
                 tvaddress.setText(address);
             }
 

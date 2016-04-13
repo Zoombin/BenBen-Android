@@ -9,6 +9,7 @@ import java.util.regex.PatternSyntaxException;
 import org.json.JSONObject;
 
 import android.R.anim;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -368,6 +369,7 @@ public class PhoneUtils {
 		intent.putExtra("address", mobile);
 		context.startActivity(intent);
 
+
 		InteNetUtils.getInstance(context).sendMsg(mobile,
 				new RequestCallBack<String>() {
 
@@ -383,6 +385,8 @@ public class PhoneUtils {
 				});
 
 	}
+
+
 
 	/**
 	 * 拨打电话

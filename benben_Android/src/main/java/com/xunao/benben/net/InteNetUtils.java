@@ -3422,4 +3422,25 @@ public class InteNetUtils {
         ComPost(AndroidConfig.NETHOST + AndroidConfig.AllBx, hashMap,
                 callBack);
     }
+
+    public void getMapAddress(String key,String region,String ak,String mCode,int page_num,RequestCallBack<String> callBack) {
+//        HashMap<String, String> hashMap = new HashMap<String, String>();
+        String url = "http://api.map.baidu.com/place/v2/search?q="+key+"&region="+region+"&output=json&ak="+ak+"&page_num="+page_num+"&mcode="+mCode;
+        Log.d("ltf","url=========="+url);
+
+        httpUtils.send(HttpMethod.GET, url, null, callBack);
+
+//        "http://api.map.baidu.com/place/v2/search?q=威宁小区&region=苏州市&output=json&ak=El8BrzKubSWSx3a5RGyGpHbGEaH2GXRI&page_num=0&mcode=A1:F7:78:66:26:1A:48:02:5C:EF:78:0A:7F:D8:69:AC:94:5F:4A:FD;com.xunao.benben"
+
+
+//        if (hashMap != null) {
+//            params.addQueryStringParameter("ak",ak);
+//            params.addQueryStringParameter("mcode",mCode);
+//            params.addQueryStringParameter("q",key);
+//            params.addQueryStringParameter("region",region);
+//            params.addQueryStringParameter("output","json");
+//            params.addQueryStringParameter("page_num",page_num+"");
+//            httpUtils.send(HttpMethod.GET, "http://api.map.baidu.com/place/v2/search", params, callBack);
+//        }
+    }
 }

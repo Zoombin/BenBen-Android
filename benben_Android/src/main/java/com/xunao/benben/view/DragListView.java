@@ -231,7 +231,9 @@ public class DragListView extends ListView {
 // 获取你拖拽滑动到位置及显示item相应的view上（注：可显示部分）（position）
         View view = getChildAt(dragPosition - getFirstVisiblePosition());
 // 真正滚动的方法setSelectionFromTop()
-        setSelectionFromTop(dragPosition, view.getTop() + current_Step);
+        if(view!=null) {
+            setSelectionFromTop(dragPosition, view.getTop() + current_Step);
+        }
 
     }
 

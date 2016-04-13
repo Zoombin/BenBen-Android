@@ -35,11 +35,13 @@ import com.xunao.benben.base.IA.CrashApplication;
 import com.xunao.benben.bean.NumberTrainDetail;
 import com.xunao.benben.bean.NumberTrainPoster;
 import com.xunao.benben.bean.Promotion;
+import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.dialog.HelpcollectDialog;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.ui.ActivityLogin;
+import com.xunao.benben.ui.ActivityMyWeb;
 import com.xunao.benben.ui.ActivityNumberTrainComment;
 import com.xunao.benben.ui.ActivityNumberTrainDetailMap;
 import com.xunao.benben.ui.ActivityNumberTrainStore;
@@ -114,7 +116,7 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
             {R.drawable.icon_red_identity,R.drawable.icon_red_xin, R.drawable.icon_red_bao}};
     private int[] rankTypes = {R.drawable.icon_rating_select1,R.drawable.icon_rating_select2,R.drawable.icon_rating_select3,R.drawable.icon_rating_select4};
 //    private ImageView com_title_bar_share;
-
+    private Button btn_renew;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -183,6 +185,9 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
         tv_store_num = (TextView) findViewById(R.id.tv_store_num);
         tv_notice = (TextView) findViewById(R.id.tv_notice);
         tv_notice.setOnClickListener(this);
+
+        btn_renew = (Button) findViewById(R.id.btn_renew);
+        btn_renew.setOnClickListener(this);
 
 		initMyLocation();
 	}
@@ -694,7 +699,20 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                 startActivity(noticeIntent);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 break;
+            case R.id.btn_renew:
+                if(vip_type==0){
+                    Intent promotionIntent = new Intent(mContext, ActivityMyWeb.class);
+                    promotionIntent.putExtra("title", "促销");
+                    promotionIntent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService/serviceDetail?type=0&token="+user.getToken());
+                    startActivity(promotionIntent);
+                }else{
+                    Intent groupBuyIntent = new Intent(mContext, ActivityMyWeb.class);
+                    groupBuyIntent.putExtra("title", "团购");
+                    groupBuyIntent.putExtra("url", AndroidConfig.NETHOST4 + "/mobileService/serviceDetail?type=1&token="+user.getToken());
+                    startActivity(groupBuyIntent);
+                }
 
+                break;
 
 		}
 	}

@@ -308,7 +308,6 @@ public class ActivityFindMapAddress extends BaseActivity implements PullToRefres
 
     @Override
     public void onLastItemVisible() {
-        Log.d("ltf","onLastItemVisible==============");
         if(currentPage >= pagNum){
 //            ToastUtils.Infotoast(mContext,"无更多数据");
         }else{

@@ -50,6 +50,7 @@ import java.util.List;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 订单评价详细
  * Created by ltf on 2015/12/25.
  */
 public class ActivityOrderCommentDetail extends BaseActivity implements View.OnClickListener {

@@ -92,7 +92,6 @@ public class ActivityNewUnionInfo extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject============"+jsonObject);
         if (jsonObject.optString("ret_num").equals("0")) {
             CommonUtils.startImageLoader(cubeimageLoader, jsonObject.optString("leg_poster"), group_poster);
             tv_group_name.setText(jsonObject.optString("leg_name"));

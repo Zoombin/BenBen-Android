@@ -45,6 +45,7 @@ import java.util.List;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 我的收藏
  * Created by ltf on 2016/1/4.
  */
 public class ActivityMyPromotionCollection extends BaseActivity implements View.OnClickListener {
@@ -147,7 +148,6 @@ public class ActivityMyPromotionCollection extends BaseActivity implements View.
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject============="+jsonObject);
         if(jsonObject.optInt("ret_num")==0){
             try {
                 JSONArray gbJsonArray = jsonObject.getJSONArray("gb");
@@ -225,7 +225,6 @@ public class ActivityMyPromotionCollection extends BaseActivity implements View.
                 }else {
                     this.showLoding("删除中...");
                     ids=ids.substring(0,ids.length()-1);
-                    Log.d("ltf","ids======="+ids+"==="+currentTab);
                     InteNetUtils.getInstance(mContext).DelCollect(ids, currentTab+"", new RequestCallBack<String>() {
                         @Override
                         public void onSuccess(ResponseInfo<String> stringResponseInfo) {

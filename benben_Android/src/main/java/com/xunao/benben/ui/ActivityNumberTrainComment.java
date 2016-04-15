@@ -98,7 +98,6 @@ public class ActivityNumberTrainComment extends BaseActivity{
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject==========="+jsonObject);
         if(jsonObject.optInt("ret_num")==0){
 
             try {

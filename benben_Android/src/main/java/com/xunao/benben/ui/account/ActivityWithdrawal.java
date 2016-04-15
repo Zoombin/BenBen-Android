@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * 提现
  * Created by ltf on 2016/3/15.
  */
 public class ActivityWithdrawal extends BaseActivity implements View.OnClickListener {
@@ -125,7 +126,6 @@ public class ActivityWithdrawal extends BaseActivity implements View.OnClickList
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject=========="+jsonObject);
         if(jsonObject.optInt("ret_num")==0){
             ToastUtils.Infotoast(mContext,"提现成功!");
             AnimFinsh();

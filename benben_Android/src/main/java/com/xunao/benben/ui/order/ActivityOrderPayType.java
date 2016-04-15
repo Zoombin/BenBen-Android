@@ -26,6 +26,7 @@ import java.net.URLEncoder;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 订单支付
  * Created by ltf on 2015/12/23.
  */
 public class ActivityOrderPayType extends BaseActivity implements View.OnClickListener {

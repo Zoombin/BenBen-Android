@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * 保证金页面及其相关操作
  * Created by ltf on 2016/3/11.
  */
 public class ActivityInsurance extends BaseActivity implements View.OnClickListener {
@@ -105,7 +106,6 @@ public class ActivityInsurance extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject================="+jsonObject);
         if (jsonObject.optInt("ret_msg")==0){
             industry = jsonObject.optString("industry");
             tv_insurance.setText(jsonObject.optString("rest")+"元");

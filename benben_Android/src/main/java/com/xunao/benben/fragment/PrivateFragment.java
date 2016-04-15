@@ -35,6 +35,9 @@ import com.xunao.benben.ui.item.ActivitymyBuy;
 import com.xunao.benben.ui.item.TallGroup.ActivityTalkGroup;
 import com.xunao.benben.utils.ToastUtils;
 
+/**
+ * 发现页面
+ */
 public class PrivateFragment extends BaseFragment implements OnClickListener {
 
 	private View view;

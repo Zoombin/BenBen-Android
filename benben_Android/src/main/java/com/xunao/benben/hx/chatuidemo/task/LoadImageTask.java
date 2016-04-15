@@ -124,7 +124,6 @@ public class LoadImageTask extends AsyncTask<Object, Void, Bitmap> {
 //				}
 //			});
 		} else {
-            Log.d("ltf", "8=================="+message.status);
             if (message.status == EMMessage.Status.FAIL) {
                 if (CommonUtils.isNetWorkConnected(activity)) {
                     new Thread(new Runnable() {

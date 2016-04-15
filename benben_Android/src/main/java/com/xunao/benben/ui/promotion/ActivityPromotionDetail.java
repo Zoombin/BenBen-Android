@@ -34,6 +34,10 @@ import com.xunao.benben.view.ActionSheet;
 
 import org.json.JSONObject;
 
+/**
+ * 促销详情
+ */
+
 public class ActivityPromotionDetail extends BaseActivity {
 
 	private WebView webView;
@@ -290,7 +294,6 @@ public class ActivityPromotionDetail extends BaseActivity {
         @Override
 
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            Log.d("ltf","url========="+url);
             position++;
             if(position==promotionId.length){
                 position--;

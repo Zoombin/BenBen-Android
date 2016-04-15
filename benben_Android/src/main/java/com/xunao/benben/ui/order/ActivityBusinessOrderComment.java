@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 我是商家订单评论
  * Created by ltf on 2015/12/25.
  */
 public class ActivityBusinessOrderComment extends BaseActivity implements View.OnClickListener {

@@ -103,7 +103,6 @@ public class ActivityReport extends BaseActivity implements View.OnClickListener
                 }else{
                     String str = String.valueOf(edt_reason.getText()).trim();
                     String context = reason+reasons[selectPos]+str;
-                    Log.d("ltf","context====="+context);
                     if (CommonUtils.isNetworkAvailable(mContext)) {
                         showLoding("");
                         InteNetUtils.getInstance(mContext).doComplain(context,new RequestCallBack<String>() {

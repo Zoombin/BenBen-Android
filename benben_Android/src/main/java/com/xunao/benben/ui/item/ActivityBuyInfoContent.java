@@ -243,7 +243,6 @@ public class ActivityBuyInfoContent extends BaseActivity implements
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject========"+jsonObject);
         nodota.setVisibility(View.GONE);
 		info = new BuyInfoContent();
 		try {

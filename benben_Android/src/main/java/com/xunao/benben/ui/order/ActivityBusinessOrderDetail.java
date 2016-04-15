@@ -40,6 +40,7 @@ import java.util.Date;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 商家订单详情
  * Created by ltf on 2015/12/25.
  */
 public class ActivityBusinessOrderDetail extends BaseActivity implements View.OnClickListener {

@@ -45,6 +45,7 @@ import java.util.Map;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 下订单
  * Created by ltf on 2015/12/16.
  */
 public class ActivityMakeOrder extends BaseActivity implements View.OnClickListener {
@@ -317,7 +318,6 @@ public class ActivityMakeOrder extends BaseActivity implements View.OnClickListe
         public void onSuccess(ResponseInfo<String> stringResponseInfo) {
             try {
                 JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
-                Log.d("ltf","jsonObject=============="+jsonObject);
                 if(jsonObject.optInt("ret_num")==0){
                     ToastUtils.Infotoast(mContext,"下单成功!");
                     String order_id = jsonObject.optString("order_id");

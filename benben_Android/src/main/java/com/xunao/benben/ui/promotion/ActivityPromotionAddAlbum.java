@@ -55,6 +55,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * 商家活动相册添加
  * Created by ltf on 2015/11/30.
  */
 public class ActivityPromotionAddAlbum extends BaseActivity implements View.OnClickListener {

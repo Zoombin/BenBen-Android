@@ -82,6 +82,9 @@ import com.xunao.benben.view.ActionSheet;
 import com.xunao.benben.view.MyTextView;
 import com.xunao.benben.view.ActionSheet.ActionSheetListener;
 
+/**
+ * 拨号页面
+ */
 public class PlayPhoneFragment extends BaseFragment implements OnClickListener,
 		OnLongClickListener, ActionSheetListener {
 

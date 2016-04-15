@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 用户视角活动相册列表
  * Created by ltf on 2015/11/30.
  */
 public class ActivityPromotionAlbum extends BaseActivity{

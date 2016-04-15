@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * 手动发货
  * Created by ltf on 2015/12/25.
  */
 public class ActivityManualSend extends BaseActivity implements View.OnClickListener {

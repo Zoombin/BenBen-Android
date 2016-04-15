@@ -77,6 +77,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 促销操作
  * Created by ltf on 2015/11/30.
  */
 public class ActivityPromotionOperate extends BaseActivity implements View.OnClickListener {

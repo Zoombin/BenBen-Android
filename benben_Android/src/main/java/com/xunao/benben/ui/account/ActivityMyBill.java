@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 账单记录
  * Created by ltf on 2016/1/5.
  */
 public class ActivityMyBill extends BaseActivity implements View.OnClickListener,
@@ -98,7 +99,6 @@ public class ActivityMyBill extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject============="+jsonObject);
         lv_detail.onRefreshComplete();
         isMoreData = false;
         if(!isLoadMore){

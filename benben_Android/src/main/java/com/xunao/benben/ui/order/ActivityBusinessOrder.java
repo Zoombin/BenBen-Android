@@ -51,6 +51,7 @@ import in.srain.cube.image.ImageTask;
 import in.srain.cube.image.impl.DefaultImageLoadHandler;
 
 /**
+ * 我是商家订单
  * Created by ltf on 2015/12/24.
  */
 public class ActivityBusinessOrder extends BaseActivity implements View.OnClickListener,
@@ -207,7 +208,6 @@ public class ActivityBusinessOrder extends BaseActivity implements View.OnClickL
             orderList.clear();
         }
         if(jsonObject.optInt("ret_num")==0){
-            Log.d("ltf","jsonObject================="+jsonObject);
             try {
                 pagNum = jsonObject.optInt("page");
                 JSONArray jsonArray = jsonObject.getJSONArray("orderinfo");

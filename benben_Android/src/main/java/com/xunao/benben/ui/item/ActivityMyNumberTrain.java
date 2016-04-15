@@ -1247,7 +1247,6 @@ public class ActivityMyNumberTrain extends BaseActivity implements
                             }
                             picList.remove(position);
                         }else {
-                            Log.d("ltf",Bimp.tempSelectBitmap.size()+"==="+(position-picList.size()));
                             Bimp.tempSelectBitmap.remove(position-picList.size());
                         }
                         adapter.update();

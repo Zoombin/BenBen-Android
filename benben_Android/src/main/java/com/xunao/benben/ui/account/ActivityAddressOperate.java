@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * 地址新增，编辑等操作
  * Created by ltf on 2015/12/16.
  */
 public class ActivityAddressOperate extends BaseActivity implements View.OnClickListener {

@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 订单验证结果
  * Created by ltf on 2015/12/24.
  */
 public class ActivityOrderCheckDetail extends BaseActivity implements View.OnClickListener {

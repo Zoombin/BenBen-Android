@@ -33,6 +33,7 @@ import java.util.List;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 促销管理列表
  * Created by ltf on 2015/11/30.
  */
 public class ActivityPromotionManage extends BaseActivity implements View.OnClickListener {

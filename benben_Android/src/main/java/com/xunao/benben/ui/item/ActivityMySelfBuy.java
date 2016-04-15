@@ -336,7 +336,6 @@ public class ActivityMySelfBuy extends BaseActivity implements OnClickListener,
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject==============="+jsonObject);
 		dissLoding();
 		buy_listview.onRefreshComplete();
 		MyBuyInfolist buyInfolist = new MyBuyInfolist();

@@ -18,6 +18,7 @@ import com.xunao.benben.ui.account.ActivityMoneyIncome;
 import org.json.JSONObject;
 
 /**
+ * 拍卖场规则提醒
  * Created by ltf on 2016/1/7.
  */
 public class ActivityTopAuctionNotice extends BaseActivity implements View.OnClickListener {

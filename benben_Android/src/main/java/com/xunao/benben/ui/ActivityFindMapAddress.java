@@ -40,6 +40,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 聊天地理位置搜索
+ */
 public class ActivityFindMapAddress extends BaseActivity implements PullToRefreshBase.OnLastItemVisibleListener{
 	private myAdapter adapter;
 	private ListView lv_city;
@@ -225,7 +228,6 @@ public class ActivityFindMapAddress extends BaseActivity implements PullToRefres
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject============="+jsonObject);
         lv_poi.onRefreshComplete();
         isMoreData = false;
         if(jsonObject.has("results")){

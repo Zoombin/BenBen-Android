@@ -94,7 +94,6 @@ public class ActivityNumberTrainStore extends BaseActivity{
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject=================="+jsonObject);
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("shops");
             if(jsonArray!=null && jsonArray.length()>0){

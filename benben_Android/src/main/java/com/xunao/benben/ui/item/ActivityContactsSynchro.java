@@ -629,7 +629,6 @@ public class ActivityContactsSynchro extends BaseActivity implements
 //                                        dbUtil.saveOrUpdateAll(mPhoneInfos);
 //
 //                                        JSONArray phoneArray = jsonObj.optJSONArray("phone");
-//                                        Log.d("ltf", "phoneArray============" + phoneArray);
 //                                        if (phoneArray != null && phoneArray.length() > 0) {
 //                                            for (int i = 0; i < phoneArray.length(); i++) {
 //                                                JSONObject jsonObject = phoneArray.optJSONObject(i);

@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 拍卖记录
  * Created by ltf on 2016/1/8.
  */
 public class ActivityTopAuctionRecord extends BaseActivity{
@@ -78,7 +79,6 @@ public class ActivityTopAuctionRecord extends BaseActivity{
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject==========="+jsonObject);
         if(jsonObject.optInt("ret_num")==0){
             auctionRecords.clear();
             try {

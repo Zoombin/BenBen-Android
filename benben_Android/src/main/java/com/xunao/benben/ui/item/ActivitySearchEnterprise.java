@@ -226,7 +226,6 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject================"+jsonObject);
         try {
 			enterpriseList = new EnterpriseList();
 			enterpriseList = enterpriseList.parseJSON(jsonObject);

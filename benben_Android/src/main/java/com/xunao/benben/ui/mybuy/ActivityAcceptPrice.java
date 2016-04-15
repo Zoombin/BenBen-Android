@@ -45,6 +45,7 @@ import java.util.List;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 我要买接收报价
  * Created by ltf on 2016/3/11.
  */
 public class ActivityAcceptPrice extends BaseActivity implements View.OnClickListener {
@@ -251,7 +252,6 @@ public class ActivityAcceptPrice extends BaseActivity implements View.OnClickLis
         public void onSuccess(ResponseInfo<String> stringResponseInfo) {
             try {
                 JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
-                Log.d("ltf","jsonObject=============="+jsonObject);
                 if(jsonObject.optInt("ret_num")==0){
                     String order_id = jsonObject.optString("order_id");
                     String order_sn = jsonObject.optString("order_sn");

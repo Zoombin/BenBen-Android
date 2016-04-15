@@ -79,7 +79,6 @@ public class ActivityChoiceBaiXin extends BaseActivity{
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject=============="+jsonObject);
         if(jsonObject.optInt("ret_num")==0){
             try {
                 JSONArray jsonArray = jsonObject.getJSONArray("bx");

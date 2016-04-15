@@ -57,6 +57,7 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
 /**
+ * 拍卖场拍卖详细列表
  * Created by ltf on 2016/1/8.
  */
 public class ActivityTopAuctionDetail extends BaseActivity implements View.OnClickListener {
@@ -202,6 +203,7 @@ public class ActivityTopAuctionDetail extends BaseActivity implements View.OnCli
                     auction_id = auction_id.substring(0,auction_id.length()-1);
                     String ip = "http://112.124.101.177:8080/?user_id="+user.getId()+"&auction_id="+auction_id+"&token="+token;
                     try {
+                        //监听出价变化
                         if(mSocket == null) {
                             mSocket = IO.socket(ip);
                             mSocket.on("givePrice", onNewMessage);
@@ -375,7 +377,6 @@ public class ActivityTopAuctionDetail extends BaseActivity implements View.OnCli
                     BigDecimal b = new BigDecimal(Double.toString(nowPrice));
 
                     double addPrice = a.subtract(b).doubleValue();
-                    Log.d("ltf","price==========="+price+"==="+nowPrice+"==="+addPrice+"==="+auction.getAdd_step());
                     if(addPrice<auction.getAdd_step()){
                         ToastUtils.Infotoast(mContext,"出价金额不得小于加价幅度");
                     }else{
@@ -531,7 +532,6 @@ public class ActivityTopAuctionDetail extends BaseActivity implements View.OnCli
                 public void run() {
                     if(args!=null && args.length>0) {
                         JSONObject data = (JSONObject) args[0];
-                        Log.d("ltf", "data===========" + data);
                         for(int i=0;i<auctionDetails.size();i++){
                             AuctionDetail auctionDetail = auctionDetails.get(i);
                             if(auctionDetail.getAuction_id()==data.optInt("auction_id")){
@@ -558,7 +558,6 @@ public class ActivityTopAuctionDetail extends BaseActivity implements View.OnCli
         public void call(Object[] args) {
 //            JSONObject data = (JSONObject) args[0];
 
-            Log.d("ltf","conn=========="+mSocket.connected());
         }
     };
 

@@ -40,6 +40,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * 置顶拍卖场列表
  * Created by ltf on 2016/1/7.
  */
 public class ActivityTopAuction extends BaseActivity implements View.OnClickListener {
@@ -79,7 +80,6 @@ public class ActivityTopAuction extends BaseActivity implements View.OnClickList
                 public void onSuccess(ResponseInfo<String> stringResponseInfo) {
                     try {
                         JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
-                        Log.d("ltf","jsonObject============="+jsonObject);
                         token = jsonObject.optString("token");
                     } catch (JSONException e) {
                         e.printStackTrace();

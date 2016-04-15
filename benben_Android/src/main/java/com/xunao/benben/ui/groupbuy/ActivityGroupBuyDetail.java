@@ -33,6 +33,9 @@ import com.xunao.benben.view.ActionSheet;
 
 import org.json.JSONObject;
 
+/**
+ * 团购详情
+ */
 public class ActivityGroupBuyDetail extends BaseActivity {
 
 	private WebView webView;
@@ -287,7 +290,6 @@ public class ActivityGroupBuyDetail extends BaseActivity {
         @Override
 
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            Log.d("ltf","url========="+url);
             if(url.contains("www.baidu.com")){
                     Intent intent = new Intent(ActivityGroupBuyDetail.this, ActivityMakeOrder.class);
                     intent.putExtra("promotionid", Integer.parseInt(promotionId[position]));

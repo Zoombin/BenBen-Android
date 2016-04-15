@@ -344,7 +344,6 @@ public class ActivityFriendUnionMember extends BaseActivity implements
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject============="+jsonObject);
 		try {
 			friendUnionOtherChiefs.clear();
 			JSONObject object = jsonObject.optJSONObject("member_info");

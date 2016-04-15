@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 订单验证记录
  * Created by ltf on 2016/3/10.
  */
 public class ActivityOrderCheckRecord extends BaseActivity{
@@ -78,7 +79,6 @@ public class ActivityOrderCheckRecord extends BaseActivity{
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject============="+jsonObject);
         if(jsonObject.optInt("ret_num")==0){
             try {
                 JSONArray jsonArray = jsonObject.getJSONArray("list");

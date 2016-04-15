@@ -91,6 +91,9 @@ import com.xunao.benben.utils.XunaoLog;
 import com.xunao.benben.view.ActionSheet;
 import com.xunao.benben.view.ActionSheet.ActionSheetListener;
 
+/**
+ * 通讯录页面，显示通讯录列表
+ */
 public class ContactsFragment extends BaseFragment implements OnClickListener {
 
 	private View view;
@@ -131,6 +134,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 		setShowLoding(false);
 		view = inflater.inflate(R.layout.fragment_contacts, null);
 		contentResolver = mActivity.getContentResolver();
+        //判断是否显示帮助提示
         if(getHintState("help1")) {
             showHintDiaLog();
         }
@@ -198,6 +202,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	protected void initDate() {
+        //判断是否新用户
         snapshot =  CrashApplication.getInstance().getSpUtil().getSnapshot();
         if(snapshot.equals("1")){
             isNew = true;
@@ -206,6 +211,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 
 
 		if (AndroidConfig.AUTOLOGIN.equals(mActivity.getFrom())) {
+            //自动登录进该页面后操作
 			initlocakData();
 			if (CommonUtils.isNetworkAvailable(mActivity)) {
 //				InteNetUtils.getInstance(mActivity).GetContact(
@@ -214,6 +220,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 			}
 
 		} else if (mActivity.getFrom().equals("login")) {
+            //手动登录进该页面后操作
 			if (CommonUtils.isNetworkAvailable(mActivity)) {
 				mActivity.showLoding("请稍后...");
 //				InteNetUtils.getInstance(mActivity).GetContact(
@@ -223,6 +230,7 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 				initlocakData();
 			}
 		} else if (mActivity.getFrom().equals("register")) {
+            //从注册进该页面后操作
             CrashApplication.getInstance().getSpUtil().setSnapshot("1");
 			// 匹配通讯录 由于耗时长 所以另开线程
 			mActivity.showLoding("匹配通讯录...");
@@ -431,101 +439,101 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 
 	}
 
-    /**
-     * 获取服务器拉取过来的数据
-     *
-     * @param jsonObject
-     */
-    private void getMatchData(JSONObject jsonObject) {
-        final ContactsObject contactsObject = new ContactsObject();
-        try {
-//			XunaoLog.yLog().i(jsonObject.toString());
-
-            contactsObject.parseJSON(jsonObject);
-            crashApplication.setContactsObject(contactsObject);
-            mContactsGroups = crashApplication.contactsObject
-                    .getmContactsGroups();
-
-
-            final ArrayList<PhoneInfo> mPhoneInfos = new ArrayList<PhoneInfo>();
-            for (Contacts contacts : contactsObject.getmContactss()) {
-                ArrayList<PhoneInfo> phones = contacts.getPhones();
-                mPhoneInfos.addAll(contacts.getPhones());
-            }
-
-            new Thread() {
-                @Override
-                public void run() {
-                    groupOrderBy();
-
-                    ArrayList<PhoneInfo> mPhoneInfos = new ArrayList<PhoneInfo>();
-                    // ArrayList<Contacts> com = new ArrayList<Contacts>();
-                    // ArrayList<Contacts> benben = new ArrayList<Contacts>();
-                    for (ContactsGroup cg : mContactsGroups) {
-                        // 记录所有的phone信息
-                        ArrayList<Contacts> mContacts = cg.getmContacts();
-                        // com.clear();
-                        // benben.clear();
-
-                        for (Contacts contacts : mContacts) {
-                            // if (!contacts.getIs_benben().equals("0")) {
-                            // benben.add(contacts);
-                            // } else {
-                            // com.add(contacts);
-                            // }
-                            ArrayList<PhoneInfo> phones = contacts.getPhones();
-                            mPhoneInfos.addAll(contacts.getPhones());
-                        }
-                    }
-
-                    // // 持久化一个环信与本地数据的hashmap
-                    // HashMap<String, Object> huanXinMap = new HashMap<String,
-                    // Object>();
-                    // if (mContacts != null && mContacts.size() > 0) {
-                    // for (Contacts cs : mContacts) {
-                    // if (!"0".equals(cs.getIs_benben())) {
-                    // huanXinMap.put(cs.getHuanxin_username(), cs);
-                    // }
-                    // }
-                    // }
-                    // crashApplication.getInstance().setHuanXinMap(huanXinMap);
-
-                    try {
-
-                        dbUtil.deleteAll(ContactsGroup.class);
-                        dbUtil.deleteAll(Contacts.class);
-                        dbUtil.deleteAll(PhoneInfo.class);
-
-                        dbUtil.saveOrUpdateAll(mContactsGroups);
-                        dbUtil.saveOrUpdateAll(contactsObject.getmContactss());
-                        // }
-                        dbUtil.saveOrUpdateAll(mPhoneInfos);
-
-                        mActivity.runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                initlocakData();
-                                mActivity.dissLoding();
-                                nodata.setVisibility(View.GONE);
-                                if (lodingDialog != null) {
-                                    lodingDialog.dismiss();
-                                }
-                            }
-                        });
-
-                    } catch (DbException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }.start();
-
-        } catch (NetRequestException e) {
-            e.getError().print(mActivity);
-            nodata.setVisibility(View.VISIBLE);
-            // initlocakData();
-        }
-    }
+//    /**
+//     * 获取服务器拉取过来的数据
+//     *
+//     * @param jsonObject
+//     */
+//    private void getMatchData(JSONObject jsonObject) {
+//        final ContactsObject contactsObject = new ContactsObject();
+//        try {
+////			XunaoLog.yLog().i(jsonObject.toString());
+//
+//            contactsObject.parseJSON(jsonObject);
+//            crashApplication.setContactsObject(contactsObject);
+//            mContactsGroups = crashApplication.contactsObject
+//                    .getmContactsGroups();
+//
+//
+//            final ArrayList<PhoneInfo> mPhoneInfos = new ArrayList<PhoneInfo>();
+//            for (Contacts contacts : contactsObject.getmContactss()) {
+//                ArrayList<PhoneInfo> phones = contacts.getPhones();
+//                mPhoneInfos.addAll(contacts.getPhones());
+//            }
+//
+//            new Thread() {
+//                @Override
+//                public void run() {
+//                    groupOrderBy();
+//
+//                    ArrayList<PhoneInfo> mPhoneInfos = new ArrayList<PhoneInfo>();
+//                    // ArrayList<Contacts> com = new ArrayList<Contacts>();
+//                    // ArrayList<Contacts> benben = new ArrayList<Contacts>();
+//                    for (ContactsGroup cg : mContactsGroups) {
+//                        // 记录所有的phone信息
+//                        ArrayList<Contacts> mContacts = cg.getmContacts();
+//                        // com.clear();
+//                        // benben.clear();
+//
+//                        for (Contacts contacts : mContacts) {
+//                            // if (!contacts.getIs_benben().equals("0")) {
+//                            // benben.add(contacts);
+//                            // } else {
+//                            // com.add(contacts);
+//                            // }
+//                            ArrayList<PhoneInfo> phones = contacts.getPhones();
+//                            mPhoneInfos.addAll(contacts.getPhones());
+//                        }
+//                    }
+//
+//                    // // 持久化一个环信与本地数据的hashmap
+//                    // HashMap<String, Object> huanXinMap = new HashMap<String,
+//                    // Object>();
+//                    // if (mContacts != null && mContacts.size() > 0) {
+//                    // for (Contacts cs : mContacts) {
+//                    // if (!"0".equals(cs.getIs_benben())) {
+//                    // huanXinMap.put(cs.getHuanxin_username(), cs);
+//                    // }
+//                    // }
+//                    // }
+//                    // crashApplication.getInstance().setHuanXinMap(huanXinMap);
+//
+//                    try {
+//
+//                        dbUtil.deleteAll(ContactsGroup.class);
+//                        dbUtil.deleteAll(Contacts.class);
+//                        dbUtil.deleteAll(PhoneInfo.class);
+//
+//                        dbUtil.saveOrUpdateAll(mContactsGroups);
+//                        dbUtil.saveOrUpdateAll(contactsObject.getmContactss());
+//                        // }
+//                        dbUtil.saveOrUpdateAll(mPhoneInfos);
+//
+//                        mActivity.runOnUiThread(new Runnable() {
+//
+//                            @Override
+//                            public void run() {
+//                                initlocakData();
+//                                mActivity.dissLoding();
+//                                nodata.setVisibility(View.GONE);
+//                                if (lodingDialog != null) {
+//                                    lodingDialog.dismiss();
+//                                }
+//                            }
+//                        });
+//
+//                    } catch (DbException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }.start();
+//
+//        } catch (NetRequestException e) {
+//            e.getError().print(mActivity);
+//            nodata.setVisibility(View.VISIBLE);
+//            // initlocakData();
+//        }
+//    }
 
 	@Override
 	protected void onFailure(HttpException exception, String strMsg) {
@@ -769,7 +777,6 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 //			JSONObject jsonObject = null;
 //			try {
 //				jsonObject = new JSONObject(arg0.result);
-//                Log.d("ltf","jsonObject====2======="+jsonObject);
 //				getData(jsonObject);
 //			} catch (JSONException e) {
 //				initlocakData();
@@ -793,7 +800,6 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
             JSONObject jsonObject = null;
             try {
                 jsonObject = new JSONObject(arg0.result);
-                Log.d("ltf","jsonObject====1======="+jsonObject);
                 getData(jsonObject);
             } catch (JSONException e) {
                 initlocakData();
@@ -1019,7 +1025,6 @@ public class ContactsFragment extends BaseFragment implements OnClickListener {
 //							// com.add(contacts);
 //							// }
 //							ArrayList<PhoneInfo> phones = contacts.getPhones();
-//                            Log.d("ltf","phones======"+phones.size());
 //							mPhoneInfos.addAll(contacts.getPhones());
 //						}
 //					}

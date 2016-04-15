@@ -20,6 +20,10 @@ import com.xunao.benben.utils.ToastUtils;
 
 import org.json.JSONObject;
 
+/**
+ * 修改相册名称
+ */
+
 public class ActivityUpdateAlbumName extends BaseActivity {
 	private EditText et_new_nick_name;
     private int id;

@@ -307,7 +307,6 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject==========="+jsonObject);
 		String optString = jsonObject.optString("ret_num");
 		dissLoding();
 		if (optString != null) {

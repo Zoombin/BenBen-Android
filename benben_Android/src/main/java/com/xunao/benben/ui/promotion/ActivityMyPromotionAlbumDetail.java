@@ -64,6 +64,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * 商家角度相册详情及操作，促销团购共用
  * Created by ltf on 2015/11/30.
  */
 public class ActivityMyPromotionAlbumDetail extends BaseActivity implements View.OnClickListener {
@@ -312,7 +313,6 @@ public class ActivityMyPromotionAlbumDetail extends BaseActivity implements View
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject====================="+jsonObject);
         try {
             album = new Album();
             album.parseJSON(jsonObject);
@@ -439,7 +439,6 @@ public class ActivityMyPromotionAlbumDetail extends BaseActivity implements View
                     this.showLoding("删除中...");
                     picid=picid.substring(0,picid.length()-1);
                     changeWhat=4;
-                    Log.d("ltf","picid==========="+picid);
                     InteNetUtils.getInstance(mContext).Delphoto(id,picid,editAlbum);
                 }
                 break;

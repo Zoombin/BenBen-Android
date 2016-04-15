@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 账户地址管理
  * Created by ltf on 2015/12/16.
  */
 public class ActivityAccountAddressManage extends BaseActivity{

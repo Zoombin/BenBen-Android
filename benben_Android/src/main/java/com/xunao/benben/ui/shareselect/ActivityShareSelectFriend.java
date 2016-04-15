@@ -52,6 +52,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 分享好友选择
+ */
+
 public class ActivityShareSelectFriend extends BaseActivity {
 	private FloatingGroupExpandableListView listView;
 	private WrapperExpandableListAdapter wrapperAdapter;

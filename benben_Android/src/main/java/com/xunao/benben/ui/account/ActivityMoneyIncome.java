@@ -29,6 +29,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
+ * 金额转入
  * Created by ltf on 2016/1/7.
  */
 public class ActivityMoneyIncome extends BaseActivity implements View.OnClickListener {

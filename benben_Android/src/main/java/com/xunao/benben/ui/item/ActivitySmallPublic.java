@@ -497,7 +497,6 @@ public class ActivitySmallPublic extends BaseActivity implements OnClickListener
                         String videoPath = "";
                         if(voiceRecorder!=null) {
                             videoPath =voiceRecorder.getVoiceFilePath();
-                            Log.d("ltf","videoPath============"+videoPath);
                         }
                         if (user.getSysLeague() == 2) {
                             if (!item_all.isChecked() && contacts.size() <= 0 && friendUnionContacts.size() <=0) {

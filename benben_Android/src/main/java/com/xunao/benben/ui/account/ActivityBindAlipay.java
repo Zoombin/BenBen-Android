@@ -16,6 +16,7 @@ import com.xunao.benben.utils.ToastUtils;
 import org.json.JSONObject;
 
 /**
+ * 支付宝绑定
  * Created by ltf on 2016/3/11.
  */
 public class ActivityBindAlipay extends BaseActivity implements View.OnClickListener {

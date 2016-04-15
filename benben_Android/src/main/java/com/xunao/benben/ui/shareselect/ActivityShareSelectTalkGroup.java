@@ -54,6 +54,9 @@ import in.srain.cube.image.CubeImageView;
 import in.srain.cube.image.ImageTask;
 import in.srain.cube.image.impl.DefaultImageLoadHandler;
 
+/**
+ * 分享群组选择
+ */
 public class ActivityShareSelectTalkGroup extends BaseActivity implements OnClickListener{
 
 	private ListView listview;

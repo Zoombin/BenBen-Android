@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 商家角度活动现场相册，促销团购共用
  * Created by ltf on 2015/11/30.
  */
 public class ActivityMyPromotionAlbum extends BaseActivity{
@@ -62,7 +63,6 @@ public class ActivityMyPromotionAlbum extends BaseActivity{
     @Override
     public void initDate(Bundle savedInstanceState) {
         id  = getIntent().getStringExtra("id");
-        Log.d("ltf","id============"+id);
         if(CommonUtils.isNetworkAvailable(mContext)){
             InteNetUtils.getInstance(mContext).Activityalbum(id,user.getToken(), mRequestCallBack);
         }else{
@@ -130,7 +130,6 @@ public class ActivityMyPromotionAlbum extends BaseActivity{
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject================"+jsonObject);
         if(jsonObject.optInt("ret_num")==0) {
             albumList.clear();
             maxalbun = jsonObject.optInt("maxalbun");

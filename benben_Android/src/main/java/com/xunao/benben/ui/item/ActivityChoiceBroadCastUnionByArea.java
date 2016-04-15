@@ -167,8 +167,6 @@ public class ActivityChoiceBroadCastUnionByArea extends BaseActivity implements
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
         friendUnionMembers.clear();
-        Log.d("ltf","jsonObject==========="+jsonObject);
-
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("member_list");
             if(jsonArray!=null && jsonArray.length()>0){

@@ -385,7 +385,6 @@ public class ActivitySmallPublics extends BaseActivity {
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject============"+jsonObject);
         try {
 			broadCastings.clear();
 			broadCasting = new BroadCastingList();

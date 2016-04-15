@@ -144,7 +144,6 @@ public class ActivityTalkGroup extends BaseActivity implements OnClickListener,
 
 	@Override
 	protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject========"+jsonObject);
         dissLoding();
 		try {
 			TalkGroupList groupList = new TalkGroupList();

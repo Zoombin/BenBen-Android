@@ -80,6 +80,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 单个团购操作，新增，编辑等操作
  * Created by ltf on 2015/12/7.
  */
 public class ActivityGroupBuyOperate extends BaseActivity implements View.OnClickListener {
@@ -434,7 +435,6 @@ public class ActivityGroupBuyOperate extends BaseActivity implements View.OnClic
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject=============="+jsonObject);
         dissLoding();
         try {
 

@@ -66,6 +66,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 我要买出价
  * Created by ltf on 2016/1/22.
  */
 public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickListener {
@@ -347,7 +348,6 @@ public class ActivityBuyGivePrice extends BaseActivity implements View.OnClickLi
                                             JSONObject jsonObject;
                                             try {
                                                 jsonObject = new JSONObject(arg0.result);
-                                                Log.d("ltf","jsonObject=============="+jsonObject);
                                                 SuccessMsg msg = new SuccessMsg();
                                                 msg.parseJSON(jsonObject);
                                                 ToastUtils.Infotoast(mContext,

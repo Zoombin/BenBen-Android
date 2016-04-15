@@ -353,7 +353,6 @@ public class ActivityNumberTrain extends BaseActivity implements
 		setOnLeftClickLinester(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-                Log.d("ltf","isSearch========="+isSearch);
 				if (isSearch || isDelete) {
 					pagerNum = 0;
 					enterNum = false;

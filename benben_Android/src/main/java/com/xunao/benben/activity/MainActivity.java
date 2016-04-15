@@ -120,6 +120,9 @@ import com.xunao.benben.utils.SharePreferenceUtil;
 import com.xunao.benben.utils.TimeUtil;
 import com.xunao.benben.utils.ToastUtils;
 
+/**
+ * 主页面，环信相关信息监听以及登录后相关操作
+ */
 public class MainActivity extends BaseActivity implements EMEventListener, UmengUpdateListener {
 
 	public static final int UPDATA = 0;
@@ -359,12 +362,13 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
                 spUtil.setLastCreationRushTime(creationRushTime);
             }
 
-
+            //获取朋友圈，微创作新消息提醒
             InteNetUtils.getInstance(mContext).Remind(friendTime, creationTime,friendRushTime, creationRushTime,user.getToken(), mRequestCallBack);
         }else{
             ToastUtils.Errortoast(mContext, "网络不可用!");
         }
 
+        //积分转换犇币
         InteNetUtils.getInstance(mContext).Exchange(user.getToken(), new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> stringResponseInfo) {
@@ -1174,13 +1178,15 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
         String from = message.getFrom();
         // 消息id
         String msgId = message.getMsgId();
-
+        //t1  1：环信消息  2：您的好友申请被同意后反馈信息  0或其他：该信息不在聊天列表显示，删除该信息
         int t1 = message.getIntAttribute("t1",1);
         int t4 = message.getIntAttribute("t4",1);
         if(t1==1){
+            //t2  1:申请相关消息，进聊天请求与通知   0：其他消息
             int t2 = message.getIntAttribute("t2",0);
             if(t2==0){
                 if(t4==4){
+                    //我要买消息，进聊天我要买状态提醒
                     try {
                         int buyid = message.getIntAttribute("buyid", 0);
                         BuyNews buyNews = new BuyNews();
@@ -1201,6 +1207,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
                     notifyNewIviteMessage();
 
                 }else {
+                    //消息进聊天列表
                     // 2014-10-22 修复在某些机器上，在聊天页面对方发消息过来时不立即显示内容的bug
                     if (ChatActivity.activityInstance != null) {
                         if (message.getChatType() == ChatType.GroupChat) {
@@ -1257,6 +1264,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
                 }
 
                 if(t4==1){
+                    //好友联盟邀请堂主相关信息
                     try {
                         PublicMessage mPublicMessage = dbUtil.findFirst(Selector.from(
                                 PublicMessage.class).where("huanxin_username", "=",
@@ -1298,6 +1306,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
                         e1.printStackTrace();
                     }
                 }else if(t4==2){
+                    //群组申请相关信息
                     PublicMessage mPublicMessage = new PublicMessage();
                     mPublicMessage.setHuanxin_username("");
                     mPublicMessage.setClassType(PublicMessage.GROUP);
@@ -1320,6 +1329,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
                     }
 
                 }else if(t4==3){
+                    //好友申请相关信息
                     PublicMessage mPublicMessage = new PublicMessage();
                     mPublicMessage.setHuanxin_username("");
                     mPublicMessage.setClassType(PublicMessage.FRIEND);
@@ -1341,6 +1351,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
                         e.printStackTrace();
                     }
                 }else if(t4==5){
+                    //群主转让
                     String huanxin_groupid = message.getStringAttribute("huanxin_groupid", "");
                     String transfer_id = message.getStringAttribute("transfer_id", "");
                     try {
@@ -1492,6 +1503,7 @@ public class MainActivity extends BaseActivity implements EMEventListener, Umeng
                         }
                     });
         }else{
+            //删除该条信息
             EMConversation conversation = EMChatManager.getInstance().getConversation(from);
             conversation.removeMessage(msgId);
             executorService.submit(new Runnable() {

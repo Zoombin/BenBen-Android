@@ -64,6 +64,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * 用户视角活动相册详情
  * Created by ltf on 2015/11/30.
  */
 public class ActivityPromotionAlbumDetail extends BaseActivity{
@@ -127,7 +128,6 @@ public class ActivityPromotionAlbumDetail extends BaseActivity{
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        Log.d("ltf","jsonObject====================="+jsonObject);
         try {
             album = new Album();
             album.parseJSON(jsonObject);

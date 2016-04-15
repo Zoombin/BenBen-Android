@@ -26,6 +26,7 @@ import com.xunao.benben.utils.ToastUtils;
 import org.json.JSONObject;
 
 /**
+ * 我的账户
  * Created by ltf on 2015/12/19.
  */
 public class ActivityMyAccount extends BaseActivity implements View.OnClickListener {

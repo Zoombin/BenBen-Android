@@ -205,7 +205,6 @@ public class ActivityChoiceDetailAddress extends BaseActivity implements
 
 	@Override
 	public void onGetGeoCodeResult(GeoCodeResult result) {
-        Log.d("ltf","result============"+result);
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
 			ToastUtils.Infotoast(mContext, "抱歉，未能找到结果");
 			return;
@@ -226,7 +225,6 @@ public class ActivityChoiceDetailAddress extends BaseActivity implements
 					.visible(isShow).draggable(true));
 
 		}
-        Log.d("ltf","result====1========"+result);
 		mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(result
 				.getLocation()));
 	}

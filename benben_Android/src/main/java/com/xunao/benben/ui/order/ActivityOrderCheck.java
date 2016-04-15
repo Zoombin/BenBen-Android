@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 /**
+ * 订单验证页面
  * Created by ltf on 2015/12/22.
  */
 public class ActivityOrderCheck extends BaseActivity implements View.OnClickListener,SurfaceHolder.Callback {

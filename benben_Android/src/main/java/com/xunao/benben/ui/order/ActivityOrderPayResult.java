@@ -32,6 +32,7 @@ import java.util.Date;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 订单支付结果
  * Created by ltf on 2015/12/22.
  */
 public class ActivityOrderPayResult extends BaseActivity implements View.OnClickListener {

@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * 我的钱包
  * Created by ltf on 2016/1/4.
  */
 public class ActivityMyWallet extends BaseActivity implements View.OnClickListener {

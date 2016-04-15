@@ -3426,7 +3426,6 @@ public class InteNetUtils {
     public void getMapAddress(String key,String region,String ak,String mCode,int page_num,RequestCallBack<String> callBack) {
 //        HashMap<String, String> hashMap = new HashMap<String, String>();
         String url = "http://api.map.baidu.com/place/v2/search?q="+key+"&region="+region+"&output=json&ak="+ak+"&page_num="+page_num+"&mcode="+mCode;
-        Log.d("ltf","url=========="+url);
 
         httpUtils.send(HttpMethod.GET, url, null, callBack);
 

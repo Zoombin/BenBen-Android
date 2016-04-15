@@ -65,6 +65,10 @@ import com.xunao.benben.ui.item.ActivitySetting;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.ToastUtils;
 
+/**
+ * 我的页面，显示个人相关信息
+ */
+
 public class MyFragment extends BaseFragment implements OnClickListener {
 	private View view;
 	private RelativeLayout rl_setting;
@@ -98,6 +102,7 @@ public class MyFragment extends BaseFragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_own, null);
 		super.onCreateView(inflater, container, savedInstanceState);
+        //帮助提示
         if(getHintState("help2")) {
             showHintDiaLog();
         }
@@ -744,7 +749,6 @@ public class MyFragment extends BaseFragment implements OnClickListener {
             public void onSuccess(ResponseInfo<String> stringResponseInfo) {
                 try {
                     JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
-                    Log.d("ltf","jsonObject================"+jsonObject);
                     if(jsonObject.optInt("ret_num")==0){
                         String integral = jsonObject.optString("integral");
                         mActivity.user.setIntegral(integral);

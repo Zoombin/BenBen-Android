@@ -455,7 +455,6 @@ public class ActivityEnterpriseMember extends BaseActivity implements
                                             arg0.result);
                                     JSONObject object = jsonObject
                                             .optJSONObject("enterprise_info");
-                                    Log.d("ltf","object============="+object);
                                     Enterprise enterprise = new Enterprise();
                                     enterprise.parseJSON(object);
                                     String content="暂无公告";

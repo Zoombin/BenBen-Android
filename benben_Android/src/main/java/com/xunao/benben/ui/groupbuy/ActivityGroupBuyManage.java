@@ -30,6 +30,7 @@ import java.util.List;
 import in.srain.cube.image.CubeImageView;
 
 /**
+ * 团购管理页面，显示团购列表
  * Created by ltf on 2015/12/7.
  */
 public class ActivityGroupBuyManage extends BaseActivity implements View.OnClickListener {

@@ -67,6 +67,10 @@ import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.ui.ActivityFindContacts;
 import com.xunao.benben.ui.ActivityFindMapAddress;
 
+/**
+ * 聊天位置发送页面
+ */
+
 public class BaiduMapActivity extends BaseActivity implements View.OnClickListener {
 
     private final static String TAG = "map";

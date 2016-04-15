@@ -342,19 +342,23 @@ public class ActivityPromotionOperate extends BaseActivity implements View.OnCli
 
                                 break;
                             case 2:
-                                if(type==1) {
-                                    Bimp.tempSelectBitmap.clear();
-                                    PublicWay.num = 6;
-                                    startAnimActivityForResult3(
-                                            ActivitySmallPublic.class,SEND_PUBLIC,
-                                            "promotion", "我开通了新的促销,来给我捧捧场吧!" ,
-                                            "url",AndroidConfig.NETHOST + "/promotion/promotiondetail/key/android?promotionid=" + promotionid);
+                                if(user.getZhiIsClose()==1){
+                                    ToastUtils.Infotoast(mContext,"号码直通车已关闭，无法发送小喇叭!");
+                                }else {
+                                    if (type == 1) {
+                                        Bimp.tempSelectBitmap.clear();
+                                        PublicWay.num = 6;
+                                        startAnimActivityForResult3(
+                                                ActivitySmallPublic.class, SEND_PUBLIC,
+                                                "promotion", "我开通了新的促销,来给我捧捧场吧!",
+                                                "url", AndroidConfig.NETHOST + "/promotion/promotiondetail/key/android?promotionid=" + promotionid);
 //                                    startAnimActivity2Obj(
 //                                            ActivitySmallPublic.class,
 //                                            "promotion", "我开通了新的促销,来给我捧捧场吧!" ,
 //                                            "url",AndroidConfig.NETHOST + "/promotion/promotiondetail/key/android?promotionid=" + promotionid);
-                                }else{
-                                    ToastUtils.Infotoast(mContext,"该商品已下架，无法发送小喇叭!");
+                                    } else {
+                                        ToastUtils.Infotoast(mContext, "该商品已下架，无法发送小喇叭!");
+                                    }
                                 }
                                 break;
                             default:

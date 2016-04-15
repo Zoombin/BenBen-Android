@@ -361,43 +361,38 @@ public class ActivityBusinessOrderDetail extends BaseActivity implements View.On
                     @Override
                     public void onClick(View v) {
                         msgDialog.dismiss();
-                        Uri uri = Uri.parse(AndroidConfig.NETHOST + AndroidConfig.Agreeback+"?key=android&order_id="+order.getOrder_id()+"&token="+user.getToken());
-                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivityForResult(intent,1);
+//                        Uri uri = Uri.parse(AndroidConfig.NETHOST + AndroidConfig.Agreeback+"?key=android&order_id="+order.getOrder_id()+"&token="+user.getToken());
+//                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                        startActivityForResult(intent,1);
 
-//                        if (CommonUtils.isNetworkAvailable(mContext)) {
-//                            showLoding("");
-//
-//                            InteNetUtils.getInstance(mContext).Agreeback(order.getOrder_id(), new RequestCallBack<String>() {
-//                                @Override
-//                                public void onSuccess(ResponseInfo<String> stringResponseInfo) {
-//                                    dissLoding();
-////                                    Uri uri = Uri.parse(stringResponseInfo.toString());
-////                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-////                                    startActivity(intent);
-////                                    try {
-////                                        JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
-////                                        if(jsonObject.optInt("ret_num")==0){
-////                                            ToastUtils.Infotoast(mContext, "同意退款成功");
-////                                            sendBroadcast(new Intent("businessOrderRefresh"));
-////                                            AnimFinsh();
-////                                        }else{
-////                                            ToastUtils.Infotoast(mContext, jsonObject.optString("ret_msg"));
-////                                        }
-////                                    } catch (JSONException e) {
-////                                        e.printStackTrace();
-////                                    }
-//                                }
-//
-//                                @Override
-//                                public void onFailure(HttpException e, String s) {
-//                                    dissLoding();
-//                                    ToastUtils.Infotoast(mContext, "同意退款失败");
-//                                }
-//                            });
-//                        } else {
-//                            ToastUtils.Infotoast(mContext, "网络不可用");
-//                        }
+                        if (CommonUtils.isNetworkAvailable(mContext)) {
+                            showLoding("");
+
+                            InteNetUtils.getInstance(mContext).Agreeback(order.getOrder_id(), new RequestCallBack<String>() {
+                                @Override
+                                public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                                    dissLoding();
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
+                                        if(jsonObject.optInt("ret_num")==0){
+                                            ToastUtils.Infotoast(mContext, "同意退款成功");
+                                            sendBroadcast(new Intent("businessOrderRefresh"));
+                                            AnimFinsh();
+                                        }else{
+                                            ToastUtils.Infotoast(mContext, jsonObject.optString("ret_msg"));
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(HttpException e, String s) {
+                                    dissLoding();
+                                    ToastUtils.Infotoast(mContext, "同意退款失败");
+                                }
+                            });
+                        }
                     }
                 });
                 msgDialog.show();

@@ -847,11 +847,13 @@ public class ActivityMyNumberTrain extends BaseActivity implements
 											numberTrainDetail
 													.setIs_close(optInt);
 											if (optInt == 0) {
+                                                user.setZhiIsClose(0);
 												send_message_red
 														.setBackgroundResource(R.drawable.btn_sendmessage_red);
 												send_message_red
 														.setText("关闭直通车");
 											} else {
+                                                user.setZhiIsClose(1);
 												send_message_red
 														.setBackgroundResource(R.drawable.btn_sendmessage_blue);
 												send_message_red

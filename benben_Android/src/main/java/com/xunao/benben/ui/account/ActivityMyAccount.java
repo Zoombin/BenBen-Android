@@ -168,7 +168,11 @@ public class ActivityMyAccount extends BaseActivity implements View.OnClickListe
                 startAnimActivity(ActivityMyOrder.class);
                 break;
             case R.id.rl_business_order:
-                startAnimActivity(ActivityBusinessOrder.class);
+                if(user.getZhiId()==0){
+                    ToastUtils.Infotoast(mContext,"您尚未开通号码直通车!");
+                }else {
+                    startAnimActivity(ActivityBusinessOrder.class);
+                }
                 break;
             case R.id.ll_collection:
                 startAnimActivity(ActivityMyPromotionCollection.class);

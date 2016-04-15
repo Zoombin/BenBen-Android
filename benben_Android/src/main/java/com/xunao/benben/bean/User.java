@@ -68,6 +68,7 @@ public class User extends BaseBean<User> {
 	}
 
 	private int zhiId;
+    private int zhiIsClose;
 	private String zhiName;
 	private String zhiShortName;
 	private boolean isRegLogin = false;
@@ -159,6 +160,8 @@ public class User extends BaseBean<User> {
 			zhiId = jsonObjectZhitongche.optInt("Id");
 			zhiName = jsonObjectZhitongche.optString("Name");
 			zhiShortName = jsonObjectZhitongche.optString("ShortName");
+            zhiIsClose = jsonObjectZhitongche.optInt("is_close");
+
 		}
 
 		JSONArray group_list = jsonObject.optJSONArray("group_list");
@@ -483,5 +486,13 @@ public class User extends BaseBean<User> {
 
     public void setBx_name(String bx_name) {
         this.bx_name = bx_name;
+    }
+
+    public int getZhiIsClose() {
+        return zhiIsClose;
+    }
+
+    public void setZhiIsClose(int zhiIsClose) {
+        this.zhiIsClose = zhiIsClose;
     }
 }

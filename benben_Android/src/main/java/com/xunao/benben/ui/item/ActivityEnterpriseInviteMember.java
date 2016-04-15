@@ -205,7 +205,6 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 								groupOrderBy();
 
 								for (ContactsGroupEnterprise group : contactsGroups) {
-
 									List contact = dbUtil.findAll(Selector
 											.from(Contacts.class)
 											.where(WhereBuilder.b("group_id",
@@ -213,189 +212,258 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 											.orderBy("is_benben", true));
 
 									ArrayList<ContactsEnterprise> contacts = new ArrayList<ContactsEnterprise>();
-
 									ContactsEnterprise ce = null;
 									for (Contacts c : (ArrayList<Contacts>) contact) {
-
-										List<PhoneInfo> phoneList;
-										if (!enterpriseType.equals("2")) {
-											phoneList = dbUtil.findAll(Selector
-													.from(PhoneInfo.class)
-													.where(WhereBuilder.b(
-															"contacts_id", "=",
-															c.getId())));
-										} else {
-											phoneList = dbUtil.findAll(Selector
-													.from(PhoneInfo.class)
-													.where(WhereBuilder.b(
-															"contacts_id", "=",
-															c.getId()).and(
-															"is_baixing", "!=",
-															"0")));
-										}
-
-										ArrayList<PhoneInfo> phoneInfos = new ArrayList<PhoneInfo>();
-										phoneInfos = (ArrayList<PhoneInfo>) phoneList;
-										ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
-										boolean isCunzai = false;
-
-										for (ContactsEnterprise co : arrayList) {
-											if (co.getName()
-													.equals(c.getName())) {
-												phoneInfos2.addAll(phoneList);
-											} else {
-
-												for (PhoneInfo p : phoneList) {
-													if (enterpriseType
-															.equals("2")) {
-														if (p.getIs_baixing()
-																.length() != enterprise
-																.getShort_length()) {
-															phoneList.remove(p);
-															break;
-														}
-													} else {
-
-														if (p.getPhone()
-																.equals(co
-																		.getPhone())
-																|| p.getIs_baixing()
-																		.equals(co
-																				.getShortPhone())
-																|| p.getPhone()
-																		.equals(co
-																				.getShortPhone())) {
-															
-															// phoneList.remove(p);
-															// break;
-															isCunzai = true;
-															if (!phoneInfos2
-																	.contains(p)) {
-																phoneInfos2
-																		.add(p);
+                                        List<PhoneInfo> phoneList = dbUtil.findAll(Selector
+                                                .from(PhoneInfo.class)
+                                                .where(WhereBuilder.b(
+                                                        "contacts_id", "=",
+                                                        c.getId()).and(
+                                                        "phone", "!=",
+                                                        "")));
+                                        ArrayList<PhoneInfo> phoneInfos = (ArrayList<PhoneInfo>) phoneList;
+                                        ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
+                                        ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
+                                        boolean isCunzai = false;//是否存在
+                                        boolean isMatch = false;//企业政企是否有第一位不为0的11位长号并
+                                        for (ContactsEnterprise co : arrayList) {
+                                            for (PhoneInfo p : phoneList) {
+                                                if (p.getPhone().equals(co.getPhone()) || p.getIs_baixing().equals(co.getShortPhone()) || p.getPhone().equals(co.getShortPhone())) {
+                                                    isCunzai = true;
+                                                    break;
+                                                }else{
+                                                    String phone = p.getPhone();
+                                                    if(phone.length()==11 && phone.charAt(0)!=0){
+                                                        isMatch = true;
+                                                    }
+                                                    if (enterpriseType.equals("2")) {
+                                                        isMatch = true;
+                                                        if (p.getIs_baixing().length() != enterprise.getShort_length()) {
+                                                            if(p.getPhone().length() == enterprise.getShort_length()){
+                                                                p.setIs_baixing(p.getPhone());
+                                                            }else if (!phoneInfos2.contains(p)) {
+																phoneInfos2.add(p);
 															}
-														}
-													}
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if(isCunzai || !isMatch || phoneList.size() == phoneInfos2.size()){
+                                            continue;
+                                        }
+                                        phoneInfos.removeAll(phoneInfos2);
+                                        for (PhoneInfo info : phoneInfos) {
+                                            if (enterpriseType.equals("1")) {
+                                                PhoneInfo info2 = new PhoneInfo();
+                                                if (!"".equals(info.getIs_baixing()) && !"0".equals(info.getIs_baixing())) {
+                                                    info2.setId(info.getId());
+                                                    info2.setPhone(info.getIs_baixing());
+                                                    info2.setIs_benben(info.getIs_benben());
+                                                    info2.setPoster(info.getPoster());
+                                                    info2.setNick_name(info.getNick_name());
+                                                    info2.setContacts_id(info.getContacts_id());
+                                                    info2.setHuanxin_username(info.getHuanxin_username());
+                                                    phoneInfos3.add(info2);
+                                                }
+                                            }
+                                        }
+                                        phoneInfos.addAll(phoneInfos3);
+                                        ce = new ContactsEnterprise();
+                                        ce.setPhones(phoneInfos);
+                                        ce.setId(c.getId() + "");
+                                        ce.setName(c.getName());
+                                        ce.setChecked(c.isChecked());
+                                        ce.setGroup_id(c.getGroup_id());
+                                        ce.setHasPinYin(c.isHasPinYin());
+                                        ce.setHuanxin_username(c
+                                                .getHuanxin_username());
+                                        ce.setIs_baixing(c.getIs_baixing());
+                                        ce.setIs_benben(c.getIs_benben());
+                                        ce.setIs_friend(c.getIs_friend());
+                                        ce.setPhone(c.getPhone());
+                                        ce.setPinyin(c.getPinyin());
+                                        ce.setPoster(c.getPoster());
+                                        ce.setRemark(c.getRemark());
+                                        contacts.add(ce);
+                                        group.setmContacts(contacts);
 
-												}
-											}
-										}
-										// if (phoneList.size() <= 0) {
-										// continue;
-										// }
-										
-										if(isCunzai){
-											continue;
-										}
-
-										if (phoneList.size() == phoneInfos2
-												.size()) {
-											continue;
-										}
-
-										phoneInfos.removeAll(phoneInfos2);
-
-										ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
-
-										for (PhoneInfo info : phoneInfos) {
-											if (info.getPhone().length() == 11
-													|| info.getIs_baixing()
-															.length() == 11) {
-												if (!phoneInfos3
-														.containsAll(phoneInfos)) {
-													phoneInfos3
-															.addAll(phoneInfos);
-												}
-												continue;
-											}
-										}
-
-										if (phoneInfos3.size() <= 0) {
-											continue;
-										}
-
-										ArrayList<PhoneInfo> phoneInfos4 = new ArrayList<PhoneInfo>();
-
-										for (PhoneInfo info : phoneInfos3) {
-											if (!phoneInfos4.contains(info)) {
-												phoneInfos4.add(info);
-											}
-											PhoneInfo info2 = new PhoneInfo();
-
-											if (!"".equals(info.getIs_baixing())
-													&& !"0".equals(info
-															.getIs_baixing())) {
-												info2.setId(info.getId());
-												info2.setPhone(info
-														.getIs_baixing());
-												info2.setIs_benben(info
-														.getIs_benben());
-												info2.setPoster(info
-														.getPoster());
-												info2.setNick_name(info
-														.getNick_name());
-												info2.setContacts_id(info
-														.getContacts_id());
-												info2.setHuanxin_username(info
-														.getHuanxin_username());
-												if (!phoneInfos4
-														.contains(info2)) {
-													phoneInfos4.add(info2);
-												}
-											}
-
-										}
-
-										ce = new ContactsEnterprise();
-										if (!enterpriseType.equals("2")) {
-											Collections.sort(phoneInfos4, new Comparator<PhoneInfo>(){
-
-												@Override
-												public int compare(
-														PhoneInfo arg0,
-														PhoneInfo arg1) {
-													Integer phone = arg0.getPhone().length();
-													Integer phone2 = arg1.getPhone().length();
-													return phone2.compareTo(phone);
-												}
-												
-											});
-											
-											
-											
-											ce.setPhones(phoneInfos4);
-										} else {
-											Collections.sort(phoneInfos3, new Comparator<PhoneInfo>(){
-
-												@Override
-												public int compare(
-														PhoneInfo arg0,
-														PhoneInfo arg1) {
-													Integer phone = arg0.getPhone().length();
-													Integer phone2 = arg1.getPhone().length();
-													return phone2.compareTo(phone);
-												}
-												
-											});
-											ce.setPhones(phoneInfos3);
-										}
-
-										ce.setId(c.getId() + "");
-										ce.setName(c.getName());
-										ce.setChecked(c.isChecked());
-										ce.setGroup_id(c.getGroup_id());
-										ce.setHasPinYin(c.isHasPinYin());
-										ce.setHuanxin_username(c
-												.getHuanxin_username());
-										ce.setIs_baixing(c.getIs_baixing());
-										ce.setIs_benben(c.getIs_benben());
-										ce.setIs_friend(c.getIs_friend());
-										ce.setPhone(c.getPhone());
-										ce.setPinyin(c.getPinyin());
-										ce.setPoster(c.getPoster());
-										ce.setRemark(c.getRemark());
-										contacts.add(ce);
-										group.setmContacts(contacts);
+//										List<PhoneInfo> phoneList;
+//										if (!enterpriseType.equals("2")) {
+//											phoneList = dbUtil.findAll(Selector
+//													.from(PhoneInfo.class)
+//													.where(WhereBuilder.b(
+//															"contacts_id", "=",
+//															c.getId())));
+//										} else {
+//											phoneList = dbUtil.findAll(Selector
+//													.from(PhoneInfo.class)
+//													.where(WhereBuilder.b(
+//															"contacts_id", "=",
+//															c.getId()).and(
+//															"is_baixing", "!=",
+//															"0")));
+//										}
+//
+//										ArrayList<PhoneInfo> phoneInfos = new ArrayList<PhoneInfo>();
+//										phoneInfos = (ArrayList<PhoneInfo>) phoneList;
+//										ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
+//										boolean isCunzai = false;
+//
+//										for (ContactsEnterprise co : arrayList) {
+//											if (co.getName()
+//													.equals(c.getName())) {
+//												phoneInfos2.addAll(phoneList);
+//											} else {
+//
+//												for (PhoneInfo p : phoneList) {
+//													if (enterpriseType
+//															.equals("2")) {
+//														if (p.getIs_baixing()
+//																.length() != enterprise
+//																.getShort_length()) {
+//															phoneList.remove(p);
+//															break;
+//														}
+//													} else {
+//
+//														if (p.getPhone()
+//																.equals(co
+//																		.getPhone())
+//																|| p.getIs_baixing()
+//																		.equals(co
+//																				.getShortPhone())
+//																|| p.getPhone()
+//																		.equals(co
+//																				.getShortPhone())) {
+//
+//															// phoneList.remove(p);
+//															// break;
+//															isCunzai = true;
+//															if (!phoneInfos2
+//																	.contains(p)) {
+//																phoneInfos2
+//																		.add(p);
+//															}
+//														}
+//													}
+//
+//												}
+//											}
+//										}
+//
+//										if(isCunzai){
+//											continue;
+//										}
+//
+//										if (phoneList.size() == phoneInfos2
+//												.size()) {
+//											continue;
+//										}
+//
+//										phoneInfos.removeAll(phoneInfos2);
+//
+//										ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
+//
+//										for (PhoneInfo info : phoneInfos) {
+//											if (info.getPhone().length() == 11
+//													|| info.getIs_baixing()
+//															.length() == 11) {
+//												if (!phoneInfos3
+//														.containsAll(phoneInfos)) {
+//													phoneInfos3
+//															.addAll(phoneInfos);
+//												}
+//												continue;
+//											}
+//										}
+//
+//										if (phoneInfos3.size() <= 0) {
+//											continue;
+//										}
+//
+//										ArrayList<PhoneInfo> phoneInfos4 = new ArrayList<PhoneInfo>();
+//
+//										for (PhoneInfo info : phoneInfos3) {
+//											if (!phoneInfos4.contains(info)) {
+//												phoneInfos4.add(info);
+//											}
+//											PhoneInfo info2 = new PhoneInfo();
+//
+//											if (!"".equals(info.getIs_baixing())
+//													&& !"0".equals(info
+//															.getIs_baixing())) {
+//												info2.setId(info.getId());
+//												info2.setPhone(info
+//														.getIs_baixing());
+//												info2.setIs_benben(info
+//														.getIs_benben());
+//												info2.setPoster(info
+//														.getPoster());
+//												info2.setNick_name(info
+//														.getNick_name());
+//												info2.setContacts_id(info
+//														.getContacts_id());
+//												info2.setHuanxin_username(info
+//														.getHuanxin_username());
+//												if (!phoneInfos4
+//														.contains(info2)) {
+//													phoneInfos4.add(info2);
+//												}
+//											}
+//
+//										}
+//
+//										ce = new ContactsEnterprise();
+//										if (!enterpriseType.equals("2")) {
+//											Collections.sort(phoneInfos4, new Comparator<PhoneInfo>(){
+//
+//												@Override
+//												public int compare(
+//														PhoneInfo arg0,
+//														PhoneInfo arg1) {
+//													Integer phone = arg0.getPhone().length();
+//													Integer phone2 = arg1.getPhone().length();
+//													return phone2.compareTo(phone);
+//												}
+//
+//											});
+//
+//
+//
+//											ce.setPhones(phoneInfos4);
+//										} else {
+//											Collections.sort(phoneInfos3, new Comparator<PhoneInfo>(){
+//
+//												@Override
+//												public int compare(
+//														PhoneInfo arg0,
+//														PhoneInfo arg1) {
+//													Integer phone = arg0.getPhone().length();
+//													Integer phone2 = arg1.getPhone().length();
+//													return phone2.compareTo(phone);
+//												}
+//
+//											});
+//											ce.setPhones(phoneInfos3);
+//										}
+//
+//										ce.setId(c.getId() + "");
+//										ce.setName(c.getName());
+//										ce.setChecked(c.isChecked());
+//										ce.setGroup_id(c.getGroup_id());
+//										ce.setHasPinYin(c.isHasPinYin());
+//										ce.setHuanxin_username(c
+//												.getHuanxin_username());
+//										ce.setIs_baixing(c.getIs_baixing());
+//										ce.setIs_benben(c.getIs_benben());
+//										ce.setIs_friend(c.getIs_friend());
+//										ce.setPhone(c.getPhone());
+//										ce.setPinyin(c.getPinyin());
+//										ce.setPoster(c.getPoster());
+//										ce.setRemark(c.getRemark());
+//										contacts.add(ce);
+//										group.setmContacts(contacts);
 									}
 								}
 
@@ -459,6 +527,7 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 				groupOrderBy();
 
 				for (ContactsGroupEnterprise group : contactsGroups) {
+
 					List contact = new ArrayList();
 					if ("".equals(searchKey)) {
 						contact = dbUtil.findAll(Selector
@@ -497,186 +566,265 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 
 					if (contact != null || contact.size() > 0) {
 						for (Contacts c : (ArrayList<Contacts>) contact) {
-							List<PhoneInfo> phoneList;
-							if (!enterpriseType.equals("2")) {
-								phoneList = dbUtil.findAll(Selector
-										.from(PhoneInfo.class)
-										.where(WhereBuilder.b(
-												"contacts_id", "=",
-												c.getId())));
-							} else {
-								phoneList = dbUtil.findAll(Selector
-										.from(PhoneInfo.class)
-										.where(WhereBuilder.b(
-												"contacts_id", "=",
-												c.getId()).and(
-												"is_baixing", "!=",
-												"0")));
-							}
+                            List<PhoneInfo> phoneList = dbUtil.findAll(Selector
+                                    .from(PhoneInfo.class)
+                                    .where(WhereBuilder.b(
+                                            "contacts_id", "=",
+                                            c.getId()).and(
+                                            "phone", "!=",
+                                            "")));
+                            ArrayList<PhoneInfo> phoneInfos = (ArrayList<PhoneInfo>) phoneList;
+                            ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
+                            ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
+                            boolean isCunzai = false;//是否存在
+                            boolean isMatch = false;//企业政企是否有第一位不为0的11位长号并
+                            for (ContactsEnterprise co : arrayList) {
+                                for (PhoneInfo p : phoneList) {
+                                    if (p.getPhone().equals(co.getPhone()) || p.getIs_baixing().equals(co.getShortPhone()) || p.getPhone().equals(co.getShortPhone())) {
+                                        isCunzai = true;
+                                        break;
+                                    }else{
+                                        String phone = p.getPhone();
+                                        if(phone.length()==11 && phone.charAt(0)!=0){
+                                            isMatch = true;
+                                        }
+                                        if (enterpriseType.equals("2")) {
+                                            isMatch = true;
+                                            if (p.getIs_baixing().length() != enterprise.getShort_length()) {
+                                                if(p.getPhone().length() == enterprise.getShort_length()){
+                                                    p.setIs_baixing(p.getPhone());
+                                                }else if (!phoneInfos2.contains(p)) {
+                                                    phoneInfos2.add(p);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if(isCunzai || !isMatch || phoneList.size() == phoneInfos2.size()){
+                                continue;
+                            }
+                            phoneInfos.removeAll(phoneInfos2);
+                            for (PhoneInfo info : phoneInfos) {
+                                if (enterpriseType.equals("1")) {
+                                    PhoneInfo info2 = new PhoneInfo();
+                                    if (!"".equals(info.getIs_baixing()) && !"0".equals(info.getIs_baixing())) {
+                                        info2.setId(info.getId());
+                                        info2.setPhone(info.getIs_baixing());
+                                        info2.setIs_benben(info.getIs_benben());
+                                        info2.setPoster(info.getPoster());
+                                        info2.setNick_name(info.getNick_name());
+                                        info2.setContacts_id(info.getContacts_id());
+                                        info2.setHuanxin_username(info.getHuanxin_username());
+                                        phoneInfos3.add(info2);
+                                    }
+                                }
+                            }
+                            phoneInfos.addAll(phoneInfos3);
+                            ce = new ContactsEnterprise();
+                            ce.setPhones(phoneInfos);
+                            ce.setId(c.getId() + "");
+                            ce.setName(c.getName());
+                            ce.setChecked(c.isChecked());
+                            ce.setGroup_id(c.getGroup_id());
+                            ce.setHasPinYin(c.isHasPinYin());
+                            ce.setHuanxin_username(c
+                                    .getHuanxin_username());
+                            ce.setIs_baixing(c.getIs_baixing());
+                            ce.setIs_benben(c.getIs_benben());
+                            ce.setIs_friend(c.getIs_friend());
+                            ce.setPhone(c.getPhone());
+                            ce.setPinyin(c.getPinyin());
+                            ce.setPoster(c.getPoster());
+                            ce.setRemark(c.getRemark());
+                            contacts.add(ce);
+                            group.setmContacts(contacts);
 
-							ArrayList<PhoneInfo> phoneInfos = new ArrayList<PhoneInfo>();
-							phoneInfos = (ArrayList<PhoneInfo>) phoneList;
-							ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
-							boolean isCunzai = false;
 
-							for (ContactsEnterprise co : arrayList) {
-								if (co.getName()
-										.equals(c.getName())) {
-									phoneInfos2.addAll(phoneList);
-								} else {
 
-									for (PhoneInfo p : phoneList) {
-										if (enterpriseType
-												.equals("2")) {
-											if (p.getIs_baixing()
-													.length() != enterprise
-													.getShort_length()) {
-												phoneList.remove(p);
-												break;
-											}
-										} else {
-
-											if (p.getPhone()
-													.equals(co
-															.getPhone())
-													|| p.getIs_baixing()
-															.equals(co
-																	.getShortPhone())
-													|| p.getPhone()
-															.equals(co
-																	.getShortPhone())) {
-												
-												// phoneList.remove(p);
-												// break;
-												isCunzai = true;
-												if (!phoneInfos2
-														.contains(p)) {
-													phoneInfos2
-															.add(p);
-												}
-											}
-										}
-
-									}
-								}
-							}
-							// if (phoneList.size() <= 0) {
-							// continue;
-							// }
-							
-							if(isCunzai){
-								continue;
-							}
-
-							if (phoneList.size() == phoneInfos2
-									.size()) {
-								continue;
-							}
-
-							phoneInfos.removeAll(phoneInfos2);
-
-							ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
-
-							for (PhoneInfo info : phoneInfos) {
-								if (info.getPhone().length() == 11
-										|| info.getIs_baixing()
-												.length() == 11) {
-									if (!phoneInfos3
-											.containsAll(phoneInfos)) {
-										phoneInfos3
-												.addAll(phoneInfos);
-									}
-									continue;
-								}
-							}
-
-							if (phoneInfos3.size() <= 0) {
-								continue;
-							}
-
-							ArrayList<PhoneInfo> phoneInfos4 = new ArrayList<PhoneInfo>();
-
-							for (PhoneInfo info : phoneInfos3) {
-								if (!phoneInfos4.contains(info)) {
-									phoneInfos4.add(info);
-								}
-								PhoneInfo info2 = new PhoneInfo();
-
-								if (!"".equals(info.getIs_baixing())
-										&& !"0".equals(info
-												.getIs_baixing())) {
-									info2.setId(info.getId());
-									info2.setPhone(info
-											.getIs_baixing());
-									info2.setIs_benben(info
-											.getIs_benben());
-									info2.setPoster(info
-											.getPoster());
-									info2.setNick_name(info
-											.getNick_name());
-									info2.setContacts_id(info
-											.getContacts_id());
-									info2.setHuanxin_username(info
-											.getHuanxin_username());
-									if (!phoneInfos4
-											.contains(info2)) {
-										phoneInfos4.add(info2);
-									}
-								}
-
-							}
-
-							ce = new ContactsEnterprise();
-							if (!enterpriseType.equals("2")) {
-								Collections.sort(phoneInfos4, new Comparator<PhoneInfo>(){
-
-									@Override
-									public int compare(
-											PhoneInfo arg0,
-											PhoneInfo arg1) {
-										Integer phone = arg0.getPhone().length();
-										Integer phone2 = arg1.getPhone().length();
-										return phone2.compareTo(phone);
-									}
-									
-								});
-								
-								
-								
-								ce.setPhones(phoneInfos4);
-							} else {
-								Collections.sort(phoneInfos3, new Comparator<PhoneInfo>(){
-
-									@Override
-									public int compare(
-											PhoneInfo arg0,
-											PhoneInfo arg1) {
-										Integer phone = arg0.getPhone().length();
-										Integer phone2 = arg1.getPhone().length();
-										return phone2.compareTo(phone);
-									}
-									
-								});
-								ce.setPhones(phoneInfos3);
-							}
-
-							ce.setId(c.getId() + "");
-							ce.setName(c.getName());
-							ce.setChecked(c.isChecked());
-							ce.setGroup_id(c.getGroup_id());
-							ce.setHasPinYin(c.isHasPinYin());
-							ce.setHuanxin_username(c
-									.getHuanxin_username());
-							ce.setIs_baixing(c.getIs_baixing());
-							ce.setIs_benben(c.getIs_benben());
-							ce.setIs_friend(c.getIs_friend());
-							ce.setPhone(c.getPhone());
-							ce.setPinyin(c.getPinyin());
-							ce.setPoster(c.getPoster());
-							ce.setRemark(c.getRemark());
-							contacts.add(ce);
-							group.setmContacts(contacts);
-						}	
+//							List<PhoneInfo> phoneList;
+//							if (!enterpriseType.equals("2")) {
+//								phoneList = dbUtil.findAll(Selector
+//										.from(PhoneInfo.class)
+//										.where(WhereBuilder.b(
+//												"contacts_id", "=",
+//												c.getId())));
+//							} else {
+//								phoneList = dbUtil.findAll(Selector
+//										.from(PhoneInfo.class)
+//										.where(WhereBuilder.b(
+//												"contacts_id", "=",
+//												c.getId()).and(
+//												"is_baixing", "!=",
+//												"0")));
+//							}
+//
+//
+//
+//
+//							ArrayList<PhoneInfo> phoneInfos = new ArrayList<PhoneInfo>();
+//							phoneInfos = (ArrayList<PhoneInfo>) phoneList;
+//							ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
+//							boolean isCunzai = false;
+//
+//							for (ContactsEnterprise co : arrayList) {
+//								if (co.getName()
+//										.equals(c.getName())) {
+//									phoneInfos2.addAll(phoneList);
+//								} else {
+//
+//									for (PhoneInfo p : phoneList) {
+//										if (enterpriseType
+//												.equals("2")) {
+//											if (p.getIs_baixing()
+//													.length() != enterprise
+//													.getShort_length()) {
+//												phoneList.remove(p);
+//												break;
+//											}
+//										} else {
+//
+//											if (p.getPhone()
+//													.equals(co
+//															.getPhone())
+//													|| p.getIs_baixing()
+//															.equals(co
+//																	.getShortPhone())
+//													|| p.getPhone()
+//															.equals(co
+//																	.getShortPhone())) {
+//
+//												// phoneList.remove(p);
+//												// break;
+//												isCunzai = true;
+//												if (!phoneInfos2
+//														.contains(p)) {
+//													phoneInfos2
+//															.add(p);
+//												}
+//											}
+//										}
+//
+//									}
+//								}
+//							}
+//							// if (phoneList.size() <= 0) {
+//							// continue;
+//							// }
+//
+//							if(isCunzai){
+//								continue;
+//							}
+//
+//							if (phoneList.size() == phoneInfos2
+//									.size()) {
+//								continue;
+//							}
+//
+//							phoneInfos.removeAll(phoneInfos2);
+//
+//							ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
+//
+//							for (PhoneInfo info : phoneInfos) {
+//								if (info.getPhone().length() == 11
+//										|| info.getIs_baixing()
+//												.length() == 11) {
+//									if (!phoneInfos3
+//											.containsAll(phoneInfos)) {
+//										phoneInfos3
+//												.addAll(phoneInfos);
+//									}
+//									continue;
+//								}
+//							}
+//
+//							if (phoneInfos3.size() <= 0) {
+//								continue;
+//							}
+//
+//							ArrayList<PhoneInfo> phoneInfos4 = new ArrayList<PhoneInfo>();
+//
+//							for (PhoneInfo info : phoneInfos3) {
+//								if (!phoneInfos4.contains(info)) {
+//									phoneInfos4.add(info);
+//								}
+//								PhoneInfo info2 = new PhoneInfo();
+//
+//								if (!"".equals(info.getIs_baixing())
+//										&& !"0".equals(info
+//												.getIs_baixing())) {
+//									info2.setId(info.getId());
+//									info2.setPhone(info
+//											.getIs_baixing());
+//									info2.setIs_benben(info
+//											.getIs_benben());
+//									info2.setPoster(info
+//											.getPoster());
+//									info2.setNick_name(info
+//											.getNick_name());
+//									info2.setContacts_id(info
+//											.getContacts_id());
+//									info2.setHuanxin_username(info
+//											.getHuanxin_username());
+//									if (!phoneInfos4
+//											.contains(info2)) {
+//										phoneInfos4.add(info2);
+//									}
+//								}
+//
+//							}
+//
+//							ce = new ContactsEnterprise();
+//							if (!enterpriseType.equals("2")) {
+//								Collections.sort(phoneInfos4, new Comparator<PhoneInfo>(){
+//
+//									@Override
+//									public int compare(
+//											PhoneInfo arg0,
+//											PhoneInfo arg1) {
+//										Integer phone = arg0.getPhone().length();
+//										Integer phone2 = arg1.getPhone().length();
+//										return phone2.compareTo(phone);
+//									}
+//
+//								});
+//
+//
+//
+//								ce.setPhones(phoneInfos4);
+//							} else {
+//								Collections.sort(phoneInfos3, new Comparator<PhoneInfo>(){
+//
+//									@Override
+//									public int compare(
+//											PhoneInfo arg0,
+//											PhoneInfo arg1) {
+//										Integer phone = arg0.getPhone().length();
+//										Integer phone2 = arg1.getPhone().length();
+//										return phone2.compareTo(phone);
+//									}
+//
+//								});
+//								ce.setPhones(phoneInfos3);
+//							}
+//
+//							ce.setId(c.getId() + "");
+//							ce.setName(c.getName());
+//							ce.setChecked(c.isChecked());
+//							ce.setGroup_id(c.getGroup_id());
+//							ce.setHasPinYin(c.isHasPinYin());
+//							ce.setHuanxin_username(c
+//									.getHuanxin_username());
+//							ce.setIs_baixing(c.getIs_baixing());
+//							ce.setIs_benben(c.getIs_benben());
+//							ce.setIs_friend(c.getIs_friend());
+//							ce.setPhone(c.getPhone());
+//							ce.setPinyin(c.getPinyin());
+//							ce.setPoster(c.getPoster());
+//							ce.setRemark(c.getRemark());
+//							contacts.add(ce);
+//							group.setmContacts(contacts);
+						}
 					}
 				}
 
@@ -873,191 +1021,80 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 
 							if (contact != null || contact.size() > 0) {
 								for (Contacts c : (ArrayList<Contacts>) contact) {
-
-									List<PhoneInfo> phoneList;
-									if (!enterpriseType.equals("2")) {
-										phoneList = dbUtil.findAll(Selector
-												.from(PhoneInfo.class)
-												.where(WhereBuilder.b(
-														"contacts_id", "=",
-														c.getId())));
-									} else {
-										phoneList = dbUtil.findAll(Selector
-												.from(PhoneInfo.class)
-												.where(WhereBuilder.b(
-														"contacts_id", "=",
-														c.getId()).and(
-														"is_baixing", "!=",
-														"0")));
-									}
-
-									ArrayList<PhoneInfo> phoneInfos = new ArrayList<PhoneInfo>();
-									phoneInfos = (ArrayList<PhoneInfo>) phoneList;
-									ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
-									boolean isCunzai = false;
-
-									for (ContactsEnterprise co : arrayList) {
-										if (co.getName()
-												.equals(c.getName())) {
-											phoneInfos2.addAll(phoneList);
-										} else {
-
-											for (PhoneInfo p : phoneList) {
-												if (enterpriseType
-														.equals("2")) {
-													if (p.getIs_baixing()
-															.length() != enterprise
-															.getShort_length()) {
-														phoneList.remove(p);
-														break;
-													}
-												} else {
-
-													if (p.getPhone()
-															.equals(co
-																	.getPhone())
-															|| p.getIs_baixing()
-																	.equals(co
-																			.getShortPhone())
-															|| p.getPhone()
-																	.equals(co
-																			.getShortPhone())) {
-														
-														// phoneList.remove(p);
-														// break;
-														isCunzai = true;
-														if (!phoneInfos2
-																.contains(p)) {
-															phoneInfos2
-																	.add(p);
-														}
-													}
-												}
-
-											}
-										}
-									}
-									// if (phoneList.size() <= 0) {
-									// continue;
-									// }
-									
-									if(isCunzai){
-										continue;
-									}
-
-									if (phoneList.size() == phoneInfos2
-											.size()) {
-										continue;
-									}
-
-									phoneInfos.removeAll(phoneInfos2);
-
-									ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
-
-									for (PhoneInfo info : phoneInfos) {
-										if (info.getPhone().length() == 11
-												|| info.getIs_baixing()
-														.length() == 11) {
-											if (!phoneInfos3
-													.containsAll(phoneInfos)) {
-												phoneInfos3
-														.addAll(phoneInfos);
-											}
-											continue;
-										}
-									}
-
-									if (phoneInfos3.size() <= 0) {
-										continue;
-									}
-
-									ArrayList<PhoneInfo> phoneInfos4 = new ArrayList<PhoneInfo>();
-
-									for (PhoneInfo info : phoneInfos3) {
-										if (!phoneInfos4.contains(info)) {
-											phoneInfos4.add(info);
-										}
-										PhoneInfo info2 = new PhoneInfo();
-
-										if (!"".equals(info.getIs_baixing())
-												&& !"0".equals(info
-														.getIs_baixing())) {
-											info2.setId(info.getId());
-											info2.setPhone(info
-													.getIs_baixing());
-											info2.setIs_benben(info
-													.getIs_benben());
-											info2.setPoster(info
-													.getPoster());
-											info2.setNick_name(info
-													.getNick_name());
-											info2.setContacts_id(info
-													.getContacts_id());
-											info2.setHuanxin_username(info
-													.getHuanxin_username());
-											if (!phoneInfos4
-													.contains(info2)) {
-												phoneInfos4.add(info2);
-											}
-										}
-
-									}
-
-									ce = new ContactsEnterprise();
-									if (!enterpriseType.equals("2")) {
-										Collections.sort(phoneInfos4, new Comparator<PhoneInfo>(){
-
-											@Override
-											public int compare(
-													PhoneInfo arg0,
-													PhoneInfo arg1) {
-												Integer phone = arg0.getPhone().length();
-												Integer phone2 = arg1.getPhone().length();
-												return phone2.compareTo(phone);
-											}
-											
-										});
-										
-										
-										
-										ce.setPhones(phoneInfos4);
-									} else {
-										Collections.sort(phoneInfos3, new Comparator<PhoneInfo>(){
-
-											@Override
-											public int compare(
-													PhoneInfo arg0,
-													PhoneInfo arg1) {
-												Integer phone = arg0.getPhone().length();
-												Integer phone2 = arg1.getPhone().length();
-												return phone2.compareTo(phone);
-											}
-											
-										});
-										ce.setPhones(phoneInfos3);
-									}
-
-									ce.setId(c.getId() + "");
-									ce.setName(c.getName());
-									ce.setChecked(c.isChecked());
-									ce.setGroup_id(c.getGroup_id());
-									ce.setHasPinYin(c.isHasPinYin());
-									ce.setHuanxin_username(c
-											.getHuanxin_username());
-									ce.setIs_baixing(c.getIs_baixing());
-									ce.setIs_benben(c.getIs_benben());
-									ce.setIs_friend(c.getIs_friend());
-									ce.setPhone(c.getPhone());
-									ce.setPinyin(c.getPinyin());
-									ce.setPoster(c.getPoster());
-									ce.setRemark(c.getRemark());
-									contacts.add(ce);
-									group.setmContacts(contacts);
-								}
-							}
-//								for (Contacts c : (ArrayList<Contacts>) contact) {
+                                    List<PhoneInfo> phoneList = dbUtil.findAll(Selector
+                                            .from(PhoneInfo.class)
+                                            .where(WhereBuilder.b(
+                                                    "contacts_id", "=",
+                                                    c.getId()).and(
+                                                    "phone", "!=",
+                                                    "")));
+                                    ArrayList<PhoneInfo> phoneInfos = (ArrayList<PhoneInfo>) phoneList;
+                                    ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
+                                    ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
+                                    boolean isCunzai = false;//是否存在
+                                    boolean isMatch = false;//企业政企是否有第一位不为0的11位长号并
+                                    for (ContactsEnterprise co : arrayList) {
+                                        for (PhoneInfo p : phoneList) {
+                                            if (p.getPhone().equals(co.getPhone()) || p.getIs_baixing().equals(co.getShortPhone()) || p.getPhone().equals(co.getShortPhone())) {
+                                                isCunzai = true;
+                                                break;
+                                            }else{
+                                                String phone = p.getPhone();
+                                                if(phone.length()==11 && phone.charAt(0)!=0){
+                                                    isMatch = true;
+                                                }
+                                                if (enterpriseType.equals("2")) {
+                                                    isMatch = true;
+                                                    if (p.getIs_baixing().length() != enterprise.getShort_length()) {
+                                                        if(p.getPhone().length() == enterprise.getShort_length()){
+                                                            p.setIs_baixing(p.getPhone());
+                                                        }else if (!phoneInfos2.contains(p)) {
+                                                            phoneInfos2.add(p);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if(isCunzai || !isMatch || phoneList.size() == phoneInfos2.size()){
+                                        continue;
+                                    }
+                                    phoneInfos.removeAll(phoneInfos2);
+                                    for (PhoneInfo info : phoneInfos) {
+                                        if (enterpriseType.equals("1")) {
+                                            PhoneInfo info2 = new PhoneInfo();
+                                            if (!"".equals(info.getIs_baixing()) && !"0".equals(info.getIs_baixing())) {
+                                                info2.setId(info.getId());
+                                                info2.setPhone(info.getIs_baixing());
+                                                info2.setIs_benben(info.getIs_benben());
+                                                info2.setPoster(info.getPoster());
+                                                info2.setNick_name(info.getNick_name());
+                                                info2.setContacts_id(info.getContacts_id());
+                                                info2.setHuanxin_username(info.getHuanxin_username());
+                                                phoneInfos3.add(info2);
+                                            }
+                                        }
+                                    }
+                                    phoneInfos.addAll(phoneInfos3);
+                                    ce = new ContactsEnterprise();
+                                    ce.setPhones(phoneInfos);
+                                    ce.setId(c.getId() + "");
+                                    ce.setName(c.getName());
+                                    ce.setChecked(c.isChecked());
+                                    ce.setGroup_id(c.getGroup_id());
+                                    ce.setHasPinYin(c.isHasPinYin());
+                                    ce.setHuanxin_username(c
+                                            .getHuanxin_username());
+                                    ce.setIs_baixing(c.getIs_baixing());
+                                    ce.setIs_benben(c.getIs_benben());
+                                    ce.setIs_friend(c.getIs_friend());
+                                    ce.setPhone(c.getPhone());
+                                    ce.setPinyin(c.getPinyin());
+                                    ce.setPoster(c.getPoster());
+                                    ce.setRemark(c.getRemark());
+                                    contacts.add(ce);
+                                    group.setmContacts(contacts);
 //									List<PhoneInfo> phoneList;
-//									boolean isCunzai = false;
 //									if (!enterpriseType.equals("2")) {
 //										phoneList = dbUtil.findAll(Selector
 //												.from(PhoneInfo.class)
@@ -1069,59 +1106,70 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 //												.from(PhoneInfo.class)
 //												.where(WhereBuilder.b(
 //														"contacts_id", "=",
-//														c.getId())
-//														.and("is_baixing",
-//																"!=", "0")));
+//														c.getId()).and(
+//														"is_baixing", "!=",
+//														"0")));
 //									}
 //
-//									ArrayList<PhoneInfo> phoneInfos = new ArrayList<>();
+//									ArrayList<PhoneInfo> phoneInfos = new ArrayList<PhoneInfo>();
 //									phoneInfos = (ArrayList<PhoneInfo>) phoneList;
-//									ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<>();
+//									ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
+//									boolean isCunzai = false;
 //
 //									for (ContactsEnterprise co : arrayList) {
-//										for (PhoneInfo p : phoneList) {
-//											// if (p.getPhone().equals(
-//											// co.getPhone()) ||
-//											// p.getPhone().equals(co.getShortPhone())
-//											// || ) {
-//											if (p.getPhone().equals(
-//													co.getPhone())
-//													|| p.getIs_baixing()
+//										if (co.getName()
+//												.equals(c.getName())) {
+//											phoneInfos2.addAll(phoneList);
+//										} else {
+//
+//											for (PhoneInfo p : phoneList) {
+//												if (enterpriseType
+//														.equals("2")) {
+//													if (p.getIs_baixing()
+//															.length() != enterprise
+//															.getShort_length()) {
+//														phoneList.remove(p);
+//														break;
+//													}
+//												} else {
+//
+//													if (p.getPhone()
 //															.equals(co
-//																	.getShortPhone())
-//													|| p.getPhone().equals(
-//															co.getShortPhone())) {
-//												isCunzai = true;
-//												if (!phoneInfos2.contains(p)) {
-//													phoneInfos2.add(p);
+//																	.getPhone())
+//															|| p.getIs_baixing()
+//																	.equals(co
+//																			.getShortPhone())
+//															|| p.getPhone()
+//																	.equals(co
+//																			.getShortPhone())) {
+//
+//														// phoneList.remove(p);
+//														// break;
+//														isCunzai = true;
+//														if (!phoneInfos2
+//																.contains(p)) {
+//															phoneInfos2
+//																	.add(p);
+//														}
+//													}
 //												}
-//												// phoneList.remove(p);
+//
 //											}
 //										}
 //									}
 //
-//									/*
-//									 * for (ContactsEnterprise co : arrayList) {
-//									 * for (PhoneInfo p : phoneList) { if
-//									 * (p.getPhone().equals( co.getPhone()) ||
-//									 * p.getIs_baixing() .equals(co
-//									 * .getShortPhone())) { phoneList.remove(p);
-//									 * break; } } }
-//									 */
-//
-//									// if (phoneList.size() <= 0) {
-//									// continue;
-//									// }
-//									
 //									if(isCunzai){
 //										continue;
 //									}
 //
-//									if (phoneList.size() == phoneInfos2.size()) {
+//									if (phoneList.size() == phoneInfos2
+//											.size()) {
 //										continue;
 //									}
 //
-//									ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<>();
+//									phoneInfos.removeAll(phoneInfos2);
+//
+//									ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
 //
 //									for (PhoneInfo info : phoneInfos) {
 //										if (info.getPhone().length() == 11
@@ -1129,7 +1177,8 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 //														.length() == 11) {
 //											if (!phoneInfos3
 //													.containsAll(phoneInfos)) {
-//												phoneInfos3.addAll(phoneInfos);
+//												phoneInfos3
+//														.addAll(phoneInfos);
 //											}
 //											continue;
 //										}
@@ -1139,23 +1188,71 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 //										continue;
 //									}
 //
-//									ce = new ContactsEnterprise();
+//									ArrayList<PhoneInfo> phoneInfos4 = new ArrayList<PhoneInfo>();
 //
-//									phoneInfos.removeAll(phoneInfos2);
-//									
-//									Collections.sort(phoneInfos3, new Comparator<PhoneInfo>(){
-//
-//										@Override
-//										public int compare(
-//												PhoneInfo arg0,
-//												PhoneInfo arg1) {
-//											Integer phone = arg0.getPhone().length();
-//											Integer phone2 = arg1.getPhone().length();
-//											return phone2.compareTo(phone);
+//									for (PhoneInfo info : phoneInfos3) {
+//										if (!phoneInfos4.contains(info)) {
+//											phoneInfos4.add(info);
 //										}
-//										
-//									});
-//									ce.setPhones(phoneInfos3);
+//										PhoneInfo info2 = new PhoneInfo();
+//
+//										if (!"".equals(info.getIs_baixing())
+//												&& !"0".equals(info
+//														.getIs_baixing())) {
+//											info2.setId(info.getId());
+//											info2.setPhone(info
+//													.getIs_baixing());
+//											info2.setIs_benben(info
+//													.getIs_benben());
+//											info2.setPoster(info
+//													.getPoster());
+//											info2.setNick_name(info
+//													.getNick_name());
+//											info2.setContacts_id(info
+//													.getContacts_id());
+//											info2.setHuanxin_username(info
+//													.getHuanxin_username());
+//											if (!phoneInfos4
+//													.contains(info2)) {
+//												phoneInfos4.add(info2);
+//											}
+//										}
+//
+//									}
+//
+//									ce = new ContactsEnterprise();
+//									if (!enterpriseType.equals("2")) {
+//										Collections.sort(phoneInfos4, new Comparator<PhoneInfo>(){
+//
+//											@Override
+//											public int compare(
+//													PhoneInfo arg0,
+//													PhoneInfo arg1) {
+//												Integer phone = arg0.getPhone().length();
+//												Integer phone2 = arg1.getPhone().length();
+//												return phone2.compareTo(phone);
+//											}
+//
+//										});
+//
+//
+//
+//										ce.setPhones(phoneInfos4);
+//									} else {
+//										Collections.sort(phoneInfos3, new Comparator<PhoneInfo>(){
+//
+//											@Override
+//											public int compare(
+//													PhoneInfo arg0,
+//													PhoneInfo arg1) {
+//												Integer phone = arg0.getPhone().length();
+//												Integer phone2 = arg1.getPhone().length();
+//												return phone2.compareTo(phone);
+//											}
+//
+//										});
+//										ce.setPhones(phoneInfos3);
+//									}
 //
 //									ce.setId(c.getId() + "");
 //									ce.setName(c.getName());
@@ -1172,11 +1269,9 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 //									ce.setPoster(c.getPoster());
 //									ce.setRemark(c.getRemark());
 //									contacts.add(ce);
-//								}
-//							} else {
-//								continue;
-//							}
-//							group.setmContacts(contacts);
+//									group.setmContacts(contacts);
+								}
+							}
 						}
 
 						dissLoding();
@@ -1353,14 +1448,23 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
                                         return;
 
                                     }
-                                }
-                                if (selectPhones.size() >= 2) {
-                                    ToastUtils.Infotoast(mContext, "最多可选2个号码");
-                                    item_phone_checkbox.setChecked(false);
-                                } else {
-                                    item_phone_checkbox.setChecked(true);
-                                    selectPhones.add(p);
-                                    selectPhonesed.add(p);
+                                    if (selectPhones.size() >= 2) {
+                                        ToastUtils.Infotoast(mContext, "最多可选2个号码");
+                                        item_phone_checkbox.setChecked(false);
+                                    } else {
+                                        item_phone_checkbox.setChecked(true);
+                                        selectPhones.add(p);
+                                        selectPhonesed.add(p);
+                                    }
+                                }else {
+                                    if (selectPhones.size() >= 1) {
+                                        ToastUtils.Infotoast(mContext, "最多可选1个号码");
+                                        item_phone_checkbox.setChecked(false);
+                                    } else {
+                                        item_phone_checkbox.setChecked(true);
+                                        selectPhones.add(p);
+                                        selectPhonesed.add(p);
+                                    }
                                 }
                             }
                         }

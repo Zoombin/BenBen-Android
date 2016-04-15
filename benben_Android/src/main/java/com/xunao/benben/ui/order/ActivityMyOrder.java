@@ -548,7 +548,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                     } else if (order.getBack_status() == 2) {
                         tv_operate4.setText("已退款");
                     } else if (order.getBack_status() == 3) {
-                        tv_operate4.setText("退款申请失败");
+                        tv_operate4.setText("退款失败");
                     } else if (order.getBack_status() == 4 || order.getBack_status() == 5) {
                         tv_operate4.setText("退款中");
                     }

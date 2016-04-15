@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -214,7 +215,7 @@ public class ActivityAddRemarks extends BaseActivity {
 						}
 
 						remarkName += member.getName() + ":";
-						for (PhoneInfo p : member.getPhones()) {
+						for (PhoneInfo p : member.getSelectPhones()) {
 							remarkName += p.getIs_baixing() + ":";
 						}
 						remarkName = remarkName.substring(0,
@@ -476,10 +477,12 @@ public class ActivityAddRemarks extends BaseActivity {
 						.get(position);
 				itemHolder.tv_name.setText(virtualMember.getName() + ":");
 				StringBuffer buffer = new StringBuffer();
-				for (PhoneInfo p : virtualMember.getPhones()) {
+				for (PhoneInfo p : virtualMember.getSelectPhones()) {
 					buffer.append(p.getIs_baixing() + ",");
 				}
 				virtualMember.setRemark(virtualMember.getName());
+
+
 				itemHolder.tv_phone.setText(buffer.substring(0,
 						buffer.length() - 1));
 

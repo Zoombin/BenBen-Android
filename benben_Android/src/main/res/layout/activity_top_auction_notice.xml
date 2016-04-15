@@ -10,14 +10,18 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="注意事项:\n1.每个置顶项目竞拍保证金100元，自动从账户余额中冻结；\n2.竞价结束后，没有中标用户，冻结的保证金立即解冻；\n3.中标用户根据竞拍价格多退少补，冻结金额不足支付时，须在3天内补缴，否则，取消中标权利，同时没收保证金；\n4.中标之后，中标者的号码直通车自动在指定时间和地区置顶；\n5.最终解释权归奔犇®所有，http://www.91benben.com/contacts/"
+        android:text="注意事项:\n1 .每个置顶项目竞拍保证金100元,自动从账户余额中冻结;\n2 .竞价结束后,没有中标用户,冻结的保证金立即解冻;\n3 .中标用户根据竞拍价格多退少补,冻结金额不足支付时,须在3天内补缴,否则,取消中标权利,同时没收保证金;\n4 .中标之后,中标者的号码直通车自动在指定时间和地区置顶;\n5 .最终解释权归奔犇®所有,http://www.91benben.com/contacts/"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
         android:autoLink="web"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
 
     <LinearLayout
         android:id="@+id/ll_bottom"

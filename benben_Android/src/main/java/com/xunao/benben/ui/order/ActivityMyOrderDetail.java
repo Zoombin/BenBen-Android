@@ -374,7 +374,7 @@ public class ActivityMyOrderDetail extends BaseActivity implements View.OnClickL
             } else if (order.getBack_status() == 2) {
                 tv_order_status.setText("已退款");
             } else if (order.getBack_status() == 3) {
-                tv_order_status.setText("退款申请失败");
+                tv_order_status.setText("退款失败");
             } else if (order.getBack_status() == 4|| order.getBack_status() == 5) {
                 tv_order_status.setText("退款中");
             }

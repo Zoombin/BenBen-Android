@@ -185,7 +185,7 @@
                 android:background="@null"
                 android:textSize="15dp"
                 android:layout_marginLeft="10dp"
-                android:hint="请输入提现金额,不得小于10元"
+                android:hint="金额不能大于当前余额"
                 android:textColorHint="#C8C8C8"
                 android:inputType="numberDecimal"
                 />

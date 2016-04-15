@@ -312,7 +312,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="置顶拍卖行"
+                    android:text="置顶拍卖场"
                     android:textColor="#3c3c3c"
                     android:textSize="15dip" />
 

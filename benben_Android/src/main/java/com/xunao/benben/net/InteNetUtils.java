@@ -3442,4 +3442,6 @@ public class InteNetUtils {
 //            httpUtils.send(HttpMethod.GET, "http://api.map.baidu.com/place/v2/search", params, callBack);
 //        }
     }
+
+
 }

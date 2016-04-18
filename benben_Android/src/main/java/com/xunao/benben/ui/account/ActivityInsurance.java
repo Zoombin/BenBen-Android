@@ -106,7 +106,7 @@ public class ActivityInsurance extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-        if (jsonObject.optInt("ret_msg")==0){
+        if (jsonObject.optInt("ret_num")==0){
             industry = jsonObject.optString("industry");
             tv_insurance.setText(jsonObject.optString("rest")+"元");
             minMoney = (int) Double.parseDouble(jsonObject.optString("guarantee"));
@@ -134,7 +134,7 @@ public class ActivityInsurance extends BaseActivity implements View.OnClickListe
                             try {
                                 JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
                                 if(jsonObject.optInt("ret_num")==0){
-                                    ToastUtils.Infotoast(mContext,"解冻成功");
+                                    ToastUtils.Infotoast(mContext,"保证金将于24小时内解冻");
                                     AnimFinsh();
                                 }else{
                                     ToastUtils.Infotoast(mContext,jsonObject.optString("ret_msg"));

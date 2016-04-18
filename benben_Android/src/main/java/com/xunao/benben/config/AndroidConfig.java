@@ -754,4 +754,5 @@ public class AndroidConfig {
 
     // 查询百姓网
     public static final String AllBx = "/bxapply/AllBx";
+
 }

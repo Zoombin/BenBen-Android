@@ -1,16 +1,12 @@
-package com.xunao.benben.ui.account;
+package com.xunao.benben.ui.trainvip;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -21,7 +17,7 @@ import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.bean.Bill;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
-import com.xunao.benben.utils.CommonUtils;
+import com.xunao.benben.ui.account.ActivityAccountAddressManage;
 import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.utils.ViewHolderUtil;
 
@@ -34,10 +30,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 账单记录
- * Created by ltf on 2016/1/5.
+ * 会员账单
+ * Created by ltf on 2016/4/18.
  */
-public class ActivityMyBill extends BaseActivity implements View.OnClickListener,
+public class ActivityTrainVipBill extends BaseActivity implements View.OnClickListener,
         PullToRefreshBase.OnRefreshListener<ListView>,PullToRefreshBase.OnLastItemVisibleListener {
     private TextView tv_message;
     private PullToRefreshListView lv_detail;
@@ -49,12 +45,12 @@ public class ActivityMyBill extends BaseActivity implements View.OnClickListener
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_my_bill);
+        setContentView(R.layout.activity_train_vip_bill);
     }
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        initTitle_Right_Left_bar("我的账单", "", "",
+        initTitle_Right_Left_bar("账单", "", "",
                 R.drawable.icon_com_title_left, 0);
         tv_message = (TextView) findViewById(R.id.tv_message);
         lv_detail = (PullToRefreshListView) findViewById(R.id.lv_detail);
@@ -201,31 +197,21 @@ public class ActivityMyBill extends BaseActivity implements View.OnClickListener
             if (getItemViewType(position) == 0) {
                 if (convertView == null) {
                     convertView = getLayoutInflater().inflate(
-                            R.layout.item_my_bill, null);
+                            R.layout.item_train_vip_bill, null);
                 }
-                ImageView iv_poster = (ImageView) convertView.findViewById(R.id.iv_poster);
                 TextView tv_time = (TextView) convertView.findViewById(R.id.tv_time);
                 TextView tv_money = (TextView) convertView.findViewById(R.id.tv_money);
                 TextView tv_content = (TextView) convertView.findViewById(R.id.tv_content);
-                TextView tv_status = (TextView) convertView.findViewById(R.id.tv_status);
 
                 Bill bill = billList.get(position);
                 tv_content.setText(bill.getContent());
                 tv_time.setText(simpleDateFormat.format(bill.getTime()*1000));
                 String status = bill.getOrder_type();
                 String typeMessage = "";
-                if(status.equals("1")){
-                    iv_poster.setImageResource(R.drawable.icon_outcome);
-                    typeMessage = "-";
-                    tv_status.setText("会员预付款支付");
-                }else if(status.equals("2")){
-                    iv_poster.setImageResource(R.drawable.icon_income);
+                if(status.equals("2")){
                     typeMessage = "+";
-                    tv_status.setText("");
                 }else{
-                    iv_poster.setImageResource(R.drawable.icon_outcome);
                     typeMessage = "-";
-                    tv_status.setText("订单支付");
                 }
                 tv_money.setText(typeMessage+bill.getFee());
 
@@ -253,73 +239,4 @@ public class ActivityMyBill extends BaseActivity implements View.OnClickListener
 
     }
 
-//    private class DataAdapter extends BaseAdapter {
-//        public int getCount() {
-//            if (billList != null) {
-//                return billList.size();
-//            }
-//            return 0;
-//        }
-//
-//        public Object getItem(int position) {
-//            if (billList != null) {
-//                return billList.get(position);
-//            }
-//            return null;
-//        }
-//
-//        public long getItemId(int position) {
-//            return position;
-//        }
-//
-//        public View getView(final int position, View convertView, ViewGroup parent) {
-//            ViewHolder localViewHolder = null;
-//
-//            LayoutInflater inflater = LayoutInflater.from(ActivityMyBill.this);
-//
-//            if (convertView == null) {
-//                localViewHolder = new ViewHolder();
-//
-//                convertView = inflater.inflate(R.layout.item_my_bill, null);
-//                localViewHolder.iv_poster = (ImageView) convertView.findViewById(R.id.iv_poster);
-//                localViewHolder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
-//                localViewHolder.tv_money = (TextView) convertView.findViewById(R.id.tv_money);
-//                localViewHolder.tv_content = (TextView) convertView.findViewById(R.id.tv_content);
-//                localViewHolder.tv_status = (TextView) convertView.findViewById(R.id.tv_status);
-//                convertView.setTag(localViewHolder);
-//            } else {
-//                localViewHolder = (ViewHolder) convertView.getTag();
-//            }
-//            Bill bill = billList.get(position);
-//            localViewHolder.tv_content.setText(bill.getContent());
-//            localViewHolder.tv_time.setText(simpleDateFormat.format(bill.getTime()*1000));
-//            String status = bill.getOrder_type();
-//            String typeMessage = "";
-//            if(status.equals("1")){
-//                localViewHolder.iv_poster.setImageResource(R.drawable.icon_outcome);
-//                typeMessage = "-";
-//                localViewHolder.tv_status.setText("会员预付款支付");
-//            }else if(status.equals("2")){
-//                localViewHolder.iv_poster.setImageResource(R.drawable.icon_income);
-//                typeMessage = "+";
-//                localViewHolder.tv_status.setText("退款");
-//            }else{
-//                localViewHolder.iv_poster.setImageResource(R.drawable.icon_outcome);
-//                typeMessage = "-";
-//                localViewHolder.tv_status.setText("订单支付");
-//            }
-//            localViewHolder.tv_money.setText(typeMessage+bill.getFee());
-//
-//
-//            return convertView;
-//        }
-//
-//        class ViewHolder {
-//            private ImageView iv_poster;
-//            private TextView tv_time;
-//            private TextView tv_money;
-//            private TextView tv_content;
-//            private TextView tv_status;
-//        }
-//    }
 }

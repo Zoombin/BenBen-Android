@@ -302,14 +302,16 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 					}
 					break;
 				case 1:
-					tv_user_phone.setFocusable(false);
-					et_name.setFocusable(false);
-					et_cardnum.setFocusable(false);
-					tv_status.setText("未通过");
-					if (CommonUtils.isEmpty(bxApplyInfo.getIdCard())) {
-						cardid_rl.setVisibility(View.GONE);
-						cardid_line.setVisibility(View.GONE);
-					}
+//					tv_user_phone.setFocusable(false);
+//					et_name.setFocusable(false);
+//					et_cardnum.setFocusable(false);
+//					tv_status.setText("未通过");
+//					if (CommonUtils.isEmpty(bxApplyInfo.getIdCard())) {
+//						cardid_rl.setVisibility(View.GONE);
+//						cardid_line.setVisibility(View.GONE);
+//					}
+                    reasonNum = 2;
+                    tv_status.setText("未通过");
 					break;
 				case 2:
 					reasonNum = 2;
@@ -354,7 +356,7 @@ public class ActivityApplyBaixingDetail extends BaseActivity implements
 
 				tv_user_phone.setKeyListener(null);
 
-				if (bxApplyInfo.getStatus() != 2) {
+				if (bxApplyInfo.getStatus() != 2 && bxApplyInfo.getStatus() != 1) {
 					et_name.setKeyListener(null);
 					et_cardnum.setKeyListener(null);
 					tv_area.setKeyListener(null);

@@ -7,6 +7,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
 import com.xunao.benben.net.InteNetUtils;
@@ -133,7 +135,31 @@ public class ActivityMyWallet extends BaseActivity implements View.OnClickListen
                 startAnimActivity(ActivityAccountAddressManage.class);
                 break;
             case R.id.rl_insurance:
-                startAnimActivityForResult(ActivityInsurance.class, 1);
+                if(CommonUtils.isNetworkAvailable(mContext)){
+                    InteNetUtils.getInstance(mContext).SearchGuarantee(user.getToken(), new RequestCallBack<String>() {
+                        @Override
+                        public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
+                                if (jsonObject.optInt("ret_num")==0){
+                                    startAnimActivityForResult(ActivityInsurance.class, 1);
+                                }else{
+                                    ToastUtils.Infotoast(mContext,jsonObject.optString("ret_msg"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(HttpException e, String s) {
+                            ToastUtils.Infotoast(mContext,"获取保证金失败");
+                        }
+                    });
+                }
+
+
                 break;
 
         }

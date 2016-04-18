@@ -57,6 +57,7 @@ import com.xunao.benben.ui.promotion.ActivityPromotionAlbum;
 import com.xunao.benben.ui.promotion.ActivityPromotionDetail;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectFriend;
 import com.xunao.benben.ui.shareselect.ActivityShareSelectTalkGroup;
+import com.xunao.benben.ui.trainvip.ActivityTrainVip;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.PhoneUtils;
 import com.xunao.benben.utils.PixelUtil;
@@ -599,6 +600,7 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
                 hint.show();
                 break;
             case R.id.iv_vip:
+                startAnimActivity(ActivityTrainVip.class);
                 break;
         }
 	}

@@ -104,6 +104,7 @@ public class ActivityAddRemarks extends BaseActivity {
 				position += 1;
 				
 			}
+            Log.d("ltf","pinContacts=====1========"+pinContacts.size());
 		}
 
 		if (contacts == null && virtualMembers != null) {
@@ -542,6 +543,41 @@ public class ActivityAddRemarks extends BaseActivity {
 
 												itemHolder.tv_remark_name.setText(Html.fromHtml(RegexUtils
 														.minganciCheck2(pecketName)));
+
+
+                                                if (RegexUtils
+                                                        .minganciCheck3(pecketName)) {
+                                                    if (!pinContacts
+                                                            .contains(virtualMember)) {
+                                                        virtualMember.setRemark(pecketName);
+                                                        virtualMember.setName(pecketName);
+                                                        pinContacts
+                                                                .add(virtualMember);
+                                                        if(!minganNum.contains(position)){
+                                                            minganNum.add(new Integer(position));
+                                                        }
+
+                                                    }
+                                                } else {
+                                                    if (pinContacts
+                                                            .contains(virtualMember)) {
+                                                        virtualMember.setRemark(pecketName);
+                                                        virtualMember.setName(pecketName);
+                                                        pinContacts
+                                                                .remove(virtualMember);
+
+                                                        if(minganNum.contains(pinbiNumber)){
+                                                            minganNum.remove(new Integer(pinbiNumber));
+                                                        }
+
+
+                                                        if(minganNum.size() > 0){
+                                                            pinbiNumber = minganNum.get(0);
+                                                            listView.setSelection(pinbiNumber);
+                                                        }
+
+                                                    }
+                                                }
 
 												virtualMember
 														.setRemark(pecketName);

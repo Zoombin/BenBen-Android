@@ -213,7 +213,23 @@ public class ActivityTrainVipBill extends BaseActivity implements View.OnClickLi
                 }else{
                     typeMessage = "-";
                 }
-                tv_money.setText(typeMessage+bill.getFee());
+
+
+                double fee = 0;
+                double remain = 0;
+                double coin = 0;
+                if(!bill.getFee().equals("")){
+                    fee = Double.parseDouble(bill.getFee());
+                }
+                if(!bill.getRemain().equals("")){
+                    remain = Double.parseDouble(bill.getRemain());
+                }
+                if(!bill.getCoin().equals("")){
+                    coin = Double.parseDouble(bill.getCoin());
+                }
+                double money = fee+remain+coin;
+
+                tv_money.setText(typeMessage+money);
 
             } else {
                 if (isMoreData) {

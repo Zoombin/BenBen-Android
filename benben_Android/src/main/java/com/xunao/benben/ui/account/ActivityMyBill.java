@@ -227,7 +227,23 @@ public class ActivityMyBill extends BaseActivity implements View.OnClickListener
                     typeMessage = "-";
                     tv_status.setText("订单支付");
                 }
-                tv_money.setText(typeMessage+bill.getFee());
+
+                double fee = 0;
+                double remain = 0;
+                double coin = 0;
+                if(!bill.getFee().equals("")){
+                    fee = Double.parseDouble(bill.getFee());
+                }
+                if(!bill.getRemain().equals("")){
+                    remain = Double.parseDouble(bill.getRemain());
+                }
+                if(!bill.getCoin().equals("")){
+                    coin = Double.parseDouble(bill.getCoin());
+                }
+                double money = fee+remain+coin;
+
+                tv_money.setText(typeMessage+money);
+//                tv_money.setText(typeMessage+bill.getFee());
 
             } else {
                 if (isMoreData) {

@@ -14,6 +14,8 @@ public class Bill extends BaseBean<Bill> {
     private String content;
     private long time;
     private String order_type;
+    private String remain;
+    private String coin;
 
     public int getId() {
         return id;
@@ -55,6 +57,22 @@ public class Bill extends BaseBean<Bill> {
         this.order_type = order_type;
     }
 
+    public String getRemain() {
+        return remain;
+    }
+
+    public void setRemain(String remain) {
+        this.remain = remain;
+    }
+
+    public String getCoin() {
+        return coin;
+    }
+
+    public void setCoin(String coin) {
+        this.coin = coin;
+    }
+
     @Override
     public JSONObject toJSON() {
         return null;
@@ -66,6 +84,10 @@ public class Bill extends BaseBean<Bill> {
         content = jsonObj.optString("content");
         time = jsonObj.optLong("time");
         order_type = jsonObj.optString("order_type");
+        remain = jsonObj.optString("remain");
+        coin = jsonObj.optString("coin");
         return this;
     }
+
+
 }

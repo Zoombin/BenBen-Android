@@ -210,7 +210,7 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
 											.where(WhereBuilder.b("group_id",
 													"=", group.getId()))
 											.orderBy("is_benben", true));
-
+                                    Log.d("ltf","contact============"+contact.size()+"==="+arrayList.size());
 									ArrayList<ContactsEnterprise> contacts = new ArrayList<ContactsEnterprise>();
 									ContactsEnterprise ce = null;
 									for (Contacts c : (ArrayList<Contacts>) contact) {
@@ -221,6 +221,7 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
                                                         c.getId()).and(
                                                         "phone", "!=",
                                                         "")));
+
                                         ArrayList<PhoneInfo> phoneInfos = (ArrayList<PhoneInfo>) phoneList;
                                         ArrayList<PhoneInfo> phoneInfos2 = new ArrayList<PhoneInfo>();
                                         ArrayList<PhoneInfo> phoneInfos3 = new ArrayList<PhoneInfo>();
@@ -228,7 +229,7 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
                                         boolean isMatch = false;//企业政企是否有第一位不为0的11位长号并
                                         for (ContactsEnterprise co : arrayList) {
                                             for (PhoneInfo p : phoneList) {
-                                                if (p.getPhone().equals(co.getPhone()) || p.getIs_baixing().equals(co.getShortPhone()) || p.getPhone().equals(co.getShortPhone())) {
+                                                if (p.getPhone().equals(co.getPhone()) || (!p.getIs_baixing().equals("0")&&p.getIs_baixing().equals(co.getShortPhone())) || p.getPhone().equals(co.getShortPhone())) {
                                                     isCunzai = true;
                                                     break;
                                                 }else{
@@ -580,7 +581,7 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
                             boolean isMatch = false;//企业政企是否有第一位不为0的11位长号并
                             for (ContactsEnterprise co : arrayList) {
                                 for (PhoneInfo p : phoneList) {
-                                    if (p.getPhone().equals(co.getPhone()) || p.getIs_baixing().equals(co.getShortPhone()) || p.getPhone().equals(co.getShortPhone())) {
+                                    if (p.getPhone().equals(co.getPhone()) || (!p.getIs_baixing().equals("0")&&p.getIs_baixing().equals(co.getShortPhone())) || p.getPhone().equals(co.getShortPhone())) {
                                         isCunzai = true;
                                         break;
                                     }else{
@@ -1035,7 +1036,7 @@ public class ActivityEnterpriseInviteMember extends BaseActivity implements
                                     boolean isMatch = false;//企业政企是否有第一位不为0的11位长号并
                                     for (ContactsEnterprise co : arrayList) {
                                         for (PhoneInfo p : phoneList) {
-                                            if (p.getPhone().equals(co.getPhone()) || p.getIs_baixing().equals(co.getShortPhone()) || p.getPhone().equals(co.getShortPhone())) {
+                                            if (p.getPhone().equals(co.getPhone()) || (!p.getIs_baixing().equals("0")&&p.getIs_baixing().equals(co.getShortPhone())) || p.getPhone().equals(co.getShortPhone())) {
                                                 isCunzai = true;
                                                 break;
                                             }else{

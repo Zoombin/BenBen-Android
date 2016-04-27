@@ -660,6 +660,14 @@ public class ActivityGroupBuyOperate extends BaseActivity implements View.OnClic
             ToastUtils.Errortoast(mContext, "请输入团购价!");
             return;
         }
+        if (TextUtils.isEmpty(promotion_price)) {
+            ToastUtils.Errortoast(mContext, "请输入团购价!");
+            return;
+        }
+        if(Double.parseDouble(promotion_price) ==0){
+            ToastUtils.Errortoast(mContext, "团购价不能为0!");
+            return;
+        }
         if(Double.parseDouble(promotion_price) > Double.parseDouble(origin_price)){
             ToastUtils.Errortoast(mContext, "团购价不能高于原价!");
             return;
@@ -766,6 +774,10 @@ public class ActivityGroupBuyOperate extends BaseActivity implements View.OnClic
         }
         if (TextUtils.isEmpty(promotion_price)) {
             ToastUtils.Errortoast(mContext, "请输入团购价!");
+            return;
+        }
+        if(Double.parseDouble(promotion_price) ==0){
+            ToastUtils.Errortoast(mContext, "团购价不能为0!");
             return;
         }
         if(Double.parseDouble(promotion_price) > Double.parseDouble(origin_price)){

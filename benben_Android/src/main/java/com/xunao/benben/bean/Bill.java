@@ -89,5 +89,12 @@ public class Bill extends BaseBean<Bill> {
         return this;
     }
 
+    public Object parseVipBillJSON(JSONObject jsonObj) throws NetRequestException {
+        fee = jsonObj.optString("money");
+        content = jsonObj.optString("name");
+        time = jsonObj.optLong("time");
+        return this;
+    }
+
 
 }

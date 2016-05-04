@@ -42,6 +42,9 @@ public class ActivityTrainVipBill extends BaseActivity implements View.OnClickLi
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private int currentPage=1;
     private int pagNum=1;
+    private String shop="";
+    private String cumulation_type="0";
+    private TextView tv_level,tv_recharge,tv_consume;
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
@@ -53,6 +56,10 @@ public class ActivityTrainVipBill extends BaseActivity implements View.OnClickLi
         initTitle_Right_Left_bar("账单", "", "",
                 R.drawable.icon_com_title_left, 0);
         tv_message = (TextView) findViewById(R.id.tv_message);
+        tv_level = (TextView) findViewById(R.id.tv_level);
+        tv_recharge = (TextView) findViewById(R.id.tv_recharge);
+        tv_consume = (TextView) findViewById(R.id.tv_consume);
+
         lv_detail = (PullToRefreshListView) findViewById(R.id.lv_detail);
         adapter = new DataAdapter();
         lv_detail.setAdapter(adapter);
@@ -63,14 +70,12 @@ public class ActivityTrainVipBill extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initDate(Bundle savedInstanceState) {
+        shop = getIntent().getStringExtra("shop");
+        cumulation_type = getIntent().getStringExtra("cumulation_type");
         setLoadMore(false);
         currentPage = 1;
-        InteNetUtils.getInstance(mContext).MyPayLog(currentPage, mRequestCallBack);
-//        if(CommonUtils.isNetworkAvailable(mContext)){
-//            InteNetUtils.getInstance(mContext).MyPayLog(mRequestCallBack);
-//        }else {
-//            ToastUtils.Infotoast(mContext,"网络不可用");
-//        }
+        InteNetUtils.getInstance(mContext).VipLog(shop,cumulation_type,currentPage, mRequestCallBack);
+
     }
 
     @Override
@@ -102,14 +107,22 @@ public class ActivityTrainVipBill extends BaseActivity implements View.OnClickLi
         }
         if(jsonObject.optInt("ret_num")==0){
             try {
+                tv_level.setText("会员等级："+jsonObject.optString("level"));
+                if(cumulation_type.equals("1")){
+                    tv_recharge.setText("累计充值:"+jsonObject.optDouble("recharge")+"");
+                    tv_recharge.setVisibility(View.VISIBLE);
+                }
+                tv_consume.setText("累计消费:"+jsonObject.optDouble("consume")+"");
+                tv_consume.setVisibility(View.VISIBLE);
+
                 pagNum = jsonObject.optInt("ap");
-                JSONArray jsonArray = jsonObject.getJSONArray("info");
+                JSONArray jsonArray = jsonObject.getJSONArray("log");
                 if(jsonArray!=null && jsonArray.length()>0){
                     tv_message.setVisibility(View.GONE);
                     lv_detail.setVisibility(View.VISIBLE);
                     for (int i=0;i<jsonArray.length();i++){
                         Bill bill = new Bill();
-                        bill.parseJSON(jsonArray.getJSONObject(i));
+                        bill.parseVipBillJSON(jsonArray.getJSONObject(i));
                         billList.add(bill);
                     }
                     adapter.notifyDataSetChanged();
@@ -150,7 +163,7 @@ public class ActivityTrainVipBill extends BaseActivity implements View.OnClickLi
         }else{
             setLoadMore(true);
             currentPage++;
-            InteNetUtils.getInstance(mContext).MyPayLog(currentPage, mRequestCallBack);
+            InteNetUtils.getInstance(mContext).VipLog(shop,cumulation_type,currentPage, mRequestCallBack);
         }
     }
 
@@ -159,7 +172,7 @@ public class ActivityTrainVipBill extends BaseActivity implements View.OnClickLi
         setLoadMore(false);
         currentPage = 1;
         lv_detail.setOnLastItemVisibleListener(this);
-        InteNetUtils.getInstance(mContext).MyPayLog(currentPage, mRequestCallBack);
+        InteNetUtils.getInstance(mContext).VipLog(shop,cumulation_type,currentPage, mRequestCallBack);
     }
 
     class DataAdapter extends BaseAdapter {
@@ -206,30 +219,7 @@ public class ActivityTrainVipBill extends BaseActivity implements View.OnClickLi
                 Bill bill = billList.get(position);
                 tv_content.setText(bill.getContent());
                 tv_time.setText(simpleDateFormat.format(bill.getTime()*1000));
-                String status = bill.getOrder_type();
-                String typeMessage = "";
-                if(status.equals("2")){
-                    typeMessage = "+";
-                }else{
-                    typeMessage = "-";
-                }
-
-
-                double fee = 0;
-                double remain = 0;
-                double coin = 0;
-                if(!bill.getFee().equals("")){
-                    fee = Double.parseDouble(bill.getFee());
-                }
-                if(!bill.getRemain().equals("")){
-                    remain = Double.parseDouble(bill.getRemain());
-                }
-                if(!bill.getCoin().equals("")){
-                    coin = Double.parseDouble(bill.getCoin());
-                }
-                double money = fee+remain+coin;
-
-                tv_money.setText(typeMessage+money);
+                tv_money.setText(bill.getFee());
 
             } else {
                 if (isMoreData) {

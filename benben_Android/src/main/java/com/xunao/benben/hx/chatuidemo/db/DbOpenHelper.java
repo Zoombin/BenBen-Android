@@ -24,7 +24,7 @@ import org.slf4j.helpers.Util;
 
 public class DbOpenHelper extends SQLiteOpenHelper{
 
-	private static final int DATABASE_VERSION = 16;
+	private static final int DATABASE_VERSION = 17;
 	private static DbOpenHelper instance;
 
 	private static final String USERNAME_TABLE_CREATE = "CREATE TABLE "

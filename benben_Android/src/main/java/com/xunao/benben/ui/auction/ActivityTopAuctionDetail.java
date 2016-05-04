@@ -431,12 +431,16 @@ public class ActivityTopAuctionDetail extends BaseActivity implements View.OnCli
                                 InteNetUtils.getInstance(mContext).PayGuarantee(selectId, new RequestCallBack<String>() {
                                     @Override
                                     public void onSuccess(ResponseInfo<String> stringResponseInfo) {
-                                        dissLoding();
+
                                         try {
                                             JSONObject jsonObject = new JSONObject(stringResponseInfo.result);
                                             if(jsonObject.optInt("ret_num")==0){
-                                                ToastUtils.Infotoast(mContext,"您已成功缴纳保证金,可进行出价!");
+                                                ToastUtils.Infotoast(mContext,"您已成功缴纳保证金,为您出价中!");
+                                                String priceStr = String.valueOf(edt_dialog_price.getText()).trim();
+                                                InteNetUtils.getInstance(mContext).GivePrice(selectId,priceStr,givePriceBack);
+
                                             }else if(jsonObject.optInt("ret_num")==2116){
+                                                dissLoding();
                                                 final MsgDialog msgDialog = new MsgDialog(mContext, R.style.MyDialogStyle);
                                                 msgDialog.setContent("账户余额不足", "", "充值", "取消");
                                                 msgDialog.setCancleListener(new View.OnClickListener() {
@@ -458,6 +462,7 @@ public class ActivityTopAuctionDetail extends BaseActivity implements View.OnCli
                                                 });
                                                 msgDialog.show();
                                             }else{
+                                                dissLoding();
                                                 ToastUtils.Infotoast(mContext,jsonObject.optString("ret_msg"));
                                             }
 

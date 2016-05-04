@@ -532,6 +532,7 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                         adapter.notifyDataSetChanged();
                         item_gridView.setVisibility(View.VISIBLE);
                     }else {
+                        tv_notice.setVisibility(View.VISIBLE);
                         tv_type.setText("商家团购");
                         ll_train_level.setVisibility(View.VISIBLE);
                         int rank=numberTrainDetail.getRank();
@@ -576,11 +577,7 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                     wx_message.setVisibility(View.GONE);
                 }
 
-
-
-
                 initRightClick(numberTrainDetail.getNo_auth());
-//                tv_notice.setVisibility(View.VISIBLE);
 
 			} catch (NetRequestException e) {
 				e.printStackTrace();
@@ -695,7 +692,9 @@ public class ActivityMyNumberTrainDetail extends BaseActivity implements
                 break;
             case R.id.tv_notice:
                 Intent noticeIntent = new Intent(ActivityMyNumberTrainDetail.this, ActivityMyNumberTrainNotice.class);
-                startActivity(noticeIntent);
+                noticeIntent.putExtra("bulletin",numberTrainDetail.getBulletin());
+                noticeIntent.putExtra("shop",numberTrainDetail.getShop());
+                startActivityForResult(noticeIntent,5);
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 break;
             case R.id.btn_renew:

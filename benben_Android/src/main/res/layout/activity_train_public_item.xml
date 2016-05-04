@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="7dip" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/fragment_private_bg"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="18dip"
+            android:gravity="center"
+            android:paddingBottom="7dip"
+            android:paddingTop="7dip"
+            android:text="1221"
+            android:textColor="#8d8d8d"
+            android:textSize="14dip" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="18dip"
+            android:background="#dddddd" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="18dip"
+            android:paddingTop="7dip"
+            android:text="1221"
+            android:textColor="#575757"
+            android:textSize="15dip" />
+
+        <com.xunao.benben.view.NoScrollGridView
+            android:id="@+id/item_gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="18dip"
+            android:paddingTop="7dip"
+            android:horizontalSpacing="5dp"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="3"
+            android:orientation="horizontal"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>

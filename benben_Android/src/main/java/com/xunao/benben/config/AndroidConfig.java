@@ -12,6 +12,11 @@ public class AndroidConfig {
     public static final String NETHOST3 ="http://112.124.101.177:81/index.php/v1";
     public static final String NETHOST4 ="http://112.124.101.177:81/index.php";
 
+//    public static final String NETHOST ="http://192.168.110.103/wtz/benben/website/index.php/v1";
+//    public static final String NETHOST2 ="http://192.168.110.103/wtz/benben/website/index.php/v1";
+//    public static final String NETHOST3 ="http://192.168.110.103/wtz/benben/website/index.php/v1";
+//    public static final String NETHOST4 ="http://192.168.110.103/wtz/benben/website/index.php/v1";
+
     //正式
 //    public static final String NETHOST = "http://112.124.101.177/index.php/v2";
 //	public static final String NETHOST2 ="http://112.124.101.177/index.php/v2";
@@ -754,5 +759,23 @@ public class AndroidConfig {
 
     // 查询百姓网
     public static final String AllBx = "/bxapply/AllBx";
+
+    // 成为会员
+    public static final String BecomeVip = "/storeVip/becomeVip";
+
+    // 获取直通车会员等级
+    public static final String GetLevel = "/storeVip/getLevel";
+
+    //会员号账单
+    public static final String VipLog = "/storeVip/log";
+
+    //直通车公告编辑
+    public static final String StoreBulletinEdit = "/storeVip/edit";
+
+    //会员号列表
+    public static final String MyVipStore = "/storeVip/myVipStore";
+
+    //直通车大喇叭
+    public static final String TrainNews = "/news/newsDetail";
 
 }

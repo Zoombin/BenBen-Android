@@ -317,9 +317,18 @@ public class ActivityEnterprisesContacts extends BaseActivity implements ActionS
                     + enterprises.get(position).getNumber() + "人)");
 //
             if(enterprises.get(position).getTag().equals("虚拟")){
-                itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_xuni);
+                if(enterprises.get(position).getOrigin()==2){
+                    itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_xuni_back);
+                }else {
+                    itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_xuni);
+                }
             }else if(enterprises.get(position).getTag().equals("企业")){
-                itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_company);
+                if(enterprises.get(position).getOrigin()==2){
+                    itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_company_back);
+                }else {
+                    itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_company);
+                }
+
             }else{
                 itHolder.iv_tag.setImageResource(R.drawable.icon_enterprises_baixing);
             }

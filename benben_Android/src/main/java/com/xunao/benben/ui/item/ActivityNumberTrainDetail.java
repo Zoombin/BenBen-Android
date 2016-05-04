@@ -456,6 +456,7 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
                         adapter.notifyDataSetChanged();
                         item_gridView.setVisibility(View.VISIBLE);
                     }else {
+                        tv_notice.setVisibility(View.VISIBLE);
                         tv_type.setText("商家团购");
                         ll_train_level.setVisibility(View.VISIBLE);
                         int rank=numberTrainDetail.getRank();
@@ -496,9 +497,11 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
                     ll_authentication.setVisibility(View.GONE);
                 }
 
+                if(!numberTrainDetail.getConsultant().equals("")) {
+                    tv_consultant.setVisibility(View.VISIBLE);
+                }
 
 
-//                tv_notice.setVisibility(View.VISIBLE);
 
 				try {
 					dbUtil.saveOrUpdate(numberTrainDetail);
@@ -587,7 +590,8 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
                 overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 break;
             case R.id.tv_consultant:
-                ToastUtils.Infotoast(mContext,"新功能开发中!");
+                startAnimActivity2Obj(ChatActivity.class, "userId",
+                        numberTrainDetail.getConsultant());
 //                setTheme(R.style.ActionSheetStyleIOS7);
 //                String[] names = {"李先生","张某某"};
 //                String[] benbenIds = {numberTrainDetail.getHuanxinUsername(),numberTrainDetail.getHuanxinUsername()};
@@ -596,11 +600,16 @@ public class ActivityNumberTrainDetail extends BaseActivity implements
             case R.id.tv_notice:
                 TrainNoticeDialog hint = new TrainNoticeDialog(
                         mContext, R.style.MyDialog1);
-                hint.setContent("我的公告");
+
+                String bulletin = numberTrainDetail.getBulletin();
+                if(bulletin.equals("")){
+                    bulletin = "暂无公告";
+                }
+                hint.setContent(bulletin);
                 hint.show();
                 break;
             case R.id.iv_vip:
-                startAnimActivity(ActivityTrainVip.class);
+                startAnimActivity2Obj(ActivityTrainVip.class,"shop",numberTrainDetail.getShop());
                 break;
         }
 	}

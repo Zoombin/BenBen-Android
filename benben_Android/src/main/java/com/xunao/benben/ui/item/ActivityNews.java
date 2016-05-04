@@ -40,6 +40,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -191,7 +192,31 @@ public class ActivityNews extends BaseActivity implements OnClickListener {
 					}
 					startAnimActivity2Obj(ActivityBuyInfoContent.class, "ID",
 							news.getIdentity1() + "");
-				} else {
+				} else if (news.getType() == 9) {
+                    InteNetUtils.getInstance(mContext).readNews(
+                            news.getId() + "", new RequestCallBack<String>() {
+
+                                @Override
+                                public void onFailure(HttpException arg0,
+                                                      String arg1) {
+
+                                }
+
+                                @Override
+                                public void onSuccess(ResponseInfo<String> arg0) {
+                                }
+
+                            });
+
+                    news.setStatus(1);
+                    try {
+                        dbUtil.saveOrUpdate(news);
+                    } catch (DbException e) {
+                        e.printStackTrace();
+                    }
+                    startAnimActivity3Obj(ActivityTrainPublics.class, "ID",
+                            news.getSenderId() + "","title",news.getSender());
+                }else {
 					startAnimActivity2Obj(ActivityNewContent.class, "NEWS",
 							mNews.get(position));
 				}
@@ -329,6 +354,9 @@ public class ActivityNews extends BaseActivity implements OnClickListener {
 				DbUtils db = CrashApplication.getInstance().getDb();
 				try {
 					for (News n : alllist.getmNewsList()) {
+                        if(n.getType()==9){
+                            db.delete(News.class, WhereBuilder.b("type","=",9).and("senderId","=",n.getSenderId()));
+                        }
 						db.save(n);
 					}
 				} catch (DbException e) {
@@ -467,7 +495,14 @@ public class ActivityNews extends BaseActivity implements OnClickListener {
 				// item_iv);
 				item_iv.setImageResource(R.drawable.ic_public);
 				break;
+                case 9:
+                    item_smalltitle.setBackgroundResource(R.drawable.o_bg);
+                    item_smalltitle.setText("喇叭");
+                    CommonUtils.startImageLoader(cubeimageLoader, item.getPoster(),
+                            item_iv);
+                    break;
 			}
+
 
 			// convertView.setOnClickListener(new OnClickListener() {
 			// @Override

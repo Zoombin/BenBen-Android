@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.lidroid.xutils.exception.HttpException;
 import com.xunao.benben.R;
 import com.xunao.benben.base.BaseActivity;
+import com.xunao.benben.net.InteNetUtils;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.ToastUtils;
 
@@ -18,6 +19,8 @@ import org.json.JSONObject;
  */
 public class ActivityMyNumberTrainNotice extends BaseActivity{
     private EditText edt_notice;
+    private String bulletin="";
+    private String shop="";
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
@@ -33,7 +36,9 @@ public class ActivityMyNumberTrainNotice extends BaseActivity{
 
     @Override
     public void initDate(Bundle savedInstanceState) {
-
+        bulletin = getIntent().getStringExtra("bulletin");
+        shop = getIntent().getStringExtra("shop");
+        edt_notice.setText(bulletin);
     }
 
     @Override
@@ -55,7 +60,10 @@ public class ActivityMyNumberTrainNotice extends BaseActivity{
                     ToastUtils.Infotoast(mContext, "公告内容限制在1-150个字之间");
                     return;
                 }else{
-                    AnimFinsh();
+                    if(CommonUtils.isNetworkAvailable(mContext)){
+                        InteNetUtils.getInstance(mContext).StoreBulletinEdit(shop,notice,"0",mRequestCallBack);
+                    }
+
                 }
 
             }
@@ -74,11 +82,17 @@ public class ActivityMyNumberTrainNotice extends BaseActivity{
 
     @Override
     protected void onSuccess(JSONObject jsonObject) {
-
+        if(jsonObject.optInt("ret_num")==0){
+            ToastUtils.Infotoast(mContext,"发表成功!");
+            setResult(RESULT_OK,null);
+            AnimFinsh();
+        }else{
+            ToastUtils.Infotoast(mContext,jsonObject.optString("ret_message"));
+        }
     }
 
     @Override
     protected void onFailure(HttpException exception, String strMsg) {
-
+        ToastUtils.Infotoast(mContext,"公告发表失败!");
     }
 }

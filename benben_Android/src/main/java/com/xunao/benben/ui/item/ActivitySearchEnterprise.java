@@ -309,9 +309,17 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 
 
             if(enterprises.get(position).getTag().equals("虚拟")){
-                iv_tag.setImageResource(R.drawable.icon_enterprises_xuni);
+                if(enterprises.get(position).getOrigin()==2){
+                   iv_tag.setImageResource(R.drawable.icon_enterprises_xuni_back);
+                }else {
+                    iv_tag.setImageResource(R.drawable.icon_enterprises_xuni);
+                }
             }else if(enterprises.get(position).getTag().equals("企业")){
-                iv_tag.setImageResource(R.drawable.icon_enterprises_company);
+                if(enterprises.get(position).getOrigin()==2){
+                    iv_tag.setImageResource(R.drawable.icon_enterprises_company_back);
+                }else {
+                    iv_tag.setImageResource(R.drawable.icon_enterprises_company);
+                }
             }else{
                 iv_tag.setImageResource(R.drawable.icon_enterprises_baixing);
             }

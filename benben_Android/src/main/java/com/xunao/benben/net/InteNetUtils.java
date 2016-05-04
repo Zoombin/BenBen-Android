@@ -3444,4 +3444,60 @@ public class InteNetUtils {
     }
 
 
+    public void BecomeVip(String StNo,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("StNo",StNo);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.BecomeVip, hashMap,
+                callBack);
+    }
+
+    public void GetLevel(String StNo,RequestCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("StNo",StNo);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.GetLevel, hashMap,
+                callBack);
+    }
+
+
+    public void VipLog(String StNo,String cumulation_type,int page,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("StNo", StNo);
+        hashMap.put("cumulation_type", cumulation_type);
+        hashMap.put("p", page+"");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.VipLog, hashMap,
+                requestCallBack);
+    }
+
+
+    public void StoreBulletinEdit(String StNo,String bu,String us,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("StNo", StNo);
+        hashMap.put("bu", bu);
+        hashMap.put("us", us);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.StoreBulletinEdit, hashMap,
+                requestCallBack);
+    }
+
+    public void MyVipStore(String keyword,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("keyword", keyword);
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.MyVipStore, hashMap,
+                requestCallBack);
+    }
+
+
+    public void TrainNews(String eId,int page,RequestCallBack<String> requestCallBack) {
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("key", "android");
+        hashMap.put("eId", eId);
+        hashMap.put("p", page+"");
+        ComPost(AndroidConfig.NETHOST + AndroidConfig.TrainNews, hashMap,
+                requestCallBack);
+    }
+
 }

@@ -176,6 +176,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -195,18 +196,6 @@
                         android:layout_weight="1"
                         />
 
-                    <TextView
-                        android:id="@+id/tv_notice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#FFFFFF"
-                        android:textSize="15dip"
-                        android:layout_weight="1"
-                        android:text="公告"
-                        android:drawableLeft="@drawable/icon_notice"
-                        android:drawablePadding="5dp"
-                        android:visibility="gone"
-                        />
 
                     <ImageView
                         android:id="@+id/iv_collect"
@@ -225,6 +214,24 @@
                         />
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dip"
+                    android:layout_weight="1"
+                    android:text="公告"
+                    android:drawableLeft="@drawable/icon_notice"
+                    android:drawablePadding="5dp"
+                    android:visibility="gone"
+                    android:layout_below="@+id/message"
+                    android:paddingLeft="15dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    />
+
 
 
                 <RelativeLayout

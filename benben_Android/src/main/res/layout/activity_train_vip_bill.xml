@@ -8,6 +8,7 @@
     <include layout="@layout/com_title_bar" />
 
     <TextView
+        android:id="@+id/tv_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="会员等级：普通会员"
@@ -24,22 +25,27 @@
         android:layout_marginTop="5dp"
         >
         <TextView
+            android:id="@+id/tv_recharge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="充值余额：2000元"
             android:textSize="15dp"
             android:textColor="#000000"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
             />
 
         <TextView
+            android:id="@+id/tv_consume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="累计消费：2000元"
             android:textSize="15dp"
             android:textColor="#000000"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:visibility="gone"
             />
 
 

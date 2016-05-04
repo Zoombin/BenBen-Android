@@ -61,7 +61,6 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
     private LinearLayout ll_seach_icon;
     private LinearLayout ll_search_item;
     private LinearLayout no_data;
-    private TextView tv_search_number;
     private String searchKey = "";
     private myAdapter adapter;
     private Button btn_search_range;
@@ -69,29 +68,7 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
     private ImageView iv_search_content_delect;
     private ArrayList<NumberTrain> numberTrains = new ArrayList<NumberTrain>();
     private EditText search_edittext;
-    // 记录了地区的id
-    private String[] addressId = { "", "", "", "" };
-    private static final int CHOCE_ADDRESS = 1;
-    private static final int CHOCE_INDUSTRY = 2;
-    private LodingDialog lodingDialog;
-
-    private boolean isDelete = false;
-
     private String phone;
-    private boolean isSearch = false;
-
-    private View view;
-    private LinearLayout ll_range;
-    private TextView tv_range;
-    protected InfoMsgHint hint;
-    private RelativeLayout rl_search_area;
-    private PopupWindow popupWindow;
-    private TextView tv_search_range,tv_search_industry;
-    private LinearLayout ll_industry;
-    private TextView tv_industry;
-    private String industryId="";
-    private String addressname;
-
 
     @Override
     public void loadLayout(Bundle savedInstanceState) {
@@ -106,19 +83,13 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
 
         search_edittext = (EditText) findViewById(R.id.search_edittext);
         ((TextView) findViewById(R.id.searchName)).setText("商铺简称/服务项目/店铺号");
-        rl_search_area = (RelativeLayout) findViewById(R.id.rl_search_area);
-        rl_search_area.setOnClickListener(this);
         iv_search_content_delect = (ImageView) findViewById(R.id.iv_search_content_delect);
         ll_seach_icon = (LinearLayout) findViewById(R.id.ll_seach_icon);
         listView = (ListView) findViewById(R.id.listView);
         btn_search_range = (Button) findViewById(R.id.btn_search_range);
         no_data = (LinearLayout) findViewById(R.id.no_data);
         ll_search_item = (LinearLayout) findViewById(R.id.ll_search_item);
-        tv_search_number = (TextView) findViewById(R.id.tv_search_number);
-
-        view = findViewById(R.id.view);
-        ll_range = (LinearLayout) findViewById(R.id.ll_range);
-        tv_range = (TextView) findViewById(R.id.tv_range);
+        ll_search_item.setVisibility(View.GONE);
 
         iv_search_content_delect.setOnClickListener(this);
         btn_search_range.setOnClickListener(this);
@@ -126,18 +97,12 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
 
         adapter = new myAdapter();
         listView.setAdapter(adapter);
-        ll_industry = (LinearLayout) findViewById(R.id.ll_industry);
-        tv_industry = (TextView) findViewById(R.id.tv_industry);
-        initPopWindow();
     }
 
     @Override
     public void initDate(Bundle savedInstanceState) {
         if(CommonUtils.isNetworkAvailable(mContext)){
-            InteNetUtils.getInstance(mContext).getStoreList(0,
-                    searchKey, 0, 0, addressId[0],
-                    addressId[1], addressId[2], addressId[3],industryId,
-                    requestCallBack);
+            InteNetUtils.getInstance(mContext).MyVipStore(searchKey, requestCallBack);
         }
     }
 
@@ -146,21 +111,7 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
         setOnLeftClickLinester(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                if (isSearch || isDelete) {
-                    search_edittext.setText("");
-                    searchKey = "";
-                    addressId[1] = addressId[2] = addressId[0] = "";
-                    addressname = null;
-                    industryId = "";
-                    InteNetUtils.getInstance(mContext).getStoreList(0,
-                            "", 0, 0, addressId[0],
-                            addressId[1], addressId[2], addressId[3],industryId,
-                            requestCallBack);
-                    isSearch = false;
-                    isDelete = false;
-                } else {
-                    finish();
-                }
+                AnimFinsh();
             }
         });
 
@@ -192,11 +143,9 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
             @Override
             public void afterTextChanged(Editable arg0) {
                 if (arg0.length() > 0) {
-                    isSearch = true;
                     ll_seach_icon.setVisibility(View.GONE);
                     iv_search_content_delect.setVisibility(View.VISIBLE);
                 } else {
-                    isSearch = false;
                     ll_seach_icon.setVisibility(View.VISIBLE);
                     iv_search_content_delect.setVisibility(View.GONE);
                     searchKey = "";
@@ -218,16 +167,9 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
 
                     // 更新关键字
                     searchKey = search_edittext.getText().toString().trim();
-                    if (CommonUtils.isEmpty(searchKey)) {
-                        isSearch = false;
-                    } else {
-                        isSearch = true;
-                    }
 
-                    InteNetUtils.getInstance(mContext).getStoreList(0,
-                            searchKey, 0, 0, addressId[0],
-                            addressId[1], addressId[2], addressId[3],industryId,
-                            requestCallBack);
+
+                    InteNetUtils.getInstance(mContext).MyVipStore(searchKey, requestCallBack);
                     return true;
                 }
                 return false;
@@ -302,34 +244,29 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
                 ToastUtils.Infotoast(mContext, "网络不可用,请重试");
 
             }
-            numberTrainList = new NumberTrainList();
-            try {
-                numberTrainList.parseJSON(jsonObject);
-                if (numberTrainList == null || numberTrainList.getNumberTrains()==null || numberTrainList.getNumberTrains().size()==0) {
-                    numberTrains.clear();
-                    no_data.setVisibility(View.VISIBLE);
-                } else {
-                    listView.setVisibility(View.VISIBLE);
-                    no_data.setVisibility(View.GONE);
-                    numberTrains = numberTrainList.getNumberTrains();
-                }
-                if (isSearch) {
-                    if (!searchKey.equals("")) {
-                        tv_search_number.setVisibility(View.VISIBLE);
-                        tv_search_number.setText("搜索到关于“" + searchKey
-                                + "”的结果共" + numberTrains.size() + "个");
+            if(jsonObject!=null) {
+                if (jsonObject.optInt("ret_num") == 0) {
+                    numberTrainList = new NumberTrainList();
+                    try {
+                        numberTrainList.parseJSON(jsonObject);
+                        if (numberTrainList == null || numberTrainList.getNumberTrains() == null || numberTrainList.getNumberTrains().size() == 0) {
+                            numberTrains.clear();
+                            no_data.setVisibility(View.VISIBLE);
+                        } else {
+                            listView.setVisibility(View.VISIBLE);
+                            no_data.setVisibility(View.GONE);
+                            numberTrains = numberTrainList.getNumberTrains();
+                        }
+
+
+                    } catch (NetRequestException e) {
+                        e.getError().print(mContext);
                     }
+                    adapter.notifyDataSetChanged();
                 } else {
-                    view.setVisibility(view.GONE);
-                    ll_range.setVisibility(view.GONE);
-                    ll_industry.setVisibility(view.GONE);
-                    tv_range.setText("");
-                    tv_search_number.setVisibility(View.GONE);
+                    ToastUtils.Infotoast(mContext, jsonObject.optString("ret_message"));
                 }
-            } catch (NetRequestException e) {
-                e.getError().print(mContext);
             }
-            adapter.notifyDataSetChanged();
         }
 
     };
@@ -432,7 +369,6 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
         switch (arg0.getId()) {
             // 搜索删除内容
             case R.id.iv_search_content_delect:
-                isDelete = true;
                 iv_search_content_delect.setVisibility(View.GONE);
                 searchKey = "";
                 ll_seach_icon.setVisibility(View.VISIBLE);
@@ -450,109 +386,13 @@ public class ActivityMyVipTrain extends BaseActivity implements View.OnClickList
             case R.id.btn_search_range:
                 // 更新关键字
                 searchKey = search_edittext.getText().toString().trim();
-                if (CommonUtils.isEmpty(searchKey)) {
-                    isSearch = false;
-                } else {
-                    isSearch = true;
-                }
 
-                InteNetUtils.getInstance(mContext).getStoreList(0,
-                        searchKey, 0, 0, addressId[0],
-                        addressId[1], addressId[2], addressId[3],industryId,
-                        requestCallBack);
+                InteNetUtils.getInstance(mContext).MyVipStore(searchKey, requestCallBack);
                 break;
-            case R.id.rl_search_area:
-                popupWindow.showAsDropDown(rl_search_area, -PixelUtil.dp2px(45), 0);
-                break;
-            case R.id.tv_search_range:
-                isSearch = true;
-                startAnimActivityForResult3(ActivityChoiceAddress.class,
-                        CHOCE_ADDRESS, "level", "0","from","train");
-                popupWindow.dismiss();
-                break;
-            case R.id.tv_search_industry:
-                isSearch = true;
-                Intent intent = new Intent(this, ActivityChoiceIndusrty.class);
-                intent.putExtra("level","1");
-                startActivityForResult(intent, CHOCE_INDUSTRY);
-                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-                popupWindow.dismiss();
+
             default:
                 break;
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case CHOCE_ADDRESS:
-                if (data != null) {
-                    if (resultCode == AndroidConfig.ChoiceAddressResultCode) {
-                        addressname = data.getStringExtra("address");
-                        addressId = null;
-                        addressId = data.getStringArrayExtra("addressId");
-
-                        if (addressname.length() > 0) {
-                            view.setVisibility(view.VISIBLE);
-                            ll_range.setVisibility(view.VISIBLE);
-                            tv_range.setText(addressname);
-                        } else {
-                            view.setVisibility(view.GONE);
-                            ll_range.setVisibility(view.GONE);
-                            tv_range.setText("");
-                        }
-                        InteNetUtils.getInstance(mContext).getStoreList(0,
-                                searchKey, 0, 0, addressId[0],
-                                addressId[1], addressId[2], addressId[3],industryId,
-                                requestCallBack);
-                    }
-                }
-                break;
-            case CHOCE_INDUSTRY:
-                if (data != null) {
-                    ll_industry.setVisibility(View.VISIBLE);
-                    tv_industry.setText("行业:"+data.getStringExtra("industry"));
-                    industryId = data.getStringExtra("industryId");
-                }else{
-                    ll_industry.setVisibility(View.GONE);
-                    industryId = "";
-                }
-                InteNetUtils.getInstance(mContext).getStoreList(0,
-                        searchKey, 0, 0, addressId[0],
-                        addressId[1], addressId[2], addressId[3],industryId,
-                        requestCallBack);
-            default:
-                break;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    /**
-     * 创建PopupWindow
-     */
-    protected void initPopWindow() {
-        // TODO Auto-generated method stub
-        View popupWindow_view = getLayoutInflater().inflate(R.layout.search_pop_window, null,
-                false);
-        // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
-        popupWindow = new PopupWindow(popupWindow_view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-//        // 设置动画效果
-//        popupWindow.setAnimationStyle(R.style.AnimationFade);
-        // 点击其他地方消失
-        popupWindow_view.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                if (popupWindow != null && popupWindow.isShowing()) {
-                    popupWindow.dismiss();
-                }
-                return false;
-            }
-        });
-        tv_search_range = (TextView) popupWindow_view.findViewById(R.id.tv_search_range);
-        tv_search_industry = (TextView) popupWindow_view.findViewById(R.id.tv_search_industry);
-        tv_search_range.setOnClickListener(this);
-        tv_search_industry.setOnClickListener(this);
-    }
 }

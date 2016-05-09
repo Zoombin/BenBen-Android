@@ -620,16 +620,25 @@ public class ActivitySearchEnterprise extends BaseActivity implements
 						@Override
 						public void onClick(View v) {
 							//user.setUpdate(true);
-							startAnimActivity2Obj(
-									ActivityEnterpriseMember.class, "id",
-									enterpriseAdd.getId(), "name",
-									enterpriseAdd.getName());
-							sendBroadcast(new Intent(AndroidConfig.refreshEnterpriseList));
+//							startAnimActivity2Obj(
+//									ActivityEnterpriseMember.class, "id",
+//									enterpriseAdd.getId(), "name",
+//									enterpriseAdd.getName());
+                            hint.dismiss();
+                            sendBroadcast(new Intent(AndroidConfig.refreshEnterpriseList));
+
+                            Intent intent = new Intent(mContext, ActivityEnterpriseMember.class);
+                            intent.putExtra("id", enterpriseAdd.getId());
+                            intent.putExtra("name", enterpriseAdd.getName());
+                            intent.putExtra("origin", enterpriseAdd.getOrigin());
+                            intent.putExtra("type", enterpriseAdd.getType());
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
+
 							AnimFinsh();
 						}
 					});
-
-					hint.show();
 					user.setUpdate(false);
 					// AnimFinsh();
 				} else {

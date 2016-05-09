@@ -233,7 +233,7 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 		member = new EnterpriseMember();
 		try {
 			member = member.parseJSON(jsonObject);
-            if(member.getFirstin()==1){
+            if(!member.getFilter().equals("1") && member.getFirstin()==1){
                 inputDialog = new InputDialog(mContext, R.style.MyDialogStyle);
                 inputDialog.setContent("通讯录名片", "请输入新的通讯录名片", "确认", "取消");
                 inputDialog.setEditContent(member.getName());
@@ -633,7 +633,8 @@ public class ActivityEnterpriseMember extends BaseActivity implements
 				holder.iv_make_shortphone.setVisibility(View.VISIBLE);
 			}
 
-			if (TextUtils.isEmpty(phone) || phone.equals("0")) {
+
+			if (type.equals("3") || TextUtils.isEmpty(phone) || phone.equals("0")) {
 				holder.longBox.setVisibility(View.GONE);
 				holder.iv_message.setVisibility(View.GONE);
 				holder.iv_make_phone.setVisibility(View.GONE);

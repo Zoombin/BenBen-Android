@@ -39,8 +39,6 @@ import com.xunao.benben.bean.GroupAddMembers;
 import com.xunao.benben.config.AndroidConfig;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.net.InteNetUtils;
-import com.xunao.benben.ui.item.ActivityEnterpriseMember.HeaderViewHolder;
-import com.xunao.benben.ui.item.ActivityEnterpriseMember.myAdapter;
 import com.xunao.benben.utils.CommonUtils;
 import com.xunao.benben.utils.ToastUtils;
 import com.xunao.benben.view.MyTextView;

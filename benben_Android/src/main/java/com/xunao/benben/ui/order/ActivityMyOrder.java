@@ -433,9 +433,13 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                 tv_operate2.setVisibility(View.GONE);
                 tv_operate3.setVisibility(View.GONE);
                 tv_operate4.setVisibility(View.GONE);
-
+                final int extension_code = order.getExtension_code();
                 CommonUtils.startImageLoader(cubeimageLoader,order.getStore_pic(),rv_poster);
-                tv_short_name.setText(order.getShort_name());
+                if(extension_code==5){
+                    tv_short_name.setText("置顶拍卖场");
+                }else {
+                    tv_short_name.setText(order.getShort_name());
+                }
                 CommonUtils.startImageLoader(cubeimageLoader,order.getPromotion_pic(),iv_promotion_post);
                 if(order.getIs_close()==1){
                     iv_promotion_state.setImageResource(R.drawable.icon_off_line);
@@ -447,13 +451,13 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
 
                 tv_promotion_name.setText(order.getGoods_name());
                 tv_goods_amount.setText("￥:"+order.getGoods_amount());
-                if(order.getPay_id()==1){
+                if(order.getPay_id()==1 && extension_code!=5){
                     tv_shipping_fee.setText("运费:"+order.getShipping_fee()+"元");
                 }else{
                     tv_shipping_fee.setText("");
                 }
                 tv_goods_number.setText("数量:x"+order.getGoods_number());
-                final int extension_code = order.getExtension_code();
+
                 if(order.getBack_status()==0) {
                     if (order.getShipping_status() == 0) {
                         tv_title_right.setText(order.getPay_name());
@@ -476,7 +480,9 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                                     tv_pay_order.setVisibility(View.VISIBLE);
                                 }
                             }
-                            tv_cancel_order.setVisibility(View.VISIBLE);
+                            if(extension_code!=5) {
+                                tv_cancel_order.setVisibility(View.VISIBLE);
+                            }
                         }else {
                             if (order.getPay_id() == 3) {
                                 tv_pay_status.setText("需到店付款:" + order.getOrder_amount());
@@ -515,7 +521,7 @@ public class ActivityMyOrder extends BaseActivity implements View.OnClickListene
                         } else if (order.getOrder_status() == 6) {
                             tv_operate3.setText("查看评价");
                         }
-                        if(order.getExtension_code()!=2) {
+                        if(order.getExtension_code()!=2 && extension_code!=5) {
                             tv_operate3.setVisibility(View.VISIBLE);
                         }
                     }

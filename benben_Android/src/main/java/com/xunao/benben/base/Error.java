@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.xunao.benben.R;
-import com.xunao.benben.activity.MainActivity;
 import com.xunao.benben.base.IA.CrashApplication;
 import com.xunao.benben.dialog.InfoSimpleMsgHint;
 import com.xunao.benben.ui.ActivityLogin;
-import com.xunao.benben.ui.item.ActivityEnterpriseMember;
-import com.xunao.benben.ui.item.ActivitySearchEnterprise;
 import com.xunao.benben.utils.ToastUtils;
 
 public class Error extends BaseBean<Error> {

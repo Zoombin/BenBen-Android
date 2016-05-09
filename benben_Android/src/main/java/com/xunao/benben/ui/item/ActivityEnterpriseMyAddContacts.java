@@ -30,7 +30,6 @@ import com.xunao.benben.dialog.MsgDialog;
 import com.xunao.benben.exception.NetRequestException;
 import com.xunao.benben.hx.chatuidemo.utils.CommonUtils;
 import com.xunao.benben.net.InteNetUtils;
-import com.xunao.benben.ui.item.ActivityEnterpriseMember.ViewHolder;
 import com.xunao.benben.utils.PhoneUtils;
 import com.xunao.benben.utils.ToastUtils;
 

@@ -66,6 +66,7 @@ public class ActivityAddCommon extends BaseActivity {
 	private boolean isCommon = false;
 	private boolean change = false;
 	private int commonNum = 0;
+    private String type;
 
 	@Override
 	public void loadLayout(Bundle savedInstanceState) {
@@ -125,6 +126,7 @@ public class ActivityAddCommon extends BaseActivity {
 	public void initDate(Bundle savedInstanceState) {
 		enterpriseId = getIntent().getStringExtra("enterpriseId");
 		commonNum = getIntent().getIntExtra("commonNum", 0);
+        type = getIntent().getStringExtra("type");
 		// if (CommonUtils.isNetworkAvailable(mContext)) {
 		// InteNetUtils.getInstance(mContext).searchEnterprisesMember(
 		// enterpriseId, "", mRequestCallBack);
@@ -367,7 +369,7 @@ public class ActivityAddCommon extends BaseActivity {
 			} else {
 				shortBox.setVisibility(View.VISIBLE);
 			}
-			if (TextUtils.isEmpty(detail.getPhone()) || detail.getPhone().equals("0")) {
+			if (type.equals("3") || TextUtils.isEmpty(detail.getPhone()) || detail.getPhone().equals("0")) {
 				longBox.setVisibility(View.GONE);
 			} else {
 				longBox.setVisibility(View.VISIBLE);
